@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dima Kremenskii Art</title>
+    <meta name="description" content="Dmitrii Kremenskii — Artist. I explore the balance between control and chaos while using acrylics, organics, and sounds." />
+    <style>
+      :root{
+        --fg:#111;
+        --muted:#4b5563;
+        --link:#111;
+        --link-underline:#d1d5db;
+        --maxw:880px;
+      }
+      html,body{height:100%;}
+      *{box-sizing:border-box}
+      body{
+        margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+        color:var(--fg); background:#fff; line-height:1.5; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      }
+      .wrap{max-width:var(--maxw); margin:0 auto; padding:40px 20px 64px; display:flex; flex-direction:column; gap:28px}
+      header h1{font-size:clamp(28px, 5vw, 48px); margin:0 0 4px; font-weight:700; letter-spacing:-0.02em}
+      header .role{color:var(--muted); font-size:clamp(14px, 2.5vw, 18px)}
+      .tagline{font-size:clamp(18px, 3.5vw, 26px); max-width:52ch}
+      .image-grid{display:grid; grid-template-columns:1fr; gap:16px; margin-top:8px}
+      .image-grid img{width:100%; height:auto; display:block; border-radius:4px}
+      @media (min-width: 900px){ .image-grid{grid-template-columns:1fr 1fr} }
+      .contact{font-size:clamp(16px, 2.8vw, 18px)}
+      a{color:var(--link); text-decoration:none; border-bottom:1px solid transparent}
+      a:hover{border-bottom-color:var(--link-underline)}
+      footer{display:flex; flex-direction:column; gap:8px; color:var(--muted)}
+      .place{letter-spacing:0.02em}
+      .social{display:flex; flex-wrap:wrap; gap:14px}
+      .social a{color:var(--fg)}
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <header>
+        <h1>Dmitrii Kremenskii</h1>
+        <div class="role">Artist</div>
+      </header>
+
+      <section class="tagline">
+        <div>I explore the balance between control and chaos</div>
+        <div>while using acrylics, organics, and sounds.</div>
+      </section>
+
+      <section class="image-grid" aria-label="Selected works textures">
+        <img alt="Yellow textured paint close-up" src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/a147199a-b714-45ad-a8b9-47f640d6f0c8/IMG_1655/w%3D3840%2Cquality%3D90%2Cfit%3Dscale-down"/>
+        <img alt="Raw plywood and dust texture close-up" src="https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/c8c4dfc7-3ae9-47f8-b5f4-e0eceda692e4/IMG_3706/w%3D3840%2Cquality%3D90%2Cfit%3Dscale-down"/>
+      </section>
+
+      <section class="contact">
+        <span>Some thoughts? → </span>
+        <a href="mailto:hello@kremenskii.art">hello@kremenskii.art</a>
+      </section>
+
+      <footer>
+        <div class="place">Stuttgart ————— 2025</div>
+        <nav class="social" aria-label="Social links">
+          <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://s-scps.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+          <a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a>
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>
