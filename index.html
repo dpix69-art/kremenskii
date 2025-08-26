@@ -50,20 +50,6 @@
       <p class="cookie-text">Only essential cookies. No tracking.</p>
       <button id="cookie-close" class="cookie-close" aria-label="Close cookie notice" title="Close">×</button>
     </div>
-    <!-- <script>
-(function(){
-  var btn = document.getElementById('cookie-close');
-  if (!btn) return;
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
-    try { localStorage.setItem('cookieConsent','accepted'); } catch(e){}
-    document.cookie = 'cookie_consent=1; Max-Age=31536000; Path=/; SameSite=Lax';
-    var b = document.getElementById('cookie-banner');
-    if (b) { b.style.display = 'none'; b.setAttribute('hidden',''); }
-  }, { once:true });
-})();
-</script> -->
-
     <script src="js/app.js" defer></script>
   </body>
 </html>
