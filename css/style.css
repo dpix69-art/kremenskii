@@ -35,12 +35,12 @@ footer{display:flex; flex-direction:column; gap:8px; color:var(--muted); margin-
   border-radius:10px;
   box-shadow:0 10px 30px rgba(0,0,0,.2);
   display:flex; align-items:center; padding:0 40px 0 12px;
-  z-index:999; /* appear above page content as requested */
+  z-index:99999; /* appear above page content as requested */
 }
 .cookie-text{font-size:14px; line-height:1; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .cookie-close{
   position:absolute; top:4px; right:6px;
   width:28px; height:28px;
-  border:0; border-radius:6px; background:transparent; color:#fff; font-size:20px; line-height:1; cursor:pointer;
+  border:0; border-radius:6px; background:transparent; color:#fff; font-size:20px; line-height:1; cursor:pointer; pointer-events:auto;
 }
 .cookie-close:focus{outline:2px solid #fff; outline-offset:2px}
