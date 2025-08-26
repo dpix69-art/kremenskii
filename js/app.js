@@ -1,3 +1,5 @@
+console.log('[cookie] app.js loaded');
+
 (function () {
   var KEY = 'cookieConsent';
   var COOKIE = 'cookie_consent=1; Max-Age=31536000; Path=/; SameSite=Lax';
@@ -41,6 +43,8 @@
         if (e.key === 'Enter' || e.key === ' ') accept(e);
       });
     }
+    console.log('[cookie] wired');
+
     // 2) Делегирование на сам баннер
     if (banner) {
       banner.addEventListener('click', function (e) {
