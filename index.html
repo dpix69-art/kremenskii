@@ -66,5 +66,34 @@
         </nav>
       </footer>
     </main>
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie notice">
+<p>We use only essential cookies (e.g., Cloudflare) to keep the site running. No tracking or marketing cookies.</p>
+<div class="cookie-actions">
+<button id="cookie-accept-btn" class="cookie-btn accept" aria-label="Accept cookies">OK</button>
+</div>
+</div>
+<script>
+(function(){
+try{
+var key = 'cookieConsent';
+var hasCookie = document.cookie.match(/(?:^|; )cookie_consent=1/);
+var hasLS = null;
+try{ hasLS = localStorage.getItem(key); }catch(e){}
+if(!(hasCookie || hasLS==='accepted')){
+var b = document.getElementById('cookie-banner');
+if(b) b.style.display='block';
+}
+var btn = document.getElementById('cookie-accept-btn');
+if(btn){
+btn.addEventListener('click', function(){
+try{ localStorage.setItem(key,'accepted'); }catch(e){}
+document.cookie = 'cookie_consent=1; max-age=31536000; path=/; SameSite=Lax';
+var b = document.getElementById('cookie-banner');
+if(b) b.remove();
+});
+}
+}catch(e){}
+})();
+</script>
   </body>
 </html>
