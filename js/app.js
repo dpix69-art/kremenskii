@@ -12,19 +12,14 @@
   function show() {
     var b = $id('cookie-banner');
     if (!b) return;
-    // убираем возможный атрибут hidden (часто имеет display:none !important)
     b.removeAttribute('hidden');
-    // явно показываем
     b.style.display = 'flex';
   }
-
   function hide() {
     var b = $id('cookie-banner');
     if (!b) return;
-    // явно прячем
     b.style.display = 'none';
-    // и ставим hidden для совместимости
-    b.setAttribute('hidden', '');
+    b.setAttribute('hidden','');
   }
 
   function accept(e) {
@@ -38,26 +33,28 @@
     var close = $id('cookie-close');
     var banner = $id('cookie-banner');
 
-    // 1) Привязка к крестику
+    // 1) Явная привязка к крестику
     if (close) {
-      close.addEventListener('click', accept, { passive: false });
-      // на всякий случай — для тач/перехватов
-      close.addEventListener('pointerup', accept, { passive: false });
+      close.addEventListener('click', accept, { passive:false });
+      close.addEventListener('pointerup', accept, { passive:false });
       close.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') accept(e);
       });
     }
-
-    // 2) Делегирование по самому баннеру (если вдруг разметка поменяется)
+    // 2) Делегирование на сам баннер
     if (banner) {
       banner.addEventListener('click', function (e) {
         var t = e.target;
         if (!t) return;
-        if (t.id === 'cookie-close' || (t.closest && t.closest('#cookie-close'))) {
-          accept(e);
-        }
+        if (t.id === 'cookie-close' || (t.closest && t.closest('#cookie-close'))) accept(e);
       });
     }
+    // 3) Глобальный «страховочный» обработчик в capture-фазе
+    document.addEventListener('click', function (e) {
+      var t = e.target;
+      if (!t) return;
+      if (t.id === 'cookie-close' || (t.closest && t.closest('#cookie-close'))) accept(e);
+    }, true);
   }
 
   function init() {
@@ -66,9 +63,6 @@
     wire();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
