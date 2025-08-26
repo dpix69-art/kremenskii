@@ -1,56 +1,57 @@
-(function () {
+(function(){
   var KEY = 'cookieConsent';
   var COOKIE = 'cookie_consent=1; Max-Age=31536000; Path=/; SameSite=Lax';
 
-  function getBanner() { return document.getElementById('cookie-banner'); }
-  function getClose()  { return document.getElementById('cookie-close'); }
-
-  function isAccepted() {
-    try { if (localStorage.getItem(KEY) === 'accepted') return true; } catch (e) {}
+  function accepted(){
+    try { if (localStorage.getItem(KEY) === 'accepted') return true; } catch(e){}
     return document.cookie.indexOf('cookie_consent=1') !== -1;
   }
 
-  function show() { var b = getBanner(); if (b) b.hidden = false; }
-  function hide() { var b = getBanner(); if (b) b.hidden = true; }
+  function getBanner(){ return document.getElementById('cookie-banner'); }
+  function show(){ var b = getBanner(); if (b) b.style.display = 'flex'; }
+  function hide(){ var b = getBanner(); if (b) b.style.display = 'none'; }
 
-  function accept() {
-    try { localStorage.setItem(KEY, 'accepted'); } catch (e) {}
+  function accept(ev){
+    if (ev) ev.preventDefault();
+    try { localStorage.setItem(KEY, 'accepted'); } catch(e){}
     document.cookie = COOKIE;
-    // максимально явно убираем баннер
+    hide();
+  }
+
+  function wire(){
     var b = getBanner();
-    if (b) b.remove();
-  }
+    if (!b) return;
+    var close = document.getElementById('cookie-close') || document.getElementById('cookie-accept-btn');
 
-  function wire() {
-    var close = getClose();
-    var banner = getBanner();
-
-    // 1) явная привязка к крестику
-    if (close) {
+    // Явная привязка к кнопке (крестику)
+    if (close){
       close.addEventListener('click', accept);
-      close.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accept(); }
+      close.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accept(e); }
       });
     }
 
-    // 2) делегирование: если что-то помешало — ловим клик по баннеру и проверяем цель
-    if (banner) {
-      banner.addEventListener('click', function (e) {
-        if (e.target && (e.target.id === 'cookie-close' || e.target.closest && e.target.closest('#cookie-close'))) {
-          accept();
-        }
-      });
-    }
+    // Делегирование: на всякий случай
+    b.addEventListener('click', function(e){
+      var t = e.target;
+      if (!t) return;
+      if (
+        t.id === 'cookie-close' || t.id === 'cookie-accept-btn' ||
+        (t.closest && (t.closest('#cookie-close') || t.closest('#cookie-accept-btn')))
+      ){
+        accept(e);
+      }
+    });
   }
 
-  function init() {
-    if (!isAccepted()) {
+  function init(){
+    if (!accepted()){
       show();
       wire();
     }
   }
 
-  if (document.readyState === 'loading') {
+  if (document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
