@@ -208,42 +208,28 @@
 
   "sounds": [
     {
-      "slug": "industrial-resonance",
-      "title": "Industrial Resonance",
-      "year": 2023,
-      "platform": "soundcloud",
-      "cover": "images/sounds/industrial-resonance-cover.jpg",
-      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/123456789",
-      "tracks": [
-        { "title": "Factory Floor", "duration": "12:34" },
-        { "title": "Resonance Study #1", "duration": "08:21" }
-      ],
-      "meta": { "label": "Experimental Sounds", "platforms": ["SoundCloud"] }
-    },
-    {
-      "slug": "material-voices",
-      "title": "Material Voices",
-      "year": 2022,
+      "slug": "Impact of the fan",
+      "title": "Impact of the fan",
+      "year": 2024,
       "platform": "soundcloud",
       "cover": "images/sounds/material-voices-cover.jpg",
-      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/987654321",
+      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1852226274",
       "tracks": [
-        { "title": "Surface Choir", "duration": "07:40" }
+        { "title": "Impact of the fan", "duration": "51:31" }
       ],
       "meta": { "label": "Independent", "platforms": ["SoundCloud"] }
     },
     {
-      "slug": "spatial-frequencies",
-      "title": "Spatial Frequencies",
-      "year": 2022,
-      "platform": "bandcamp",
+      "slug": "Impact of the fan",
+      "title": "Impact of the fan",
+      "year": 2024,
+      "platform": "soundcloud",
       "cover": "images/sounds/spatial-frequencies-cover.jpg",
-      "embed": "https://bandcamp.com/EmbeddedPlayer/album=000000000/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/",
+      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1841509218",
       "tracks": [
-        { "title": "Hall Mode", "duration": "06:12" },
-        { "title": "Threshold", "duration": "09:04" }
+        { "title": "Live at Elsiens Galerie Stuttgart", "duration": "20:18" }
       ],
-      "meta": { "label": "MAK", "platforms": ["Bandcamp"] }
+      "meta": { "label": "Independent", "platforms": ["SoundCloud"] }
     }
   ],
 
@@ -264,13 +250,13 @@
     "email": "hi@kremenskii.art",
     "city": "Stuttgart",
     "country": "Germany",
-    "introText": "Idea? Please write an email.",
+    "introText": "Idea? Please write me an email.",
     "openToText": "Open for exhibitions, collaborations and commissions.",
     "portfolioPdf": "files/portfolio.pdf",
     "socials": [
       { "label": "Instagram",  "href": "https://instagram.com/artist" },
-      { "label": "Soundcloud", "href": "https://soundcloud.com/artist" },
-      { "label": "Bandcamp",   "href": "https://artist.bandcamp.com" }
+      { "label": "Soundcloud", "href": "https://soundcloud.com/dmitrii-kremenskii" },
+      { "label": "Bandcamp",   "href": "https://kremenskii.bandcamp.com/" }
     ]
   },
 
