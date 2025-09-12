@@ -46,24 +46,24 @@
         },
         {
           "slug": "study-11",
-          "title": "Study #11",
+          "title": "fkb-02",
           "year": 2024,
           "technique": "Mixed media on canvas",
           "dimensions": "120 × 90 cm",
           "images": [
             { "url": "images/farbkoerper/fkb-03.jpg", "role": "main" },
-            { "url": "images/farbkoerper/fkb-03.jpg", "role": "detail" }
+            { "url": "images/farbkoerper/fkb-04.jpg", "role": "detail" }
           ],
           "about": ["Short note about process/materials for Study #11."]
         },
         {
           "slug": "study-13",
-          "title": "Study #13",
+          "title": "fkb-03",
           "year": 2024,
           "technique": "Mixed media on canvas",
           "dimensions": "120 × 90 cm",
           "images": [
-            { "url": "images/farbkoerper/study-13-main.jpg", "role": "main" }
+            { "url": "images/farbkoerper/fkb-05.jpg", "role": "main" }
           ],
           "about": ["Short note for Study #13."]
         },
@@ -128,9 +128,9 @@
       "year": "2022–",
       "intro": "A series examining industrial and organic materials, their intersection in urban environments, and the traces they leave behind.",
       "artworkImages": [
-        "images/pgsrd/material-research-main.jpg",
-        "images/pgsrd/urban-fragment-3-main.jpg",
-        "images/pgsrd/aggregate-12-main.jpg"
+        "images/pgsrd-trc/pgsrd-trc-01.jpg",
+        "images/pgsrd-trc/pgsrd-trc-02.jpg",
+        "images/pgsrd-trc/pgsrd-trc-01.jpg"
       ],
       "works": [
         {
@@ -140,7 +140,7 @@
           "technique": "Plywood, gravel, sand",
           "dimensions": "40 × 60 × 8 cm",
           "images": [
-            { "url": "images/pgsrd/material-research-main.jpg", "role": "main" }
+            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" }
           ]
         },
         {
@@ -150,7 +150,7 @@
           "technique": "Road dust, mixed media",
           "dimensions": "55 × 42 cm",
           "images": [
-            { "url": "images/pgsrd/urban-fragment-3-main.jpg", "role": "main" }
+            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" }
           ]
         },
         {
@@ -160,7 +160,7 @@
           "technique": "Plywood, concrete",
           "dimensions": "60 × 45 × 10 cm",
           "images": [
-            { "url": "images/pgsrd/construction-study-main.jpg", "role": "main" }
+            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" }
           ]
         },
         {
@@ -170,7 +170,7 @@
           "technique": "Gravel, sand, resin",
           "dimensions": "50 × 50 × 7 cm",
           "images": [
-            { "url": "images/pgsrd/aggregate-12-main.jpg", "role": "main" }
+            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" }
           ]
         }
       ]
@@ -181,9 +181,9 @@
       "year": "2020–",
       "intro": "Individual works that explore various media and concepts outside of larger series, unified by an interest in material experimentation.",
       "artworkImages": [
-        "images/singles/fragment-study-main.jpg",
-        "images/singles/meditation-5-main.jpg",
-        "images/singles/untitled-black-main.jpg"
+        "images/singles/pgsrd-trc-04.jpg",
+        "images/singles/pgsrd-trc-05.jpg",
+        "images/singles/pgsrd-trc-06.jpg"
       ],
       "works": [
         {
