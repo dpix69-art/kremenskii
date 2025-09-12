@@ -47,7 +47,6 @@
         },
         {
           "slug": "fkb-02",
-          // "aliases": ["untitled-study-12"],
           "title": "fkb-02",
           "year": 2024,
           "technique": "Acrylic pigment on MDF",
@@ -65,7 +64,6 @@
         },
         {
           "slug": "fkb-03",
-          // "aliases": ["untitled-study-12"],
           "title": "fkb-03",
           "year": 2024,
           "technique": "Acrylic pigment on MDF",
@@ -135,83 +133,6 @@
             "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
           ]
         }
-        // {
-        //   "slug": "fkb-02",
-        //   "aliases": ["study-11"],
-        //   "title": "fkb-02",
-        //   "year": 2024,
-        //   "technique": "Mixed media on canvas",
-        //   "dimensions": "120 × 90 cm",
-        //   "images": [
-        //     { "url": "images/farbkoerper/fkb-03.jpg", "role": "main" },
-        //     { "url": "images/farbkoerper/fkb-04.jpg", "role": "detail" }
-        //   ],
-        //   "about": ["Short note about process/materials for Study #11."]
-        // },
-        // {
-        //   "slug": "study-13",
-        //   "title": "fkb-03",
-        //   "year": 2024,
-        //   "technique": "Mixed media on canvas",
-        //   "dimensions": "120 × 90 cm",
-        //   "images": [
-        //     { "url": "images/farbkoerper/fkb-05?v=2025-09-12-1.jpg", "role": "main" }
-        //   ],
-        //   "about": ["Short note for Study #13."]
-        // },
-        // {
-        //   "slug": "color-study-1",
-        //   "title": "Color Study #1",
-        //   "year": 2024,
-        //   "technique": "Oil on canvas",
-        //   "dimensions": "100 × 80 cm",
-        //   "images": [
-        //     { "url": "images/farbkoerper/color-study-1-main.jpg", "role": "main" }
-        //   ],
-        //   "about": ["Oil study focusing on saturation and edge behavior."]
-        // },
-        // {
-        //   "slug": "red-fragment",
-        //   "title": "Red Fragment",
-        //   "year": 2023,
-        //   "technique": "Acrylic on wood panel",
-        //   "dimensions": "70 × 50 cm",
-        //   "images": [
-        //     { "url": "images/farbkoerper/red-fragment-main.jpg", "role": "main" }
-        //   ],
-        //   "about": ["Fragmented field with high-chroma red mass."]
-        // },
-        // {
-        //   "slug": "blue-composition",
-        //   "title": "Blue Composition",
-        //   "year": 2023,
-        //   "technique": "Mixed media",
-        //   "dimensions": "90 × 70 cm",
-        //   "images": [
-        //     { "url": "images/farbkoerper/blue-composition-main.jpg", "role": "main" }
-        //   ],
-        //   "about": ["Layered ultramarine, matte/gleam interplay."]
-        // },
-        // {
-        //   "slug": "color-field-7",
-        //   "title": "Color Field #7",
-        //   "year": 2022,
-        //   "technique": "Oil and pigment on canvas",
-        //   "dimensions": "110 × 85 cm",
-        //   "images": [
-        //     { "url": "images/farbkoerper/color-field-7-main.jpg", "role": "main" }
-        //   ]
-        // },
-        // {
-        //   "slug": "material-study",
-        //   "title": "Material Study",
-        //   "year": 2022,
-        //   "technique": "Mixed media on panel",
-        //   "dimensions": "80 × 60 cm",
-        //   "images": [
-        //     { "url": "images/farbkoerper/material-study-main.jpg", "role": "main" }
-        //   ]
-        // }
       ]
     },
     {
