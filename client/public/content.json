@@ -155,7 +155,7 @@
         },
         { "slug": "pgsrd-trc-07", "title": "pgsrd-trc-07", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
           "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-07?url=1.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-07.jpg?url-00",    "role": "main" },
             { "url": "images/pgsrd-trc/pgsrd-trc-07-d-1.png","role": "detail" },
             { "url": "images/pgsrd-trc/pgsrd-trc-07-d-2.png","role": "detail" }
           ]
