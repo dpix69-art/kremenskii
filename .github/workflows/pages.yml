@@ -31,7 +31,7 @@ jobs:
         run: |
           npm ci || npm i
 
-      # Убедимся, что контент лежит в правильном месте для Vite (root=client)
+      # Проверяем, что контент лежит там, где ожидает Vite (root=client)
       - name: Ensure content.json exists (pre)
         run: |
           test -f client/public/content.json && echo "OK: client/public/content.json present" || (echo "ERROR: client/public/content.json missing" && exit 1)
@@ -39,16 +39,30 @@ jobs:
       - name: Build
         run: npm run build
 
-      # На всякий случай — чтобы Pages не применял Jekyll-обработку
+      # На всякий случай — отключаем Jekyll
       - name: Ensure .nojekyll in output
         run: |
           mkdir -p dist/public
           touch dist/public/.nojekyll
 
-      # Проверим, что content.json попал в артефакт
+      # Форс-копируем статику из client/public в финальный артефакт
+      - name: Force copy static public assets (content.json, images, files)
+        run: |
+          mkdir -p dist/public
+          cp -f client/public/content.json dist/public/content.json || true
+          if [ -d client/public/images ]; then
+            rm -rf dist/public/images
+            cp -R client/public/images dist/public/
+          fi
+          if [ -d client/public/files ]; then
+            rm -rf dist/public/files
+            cp -R client/public/files dist/public/
+          fi
+
+      # Проверяем, что content.json реально в артефакте
       - name: List build output & check content.json
         run: |
-          echo "Contents of dist/public:"
+          echo "Contents of dist/public (top):"
           ls -la dist/public | sed -n '1,200p'
           test -f dist/public/content.json && echo "OK: content.json in build" || (echo "ERROR: content.json not found in dist/public" && exit 1)
 
