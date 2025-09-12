@@ -25,7 +25,7 @@ const defaultContent = {
     ],
   },
   statement: {
-    portrait: "images/portrait.jpg",
+    portrait: "images/kremenskii.png",
     paragraphs: [
       "Artist statement paragraph 1.",
       "Artist statement paragraph 2."
