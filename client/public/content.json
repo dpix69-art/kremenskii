@@ -1,0 +1,76 @@
+{
+  "site": {
+    "artistName": "REPLACE_ME",
+    "role": "artist",
+    "statement": "REPLACE_ME two short sentences."
+  },
+  "nav": [
+    { "label": "Gallery", "href": "#/gallery" },
+    { "label": "Sounds", "href": "#/sounds" },
+    { "label": "Statement", "href": "#/statement" },
+    { "label": "Contacts", "href": "#/contacts" }
+  ],
+  "series": [
+    {
+      "slug": "farbkoerper",
+      "title": "Farbkörper",
+      "year": "2022–",
+      "intro": "REPLACE_ME short intro about the series.",
+      "works": [
+        {
+          "slug": "fk-01",
+          "title": "REPLACE_ME Work Title",
+          "year": 2024,
+          "technique": "mixed media on panel",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            "attached_assets/generated_images/farb/fk-01.jpg",
+            "attached_assets/generated_images/farb/fk-01-detail.jpg"
+          ],
+          "price": "on request",
+          "availability": "available",
+          "about": [
+            "REPLACE_ME paragraph 1.",
+            "Optional paragraph 2."
+          ]
+        }
+      ]
+    }
+  ],
+  "sounds": [
+    {
+      "slug": "album-x",
+      "title": "REPLACE_ME Album X",
+      "year": 2024,
+      "cover": "attached_assets/generated_images/sounds/album-x.jpg",
+      "embed": "https://REPLACE_ME.bandcamp.com/…",
+      "tracks": [
+        { "title": "Track 1", "duration": "00:03:20" },
+        { "title": "Track 2", "duration": "00:04:10" }
+      ],
+      "meta": { "label": "REPLACE_ME", "platform": "Bandcamp" }
+    }
+  ],
+  "statement": {
+    "portrait": "attached_assets/generated_images/portrait.jpg",
+    "paragraphs": [
+      "REPLACE_ME statement paragraph 1.",
+      "REPLACE_ME statement paragraph 2."
+    ],
+    "pressKitPdf": "files/press-kit.pdf"
+  },
+  "contacts": {
+    "email": "hi@example.art",
+    "city": "City",
+    "country": "Country",
+    "portfolioPdf": "files/portfolio.pdf",
+    "socials": [
+      { "label": "Instagram", "href": "https://instagram.com/REPLACE_ME" },
+      { "label": "Bandcamp", "href": "https://bandcamp.com/REPLACE_ME" }
+    ]
+  },
+  "footer": {
+    "legal": "Images © … / Texts © … No reproduction without written permission.",
+    "copyright": "© REPLACE_ME. All rights reserved."
+  }
+}
