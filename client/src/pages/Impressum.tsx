@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export default function Impressum() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Dmitrii Kremenskii" />
+      <Header />
       
       <main className="section-py flex-1">
         <div className="site-container heading-gap-lg">

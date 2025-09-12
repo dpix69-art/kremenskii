@@ -90,7 +90,7 @@ export default function ArtworkDetailPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Dmitrii Kremenskii" />
+      <Header />
       
       <main className="flex-1">
         <div className="site-container section-py">
