@@ -104,7 +104,7 @@ export default function StatementPage({
         </div>
 
         {/* Press & Contact */}
-        <div className="grid-12 pt-8 border-t border-border">
+        {/* <div className="grid-12 pt-8 border-t border-border">
           <div className="col-span-12 lg:col-span-6 space-y-4">
             <h2 className="text-type-h2 font-semibold text-foreground">Press</h2>
             <p className="text-type-body text-muted-foreground">
@@ -129,7 +129,7 @@ export default function StatementPage({
               {email}
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
