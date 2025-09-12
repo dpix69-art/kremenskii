@@ -6,7 +6,9 @@ import ArtworkDetail from "@/components/ArtworkDetail";
 import GalleryGrid from "@/components/GalleryGrid";
 import Footer from "@/components/Footer";
 import { useContent } from "@/content/ContentProvider";
+import { assetUrl } from "@/lib/assetUrl";
 
+// плейсхолдеры на случай полного отсутствия картинок в JSON
 import blueAbstractImage from "@assets/generated_images/Blue_abstract_color_field_53f088fd.png";
 import industrialSculptureImage from "@assets/generated_images/Industrial_sculpture_assemblage_2b04ef29.png";
 import gesturalPaintingImage from "@assets/generated_images/Gestural_earth_tone_painting_554103d6.png";
@@ -23,32 +25,30 @@ export default function ArtworkDetailPage() {
   const ser = (content?.series || []).find((s: any) => s.slug === series);
   const work = ser?.works?.find((w: any) => w.slug === slug);
 
-  // Мап серий для заголовка (если серии нет в JSON)
+  // Мап серий для заголовка (под твои реальные слуги)
   const seriesMap: Record<string, string> = {
-    farbkoerper: "Farbkoerper",
-    pgsrd: "Plywood-Gravel-Sand-Road-Dust (PGSRD)",
-    singles: "Singles",
-    graphics: "Graphics",
+    farbkoerper: "Farbkörper",
+    "pgsrd-trc": "Plywood-Gravel-Sand-Road-Dust (TRC)",
   };
 
   const seriesTitle = ser?.title || seriesMap[series!] || series || "Unknown Series";
 
   // --- 2) Основные поля работы ---
-  const workTitle = work?.title || "Untitled Study #12";
-  const year = String(work?.year ?? "2024");
-  const medium = work?.technique || work?.medium || "Mixed media on canvas";
-  const dimensions = work?.dimensions || "120 × 90 cm";
-  const price = work?.price || "€3,200";
-  const availability = work?.availability || "available";
+  const workTitle = work?.title || "Untitled";
+  const year = String(work?.year ?? "");
+  const medium = work?.technique || work?.medium || "";
+  const dimensions = work?.dimensions || "";
+  const price = work?.price || "";
+  const availability = work?.availability || "";
 
-  // Описание: поддерживаем work.about (массив строк). Иначе — фолбэк.
+  // Описание: сначала work.about (массив строк), иначе — ТЕКСТ ИЗ ОПИСАНИЯ СЕРИИ (ser.intro)
+  const seriesIntro = typeof ser?.intro === "string" ? ser!.intro : "";
   const description: string[] =
-    (Array.isArray(work?.about) && work!.about.length > 0
+    Array.isArray(work?.about) && work!.about.length > 0
       ? (work!.about as string[])
-      : [
-          "Plywood, gravel and road dust register direct actions — imprint, friction, displacement. This is not metaphor: it is a topography of actual interaction.",
-          "The crushed stone leaves permanent scars; plywood absorbs the impact without breaking.",
-        ]);
+      : seriesIntro
+      ? [seriesIntro]
+      : [];
 
   // --- 3) Изображения работы ---
   const imgs = Array.isArray(work?.images) ? (work!.images as any[]) : [];
@@ -56,19 +56,19 @@ export default function ArtworkDetailPage() {
     imgs.length > 0
       ? imgs
           .map((it: any, idx: number) => {
-            const url =
-              typeof it === "string"
-                ? it
-                : (it?.url || it?.src || "");
+            const raw =
+              typeof it === "string" ? it : (it?.url || it?.src || "");
+            if (!raw) return null;
+            const normalized = String(raw).replace(/^\/+/, "");
             const role =
               (it && typeof it === "object" && it.role) || (idx === 0 ? "main" : "detail");
             return {
-              url: (url || "").replace(/^\/+/, ""),
+              url: assetUrl(normalized),
               role: role as "main" | "detail" | "angle" | "poster" | "installation-view",
               alt: `${workTitle} - ${role}`,
             };
           })
-          .filter((x) => x.url)
+          .filter(Boolean) as { url: string; role: any; alt: string }[]
       : [
           { url: blueAbstractImage, role: "main" as const, alt: `${workTitle} - main view` },
           { url: gesturalPaintingImage, role: "detail" as const, alt: `${workTitle} - detail` },
@@ -85,10 +85,6 @@ export default function ArtworkDetailPage() {
       prevWork = p ? { title: p.title || "Previous", slug: p.slug } : undefined;
       nextWork = n ? { title: n.title || "Next", slug: n.slug } : undefined;
     }
-  } else {
-    // фолбэк
-    prevWork = { title: "Study #11", slug: "study-11" };
-    nextWork = { title: "Study #13", slug: "study-13" };
   }
 
   // --- 5) Related: из этой же серии ---
@@ -96,13 +92,11 @@ export default function ArtworkDetailPage() {
     (ser?.works || [])
       .filter((w: any) => w.slug !== slug)
       .map((w: any, i: number) => {
-        const thumb =
-          Array.isArray(w.images) && w.images[0]
-            ? (typeof w.images[0] === "string"
-                ? w.images[0]
-                : w.images[0]?.src || w.images[0]?.url || "")
-            : "";
-        const imageUrl = (thumb || minimalistInstallationImage).replace?.(/^\/+/, "") || minimalistInstallationImage;
+        const first = Array.isArray(w.images) && w.images[0] ? w.images[0] : undefined;
+        const raw =
+          typeof first === "string" ? first : first?.src || first?.url || "";
+        const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
+        const imageUrl = normalized ? assetUrl(normalized) : minimalistInstallationImage;
         return {
           id: w.slug || `related-${i + 1}`,
           title: w.title || "Untitled",
@@ -113,27 +107,7 @@ export default function ArtworkDetailPage() {
           type: "artwork" as const,
         };
       })
-      .slice(0, 8) || [
-      // фолбэк
-      {
-        id: "related-1",
-        title: "Study #11",
-        year: "2024",
-        medium: "Mixed media on canvas",
-        imageUrl: minimalistInstallationImage,
-        linkUrl: "#/gallery/farbkoerper/study-11",
-        type: "artwork" as const,
-      },
-      {
-        id: "related-2",
-        title: "Study #13",
-        year: "2024",
-        medium: "Mixed media on canvas",
-        imageUrl: industrialSculptureImage,
-        linkUrl: "#/gallery/farbkoerper/study-13",
-        type: "artwork" as const,
-      },
-    ];
+      .slice(0, 8);
 
   // --- 6) Related: из других серий (берём первые работы) ---
   const relatedGlobal =
@@ -141,13 +115,11 @@ export default function ArtworkDetailPage() {
       .filter((s: any) => s.slug !== series)
       .flatMap((s: any) => (Array.isArray(s.works) ? s.works.slice(0, 1) : []))
       .map((w: any, i: number) => {
-        const thumb =
-          Array.isArray(w.images) && w.images[0]
-            ? (typeof w.images[0] === "string"
-                ? w.images[0]
-                : w.images[0]?.src || w.images[0]?.url || "")
-            : "";
-        const imageUrl = (thumb || digitalPrintImage).replace?.(/^\/+/, "") || digitalPrintImage;
+        const first = Array.isArray(w.images) && w.images[0] ? w.images[0] : undefined;
+        const raw =
+          typeof first === "string" ? first : first?.src || first?.url || "";
+        const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
+        const imageUrl = normalized ? assetUrl(normalized) : digitalPrintImage;
 
         // нужно знать серию для линка
         const parentSeries = (content?.series || []).find((s: any) =>
@@ -157,7 +129,7 @@ export default function ArtworkDetailPage() {
 
         return {
           id: w.slug || `global-${i + 1}`,
-          title: w.title || "Material Fragment",
+          title: w.title || "Untitled",
           year: String(w.year ?? ""),
           medium: w.technique || w.medium || "",
           imageUrl,
@@ -165,25 +137,11 @@ export default function ArtworkDetailPage() {
           type: "artwork" as const,
         };
       })
-      .slice(0, 8) || [
-      // фолбэк
-      {
-        id: "global-1",
-        title: "Material Fragment",
-        year: "2023",
-        medium: "Plywood assemblage",
-        imageUrl: industrialSculptureImage,
-        linkUrl: "#/gallery/pgsrd/material-fragment",
-        type: "artwork" as const,
-      },
-    ];
+      .slice(0, 8);
 
-  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
-    /^\/+/,
-    ""
-  );
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "");
 
-  // --- 7) Analytics event (сохраняем твою логику) ---
+  // --- 7) Analytics event ---
   useEffect(() => {
     if (series && slug && typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "view_artwork", { series, work: slug });
