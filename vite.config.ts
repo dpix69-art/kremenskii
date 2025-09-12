@@ -1,43 +1,61 @@
+// vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import { fileURLToPath } from "node:url";
 
-export default defineConfig({
-  plugins: [
-    react(),
-    runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID !== undefined
-      ? [await import("@replit/vite-plugin-cartographer").then((m) => m.cartographer())]
-      : []),
-  ],
+// Узнаём __dirname в ESM
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-  // ВАЖНО для GitHub Pages: относительные ассеты
-  base: "./",
+export default defineConfig(async ({ mode }) => {
+  const isDev = mode === "development";
+  const plugins = [react()];
 
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+  // Подключаем dev-плагины ТОЛЬКО в dev-режиме
+  if (isDev) {
+    try {
+      const { default: runtimeErrorOverlay } = await import(
+        "@replit/vite-plugin-runtime-error-modal"
+      );
+      plugins.push(runtimeErrorOverlay());
+    } catch {}
+    // Подключаем cartographer только в dev и если есть REPL_ID
+    if (process.env.REPL_ID) {
+      try {
+        const m = await import("@replit/vite-plugin-cartographer");
+        plugins.push(m.cartographer());
+      } catch {}
+    }
+  }
+
+  return {
+    plugins,
+
+    // ВАЖНО для GitHub Pages — относительные ассеты
+    base: "./",
+
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "client", "src"),
+        "@shared": path.resolve(__dirname, "shared"),
+        "@assets": path.resolve(__dirname, "attached_assets"),
+      },
     },
-  },
 
-  // Корень проекта
-  root: path.resolve(import.meta.dirname, "client"),
+    // Корень фронтенда
+    root: path.resolve(__dirname, "client"),
 
-  // Public у тебя в корне репозитория → явно укажем
-  publicDir: path.resolve(import.meta.dirname, "public"),
+    // Твой публичный каталог лежит в корне репозитория
+    publicDir: path.resolve(__dirname, "public"),
 
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-
-  server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+    build: {
+      outDir: path.resolve(__dirname, "dist/public"),
+      emptyOutDir: true,
+      sourcemap: false,
     },
-  },
+
+    server: {
+      fs: { strict: true, deny: ["**/.*"] },
+    },
+  };
 });
