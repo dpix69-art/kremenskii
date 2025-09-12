@@ -353,8 +353,8 @@
     "email": "hi@kremenskii.art",
     "city": "Stuttgart",
     "country": "Germany",
-    "introText": "If you have an idea or proposal, please write an email.",
-    "openToText": "Open for exhibitions, collaborations and commissions. Please email.",
+    "introText": "Idea? Please write an email.",
+    "openToText": "Open for exhibitions, collaborations and commissions.",
     "portfolioPdf": "files/portfolio.pdf",
     "socials": [
       { "label": "Instagram",  "href": "https://instagram.com/artist" },
