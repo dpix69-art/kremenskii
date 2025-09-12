@@ -208,7 +208,7 @@
 
   "sounds": [
     {
-      "slug": "Impact of the fan",
+      "slug": "impact-of-the-fan",
       "title": "Impact of the fan",
       "year": 2024,
       "platform": "soundcloud",
@@ -220,8 +220,8 @@
       "meta": { "label": "Independent", "platforms": ["SoundCloud"] }
     },
     {
-      "slug": "Impact of the fan",
-      "title": "Impact of the fan",
+      "slug": "live-at-elsiens-galerie-stuttgart",
+      "title": "Live at Elsiens Galerie Stuttgart",
       "year": 2024,
       "platform": "soundcloud",
       "cover": "images/sounds/spatial-frequencies-cover.jpg",
