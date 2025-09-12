@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type Content = any; // можно расписать типы позже
-
+type Content = any; // типы добавим позже
 type Ctx = { content: Content | null; loading: boolean; error?: string };
+
 const ContentContext = createContext<Ctx>({ content: null, loading: true });
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
