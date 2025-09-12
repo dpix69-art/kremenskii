@@ -80,7 +80,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName={artistName} />
+      <Header />
 
       <main className="flex-1">
         {/* Text Header (из content.json) */}

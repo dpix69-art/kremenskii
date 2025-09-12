@@ -48,7 +48,7 @@ export default function Contacts() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName={artistName} />
+      <Header />
 
       <main className="section-py flex-1">
         <div className="site-container heading-gap-lg">

@@ -17,13 +17,13 @@ function normalizePath(p?: string): string {
   return p;
 }
 
-export default function Header({ artistName: artistNameProp = "Dmitrii Kremenskii" }: HeaderProps) {
+export default function Header({ artistName: artistNameProp }: HeaderProps) {
   const { content } = useContent();
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const artistName = artistNameProp ?? content?.site?.artistName ?? "Dmitrii Kremenskii";
-
+  // const artistName = artistNameProp ?? content?.site?.artistName ?? "Dmitrii Kremenskii";
+  const artistName = content?.site?.artistName ?? artistNameProp ?? "Dmitrii 
   // Навигация: content.json (nav/navigation) → дефолт
   const navBase = ((content?.nav || content?.navigation || []) as any[]);
   const navFromJson: NavItem[] = navBase

@@ -59,7 +59,7 @@ export default function Statement() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName={artistName} />
+      <Header />
 
       <main className="flex-1">
         <div className="site-container section-py">
