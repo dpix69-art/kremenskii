@@ -11,9 +11,8 @@ export default function Contacts() {
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(email);
-      alert("Email copied"); // можно заменить на ваш toast, если есть
+      alert("Email copied"); // при желании замени на твой toast
     } catch {
-      // fallback: выделить и скопировать через prompt
       prompt("Copy email:", email);
     }
   };
@@ -25,15 +24,9 @@ export default function Contacts() {
       </h1>
 
       <div className="text-type-body space-y-4 max-w-prose">
+        <p>If you have ideas or proposals, please write to me.</p>
         <p>
-          If you have ideas or proposals, please write to me.
-        </p>
-        <p>
-          <button
-            onClick={copyEmail}
-            className="underline underline-offset-4"
-            aria-label="Copy email"
-          >
+          <button onClick={copyEmail} className="underline underline-offset-4" aria-label="Copy email">
             {email}
           </button>
         </p>
