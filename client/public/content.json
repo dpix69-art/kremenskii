@@ -46,6 +46,7 @@
         },
         {
           "slug": "study-11",
+          "aliases": ["untitled-study-12"],
           "title": "Study #11",
           "year": 2024,
           "technique": "Mixed media on canvas",
@@ -58,6 +59,7 @@
         },
         {
           "slug": "study-13",
+          "aliases": ["untitled-study-12"],
           "title": "Study #13",
           "year": 2024,
           "technique": "Mixed media on canvas",
@@ -69,6 +71,7 @@
         },
         {
           "slug": "color-study-1",
+          "aliases": ["untitled-study-12"],
           "title": "Color Study #1",
           "year": 2024,
           "technique": "Oil on canvas",
@@ -80,6 +83,7 @@
         },
         {
           "slug": "red-fragment",
+          "aliases": ["untitled-study-12"],
           "title": "Red Fragment",
           "year": 2023,
           "technique": "Acrylic on wood panel",
@@ -91,6 +95,7 @@
         },
         {
           "slug": "blue-composition",
+          "aliases": ["untitled-study-12"],
           "title": "Blue Composition",
           "year": 2023,
           "technique": "Mixed media",
@@ -102,6 +107,7 @@
         },
         {
           "slug": "color-field-7",
+          "aliases": ["untitled-study-12"],
           "title": "Color Field #7",
           "year": 2022,
           "technique": "Oil and pigment on canvas",
@@ -112,6 +118,7 @@
         },
         {
           "slug": "material-study",
+          "aliases": ["untitled-study-12"],
           "title": "Material Study",
           "year": 2022,
           "technique": "Mixed media on panel",
@@ -125,7 +132,7 @@
     {
       "slug": "pgsrd",
       "title": "Plywood-Gravel-Sand-Road-Dust (PGSRD)",
-      "year": "2021–",
+      "year": "2022",
       "intro": "A series examining industrial and organic materials, their intersection in urban environments, and the traces they leave behind.",
       "artworkImages": [
         "images/pgsrd/material-research-main.jpg",
