@@ -78,8 +78,11 @@ export default function Home() {
     },
   ];
 
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "");
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      {/* Header берёт имя из content.json сам — пропс не нужен */}
       <Header />
 
       <main className="flex-1">
@@ -115,15 +118,8 @@ export default function Home() {
       </main>
 
       <Footer
-        artistName={artistName}
-        year={2025}
-        // ВАЖНО: без ведущего слеша на GitHub Pages
-        portfolioPdfUrl="files/portfolio.pdf"
-        socialLinks={{
-          instagram: "https://instagram.com/artist",
-          soundcloud: "https://soundcloud.com/artist",
-          bandcamp: "https://artist.bandcamp.com",
-        }}
+        year={new Date().getFullYear()}
+        portfolioPdfUrl={portfolioPdfUrl}
       />
     </div>
   );

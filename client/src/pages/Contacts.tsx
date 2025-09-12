@@ -13,9 +13,6 @@ type SocialLinks = {
 export default function Contacts() {
   const { content } = useContent();
 
-  // данные из content.json с дефолтами, чтобы ничего не ломалось
-  const artistName = content?.site?.artistName ?? "Artist Name";
-
   const email = content?.contacts?.email ?? "hi@example.art";
   const city = content?.contacts?.city ?? "Berlin";
   const country = content?.contacts?.country ?? "Germany";
@@ -28,13 +25,11 @@ export default function Contacts() {
     content?.contacts?.openToText ??
     "Open for exhibitions, collaborations and commissions. Please email.";
 
-  // PDF-путь без ведущего слэша — важно для GitHub Pages
   const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
     /^\/+/,
     ""
   );
 
-  // socials из JSON (если есть) + совместимость с пропсами Footer'а
   const socialLinks: SocialLinks = (content?.contacts?.socials || []).reduce(
     (acc: SocialLinks, s: any) => {
       const key = String(s.label || "").toLowerCase();
@@ -54,12 +49,13 @@ export default function Contacts() {
         <div className="site-container heading-gap-lg">
           <Breadcrumbs
             items={[
-              // hash-роутер безопасно
               { label: "Home", href: "#/", testId: "link-bc-home" },
               { label: "Contacts", testId: "text-bc-current" }
             ]}
           />
-          <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">Contacts</h1>
+          <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">
+            Contacts
+          </h1>
         </div>
 
         <ContactsPage
@@ -72,7 +68,6 @@ export default function Contacts() {
       </main>
 
       <Footer
-        artistName={artistName}
         year={new Date().getFullYear()}
         portfolioPdfUrl={portfolioPdfUrl}
         socialLinks={socialLinks}
