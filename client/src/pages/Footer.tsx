@@ -20,7 +20,7 @@ export default function Footer(props: Props) {
     props.artistName ?? content?.site?.artistName ?? "Artist Name";
   const year = props.year ?? new Date().getFullYear();
 
-  // важно: без ведущего слэша (GitHub Pages)
+  // важно: без ведущего слэша для GitHub Pages
   const portfolio =
     (props.portfolioPdfUrl || content?.contacts?.portfolioPdf || "files/portfolio.pdf").replace(
       /^\/+/,
