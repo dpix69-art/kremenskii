@@ -2,8 +2,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Router } from "wouter";
-// ВНУЖНО: у вашей версии wouter — ИМЕНОВАННЫЙ экспорт:
-import { useHashLocation } from "wouter/use-hash-location";
+import { useHashLocation } from "wouter/use-hash-location"; // ← ИМЕНОВАННЫЙ импорт
 
 import App from "./App";
 import "./index.css";
