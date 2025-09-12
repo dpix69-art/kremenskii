@@ -4,22 +4,24 @@
     "role": "artist",
     "statement": "My practice investigates the intersection of material and meaning, exploring how physical substances carry cultural and emotional weight beyond their immediate visual properties. Through painting, sculpture, and sound, I examine the boundaries between the constructed and the found, seeking moments where these distinctions collapse or reveal their arbitrariness."
   },
+
   "nav": [
-    { "label": "Gallery", "href": "#/gallery" },
-    { "label": "Sounds", "href": "#/sounds" },
+    { "label": "Gallery",   "href": "#/gallery" },
+    { "label": "Sounds",    "href": "#/sounds" },
     { "label": "Statement", "href": "#/statement" },
-    { "label": "Contacts", "href": "#/contacts" }
+    { "label": "Contacts",  "href": "#/contacts" }
   ],
+
   "series": [
     {
       "slug": "farbkoerper",
       "title": "Farbkörper",
       "year": "2022–",
-      "intro": "REPLACE_ME short intro about the series.",
+      "intro": "Short intro about the series.",
       "works": [
         {
           "slug": "fk-01",
-          "title": "REPLACE_ME Work Title",
+          "title": "Work Title",
           "year": 2024,
           "technique": "mixed media on panel",
           "dimensions": "51 × 69 × 0.6 cm",
@@ -30,43 +32,48 @@
           "price": "on request",
           "availability": "available",
           "about": [
-            "REPLACE_ME paragraph 1.",
+            "Paragraph 1 about the work.",
             "Optional paragraph 2."
           ]
         }
       ]
     }
   ],
+
   "sounds": [
     {
       "slug": "album-x",
-      "title": "REPLACE_ME Album X",
+      "title": "Album X",
       "year": 2024,
       "cover": "attached_assets/generated_images/sounds/album-x.jpg",
-      "embed": "https://REPLACE_ME.bandcamp.com/…",
+      "embed": "https://example.bandcamp.com/...", 
       "tracks": [
         { "title": "Track 1", "duration": "00:03:20" },
         { "title": "Track 2", "duration": "00:04:10" }
-      ],
-      "meta": { "label": "REPLACE_ME", "platform": "Bandcamp" }
+        ],
+      "meta": { "label": "Label Name", "platform": "Bandcamp" }
     }
   ],
-   "statement": {
+
+  "statement": {
     "portrait": "attached_assets/generated_images/Professional_artist_portrait_0c565b16.png",
     "paragraphs": [
       "Artist statement paragraph 1.",
       "Artist statement paragraph 2."
     ],
-    "pressKitPdf": "files/press-kit.pdf"
+    "pressKitPdf": "files/press-kit.pdf",
+    "exhibitions": [
+      { "year": "2024", "event": "Material Traces, Contemporary Art Gallery, Berlin" },
+      { "year": "2023", "event": "Substance and Surface, Museum of Modern Art, Vienna" }
+    ]
   },
-  "exhibitions": [
-      { "year": "2024", "event": "…" },
-      { "year": "2023", "event": "…" }
-  ],
+
   "contacts": {
     "email": "hi@kremenskii.art",
     "city": "Stuttgart",
     "country": "Germany",
+    "introText": "If you have an idea or proposal, please write an email.",
+    "openToText": "Open for exhibitions, collaborations and commissions. Please email.",
     "portfolioPdf": "files/portfolio.pdf",
     "socials": [
       { "label": "Instagram", "href": "https://instagram.com/artist" },
@@ -74,6 +81,15 @@
       { "label": "Bandcamp", "href": "https://artist.bandcamp.com" }
     ]
   },
+
+  "impressum": {
+    "paragraphs": [
+      "This website is operated by Dmitrii Kremenskii.",
+      "No reproduction without written permission.",
+      "Contact: hi@kremenskii.art"
+    ]
+  },
+
   "footer": {
     "legal": "No reproduction without written permission.",
     "copyright": "2025 © Dmitrii Kremenskii. All rights reserved."
