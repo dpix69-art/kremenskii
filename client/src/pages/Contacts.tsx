@@ -2,43 +2,80 @@ import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ContactsPage from "@/components/ContactsPage";
 import Footer from "@/components/Footer";
+import { useContent } from "@/content/ContentProvider";
+
+type SocialLinks = {
+  instagram?: string;
+  soundcloud?: string;
+  bandcamp?: string;
+};
 
 export default function Contacts() {
+  const { content } = useContent();
+
+  // данные из content.json с дефолтами, чтобы ничего не ломалось
+  const artistName = content?.site?.artistName ?? "Artist Name";
+
+  const email = content?.contacts?.email ?? "hi@example.art";
+  const city = content?.contacts?.city ?? "Berlin";
+  const country = content?.contacts?.country ?? "Germany";
+
+  const introText =
+    content?.contacts?.introText ??
+    "If you have an idea or proposal, please write an email.";
+
+  const openToText =
+    content?.contacts?.openToText ??
+    "Open for exhibitions, collaborations and commissions. Please email.";
+
+  // PDF-путь без ведущего слэша — важно для GitHub Pages
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
+    /^\/+/,
+    ""
+  );
+
+  // socials из JSON (если есть) + совместимость с пропсами Footer'а
+  const socialLinks: SocialLinks = (content?.contacts?.socials || []).reduce(
+    (acc: SocialLinks, s: any) => {
+      const key = String(s.label || "").toLowerCase();
+      if (["instagram", "soundcloud", "bandcamp"].includes(key)) {
+        (acc as any)[key] = s.href;
+      }
+      return acc;
+    },
+    {}
+  );
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Artist Name" />
-      
+      <Header artistName={artistName} />
+
       <main className="section-py flex-1">
         <div className="site-container heading-gap-lg">
-          <Breadcrumbs 
+          <Breadcrumbs
             items={[
-              { label: "Home", href: "/", testId: "link-bc-home" },
+              // hash-роутер безопасно
+              { label: "Home", href: "#/", testId: "link-bc-home" },
               { label: "Contacts", testId: "text-bc-current" }
-            ]} 
+            ]}
           />
-          <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">
-            Contacts
-          </h1>
+          <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">Contacts</h1>
         </div>
-        
+
         <ContactsPage
-          email="hi@example.art"
-          city="Berlin"
-          country="Germany"
-          introText="If you have an idea or proposal, please write an email."
-          openToText="Open for exhibitions, collaborations and commissions. Please email."
+          email={email}
+          city={city}
+          country={country}
+          introText={introText}
+          openToText={openToText}
         />
       </main>
 
       <Footer
-        artistName="Artist Name"
-        year={2025}
-        portfolioPdfUrl="/files/portfolio.pdf"
-        socialLinks={{
-          instagram: "https://instagram.com/artist",
-          soundcloud: "https://soundcloud.com/artist",
-          bandcamp: "https://artist.bandcamp.com"
-        }}
+        artistName={artistName}
+        year={new Date().getFullYear()}
+        portfolioPdfUrl={portfolioPdfUrl}
+        socialLinks={socialLinks}
       />
     </div>
   );
