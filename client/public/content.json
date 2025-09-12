@@ -28,7 +28,8 @@
       ],
       "works": [
         {
-          "slug": "untitled-study-12",
+          "slug": "fkb-01",
+          "aliases": ["untitled-study-12"],
           "title": "Untitled Study #12",
           "year": 2024,
           "technique": "Medium: Acrylic pigment on MDF",
@@ -36,13 +37,11 @@
           "price": "€3,200",
           "availability": "available",
           "images": [
-            { "url": "images/farb/fk-12-main.jpg", "role": "main" },
-            { "url": "images/farb/fk-12-detail.jpg", "role": "detail" }
+            { "url": "images/farbkoerper/fkb-01.jpg", "role": "main" },
+            { "url": "images/farbkoerper/fkb-02.jpg", "role": "detail" }
           ],
           "about": [
-            "This work continues the exploration of color as material substance, investigating how pigment can occupy and define space beyond the traditional boundaries of painting.",
-            "The composition emerges from a process of layering and excavation, where each application of paint both conceals and reveals the surface beneath.",
-            "Part of the ongoing Farbkoerper series, this piece questions the relationship between color perception and physical presence."
+            "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
           ]
         },
         {
