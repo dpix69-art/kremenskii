@@ -2,8 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -12,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
@@ -22,49 +21,48 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: 'npm'
 
-      - name: Install deps
-        run: npm ci || npm i --no-audit --no-fund
+      - name: Install dependencies
+        run: |
+          npm ci || npm i
+
+      # Убедимся, что контент лежит в правильном месте для Vite (root=client)
+      - name: Ensure content.json exists (pre)
+        run: |
+          test -f client/public/content.json && echo "OK: client/public/content.json present" || (echo "ERROR: client/public/content.json missing" && exit 1)
 
       - name: Build
         run: npm run build
 
-      # 👇 Диагностика: смотрим, что положил билд
-      - name: Inspect artifact
+      # На всякий случай — чтобы Pages не применял Jekyll-обработку
+      - name: Ensure .nojekyll in output
         run: |
-          echo "::group::dist tree"
-          if command -v tree >/dev/null 2>&1; then
-            tree -a dist || true
-          else
-            find dist -maxdepth 3 -type f | sort
-          fi
-          echo "::endgroup::"
-          echo "---- probe index.html ----"
-          if [ -f dist/public/index.html ]; then
-            echo "OK: dist/public/index.html exists"
-            head -n 10 dist/public/index.html || true
-          else
-            echo "⚠️ Not found: dist/public/index.html"
-            ls -la dist dist/public || true
-          fi
+          mkdir -p dist/public
+          touch dist/public/.nojekyll
+
+      # Проверим, что content.json попал в артефакт
+      - name: List build output & check content.json
+        run: |
+          echo "Contents of dist/public:"
+          ls -la dist/public | sed -n '1,200p'
+          test -f dist/public/content.json && echo "OK: content.json in build" || (echo "ERROR: content.json not found in dist/public" && exit 1)
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # ВАЖНО: путь должен совпадать с outDir в vite.config.ts (у вас dist/public)
           path: dist/public
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
