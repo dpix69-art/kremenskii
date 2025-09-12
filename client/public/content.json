@@ -32,8 +32,8 @@
           "dimensions": "51 × 69 × 0.6 cm",
           "images": [
             { "url": "images/farbkoerper/fkb-01.jpg",    "role": "main" },
-            { "url": "images/farbkoerper/fkb-01-d-1.jpg","role": "detail" },
-            { "url": "images/farbkoerper/fkb-01-d-2.jpg","role": "detail" }
+            { "url": "images/farbkoerper/fkb-01-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-01-d-2.png","role": "detail" }
           ]
         },
         {
@@ -44,8 +44,8 @@
           "dimensions": "51 × 69 × 0.6 cm",
           "images": [
             { "url": "images/farbkoerper/fkb-02.jpg",    "role": "main" },
-            { "url": "images/farbkoerper/fkb-02-d-1.jpg","role": "detail" },
-            { "url": "images/farbkoerper/fkb-02-d-2.jpg","role": "detail" }
+            { "url": "images/farbkoerper/fkb-02-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-02-d-2.png","role": "detail" }
           ]
         },
         {
