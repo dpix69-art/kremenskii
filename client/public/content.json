@@ -148,7 +148,7 @@
         },
         { "slug": "pgsrd-trc-06", "title": "pgsrd-trc-06", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
           "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-06.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-06.jpg?url-00",    "role": "main" },
             { "url": "images/pgsrd-trc/pgsrd-trc-06-d-1.png","role": "detail" },
             { "url": "images/pgsrd-trc/pgsrd-trc-06-d-2.png","role": "detail" }
           ]
@@ -162,21 +162,21 @@
         },
         { "slug": "pgsrd-trc-08", "title": "pgsrd-trc-08", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
           "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-08.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-08.jpg?url-00",    "role": "main" },
             { "url": "images/pgsrd-trc/pgsrd-trc-08-d-1.png","role": "detail" },
             { "url": "images/pgsrd-trc/pgsrd-trc-08-d-2.png","role": "detail" }
           ]
         },
         { "slug": "pgsrd-trc-09", "title": "pgsrd-trc-09", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
           "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-09.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-09.jpg?url-00",    "role": "main" },
             { "url": "images/pgsrd-trc/pgsrd-trc-09-d-1.png","role": "detail" },
             { "url": "images/pgsrd-trc/pgsrd-trc-09-d-2.png","role": "detail" }
           ]
         },
         { "slug": "pgsrd-trc-10", "title": "pgsrd-trc-10", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
           "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-10.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-10.jpg?url-00",    "role": "main" },
             { "url": "images/pgsrd-trc/pgsrd-trc-10-d-1.png","role": "detail" },
             { "url": "images/pgsrd-trc/pgsrd-trc-10-d-2.png","role": "detail" }
           ]
@@ -190,7 +190,7 @@
         },
         { "slug": "pgsrd-trc-12", "title": "pgsrd-trc-12", "year": 2021, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
           "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-12.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-12.jpg?url-00",    "role": "main" },
             { "url": "images/pgsrd-trc/pgsrd-trc-12-d-1.png","role": "detail" },
             { "url": "images/pgsrd-trc/pgsrd-trc-12-d-2.png","role": "detail" }
           ]
