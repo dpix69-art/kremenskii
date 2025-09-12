@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export default function Contacts() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Artist Name" />
+      <Header artistName="Dmitrii Kremenskii" />
       
       <main className="section-py flex-1">
         <div className="site-container heading-gap-lg">
@@ -22,8 +22,8 @@ export default function Contacts() {
         </div>
         
         <ContactsPage
-          email="hi@example.art"
-          city="Berlin"
+          email="hi@kremenskii.art"
+          city="Stuttgart"
           country="Germany"
           introText="If you have an idea or proposal, please write an email."
           openToText="Open for exhibitions, collaborations and commissions. Please email."
@@ -31,7 +31,7 @@ export default function Contacts() {
       </main>
 
       <Footer
-        artistName="Artist Name"
+        artistName="Dmitrii Kremenskii"
         year={2025}
         portfolioPdfUrl="/files/portfolio.pdf"
         socialLinks={{

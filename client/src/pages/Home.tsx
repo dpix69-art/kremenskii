@@ -70,7 +70,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Artist Name" />
+      <Header artistName="Dmitrii Kremenskii" />
       <main className="flex-1">
         {/* Text Header */}
         <section className="section-py">
@@ -82,7 +82,7 @@ export default function Home() {
                 className="text-type-h1 leading-tight font-semibold text-foreground h1-spacing"
                 data-testid="text-artist-name"
               >
-                Artist Name
+                Dmitrii Kremenskii
               </h1>
               <p className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide" style={{marginBottom: 'var(--paragraph-gap)'}}>
                 Artist
@@ -104,7 +104,7 @@ export default function Home() {
         </div>
       </main>
       <Footer
-        artistName="Artist Name"
+        artistName="Dmitrii Kremenskii"
         year={2025}
         portfolioPdfUrl="/files/portfolio.pdf"
         socialLinks={{

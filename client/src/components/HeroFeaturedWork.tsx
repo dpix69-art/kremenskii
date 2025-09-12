@@ -52,7 +52,7 @@ export default function HeroFeaturedWork({
       <div className="w-full lg:w-1/2 relative h-64 lg:h-screen">
         <img
           src={imageUrl}
-          alt={`${title} by Artist Name`}
+          alt={`${title} by Dmitrii Kremenskii`}
           className="absolute inset-0 w-full h-full object-cover pt-[0px] pb-[0px] mt-[550px] mb-[550px]"
           data-testid="img-hero-artwork"
         />

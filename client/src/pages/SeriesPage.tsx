@@ -222,7 +222,7 @@ export default function SeriesPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Artist Name" />
+      <Header artistName="Dmitrii Kremenskii" />
       
       <main className="flex-1">
         {/* Series Header */}
@@ -266,7 +266,7 @@ export default function SeriesPage() {
       </main>
 
       <Footer
-        artistName="Artist Name"
+        artistName="Dmitrii Kremenskii"
         year={2025}
         portfolioPdfUrl="/files/portfolio.pdf"
         socialLinks={{

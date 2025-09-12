@@ -46,7 +46,7 @@ export default function Sounds() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Artist Name" />
+      <Header artistName="Dmitrii Kremenskii" />
       <main className="section-py flex-1">
         <div className="site-container heading-gap-lg">
           <Breadcrumbs 
@@ -70,7 +70,7 @@ export default function Sounds() {
         />
       </main>
       <Footer
-        artistName="Artist Name"
+        artistName="Dmitrii Kremenskii"
         year={2025}
         portfolioPdfUrl="/files/portfolio.pdf"
         socialLinks={{

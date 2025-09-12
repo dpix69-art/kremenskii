@@ -7,7 +7,7 @@ interface HeaderProps {
   artistName?: string;
 }
 
-export default function Header({ artistName = "Artist Name" }: HeaderProps) {
+export default function Header({ artistName = "Dmitrii Kremenskii" }: HeaderProps) {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -28,7 +28,7 @@ export default function Header({ artistName = "Artist Name" }: HeaderProps) {
     <header className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo/Artist Name */}
+          {/* Logo/Dmitrii Kremenskii */}
           <Link href="/" data-testid="link-home" className="cursor-pointer">
             <div 
               className="text-type-h3 font-semibold text-foreground"
