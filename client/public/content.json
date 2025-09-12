@@ -1,8 +1,8 @@
 {
   "site": {
-    "artistName": "REPLACE_ME",
+    "artistName": "Dmitrii Kremenskii",
     "role": "artist",
-    "statement": "REPLACE_ME two short sentences."
+    "statement": "My practice investigates the intersection of material and meaning, exploring how physical substances carry cultural and emotional weight beyond their immediate visual properties. Through painting, sculpture, and sound, I examine the boundaries between the constructed and the found, seeking moments where these distinctions collapse or reveal their arbitrariness."
   },
   "nav": [
     { "label": "Gallery", "href": "#/gallery" },
@@ -51,26 +51,27 @@
       "meta": { "label": "REPLACE_ME", "platform": "Bandcamp" }
     }
   ],
-  "statement": {
+   "statement": {
     "portrait": "attached_assets/generated_images/portrait.jpg",
     "paragraphs": [
-      "REPLACE_ME statement paragraph 1.",
-      "REPLACE_ME statement paragraph 2."
+      "Artist statement paragraph 1.",
+      "Artist statement paragraph 2."
     ],
     "pressKitPdf": "files/press-kit.pdf"
   },
   "contacts": {
-    "email": "hi@example.art",
-    "city": "City",
-    "country": "Country",
+    "email": "hi@kremenskii.art",
+    "city": "Stuttgart",
+    "country": "Germany",
     "portfolioPdf": "files/portfolio.pdf",
     "socials": [
-      { "label": "Instagram", "href": "https://instagram.com/REPLACE_ME" },
-      { "label": "Bandcamp", "href": "https://bandcamp.com/REPLACE_ME" }
+      { "label": "Instagram", "href": "https://instagram.com/artist" },
+      { "label": "Soundcloud", "href": "https://soundcloud.com/artist" },
+      { "label": "Bandcamp", "href": "https://artist.bandcamp.com" }
     ]
   },
   "footer": {
-    "legal": "Images © … / Texts © … No reproduction without written permission.",
-    "copyright": "© REPLACE_ME. All rights reserved."
+    "legal": "No reproduction without written permission.",
+    "copyright": "2025 © Dmitrii Kremenskii. All rights reserved."
   }
 }
