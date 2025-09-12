@@ -80,6 +80,19 @@ export default function Sounds() {
     ""
   );
 
+  const soundProjects = (content?.sounds || []).map((s: any) => ({
+  id: s.slug,
+  title: s.title,
+  year: String(s.year ?? ""),
+  medium: s?.meta?.label || (s.platform ? s.platform.toUpperCase() : ""),
+  imageUrl: s.cover ? s.cover.replace(/^\/+/, "") : undefined,
+  linkUrl: `#/sounds/${s.slug}`,
+  type: "sound_project" as const,
+  platform: (s.platform || "").toLowerCase(),
+  embedUrl: s.embed
+}));
+
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header сам возьмёт имя из content.json */}
