@@ -56,8 +56,8 @@
           "dimensions": "51 × 69 × 0.6 cm",
           "images": [
             { "url": "images/farbkoerper/fkb-03.jpg",    "role": "main" },
-            { "url": "images/farbkoerper/fkb-03-d-1.jpg","role": "detail" },
-            { "url": "images/farbkoerper/fkb-03-d-2.jpg","role": "detail" }
+            { "url": "images/farbkoerper/fkb-03-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-03-d-2.png","role": "detail" }
           ]
         },
         {
@@ -68,8 +68,8 @@
           "dimensions": "51 × 69 × 0.6 cm",
           "images": [
             { "url": "images/farbkoerper/fkb-04.jpg",    "role": "main" },
-            { "url": "images/farbkoerper/fkb-04-d-1.jpg","role": "detail" },
-            { "url": "images/farbkoerper/fkb-04-d-2.jpg","role": "detail" }
+            { "url": "images/farbkoerper/fkb-04-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-04-d-2.png","role": "detail" }
           ]
         },
         {
@@ -80,8 +80,8 @@
           "dimensions": "51 × 69 × 0.6 cm",
           "images": [
             { "url": "images/farbkoerper/fkb-05.jpg",    "role": "main" },
-            { "url": "images/farbkoerper/fkb-05-d-1.jpg","role": "detail" },
-            { "url": "images/farbkoerper/fkb-05-d-2.jpg","role": "detail" }
+            { "url": "images/farbkoerper/fkb-05-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-05-d-2.png","role": "detail" }
           ]
         },
         {
@@ -92,8 +92,8 @@
           "dimensions": "41 x 60 x 0.6 cm",
           "images": [
             { "url": "images/farbkoerper/fkb-06.jpg",    "role": "main" },
-            { "url": "images/farbkoerper/fkb-06-d-1.jpg","role": "detail" },
-            { "url": "images/farbkoerper/fkb-06-d-2.jpg","role": "detail" }
+            { "url": "images/farbkoerper/fkb-06-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-06-d-2.png","role": "detail" }
           ]
         }
       ]
