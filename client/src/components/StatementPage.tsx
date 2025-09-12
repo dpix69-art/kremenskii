@@ -30,9 +30,9 @@ export default function StatementPage({
 
   const artistName = content?.site?.artistName ?? "Artist";
 
-  // Фолбэки из content.json
+  // Данные по умолчанию — из content.json
   const usedPortrait =
-    portraitImageUrl || content?.statement?.portrait || "images/kremenskii.png";
+    portraitImageUrl || content?.statement?.portrait || "images/portrait.jpg";
 
   const usedStatement: string[] =
     statement ||
@@ -52,9 +52,7 @@ export default function StatementPage({
   const handleDownloadPressKit = () => {
     if (!usedPressKit) return;
     if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "press_kit_open", {
-        method: "statement_page",
-      });
+      (window as any).gtag("event", "press_kit_open", { method: "statement_page" });
     }
     const link = document.createElement("a");
     link.href = assetUrl(usedPressKit);
@@ -79,14 +77,9 @@ export default function StatementPage({
   return (
     <div className="w-full py-12 pt-[0px] pb-[0px]">
       <div className="site-container">
-        {/* Portrait and Statement */}
+        {/* Portrait + Statement */}
         <div className="grid-12 mb-16">
-          {/* Portrait Image */}
-          <div
-            className={`col-span-12 lg:col-span-5 space-y-4 ${
-              portraitPosition === "right" ? "lg:order-2" : "lg:order-1"
-            }`}
-          >
+          <div className={`col-span-12 lg:col-span-5 space-y-4 ${portraitPosition === "right" ? "lg:order-2" : "lg:order-1"}`}>
             <div className="aspect-[4/5] overflow-hidden rounded-md bg-muted">
               <img
                 src={assetUrl(usedPortrait)}
@@ -99,26 +92,14 @@ export default function StatementPage({
             </div>
           </div>
 
-          {/* Statement Text */}
-          <div
-            className={`col-span-12 lg:col-span-7 space-y-6 ${
-              portraitPosition === "right" ? "lg:order-1" : "lg:order-2"
-            }`}
-          >
-            <h1
-              id="page-title"
-              tabIndex={-1}
-              className="text-type-h1 font-semibold text-foreground"
-            >
+          <div className={`col-span-12 lg:col-span-7 space-y-6 ${portraitPosition === "right" ? "lg:order-1" : "lg:order-2"}`}>
+            <h1 id="page-title" tabIndex={-1} className="text-type-h1 font-semibold text-foreground">
               Statement
             </h1>
 
             <div className="prose prose-lg max-w-none">
               {usedStatement.map((paragraph, i) => (
-                <p
-                  key={i}
-                  className="text-type-body text-foreground leading-relaxed mb-6"
-                >
+                <p key={i} className="text-type-body text-foreground leading-relaxed mb-6">
                   {paragraph}
                 </p>
               ))}
@@ -134,30 +115,25 @@ export default function StatementPage({
             </h2>
             <div className="space-y-4">
               {usedExhibitions.map((ex, i) => (
-                <div
-                  key={`${ex.year}-${i}`}
-                  className="flex flex-col sm:flex-row sm:gap-8"
-                  data-testid={`exhibition-${i}`}
-                >
+                <div key={`${ex.year}-${i}`} className="flex flex-col sm:flex-row sm:gap-8" data-testid={`exhibition-${i}`}>
                   <div className="text-type-body text-muted-foreground font-medium min-w-[4rem]">
                     {ex.year}
                   </div>
-                  <div className="text-type-body text-foreground">{ex.event}</div>
+                  <div className="text-type-body text-foreground">
+                    {ex.event}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Press & Contact — СКРЫТО по умолчанию */}
+        {/* Press & Contact — скрыто по умолчанию */}
         {showPressContact && (usedPressKit || usedEmail) && (
           <div className="grid-12 pt-8 border-t border-border mt-12">
-            {/* Press */}
             {usedPressKit && (
               <div className="col-span-12 lg:col-span-6 space-y-4">
-                <h2 className="text-type-h2 font-semibold text-foreground">
-                  Press
-                </h2>
+                <h2 className="text-type-h2 font-semibold text-foreground">Press</h2>
                 <p className="text-type-body text-muted-foreground">
                   Statement PDF + high-resolution press images
                 </p>
@@ -171,12 +147,9 @@ export default function StatementPage({
               </div>
             )}
 
-            {/* Contact */}
             {usedEmail && (
               <div className="col-span-12 lg:col-span-6 space-y-4">
-                <h2 className="text-type-h2 font-semibold text-foreground">
-                  Contact
-                </h2>
+                <h2 className="text-type-h2 font-semibold text-foreground">Contact</h2>
                 <button
                   onClick={handleCopyEmail}
                   className="text-type-body text-foreground underline hover:text-muted-foreground transition-colors"

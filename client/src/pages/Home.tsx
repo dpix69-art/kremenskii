@@ -13,30 +13,26 @@ export default function Home() {
 
   const artistName = content?.site?.artistName ?? "Artist Name";
   const role = content?.site?.role ?? "artist";
-  const statement = content?.site?.statement ?? "Two short sentences about the practice.";
+  const statement = content?.site?.statement ?? "";
 
-  // Берём по одной карточке из каждой серии (сама серия)
+  // карточки серий
   const seriesCards: GridItem[] = (content?.series || []).map((s: any) => {
-    // превью серии: либо artworkImages, либо первая картинка первой работы
-    const firstImg =
+    const first =
       (Array.isArray(s.artworkImages) && s.artworkImages[0]) ||
       (Array.isArray(s.works) && s.works[0]?.images?.[0]);
-
-    const src =
-      typeof firstImg === "string" ? firstImg : (firstImg?.url || firstImg?.src || "");
-
+    const src = typeof first === "string" ? first : (first?.url || first?.src || "");
     return {
       id: s.slug,
       title: s.title || s.slug,
       year: String(s.year ?? ""),
-      medium: "Series",
+      medium: "SERIES",
       imageUrl: (src || "").replace(/^\/+/, ""),
       linkUrl: `#/gallery/${s.slug}`,
       type: "series",
     };
   });
 
-  // Берём первые 2-3 работы суммарно (latest/mixed)
+  // несколько работ суммарно
   const artworkCards: GridItem[] = (content?.series || [])
     .flatMap((s: any) =>
       (Array.isArray(s.works) ? s.works : []).slice(0, 1).map((w: any) => {
@@ -55,24 +51,18 @@ export default function Home() {
     )
     .slice(0, 3);
 
-  // Берём первые 2 sound-проекта
-  const soundCards: GridItem[] = (content?.sounds || []).slice(0, 2).map((p: any) => {
-    const cover = typeof p.cover === "string" ? p.cover : "";
-    const medium = (p?.meta?.label || p?.meta?.platform || "Sound project").toString();
-    return {
-      id: p.slug,
-      title: p.title || "Untitled",
-      year: String(p.year ?? ""),
-      medium,
-      imageUrl: (cover || "").replace(/^\/+/, ""),
-      linkUrl: `#/sounds/${p.slug}`,
-      type: "sound_project" as const,
-    };
-  });
+  // 1–2 звуковых проекта
+  const soundCards: GridItem[] = (content?.sounds || []).slice(0, 2).map((p: any) => ({
+    id: p.slug,
+    title: p.title || "Untitled",
+    year: String(p.year ?? ""),
+    medium: (p?.meta?.label || p?.meta?.platforms?.[0] || "Sound").toString(),
+    imageUrl: String(p.cover || "").replace(/^\/+/, ""),
+    linkUrl: `#/sounds/${p.slug}`,
+    type: "sound_project" as const,
+  }));
 
-  // Смешиваем и режем до 6 карточек (2 столбца × 3 ряда)
   const items: GridItem[] = [...seriesCards, ...artworkCards, ...soundCards].slice(0, 6);
-
   const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "");
 
   return (
@@ -96,10 +86,10 @@ export default function Home() {
 
         {/* Two-column Grid */}
         <div style={{ marginTop: "var(--heading-gap-lg)" }}>
-          <GalleryGrid items={items} columns={2} showArtworkBadge={true} />
+          <GalleryGrid items={items} columns={2} showArtworkBadge />
         </div>
       </main>
-      <Footer year={new Date().getFullYear()} portfolioPdfUrl={portfolioPdfUrl} />
+      <Footer portfolioPdfUrl={portfolioPdfUrl} />
     </div>
   );
 }
