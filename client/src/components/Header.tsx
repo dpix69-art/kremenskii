@@ -24,14 +24,14 @@ export default function Header({ artistName: artistNameProp = "Dmitrii Kremenski
 
   const artistName = artistNameProp ?? content?.site?.artistName ?? "Dmitrii Kremenskii";
 
-  // Навигация: content.json → дефолт
-  const navFromJson: NavItem[] =
-    (content?.nav || content?.navigation || [])
-      .map((n: any) => ({
-        title: String(n.title ?? n.label ?? "").trim(),
-        path: normalizePath(String(n.path ?? n.href ?? "/")),
-      }))
-      .filter((n: NavItem) => n.title && n.path)) || [];
+  // Навигация: content.json (nav/navigation) → дефолт
+  const navBase = ((content?.nav || content?.navigation || []) as any[]);
+  const navFromJson: NavItem[] = navBase
+    .map((n: any) => ({
+      title: String(n.title ?? n.label ?? "").trim(),
+      path: normalizePath(String(n.path ?? n.href ?? "/")),
+    }))
+    .filter((n: NavItem) => n.title && n.path);
 
   const navItems: NavItem[] =
     navFromJson.length > 0
@@ -45,7 +45,6 @@ export default function Header({ artistName: artistNameProp = "Dmitrii Kremenski
 
   const isActive = (path: string) => {
     if (path === "/") return location === "/";
-    // строгое совпадение раздела: "/gallery" или "/gallery/…"
     return location === path || location.startsWith(path + "/");
   };
 
