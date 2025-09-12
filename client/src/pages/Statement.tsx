@@ -26,11 +26,11 @@ export default function Statement() {
     content?.statement?.portrait && content.statement.portrait.replace(/^\/+/, "");
   const portraitImageUrl = portraitFromJson || portraitFallback;
 
-  // const email = content?.contacts?.email ?? "hi@example.art";
-  // const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
-  //   /^\/+/,
-  //   ""
-  // );
+  const email = content?.contacts?.email ?? "hi@example.art";
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
+    /^\/+/,
+    ""
+  );
 
   const socialLinks = (content?.contacts?.socials || []).reduce((acc: any, s: any) => {
     const key = String(s.label || "").toLowerCase();
