@@ -10,7 +10,9 @@ import "./index.css";
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Router hook={useHashLocation}>
-      <App />
+      <ContentProvider>
+        <App />
+      </ContentProvider>
     </Router>
   </React.StrictMode>
 );

@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { useContent } from "@/content/ContentProvider";
 import Header from "@/components/Header";
 import GalleryGrid from "@/components/GalleryGrid";
 import Footer from "@/components/Footer";
@@ -8,6 +9,19 @@ import gesturalPaintingImage from '@assets/generated_images/Gestural_earth_tone_
 import minimalistInstallationImage from '@assets/generated_images/White_minimalist_installation_e967bdd0.png';
 import digitalPrintImage from '@assets/generated_images/Digital_glitch_print_392d678b.png';
 import soundImage from '@assets/generated_images/Sound_art_installation_ace33df5.png';
+
+export default function HomeHeader() {
+  const { content, loading } = useContent();
+  if (loading || !content) return null;
+
+  return (
+    <header>
+      <h1>{content.site.artistName}</h1>
+      <p className="role">{content.site.role}</p>
+      <p className="statement">{content.site.statement}</p>
+    </header>
+  );
+}
 
 export default function Home() {
 
