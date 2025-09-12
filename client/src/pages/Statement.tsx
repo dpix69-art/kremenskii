@@ -1,58 +1,47 @@
-import Header from "@/components/Header";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import StatementPage from "@/components/StatementPage";
-import Footer from "@/components/Footer";
-import portraitImage from '@assets/generated_images/Professional_artist_portrait_0c565b16.png';
+import { useContent } from "@/content/ContentProvider";
 
 export default function Statement() {
-  const statementText = [
-    "My practice investigates the intersection of material and meaning, exploring how physical substances carry cultural and emotional weight beyond their immediate visual properties.",
-    "Through painting, sculpture, and sound, I examine the boundaries between the constructed and the found, the industrial and the organic, seeking moments where these distinctions collapse or reveal their arbitrariness.",
-    "Recent work has focused on the materiality of color itself—not as representation or symbol, but as physical substance that occupies space and time, accumulates history, and bears the traces of its own making."
-  ];
+  const { content } = useContent();
 
-  const exhibitions = [
-    { year: "2024", event: "Material Traces, Contemporary Art Gallery, Berlin" },
-    { year: "2023", event: "Substance and Surface, Museum of Modern Art, Vienna" },
-    { year: "2023", event: "Sound and Space, Kunstverein München, Munich" },
-    { year: "2022", event: "Color Studies, Gallery XYZ, London" },
-    { year: "2021", event: "Industrial Fragments, Biennale of Contemporary Art, Venice" },
-    { year: "2021", event: "New Materialities, Tate Modern, London" },
-    { year: "2020", event: "Between Object and Sound, Berlinische Galerie, Berlin" }
+  const portrait = content?.statement?.portrait; // можно позже поменять на images/…
+  const paras: string[] = content?.statement?.paragraphs ?? [
+    "Artist statement paragraph 1.",
+    "Artist statement paragraph 2.",
   ];
+  const pressKit = (content?.statement?.pressKitPdf ?? "files/press-kit.pdf").replace(/^\/+/, "");
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Dmitrii Kremenskii" />
-      
-      <main className="flex-1">
-        <div className="site-container section-py">
-          <Breadcrumbs 
-            items={[
-              { label: "Home", href: "/", testId: "link-bc-home" },
-              { label: "Statement", testId: "text-bc-current" }
-            ]} 
-          />
-        </div>
-        <StatementPage
-          portraitImageUrl={portraitImage}
-          statement={statementText}
-          exhibitions={exhibitions}
-          portraitPosition="left"
-          email="hi@example.art"
-        />
-      </main>
+    <div className="site-container section-py">
+      <h1 id="page-title" tabIndex={-1} className="text-type-h1 font-semibold">
+        Statement
+      </h1>
 
-      <Footer
-        artistName="Dmitrii Kremenskii"
-        year={2025}
-        portfolioPdfUrl="/files/portfolio.pdf"
-        socialLinks={{
-          instagram: "https://instagram.com/artist",
-          soundcloud: "https://soundcloud.com/artist",
-          bandcamp: "https://artist.bandcamp.com"
-        }}
-      />
+      <div className="grid gap-8 md:grid-cols-12">
+        {/* Portrait (optional) */}
+        <div className="md:col-span-4">
+          {portrait && (
+            <img
+              src={portrait.replace(/^\/+/, "")}
+              alt="Artist portrait"
+              className="w-full object-cover"
+              loading="lazy"
+            />
+          )}
+        </div>
+
+        {/* Text */}
+        <div className="md:col-span-8 text-type-body leading-relaxed space-y-[var(--paragraph-gap)]">
+          {paras.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+
+          <div className="mt-6">
+            <a href={pressKit} className="underline underline-offset-4">
+              Press kit (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

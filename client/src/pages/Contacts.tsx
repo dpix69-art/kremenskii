@@ -1,45 +1,51 @@
-import Header from "@/components/Header";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import ContactsPage from "@/components/ContactsPage";
-import Footer from "@/components/Footer";
+import { useContent } from "@/content/ContentProvider";
 
 export default function Contacts() {
-  return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName="Dmitrii Kremenskii" />
-      
-      <main className="section-py flex-1">
-        <div className="site-container heading-gap-lg">
-          <Breadcrumbs 
-            items={[
-              { label: "Home", href: "/", testId: "link-bc-home" },
-              { label: "Contacts", testId: "text-bc-current" }
-            ]} 
-          />
-          <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">
-            Contacts
-          </h1>
-        </div>
-        
-        <ContactsPage
-          email="hi@kremenskii.art"
-          city="Stuttgart"
-          country="Germany"
-          introText="If you have an idea or proposal, please write an email."
-          openToText="Open for exhibitions, collaborations and commissions. Please email."
-        />
-      </main>
+  const { content } = useContent();
 
-      <Footer
-        artistName="Dmitrii Kremenskii"
-        year={2025}
-        portfolioPdfUrl="/files/portfolio.pdf"
-        socialLinks={{
-          instagram: "https://instagram.com/artist",
-          soundcloud: "https://soundcloud.com/artist",
-          bandcamp: "https://artist.bandcamp.com"
-        }}
-      />
+  const email = content?.contacts?.email ?? "hi@example.art";
+  const city = content?.contacts?.city ?? "City";
+  const country = content?.contacts?.country ?? "Country";
+  const portfolio = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "");
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      alert("Email copied"); // можно заменить на ваш toast, если есть
+    } catch {
+      // fallback: выделить и скопировать через prompt
+      prompt("Copy email:", email);
+    }
+  };
+
+  return (
+    <div className="site-container section-py">
+      <h1 id="page-title" tabIndex={-1} className="text-type-h1 font-semibold">
+        Contacts
+      </h1>
+
+      <div className="text-type-body space-y-4 max-w-prose">
+        <p>
+          If you have ideas or proposals, please write to me.
+        </p>
+        <p>
+          <button
+            onClick={copyEmail}
+            className="underline underline-offset-4"
+            aria-label="Copy email"
+          >
+            {email}
+          </button>
+        </p>
+        <p>
+          {city}, {country}
+        </p>
+        <p>
+          <a href={portfolio} download className="underline underline-offset-4">
+            Download portfolio (PDF)
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
