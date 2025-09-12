@@ -23,7 +23,7 @@ export default function Header({ artistName: artistNameProp }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // const artistName = artistNameProp ?? content?.site?.artistName ?? "Dmitrii Kremenskii";
-  const artistName = content?.site?.artistName ?? artistNameProp ?? "Dmitrii 
+  const artistName = content?.site?.artistName ?? artistNameProp ?? "Dmitrii Kremenskii";
   // Навигация: content.json (nav/navigation) → дефолт
   const navBase = ((content?.nav || content?.navigation || []) as any[]);
   const navFromJson: NavItem[] = navBase
