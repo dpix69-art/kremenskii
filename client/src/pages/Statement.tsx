@@ -3,7 +3,7 @@ import { useContent } from "@/content/ContentProvider";
 export default function Statement() {
   const { content } = useContent();
 
-  const portrait = content?.statement?.portrait; // можно позже поменять на images/…
+  const portrait = content?.statement?.portrait; // можно позже перевести на images/…
   const paras: string[] = content?.statement?.paragraphs ?? [
     "Artist statement paragraph 1.",
     "Artist statement paragraph 2.",
