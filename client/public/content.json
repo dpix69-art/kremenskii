@@ -24,12 +24,78 @@
         "images/farbkoerper/fkb-03.jpg"
       ],
       "works": [
-        { "slug": "fkb-01", "title": "Farbkörper #01", "year": 2024, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-01.jpg", "role": "main" } ] },
-        { "slug": "fkb-02", "title": "Farbkörper #02", "year": 2024, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-02.jpg", "role": "main" } ] },
-        { "slug": "fkb-03", "title": "Farbkörper #03", "year": 2023, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-03.jpg", "role": "main" } ] },
-        { "slug": "fkb-04", "title": "Farbkörper #04", "year": 2023, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-04.jpg", "role": "main" } ] },
-        { "slug": "fkb-05", "title": "Farbkörper #05", "year": 2022, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-05.jpg", "role": "main" } ] },
-        { "slug": "fkb-06", "title": "Farbkörper #06", "year": 2022, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-06.jpg", "role": "main" } ] }
+        {
+          "slug": "fkb-01",
+          "title": "fkb-01",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-01.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-01-d-1.jpg","role": "detail" },
+            { "url": "images/farbkoerper/fkb-01-d-2.jpg","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-02",
+          "title": "fkb-02",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-02.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-02-d-1.jpg","role": "detail" },
+            { "url": "images/farbkoerper/fkb-02-d-2.jpg","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-03",
+          "title": "fkb-03",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-03.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-03-d-1.jpg","role": "detail" },
+            { "url": "images/farbkoerper/fkb-03-d-2.jpg","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-04",
+          "title": "fkb-04",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-04.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-04-d-1.jpg","role": "detail" },
+            { "url": "images/farbkoerper/fkb-04-d-2.jpg","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-05",
+          "title": "fkb-05",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-05.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-05-d-1.jpg","role": "detail" },
+            { "url": "images/farbkoerper/fkb-05-d-2.jpg","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-06",
+          "title": "fkb-06",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "41 x 60 x 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-06.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-06-d-1.jpg","role": "detail" },
+            { "url": "images/farbkoerper/fkb-06-d-2.jpg","role": "detail" }
+          ]
+        }
       ]
     },
     {
@@ -38,24 +104,102 @@
       "year": "2021–",
       "intro": "Industrial and organic materials intersect; traces and aggregates become form.",
       "artworkImages": [
-        "images/pgsrd-trc/pgsrd-trc-01.jpg",
-        "images/pgsrd-trc/pgsrd-trc-02.jpg",
-        "images/pgsrd-trc/pgsrd-trc-03.jpg"
+        "images/pgsrd-trc/pgsrd-trc-01.png",
+        "images/pgsrd-trc/pgsrd-trc-02.png",
+        "images/pgsrd-trc/pgsrd-trc-03.png"
       ],
       "works": [
-        { "slug": "pgsrd-trc-01", "title": "PGSRD-TRC #01", "year": 2024, "technique": "Plywood, gravel, sand, resin", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-02", "title": "PGSRD-TRC #02", "year": 2024, "technique": "Plywood, gravel, sand, resin", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-02.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-03", "title": "PGSRD-TRC #03", "year": 2024, "technique": "Plywood, gravel, sand, resin", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-03.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-04", "title": "PGSRD-TRC #04", "year": 2023, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-04.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-05", "title": "PGSRD-TRC #05", "year": 2023, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-05.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-06", "title": "PGSRD-TRC #06", "year": 2023, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-06.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-07", "title": "PGSRD-TRC #07", "year": 2022, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-07.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-08", "title": "PGSRD-TRC #08", "year": 2022, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-08.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-09", "title": "PGSRD-TRC #09", "year": 2022, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-09.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-10", "title": "PGSRD-TRC #10", "year": 2021, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-10.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-11", "title": "PGSRD-TRC #11", "year": 2021, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-11.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-12", "title": "PGSRD-TRC #12", "year": 2021, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-12.jpg", "role": "main" } ] },
-        { "slug": "pgsrd-trc-13", "title": "PGSRD-TRC #13", "year": 2021, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-13.jpg", "role": "main" } ] }
+        { "slug": "pgsrd-trc-01", "title": "pgsrd-trc-01", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-01.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-01-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-01-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-02", "title": "pgsrd-trc-02", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-02.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-02-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-02-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-03", "title": "pgsrd-trc-03", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-03.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-03-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-03-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-04", "title": "pgsrd-trc-04", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-04.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-04-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-04-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-05", "title": "pgsrd-trc-05", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-05.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-05-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-05-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-06", "title": "pgsrd-trc-06", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-06.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-06-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-06-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-07", "title": "pgsrd-trc-07", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-07.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-07-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-07-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-08", "title": "pgsrd-trc-08", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-08.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-08-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-08-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-09", "title": "pgsrd-trc-09", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-09.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-09-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-09-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-10", "title": "pgsrd-trc-10", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-10.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-10-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-10-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-11", "title": "pgsrd-trc-11", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-11.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-11-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-11-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-12", "title": "pgsrd-trc-12", "year": 2021, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-12.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-12-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-12-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-13", "title": "pgsrd-trc-13", "year": 2021, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-13.png",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-13-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-13-d-2.png","role": "detail" }
+          ]
+        }
       ]
     }
   ],
