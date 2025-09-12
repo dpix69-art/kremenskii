@@ -1,0 +1,49 @@
+You are a senior front-end architect. In ONE pass, audit AND refactor the entire codebase to a hi-end standard: clean, minimal, fast, type-safe, accessible, and production-ready for GitHub Pages.
+
+CONTEXT (do not break)
+- SPA with Vite + React (+ wouter) deployed on GitHub Pages.
+- Pages and IA are fixed: Home, Gallery, Series page (lists ALL works), All Works, Artwork page (two-column hero, boxed-cover image left; labeled meta right), Sounds index & project page, Statement, Contacts.
+- Global layout tokens: container max 1200; gutters 24/24/32; grid 12 with gaps 24/24/32; unified badges (Artwork/Series/Sound or placeholder); vertical rhythm tokens; route change scroll-top + focus.
+- Asset paths must respect `import.meta.env.BASE_URL` (GitHub Pages base); SPA fallback `404.html` must render.
+
+GOALS
+1) Remove all noise: unused code, dead deps, commented blocks, console logs, magic numbers.
+2) Simplify architecture: fewer variants, shared primitives, zero ad-hoc CSS; enforce tokens.
+3) Raise reliability & performance: type safety, error boundaries, stable hooks, lazy routes, optimized media.
+4) Pixel-perfect & a11y-clean: exact spacing & headings; one H1/page; focus management in place.
+5) GitHub Pages readiness: correct `base`, SPA fallback, deterministic assets.
+
+OUTPUT (STRICT)
+1) SUMMARY table: {Area, Issues, Fixes, Impact, Risk, Notes}
+2) CONFIGS (new/updated): tsconfig/eslint/prettier/stylelint/tailwind (or CSS vars), vite config, aliases, scripts.
+3) PER-FILE DIFFS: unified diffs (old → new) for all changed files; annotate WHY.
+4) BUNDLE REPORT: before/after sizes, biggest chunks, tree-shaken deps.
+5) LINT & TYPE RESULTS: ESLint/Prettier clean; TypeScript strict pass; type coverage %.
+6) TEST PLAN & RESULTS: unit (Vitest/RTL) + smoke e2e (Playwright) minimal set.
+7) CHECKLIST (pass/fail): design tokens, layout, a11y, routing, assets, Pages.
+8) TODO (if any): tiny list with rationale.
+
+TASKS — APPLY CONCRETELY
+
+A) HOUSEKEEPING & CONSISTENCY
+- Remove: unused imports/vars, dead files, commented code, console.* (guard dev only), TODOs without owner.
+- Normalize file structure under `src/`:
+  - `src/components/` (dumb UI primitives), `src/blocks/` (page sections), `src/pages/`, `src/hooks/`, `src/context/`, `src/utils/`, `src/types/`, `src/assets/` (non-public only).
+- Prefer **explicit exports**; avoid deep barrel chains that create cycles.
+- Naming: PascalCase components, camelCase hooks/utils; files align with default exports.
+
+B) TYPE SAFETY (TS) OR PROP TYPES (JS)
+- If TS: enable strictest options:
+  - `strict: true, noUncheckedIndexedAccess: true, exactOptionalPropertyTypes: true, noImplicitOverride: true, noFallthroughCasesInSwitch: true`
+- Replace `any` with precise types; add `Props` types to all components; use `React.FC` only if children semantics needed.
+- Centralize domain types in `src/types/`; no duplicate inline type aliases.
+
+C) LAYOUT PRIMITIVES & TOKENS
+- Create or enforce primitives:
+  - `<Container>` (max 1200; gutters 24/24/32), `<Grid12 gap=24|32>`, `<Section padY>`, `<Stack gap>`, `<Cluster gap wrap>`
+  - `<Card>` with bottom-aligned caption + reserved badge row; `<Badge>`; `<MetaList dl>`
+  - `<Figure>` for images with `<picture>` and `sizes/srcset`
+- Replace magic numbers with tokens (CSS vars or Tailwind theme.extend). Remove bespoke margins; use section/block gaps.
+- Ensure **all pages** use the same left baseline via `<Container>`.
+
+D) ROUTING, SCROLL & FOCUS

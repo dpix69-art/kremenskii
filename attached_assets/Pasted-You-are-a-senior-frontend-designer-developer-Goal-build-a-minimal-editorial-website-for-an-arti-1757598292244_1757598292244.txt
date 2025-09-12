@@ -1,0 +1,93 @@
+You are a senior frontend designer & developer.
+Goal: build a minimal editorial website for an artist using the provided content structure (Gallery with series: Farbkoerper, PGSRD, Singles, Graphics; Sounds projects; Statement; Contacts). 
+Style: calm, clean, typographic, with generous whitespace. No marketing CTAs.
+
+### TYPOGRAPHY
+- Font stack (web-safe, neutral grotesk):
+  --font-sans: "Inter", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+- Type scale (px / line-height / weight):
+  H1: 40 / 1.2 / 600
+  H2: 30 / 1.25 / 600
+  H3: 22 / 1.35 / 600
+  Body: 17 / 1.65 / 400
+  Small: 13 / 1.40 / 400
+- Paragraph spacing: 16–20px between paragraphs.
+- Uppercase meta labels (optional): letter-spacing +0..+0.2px.
+- Links: same color as text; underline on hover/focus only.
+
+### COLORS (neutral, content-first)
+--bg: #FFFFFF
+--fg: #0A0A0A
+--muted: #666666
+--line: #EDEDED
+Use color only for media; UI is monochrome.
+
+### LAYOUT & GRID
+- Reading container: 760px (±40px) for long text (Statement, project pages).
+- Max page width: 1200px; side gutters ≥ 24px.
+- Section vertical rhythm: 64px top/bottom; within section 24px.
+- Breakpoints: sm 640, md 768, lg 1024, xl 1280.
+- Mobile: single column; images flow in content. 
+- Desktop (lg+): align figures to the reading column; avoid complex multi-column layouts.
+
+### COMPONENTS (match content structure)
+1) Header:
+   - Text navigation: ["Gallery","Sounds","Statement","Contacts"].
+   - No backgrounds or borders; compact paddingY ≈ 16px.
+2) Home / Hero_Featured_Work:
+   - Layout "split-right": full-height image column on the right (contain), caption block on light background at the bottom; caption click → work page.
+   - Below: Mixed_Gallery_Preview (12 items from artworks + sounds). Card footer shows [title, year, medium].
+3) Gallery:
+   - Series index for ["Farbkoerper","Plywood-Gravel-Sand-Road-Dust (PGSRD)","Singles","Graphics"].
+   - Series page: H1 = series title, short intro, optional year/co-authors; grid of works.
+   - All_Works_View: grid/list switch; filters by series; reset button.
+4) Artwork page:
+   - Large main image (≥2000px long side). Optional modal zoom on click.
+   - Text block (1–3 paragraphs): series + work description. 
+   - Meta list: year, medium, dimensions (+ optional edition/credits).
+   - Extra images (angles/details): non-clickable.
+   - Optional media: video (file/YouTube), audio (file/Bandcamp/SoundCloud).
+   - Prev/Next navigation within the series.
+   - Related: 8 items from the same series (medium grid), then 12 small items from other series/projects.
+5) Sounds:
+   - Projects index: cards with thumb, title, year, location (city/country/institution).
+   - Project page: big cover image; multi-block body (H2 + paragraphs); tracks list (title, duration, optional external link); optional meta (label, platforms).
+   - Media: photos, embedded video (YouTube or file), external links.
+   - Must include an embedded Bandcamp or SoundCloud player.
+   - Related sections identical to artwork page bottom pattern.
+6) Statement:
+   - Portrait image placed left or right of content (not background).
+   - 3 paragraphs of statement text.
+   - Selected Exhibitions & Performances: compact list (year — event, venue, city).
+   - Education block exists but hidden by default.
+7) Contacts:
+   - Intro sentence: propose emailing for ideas/collaborations.
+   - Email is click-to-copy (do not invoke mailto client).
+   - Address: city, country. 
+   - Open_to: short line "Open for exhibitions, collaborations and commissions."
+8) Global_Footer:
+   - Compact line with © Artist Name, year; legal note; portfolio PDF download; social links [Instagram, SoundCloud, Bandcamp].
+
+### MEDIA RULES
+- Images: JPG/WEBP; main images long side ≥ 2000px, thumbs 1200–1600px.
+- Videos: place as blocks in flow beneath relevant text.
+- Alt text required for all media.
+- Do not use background images for portraits or hero work (use inline <img> or <picture>).
+
+### INTERACTIONS
+- Subtle transitions (120–160ms) for opacity/underline.
+- Focus-visible outlines must be present (a11y).
+- No aggressive animations; no marketing CTAs.
+
+### ACCESSIBILITY & SEO
+- Body text contrast ≥ 7:1.
+- Base font-size ≥ 16px on mobile.
+- Semantic headings (H1 per page/series/work).
+- <meta> title/description from page/series/work fields.
+- Structured data optional, but keep markup clean and minimal.
+
+### IMPLEMENTATION NOTES
+- Prefer CSS variables for tokens; Tailwind or vanilla CSS acceptable.
+- Keep class naming consistent and componentized.
+- Do not introduce new sections beyond the provided structure.
+- Keep content in English UI labels unless provided otherwise.

@@ -1,0 +1,42 @@
+Home {"type":"page","path":"/"}
+	Header {"nav":["Gallery","Sounds","Statement","Contacts"],"logo_link":"/"}
+	Hero_Featured_Work {"layout":"split-right","image":{"format":["jpg","webp"],"min_long_side_px":2000,"fit":"contain","full_height":true},"caption":{"position":"bottom","background":"light","click_link":"/gallery/:series-slug/:work-slug"}}
+	Artist_Identity {"name":"Artist Name","statement_short":{"lines":2,"text":"…"}}
+	Mixed_Gallery_Preview {"heading":"Latest / Mixed","item_types":["artwork","sound_project"],"card_footer":["title","year","medium"],"count":12,"link":"/gallery"}
+	Footer_Note {"text":"Images ©… Texts ©… No reproduction without written permission."}
+
+Gallery {"type":"section","path":"/gallery"}
+	Series_Index {"series":["Farbkoerper","Plywood-Gravel-Sand-Road-Dust (PGSRD)","Singles","Graphics"],"future_series_allowed":true}
+		Series_Page {"title":"Farbkoerper","path":"/gallery/farbkoerper","series_intro":"…","year":"2022–","co_authors":[],"allow_sound_items":true}
+			Artwork_Page {"title":"Work Title","slug":":work-slug","year":"YYYY","medium":"…","dimensions":"…","description":{"paragraphs":3,"source_blocks":["series","work"]},"image_main":{"min_long_side_px":2000,"modal_zoom":true},"images_extra":{"clickable":false,"items":[{"role":"angle"},{"role":"detail"}]},"media":{"video":{"enabled":true,"source":["file","youtube"],"caption":"…"},"audio":{"enabled":true,"source":["file","bandcamp","soundcloud"],"links":[]}},"prev_next":true}
+			Related_In_Series {"grid":"medium","count":8,"link":"/gallery/farbkoerper/:work-slug"}
+		Series_Page {"title":"Plywood-Gravel-Sand-Road-Dust (PGSRD)","path":"/gallery/pgsrd","series_intro":"…","year":"2021–","co_authors":[],"allow_sound_items":true}
+		Series_Page {"title":"Singles","path":"/gallery/singles","series_intro":"…","allow_sound_items":true}
+		Series_Page {"title":"Graphics","path":"/gallery/graphics","series_intro":"…","allow_sound_items":false}
+	All_Works_View {"path":"/gallery/all","filters":{"by_series":true,"reset":true},"view_modes":["grid","list"],"card_footer":["title","year","medium"],"mix_types":["visual","sound"]}
+
+Artwork_Related_Global {"path":"/gallery/related","heading":"From other series & projects","grid":"small","count":12,"include":["series","sounds"]}
+
+Sounds {"type":"section","path":"/sounds"}
+	Project_Index {"card_footer":["title","year","location"],"item":{"thumb_min_px":1200}}
+		Project_Page {"title":"Project Title","slug":":project-slug","year":"YYYY","location":{"city":"…","country":"…","institution":"…"},"cover_image":{"min_long_side_px":2000},"body":{"blocks":[{"type":"h2","text":"…"},{"type":"p","text":"…"}]},"tracks":{"list":[{"title":"Track Title","duration":"00:03:20","external_link":"https://…"}]},"meta":{"label":"…","platforms":["Bandcamp","SoundCloud"],"optional":true},"media":{"photos":[{"role":"doc"}],"video":[{"type":"youtube","id":"…"}],"links":["https://…"]},"players":{"bandcamp":true,"soundcloud":true}}
+		Related_In_Series {"grid":"medium","count":8}
+		Related_Global {"grid":"small","count":12,"include":["gallery_series","sounds"]}
+
+Statement {"type":"page","path":"/statement"}
+	Portrait_Image {"position":"left-or-right","min_long_side_px":1600}
+	Artist_Statement {"heading":"Statement","paragraphs":3}
+	Selected_Exhibitions {"heading":"Selected Exhibitions & Performances","items":[{"year":"YYYY","event":"Exhibition / Concert, Venue, City"},{"year":"YYYY","event":"…"}]}
+	Education {"visible":false,"items":[{"year":"YYYY","program":"…","institution":"…"}]}
+
+Contacts {"type":"page","path":"/contacts"}
+	Intro_Text {"text":"If you have an idea or proposal, please write an email."}
+	Email {"value":"hi@example.art","click_to_copy":true}
+	Address {"city":"…","country":"…"}
+	Open_To {"text":"Open for exhibitions, collaborations and commissions. Please email."}
+
+Global_Footer {"type":"component"}
+	Copyright_Text {"text":"© Artist Name, 2025. All rights reserved."}
+	Legal_Note {"text":"Images ©… Texts ©… No reproduction without written permission."}
+	Download_Portfolio {"file_pdf":"/files/portfolio.pdf"}
+	Social_Links {"items":["Instagram","SoundCloud","Bandcamp"]}

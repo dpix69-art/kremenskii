@@ -1,0 +1,45 @@
+You are updating ONLY the first screen (Hero). Do not change anything else on the page or site. Keep all tokens, breakpoints, spacing, and components exactly as they are elsewhere.
+
+OBJECTIVE
+- Keep the current Hero image layout as-is (full-height image on the RIGHT, contained, not background).
+- On the LEFT, place a short two-sentence art statement. This statement replaces any separate “Artist_Identity” block on the first screen (do not duplicate it elsewhere on the hero).
+- The work caption may be shown as an OVERLAY CARD on top of the image OR be removed entirely.
+- Everything below the hero (Mixed_Gallery_Preview, footer note, etc.) MUST remain unchanged.
+
+LAYOUT (Hero)
+- Two columns (desktop lg+): left = statement, right = hero image. On mobile, stack: statement first, image second; keep generous spacing.
+- Right column: keep image behavior (object-fit: contain; full-height hero).
+- Caption OVERLAY CARD (if visible): place on top of the image, pinned bottom-left, with inner padding and readable contrast.
+  - Card max-width ≈ 360px; padding 12–16px; subtle shadow; z-index above image.
+  - Background: translucent light layer (e.g., rgba(255,255,255,0.85)) with optional backdrop-filter blur(4px); text uses body style.
+  - Entire card is a single link to the work page.
+  - On mobile, pin bottom-center with safe insets; ensure 16px minimum padding from edges.
+- If caption is hidden (variant “none”): remove the card from DOM (not display:none), and keep image alignment unchanged.
+
+TYPOGRAPHY
+- Use existing tokens. Recommended:
+  - Statement (left): Body size (17/1.65) with slight emphasis (weight 500–600). Exactly two sentences; max-width ≈ 480px.
+  - Caption (overlay, if visible): Small/meta (13/1.4) for secondary lines (year, medium) and 17/1.65 for title.
+- Links use the same color as text; underline on hover/focus only.
+
+ACCESSIBILITY
+- Overlay card contrast must meet WCAG for body text.
+- Provide focus-visible outline for the overlay card link.
+- Image must keep alt text.
+
+DO NOTS (critical)
+- Do NOT modify navigation, Mixed_Gallery_Preview, footer, or any other sections.
+- Do NOT change tokens, breakpoints, spacings elsewhere.
+- Do NOT introduce new components or reorder content beyond the hero.
+- Do NOT switch the image to a background image.
+
+CONFIG FLAGS (data-driven)
+- `hero.caption.visible`: boolean — show/hide overlay card.
+- `hero.caption.variant`: "overlay-card" | "none"
+- `hero.left.statement`: string — exactly two sentences.
+- `hero.image`: unchanged (keep current source/behavior).
+
+ACCEPTANCE CRITERIA
+- Desktop: split-right layout with left statement and right image; optional caption overlay rendered as specified.
+- Mobile: stacked layout; overlay card legible and not clipped; safe spacing preserved.
+- No visual or structural changes outside the hero.

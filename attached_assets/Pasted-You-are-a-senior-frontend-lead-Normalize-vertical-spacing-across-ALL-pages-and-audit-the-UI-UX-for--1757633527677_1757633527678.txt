@@ -1,0 +1,77 @@
+You are a senior frontend lead. Normalize vertical spacing across ALL pages and audit the UI/UX for professional-grade layout quality.
+
+GOAL
+- Enforce a consistent vertical rhythm on desktop and mobile.
+- Remove layout noise (inconsistent margins/paddings, doubled gaps, random overrides).
+- Fix UX/UI issues that break alignment, readability, or accessibility—without changing content.
+
+HARD CONSTRAINTS (do not break)
+- Global container: max 1200px; gutters 24/24/32 (sm/md/lg+); centered.
+- 12-column grid; gaps 24/24/32 (sm/md/lg+).
+- Left alignment baseline (all text/media start on the same left edge).
+- Home: text-only header (no hero image). Big two-column grid below (same as Sounds cards).
+- Cards: bottom-aligned captions + unified badges (Artwork/Series/Sound or placeholder).
+- Gallery: Series cards have “Series” badge; Series page lists ALL works immediately.
+- Artwork page: two-column hero (LEFT boxed-cover image, RIGHT meta with labeled rows); no zoom.
+- Scroll to top + focus main heading on every route change.
+
+VERTICAL RHYTHM (tokens; multiples of 4px)
+- Section padY: 64/64/72 (sm/md/lg+)
+- Block gap (between sibling content blocks within a section): 24/24/32
+- Heading spacing:
+  H1: margin-top 0; margin-bottom 16
+  H2: margin-top 40; margin-bottom 12
+  H3: margin-top 32; margin-bottom 8
+- Paragraph spacing: 16 between paragraphs; last-child margin-bottom 0
+- Lists: 12 between items; 16 above/below the list block
+- Figures (single media blocks): margin 24 above/below
+- Cards grid gaps (Gallery/Series/All/Sounds/Home grid): 24/24/32
+- Card caption: padding 12–16; inner gap 6–8; min-height stable so baselines align
+- Artwork page (first screen):
+  LEFT image box height: min(1000px, max(540px, 88vh)) desktop; ~65vh mobile
+  RIGHT meta panel: row gap 16–20; “About This Work” (H3) has 24 above
+- Series header (title/intro/meta) → works grid: 40/32/24 (lg/md/sm)
+- Home header → grid: 40/32/24
+
+CLEANUP RULES
+- Single source of truth for spacing: use tokens; no magic numbers.
+- Prefer margin-top on blocks for vertical rhythm; avoid mixing parent padding + child top margin that doubles space.
+- Remove duplicate margins, collapsed-margin hacks, stray <br>, empty wrappers, and commented code.
+- Ensure one <h1> per page; semantic order of headings.
+
+ACCESSIBILITY
+- Body contrast ≥ 7:1; base font ≥ 16px on mobile.
+- Focus-visible on interactive elements.
+- Route change: jump to top, focus main heading (tabindex="-1").
+
+IMPLEMENTATION
+1) Create/verify spacing tokens (CSS vars or Tailwind theme) and apply them to sections/blocks/components.
+2) Normalize all page templates (Home, Gallery, Series, All, Artwork, Sounds, Statement, Contacts) to use:
+   - container + grid
+   - section padY
+   - block gaps
+   - heading/paragraph/list spacing rules
+3) Remove per-component ad-hoc margins; replace with tokens.
+4) Ensure card components share the same caption structure and reserved badge row.
+5) Verify scroll-to-top + focus behavior on route change (ignore hash).
+
+OUTPUT (STRICT)
+1) SUMMARY table: {Page/Area, IssuesFound, FixesApplied, Risk, Notes}
+2) TOKENS: show patch for spacing tokens (CSS variables or tailwind.config)
+3) PER-FILE DIFFS: unified diffs (old → new)
+4) VISUAL CHECKLIST (pass/fail):
+   - containers equal width; left baselines aligned
+   - section padY consistent
+   - heading/paragraph/list spacing per tokens
+   - grid gaps per tokens (24/24/32)
+   - cards bottom-aligned; badges stable
+   - artwork hero two-column: image box cover, meta rows labeled
+   - series page: header → grid spacing correct; lists all works
+   - mobile: single column; rhythm preserved
+5) TODO (if any): short list with rationale
+6) TESTS performed: viewports (360/768/1024/1280), Chrome/Safari/Firefox, keyboard-only nav, Lighthouse scores
+
+DO NOTS
+- Do not alter copy, routes, or business logic.
+- Do not introduce new visual styles outside tokens.
+- Do not add animations beyond existing subtle transitions.

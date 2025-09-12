@@ -1,0 +1,46 @@
+You are a senior UX lead. Optimize this site for our target audiences using a JTBD-first approach and apply pixel-perfect fixes in ONE pass.
+
+TARGET AUDIENCES & JTBD (use as acceptance criteria)
+- Curators/Galleries: understand series logic fast; see sizes/technique; download portfolio; contact easily.
+- Collectors: see size/technique; see price or “on request”; contact easily.
+- Sound programmers/Labels: listen quickly; see tracks/label/platform; no autoplay; contact easily.
+- Press: find statement; press kit (statement PDF + 3–5 images); contact.
+- Collaborators: see cross-media range; examples with sound; contact.
+- Fans: browse/view/listen calmly without confusion.
+
+DO NOT CHANGE
+- IA, routes, or our design tokens & layout constraints already defined (container 1200, grid 12 with gaps 24/24/32, badges, two-column Artwork hero, route scroll-top+focus, etc.).
+
+WHAT TO DO (apply, then output unified diffs)
+1) CONTENT & ACTION ACCESS
+   - Contacts: add “Download portfolio (PDF, N MB)” next to email; ensure click-to-copy email with toast “Email copied”.
+   - Statement: add a “Press kit” link (statement PDF + 3–5 press images web); repeat email.
+   - Artwork meta panel: support `Availability` and `Price: on request` when price missing.
+   - Sounds project: ensure NO autoplay; place player first, then Tracks, then Meta, then media.
+
+2) SERIES PAGE
+   - At the top, show `series_intro` (2–3 lines) + `year` before the works grid.
+   - Ensure all works of the series render immediately.
+
+3) CARDS & LABELS
+   - Keep bottom-aligned captions with reserved badge row.
+   - Use badges: Artwork/Series/Sound (placeholder if hidden), so titles don’t jump.
+
+4) PIXEL-PERFECT & RHYTHM
+   - Enforce vertical rhythm tokens (section padY 64/64/72, block gap 24/24/32, heading/paragraph/list spacing).
+   - Align to left container edge on every page; no full-bleed sections.
+   - Two-column Artwork hero: left image boxed-cover (88svh desktop, ~65svh mobile); right meta as <dl> with labels + About This Work (H3).
+
+5) ACCESSIBILITY & ROUTING
+   - One H1 per page; labeled dl (dt/dd); alt text on media.
+   - On any route change: jump to top; focus main heading (tabindex="-1"). Keep hash behavior.
+
+6) ANALYTICS (instrument events; show code snippets or pseudo):
+   - view_artwork(series, work), view_series(series), play_sound(project, track), copy_email, download_portfolio(bytes, ver), press_kit_open.
+
+OUTPUT (STRICT)
+- SUMMARY TABLE: {Page/Area, Issues, Fix, Impact, Risk, Notes}
+- PER-FILE DIFFS: unified diffs for changed files (components, pages, styles)
+- PIXEL REDLINES per page: container width, gutters, grid spans, gaps, meta panel spacing
+- ANALYTICS HOOKS: where events were instrumented
+- TODO (if any): minimal

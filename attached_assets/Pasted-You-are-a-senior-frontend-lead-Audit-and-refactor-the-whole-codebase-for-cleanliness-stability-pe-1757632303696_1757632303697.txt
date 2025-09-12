@@ -1,0 +1,86 @@
+You are a senior frontend lead. Audit and refactor the whole codebase for cleanliness, stability, performance, and pixel-consistent layout.
+
+TECH CONTEXT
+- Stack: React (TS/JS), Vite/CRA/Next (detect), Tailwind or CSS Modules (detect), Framer Motion & lucide-react (if present).
+- Site structure & design rules MUST be respected (given below in “HARD CONSTRAINTS”).
+
+GOAL
+Produce crystal-clean layout code with consistent container, spacing, and typography. Remove dead code, simplify components, fix a11y, stabilize routing/scroll, and ensure design parity.
+
+SCOPE
+- All pages and components (Home, Gallery, Series page, Artwork page, Sounds, Statement, Contacts).
+- Shared UI (cards, grid, container, header/footer).
+- Routing and scroll behavior.
+
+OUTPUT FORMAT (STRICT)
+1) SUMMARY (table): {Area, IssuesFound, FixesApplied, Risk, Notes}
+2) LINTER/FORMATTER SETUP (if missing): show .eslintrc, .prettierrc, stylelint/tailwind config snippets.
+3) PER-FILE DIFFS: unified diff blocks (old → new).
+4) TODOs LEFT (if any): short list with rationale.
+5) VISUAL CHECKLIST (pass/fail): containers, gaps, badges, headings, mobile/desktop.
+
+CHECKLIST — WHAT TO DO
+
+A) HYGIENE & CORRECTNESS
+- Remove: unused imports/vars, commented-out code, TODOs, console.log in production.
+- Fix: key props in lists, unstable keys, duplicate IDs, duplicate <h1> per page.
+- Normalize file naming, exports (default vs named), folder structure.
+- Enforce strict types (TS) or PropTypes (JS). No “any” unless justified.
+- Replace magic numbers with tokens.
+
+B) LAYOUT & DESIGN (HARD CONSTRAINTS)
+1) Global container & grid
+   - One container site-wide: max-width 1200px; gutters 24/24/32 (sm/md/lg+), centered. 12-column grid with gaps 24/24/32.
+   - All text/media align to the SAME left edge. No full-viewport sections except hero image on Home (right column).
+2) Home / Hero
+   - Split-right layout. Right image is full-height (100vh), object-fit: cover, full-bleed right. No click on hero image or caption.
+   - Caption card (bottom-right) optional; left side shows two-sentence statement inside container.
+3) Cards (Latest/Mixed, Gallery, Series, Sounds)
+   - Bottom-aligned captions with reserved badge row.
+   - Badges: Artwork / Series / Sound (placeholder if hidden) so titles don’t jump.
+4) Gallery & Series
+   - Series cards show “Series” badge.
+   - Clicking a series opens a Series page (not only filter). Series page immediately lists ALL works of that series.
+   - Grid gaps: 24/32/40 (you can map to 24/24/32 using container/grid settings if a single source of truth).
+5) Artwork page (two-column hero)
+   - LEFT: main image in a boxed cover container (fills the column, object-fit: cover; overflow hidden; 88vh desktop, ~65vh mobile).
+   - RIGHT: meta panel with labeled rows (dl): Series:, Year:, Price:, Technique:, Dimensions:. Below: “About This Work” (H3) with 1–3 short paragraphs.
+   - No zoom/click on main image.
+6) Scroll & Focus
+   - On route change to ANY content page (/gallery, /gallery/all, /gallery/:series, /gallery/:series/:work, /sounds/:project, /statement, /contacts): jump to top (no smooth). Focus main heading (#page-title / #series-title / #artwork-title / #project-title) with tabindex="-1".
+7) Media
+   - <picture> with WEBP+JPG sources where possible. Main images ≥2000px long side, thumbs 1200–1600px. No background images for portraits/hero left statement.
+8) Typography & Tokens
+   - Font stack (neutral grotesk): Inter/IBM Plex Sans/system. Type scale: H1 40/1.2/600, H2 30/1.25/600, H3 22/1.35/600, Body 17/1.65/400, Small 13/1.4/400.
+   - Links same color as text; underline on hover/focus.
+   - Enforce single <h1> per page; semantic heading order.
+9) Accessibility
+   - Color contrast ≥ 7:1 for body. Focus-visible on interactive elements. Alt for all media. Landmark roles for header/main/footer/nav where appropriate.
+10) Performance & Stability
+   - Remove heavy re-renders; memoize stable lists; avoid prop drilling (lift to context or split components).
+   - Lazy-load non-hero media/sections; code-split routes/components; tree-shake icons.
+   - Avoid layout thrash (no sync reads/writes in scroll); use IntersectionObserver over scroll handlers.
+   - Optimize images (sizes/srcset), defer non-critical JS, preconnect to CDNs if used.
+11) SEO & Meta
+   - Title/description per page; canonical; OG/Twitter basics; no duplicate meta tags.
+
+REFRACTORING RULES
+- Do NOT change content, copy, routes, or business logic.
+- Preserve the visual design described in “HARD CONSTRAINTS”.
+- Prefer composition over inheritance. Extract shared UI primitives: Container, Grid, Card, Badge, MetaList, Hero.
+- Deduplicate Tailwind utility chains (use @apply or component classes for repeated patterns).
+- Centralize tokens (CSS variables or tailwind.config theme.extend).
+
+TESTS TO RUN (describe in output)
+- Viewports: 360, 768, 1024, 1280.
+- Browsers: Chrome, Safari (iOS), Firefox.
+- Keyboard only: tab order, focus ring, skip-to-content (if present).
+- Lighthouse: performance ≥ 90, a11y ≥ 95, best practices ≥ 95 (note any constraints).
+
+HARD CONSTRAINTS (DO NOT BREAK)
+- Global container alignment; 12-col grid.
+- Home hero right full-bleed cover; no click on hero.
+- Cards bottom captions + badges.
+- Series page shows all works immediately.
+- Artwork page two-column hero; image boxed cover; labeled meta list; no zoom.
+- Route change scroll-to-top + focus main heading.
