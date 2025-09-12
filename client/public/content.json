@@ -52,13 +52,17 @@
     }
   ],
    "statement": {
-    "portrait": "attached_assets/generated_images/portrait.jpg",
+    "portrait": "attached_assets/generated_images/Professional_artist_portrait_0c565b16.png",
     "paragraphs": [
       "Artist statement paragraph 1.",
       "Artist statement paragraph 2."
     ],
     "pressKitPdf": "files/press-kit.pdf"
   },
+  "exhibitions": [
+      { "year": "2024", "event": "…" },
+      { "year": "2023", "event": "…" }
+  ],
   "contacts": {
     "email": "hi@kremenskii.art",
     "city": "Stuttgart",
