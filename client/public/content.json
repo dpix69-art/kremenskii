@@ -17,20 +17,23 @@
       "slug": "farbkoerper",
       "title": "Farbkörper",
       "year": "2022–",
-      "intro": "An ongoing exploration of color as physical form, investigating the materiality of pigment and its relationship to space and light.",
+      "intro": "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony.",
       "artworkImages": [
-        "images/farb/fk-12-main.jpg",
-        "images/farb/color-study-1-main.jpg",
-        "images/farb/red-fragment-main.jpg"
+        "images/farb/fkb - 01.jpg",
+        "images/farb/fkb - 02.jpg",
+        "images/farb/fkb - 03.jpg",
+        "images/farb/fkb - 04.jpg",
+        "images/farb/fkb - 05.jpg",
+        "images/farb/fkb - 06.jpg"
       ],
       "works": [
         {
           "slug": "untitled-study-12",
           "title": "Untitled Study #12",
           "year": 2024,
-          "technique": "Mixed media on canvas",
-          "dimensions": "120 × 90 cm",
-          "price": "€3,200",
+          "technique": "Medium: Acrylic pigment on MDF",
+          "dimensions": "51 x 69 x 0.6 cm",
+          // "price": "€3,200",
           "availability": "available",
           "images": [
             { "url": "images/farb/fk-12-main.jpg", "role": "main" },
