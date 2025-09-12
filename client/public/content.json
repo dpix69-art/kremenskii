@@ -37,8 +37,8 @@
           "price": "€3,200",
           "availability": "available",
           "images": [
-            { "url": "images/farbkoerper/fkb-01.jpg", "role": "main" },
-            { "url": "images/farbkoerper/fkb-02.jpg", "role": "detail" }
+            { "url": "images/farbkoerper/fkb-01.jpg?v=2025-09-12-1", "role": "main" },
+            { "url": "images/farbkoerper/fkb-02.jpg?v=2025-09-12-1", "role": "detail" }
           ],
           "about": [
             "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
@@ -51,8 +51,8 @@
           "technique": "Mixed media on canvas",
           "dimensions": "120 × 90 cm",
           "images": [
-            { "url": "images/farbkoerper/fkb-03.jpg", "role": "main" },
-            { "url": "images/farbkoerper/fkb-04.jpg", "role": "detail" }
+            { "url": "images/farbkoerper/fkb-03.jpg?v=2025-09-12-1", "role": "main" },
+            { "url": "images/farbkoerper/fkb-04.jpg?v=2025-09-12-1", "role": "detail" }
           ],
           "about": ["Short note about process/materials for Study #11."]
         },
@@ -63,7 +63,7 @@
           "technique": "Mixed media on canvas",
           "dimensions": "120 × 90 cm",
           "images": [
-            { "url": "images/farbkoerper/fkb-05.jpg", "role": "main" }
+            { "url": "images/farbkoerper/fkb-05?v=2025-09-12-1.jpg", "role": "main" }
           ],
           "about": ["Short note for Study #13."]
         },
