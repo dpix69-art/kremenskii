@@ -1,4 +1,5 @@
 import { useContent } from "@/content/ContentProvider";
+import { assetUrl } from "@/lib/assetUrl";
 
 interface Exhibition {
   year: string;
@@ -16,12 +17,6 @@ interface StatementPageProps {
   showPressContact?: boolean;
 }
 
-function withBase(p?: string) {
-  if (!p) return "";
-  const base = (import.meta.env.BASE_URL || "/").replace(/\/+$/, "");
-  return `${base}/${String(p).replace(/^\/+/, "")}`;
-}
-
 export default function StatementPage({
   portraitImageUrl,
   statement,
@@ -29,15 +24,15 @@ export default function StatementPage({
   portraitPosition = "left",
   email,
   pressKitPdfUrl,
-  showPressContact = false
+  showPressContact = false,
 }: StatementPageProps) {
   const { content } = useContent();
 
+  const artistName = content?.site?.artistName ?? "Artist";
+
   // Фолбэки из content.json
   const usedPortrait =
-    portraitImageUrl ||
-    content?.statement?.portrait ||
-    "images/portrait.jpg";
+    portraitImageUrl || content?.statement?.portrait || "images/kremenskii.png";
 
   const usedStatement: string[] =
     statement ||
@@ -51,19 +46,18 @@ export default function StatementPage({
       ? content.statement.exhibitions
       : []);
 
-  const usedEmail =
-    email || content?.contacts?.email || ""; // пустая строка — не рендерим кнопку
-
-  const usedPressKit =
-    pressKitPdfUrl || content?.statement?.pressKitPdf || ""; // пустая строка — не рендерим кнопку
+  const usedEmail = email || content?.contacts?.email || "";
+  const usedPressKit = pressKitPdfUrl || content?.statement?.pressKitPdf || "";
 
   const handleDownloadPressKit = () => {
     if (!usedPressKit) return;
     if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "press_kit_open", { method: "statement_page" });
+      (window as any).gtag("event", "press_kit_open", {
+        method: "statement_page",
+      });
     }
     const link = document.createElement("a");
-    link.href = withBase(usedPressKit);
+    link.href = assetUrl(usedPressKit);
     link.download = "press-kit.pdf";
     document.body.appendChild(link);
     link.click();
@@ -95,8 +89,8 @@ export default function StatementPage({
           >
             <div className="aspect-[4/5] overflow-hidden rounded-md bg-muted">
               <img
-                src={withBase(usedPortrait)}
-                alt="Artist portrait"
+                src={assetUrl(usedPortrait)}
+                alt={`Portrait of ${artistName}`}
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"
@@ -161,7 +155,9 @@ export default function StatementPage({
             {/* Press */}
             {usedPressKit && (
               <div className="col-span-12 lg:col-span-6 space-y-4">
-                <h2 className="text-type-h2 font-semibold text-foreground">Press</h2>
+                <h2 className="text-type-h2 font-semibold text-foreground">
+                  Press
+                </h2>
                 <p className="text-type-body text-muted-foreground">
                   Statement PDF + high-resolution press images
                 </p>
@@ -178,7 +174,9 @@ export default function StatementPage({
             {/* Contact */}
             {usedEmail && (
               <div className="col-span-12 lg:col-span-6 space-y-4">
-                <h2 className="text-type-h2 font-semibold text-foreground">Contact</h2>
+                <h2 className="text-type-h2 font-semibold text-foreground">
+                  Contact
+                </h2>
                 <button
                   onClick={handleCopyEmail}
                   className="text-type-body text-foreground underline hover:text-muted-foreground transition-colors"

@@ -38,7 +38,9 @@ jobs:
 
       - name: Build
         run: npm run build
-
+        env:
+          VITE_BUILD_ID: ${{ github.sha }}
+          
       # На всякий случай — отключаем Jekyll
       - name: Ensure .nojekyll in output
         run: |
