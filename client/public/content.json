@@ -16,262 +16,46 @@
     {
       "slug": "farbkoerper",
       "title": "Farbkörper",
-      "year": "2022",
+      "year": "2022–",
       "intro": "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony.",
       "artworkImages": [
         "images/farbkoerper/fkb-01.jpg",
         "images/farbkoerper/fkb-02.jpg",
-        "images/farbkoerper/fkb-03.jpg",
-        "images/farbkoerper/fkb-04.jpg",
-        "images/farbkoerper/fkb-05.jpg",
-        "images/farbkoerper/fkb-06.jpg" 
+        "images/farbkoerper/fkb-03.jpg"
       ],
       "works": [
-        {
-          "slug": "fkb-01",
-          "aliases": ["untitled-study-12"],
-          "title": "fkb-01",
-          "year": 2024,
-          "technique": "Acrylic pigment on MDF",
-          "dimensions": "51 × 69 × 0.6 cm",
-          "price": "€3,200",
-          "availability": "available",
-          "images": [
-            { "url": "images/farbkoerper/fkb-01.jpg?v=2025-09-12-1", "role": "main" },
-            { "url": "images/farbkoerper/fkb-01-d-1.png", "role": "detail" },
-            { "url": "images/farbkoerper/fkb-01-d-2.png", "role": "detail" }
-          ],
-          "about": [
-            "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
-          ]
-        },
-        {
-          "slug": "fkb-02",
-          "title": "fkb-02",
-          "year": 2024,
-          "technique": "Acrylic pigment on MDF",
-          "dimensions": "51 × 69 × 0.6 cm",
-          "price": "€3,200",
-          "availability": "available",
-          "images": [
-            { "url": "images/farbkoerper/fkb-02.jpg?v=2025-09-12-1", "role": "main" },
-            { "url": "images/farbkoerper/fkb-02-d-1.png", "role": "detail" },
-            { "url": "images/farbkoerper/fkb-02-d-2.png", "role": "detail" }
-          ],
-          "about": [
-            "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
-          ]
-        },
-        {
-          "slug": "fkb-03",
-          "title": "fkb-03",
-          "year": 2024,
-          "technique": "Acrylic pigment on MDF",
-          "dimensions": "51 × 69 × 0.6 cm",
-          "price": "€3,200",
-          "availability": "available",
-          "images": [
-            { "url": "images/farbkoerper/fkb-03.jpg?v=2025-09-12-1", "role": "main" },
-            { "url": "images/farbkoerper/fkb-03-d-1.png", "role": "detail" },
-            { "url": "images/farbkoerper/fkb-03-d-2.png", "role": "detail" }
-          ],
-          "about": [
-            "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
-          ]
-        },
-        {
-          "slug": "fkb-04",
-          "aliases": ["untitled-study-12"],
-          "title": "fkb-04",
-          "year": 2024,
-          "technique": "Acrylic pigment on MDF",
-          "dimensions": "51 × 69 × 0.6 cm",
-          "price": "€3,200",
-          "availability": "available",
-          "images": [
-            { "url": "images/farbkoerper/fkb-04.jpg?v=2025-09-12-1", "role": "main" },
-            { "url": "images/farbkoerper/fkb-04-d-1.png", "role": "detail" },
-            { "url": "images/farbkoerper/fkb-04-d-2.png", "role": "detail" }
-          ],
-          "about": [
-            "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
-          ]
-        },
-        {
-          "slug": "fkb-05",
-          "aliases": ["untitled-study-12"],
-          "title": "fkb-05",
-          "year": 2024,
-          "technique": "Acrylic pigment on MDF",
-          "dimensions": "51 × 69 × 0.6 cm",
-          "price": "€3,200",
-          "availability": "available",
-          "images": [
-            { "url": "images/farbkoerper/fkb-05.jpg?v=2025-09-12-1", "role": "main" },
-            { "url": "images/farbkoerper/fkb-05-d-1.png", "role": "detail" },
-            { "url": "images/farbkoerper/fkb-05-d-2.png", "role": "detail" }
-          ],
-          "about": [
-            "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
-          ]
-        },
-        {
-          "slug": "fkb-06",
-          "aliases": ["untitled-study-12"],
-          "title": "fkb-06",
-          "year": 2024,
-          "technique": "Acrylic pigment on MDF",
-          "dimensions": "41 x 60 x 0.6 cm",
-          "price": "€3,200",
-          "availability": "available",
-          "images": [
-            { "url": "images/farbkoerper/fkb-06.jpg?v=2025-09-12-1", "role": "main" },
-            { "url": "images/farbkoerper/fkb-06-d-1.png", "role": "detail" },
-            { "url": "images/farbkoerper/fkb-06-d-2.png", "role": "detail" }
-          ],
-          "about": [
-            "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
-          ]
-        }
+        { "slug": "fkb-01", "title": "Farbkörper #01", "year": 2024, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-01.jpg", "role": "main" } ] },
+        { "slug": "fkb-02", "title": "Farbkörper #02", "year": 2024, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-02.jpg", "role": "main" } ] },
+        { "slug": "fkb-03", "title": "Farbkörper #03", "year": 2023, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-03.jpg", "role": "main" } ] },
+        { "slug": "fkb-04", "title": "Farbkörper #04", "year": 2023, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-04.jpg", "role": "main" } ] },
+        { "slug": "fkb-05", "title": "Farbkörper #05", "year": 2022, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-05.jpg", "role": "main" } ] },
+        { "slug": "fkb-06", "title": "Farbkörper #06", "year": 2022, "technique": "Acrylic pigment on panel", "dimensions": "51 × 69 × 0.6 cm", "images": [ { "url": "images/farbkoerper/fkb-06.jpg", "role": "main" } ] }
       ]
     },
     {
-      "slug": "pgsrd",
-      "title": "Plywood-Gravel-Sand-Road-Dust (PGSRD)",
-      "year": "2022–",
-      "intro": "A series examining industrial and organic materials, their intersection in urban environments, and the traces they leave behind.",
+      "slug": "pgsrd-trc",
+      "title": "Plywood-Gravel-Sand-Road-Dust (TRC)",
+      "year": "2021–",
+      "intro": "Industrial and organic materials intersect; traces and aggregates become form.",
       "artworkImages": [
         "images/pgsrd-trc/pgsrd-trc-01.jpg",
         "images/pgsrd-trc/pgsrd-trc-02.jpg",
-        "images/pgsrd-trc/pgsrd-trc-10.jpg"
+        "images/pgsrd-trc/pgsrd-trc-03.jpg"
       ],
       "works": [
-        {
-          "slug": "material-research",
-          "title": "Material Research",
-          "year": 2023,
-          "technique": "Plywood, gravel, sand",
-          "dimensions": "40 × 60 × 8 cm",
-          "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" }
-          ]
-        },
-        {
-          "slug": "urban-fragment-3",
-          "title": "Urban Fragment #3",
-          "year": 2023,
-          "technique": "Road dust, mixed media",
-          "dimensions": "55 × 42 cm",
-          "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" }
-          ]
-        },
-        {
-          "slug": "construction-study",
-          "title": "Construction Study",
-          "year": 2022,
-          "technique": "Plywood, concrete",
-          "dimensions": "60 × 45 × 10 cm",
-          "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" }
-          ]
-        },
-        {
-          "slug": "aggregate-12",
-          "title": "Aggregate #12",
-          "year": 2022,
-          "technique": "Gravel, sand, resin",
-          "dimensions": "50 × 50 × 7 cm",
-          "images": [
-            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" }
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "singles",
-      "title": "Singles",
-      "year": "2020–",
-      "intro": "Individual works that explore various media and concepts outside of larger series, unified by an interest in material experimentation.",
-      "artworkImages": [
-        "images/singles/pgsrd-trc-04.jpg",
-        "images/singles/pgsrd-trc-05.jpg",
-        "images/singles/pgsrd-trc-06.jpg"
-      ],
-      "works": [
-        {
-          "slug": "fragment-study",
-          "title": "Fragment Study",
-          "year": 2024,
-          "technique": "Mixed media",
-          "dimensions": "60 × 45 cm",
-          "images": [
-            { "url": "images/singles/fragment-study-main.jpg", "role": "main" }
-          ]
-        },
-        {
-          "slug": "meditation-5",
-          "title": "Meditation #5",
-          "year": 2023,
-          "technique": "Oil on canvas",
-          "dimensions": "80 × 60 cm",
-          "images": [
-            { "url": "images/singles/meditation-5-main.jpg", "role": "main" }
-          ]
-        },
-        {
-          "slug": "untitled-black",
-          "title": "Untitled (Black)",
-          "year": 2023,
-          "technique": "Charcoal on paper",
-          "dimensions": "70 × 50 cm",
-          "images": [
-            { "url": "images/singles/untitled-black-main.jpg", "role": "main" }
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "graphics",
-      "title": "Graphics",
-      "year": "2019–",
-      "intro": "Print-based works investigating digital and analog reproduction techniques, examining the transformation of images through various media.",
-      "artworkImages": [
-        "images/graphics/texture-analysis-3-main.jpg",
-        "images/graphics/print-study-8-main.jpg",
-        "images/graphics/digital-fragment-main.jpg"
-      ],
-      "works": [
-        {
-          "slug": "texture-analysis-3",
-          "title": "Texture Analysis #3",
-          "year": 2023,
-          "technique": "Digital print",
-          "dimensions": "50 × 40 cm",
-          "images": [
-            { "url": "images/graphics/texture-analysis-3-main.jpg", "role": "main" }
-          ]
-        },
-        {
-          "slug": "print-study-8",
-          "title": "Print Study #8",
-          "year": 2022,
-          "technique": "Screen print on paper",
-          "dimensions": "42 × 30 cm",
-          "images": [
-            { "url": "images/graphics/print-study-8-main.jpg", "role": "main" }
-          ]
-        },
-        {
-          "slug": "digital-fragment",
-          "title": "Digital Fragment",
-          "year": 2021,
-          "technique": "Inkjet print, mixed media",
-          "dimensions": "45 × 35 cm",
-          "images": [
-            { "url": "images/graphics/digital-fragment-main.jpg", "role": "main" }
-          ]
-        }
+        { "slug": "pgsrd-trc-01", "title": "PGSRD-TRC #01", "year": 2024, "technique": "Plywood, gravel, sand, resin", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-02", "title": "PGSRD-TRC #02", "year": 2024, "technique": "Plywood, gravel, sand, resin", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-02.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-03", "title": "PGSRD-TRC #03", "year": 2024, "technique": "Plywood, gravel, sand, resin", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-03.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-04", "title": "PGSRD-TRC #04", "year": 2023, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-04.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-05", "title": "PGSRD-TRC #05", "year": 2023, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-05.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-06", "title": "PGSRD-TRC #06", "year": 2023, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-06.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-07", "title": "PGSRD-TRC #07", "year": 2022, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-07.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-08", "title": "PGSRD-TRC #08", "year": 2022, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-08.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-09", "title": "PGSRD-TRC #09", "year": 2022, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-09.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-10", "title": "PGSRD-TRC #10", "year": 2021, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-10.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-11", "title": "PGSRD-TRC #11", "year": 2021, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-11.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-12", "title": "PGSRD-TRC #12", "year": 2021, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-12.jpg", "role": "main" } ] },
+        { "slug": "pgsrd-trc-13", "title": "PGSRD-TRC #13", "year": 2021, "technique": "Mixed media", "dimensions": "—", "images": [ { "url": "images/pgsrd-trc/pgsrd-trc-13.jpg", "role": "main" } ] }
       ]
     }
   ],
@@ -281,78 +65,53 @@
       "slug": "industrial-resonance",
       "title": "Industrial Resonance",
       "year": 2023,
+      "platform": "soundcloud",
       "cover": "images/sounds/industrial-resonance-cover.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/123456789",
-      "location": { "city": "Berlin", "country": "Germany", "institution": "Künstlerhaus Bethanien" },
-      "bodyBlocks": [
-        { "type": "h2", "text": "Concept" },
-        { "type": "p",  "text": "This installation explores the acoustic properties of industrial spaces, using field recordings and live processing to create an immersive sound environment that responds to the physical architecture." },
-        { "type": "h2", "text": "Process" },
-        { "type": "p",  "text": "Developed during a residency; recordings captured the building’s silence and the city filtering through its walls." }
-      ],
       "tracks": [
-        { "title": "Factory Floor", "duration": "12:34", "externalLink": "https://soundcloud.com/artist/factory-floor" },
-        { "title": "Resonance Study #1", "duration": "08:21" },
-        { "title": "Ambient Reconstruction", "duration": "15:07", "externalLink": "https://soundcloud.com/artist/ambient-reconstruction" }
+        { "title": "Factory Floor", "duration": "12:34" },
+        { "title": "Resonance Study #1", "duration": "08:21" }
       ],
-      "meta": { "label": "Experimental Sounds", "platforms": ["Bandcamp", "SoundCloud"] }
-    },
-    {
-      "slug": "spatial-frequencies",
-      "title": "Spatial Frequencies",
-      "year": 2022,
-      "cover": "images/sounds/spatial-frequencies-cover.jpg",
-      "embed": "https://bandcamp.com/EmbeddedPlayer/album=000000000/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/",
-      "location": { "city": "Vienna", "country": "Austria", "institution": "Museum of Applied Arts" },
-      "about": [
-        "Site-specific investigation into resonance patterns of large halls and transitional spaces."
-      ],
-      "tracks": [
-        { "title": "Hall Mode", "duration": "06:12" },
-        { "title": "Threshold", "duration": "09:04" }
-      ],
-      "meta": { "label": "MAK", "platforms": ["Bandcamp"] }
+      "meta": { "label": "Experimental Sounds", "platforms": ["SoundCloud"] }
     },
     {
       "slug": "material-voices",
       "title": "Material Voices",
       "year": 2022,
+      "platform": "soundcloud",
       "cover": "images/sounds/material-voices-cover.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/987654321",
-      "location": { "city": "Munich", "country": "Germany", "institution": "Kunstverein München" },
-      "about": ["Vocalizations derived from contact microphones on surfaces, re-scored for space."],
       "tracks": [
         { "title": "Surface Choir", "duration": "07:40" }
       ],
       "meta": { "label": "Independent", "platforms": ["SoundCloud"] }
     },
     {
-      "slug": "urban-field-studies",
-      "title": "Urban Field Studies",
-      "year": 2021,
-      "cover": "images/sounds/urban-field-studies-cover.jpg",
-      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/246813579",
-      "location": { "city": "London", "country": "UK", "institution": "ICA London" },
-      "about": ["Field recordings across city strata; re-assembled as layered drift."],
+      "slug": "spatial-frequencies",
+      "title": "Spatial Frequencies",
+      "year": 2022,
+      "platform": "bandcamp",
+      "cover": "images/sounds/spatial-frequencies-cover.jpg",
+      "embed": "https://bandcamp.com/EmbeddedPlayer/album=000000000/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/",
       "tracks": [
-        { "title": "Underpass Drift", "duration": "05:55" },
-        { "title": "Night Vent", "duration": "04:22" }
+        { "title": "Hall Mode", "duration": "06:12" },
+        { "title": "Threshold", "duration": "09:04" }
       ],
-      "meta": { "label": "Field Unit", "platforms": ["Bandcamp", "SoundCloud"] }
+      "meta": { "label": "MAK", "platforms": ["Bandcamp"] }
     }
   ],
 
   "statement": {
-    "portrait": "images/kremenskii.png?v=2025-09-12-1",
+    "portrait": "images/kremenskii.png",
     "paragraphs": [
       "I do not seek relief through expression or catharsis.",
       "Each work stands as a document: this is what the encounter looked like. If a viewer recognizes their own tension and decides to face it, that is a welcomed but optional consequence."
     ],
-    "pressKitPdf": "files/press-kit.pdf",
     "exhibitions": [
-      { "year": "2023", "event": "Material Traces, Elsiens Art Gallery, Stuttgart" },
-      { "year": "2024", "event": "Im contrast, Elsiens Art Gallery, Stuttgart" }
-    ]
+      { "year": "2024", "event": "Im contrast, Elsiens Art Gallery, Stuttgart" },
+      { "year": "2023", "event": "Material Traces, Elsiens Art Gallery, Stuttgart" }
+    ],
+    "pressKitPdf": "files/press-kit.pdf"
   },
 
   "contacts": {

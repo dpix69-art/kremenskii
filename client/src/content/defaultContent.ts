@@ -27,13 +27,13 @@ const defaultContent = {
   statement: {
     portrait: "images/kremenskii.png",
     paragraphs: [
-      "Artist statement paragraph 1.",
-      "Artist statement paragraph 2."
+      "I do not seek relief through expression or catharsis.",
+      "Each work stands as a document: this is what the encounter looked like. If a viewer recognizes their own tension and decides to face it, that is a welcomed but optional consequence."
     ],
     pressKitPdf: "files/press-kit.pdf",
     exhibitions: [
-      { year: "2024", event: "Material Traces, Contemporary Art Gallery, Berlin" },
-      { year: "2023", event: "Substance and Surface, Museum of Modern Art, Vienna" },
+      { year: "2023", event: "Material Traces, Elsiens Art Gallery, Stuttgart" },
+      { year: "2024", event: "Im contrast, Elsiens Art Gallery, Stuttgart" },
     ],
   },
   series: [],
