@@ -1,70 +1,57 @@
-import { useContent } from "@/content/ContentProvider";
 import Header from "@/components/Header";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import StatementPage from "@/components/StatementPage";
 import Footer from "@/components/Footer";
+import portraitImage from '@assets/generated_images/Professional_artist_portrait_0c565b16.png';
 
 export default function Statement() {
-  const { content } = useContent();
-
-  const artistName = content?.site?.artistName ?? "Artist Name";
-  const portrait = content?.statement?.portrait; // пока может быть attached_assets/..., позже сменим на images/...
-  const paragraphs: string[] = content?.statement?.paragraphs ?? [
-    "Artist statement paragraph 1.",
-    "Artist statement paragraph 2.",
+  const statementText = [
+    "My practice investigates the intersection of material and meaning, exploring how physical substances carry cultural and emotional weight beyond their immediate visual properties.",
+    "Through painting, sculpture, and sound, I examine the boundaries between the constructed and the found, the industrial and the organic, seeking moments where these distinctions collapse or reveal their arbitrariness.",
+    "Recent work has focused on the materiality of color itself—not as representation or symbol, but as physical substance that occupies space and time, accumulates history, and bears the traces of its own making."
   ];
-  const pressKit = (content?.statement?.pressKitPdf ?? "files/press-kit.pdf").replace(/^\/+/, "");
+
+  const exhibitions = [
+    { year: "2024", event: "Material Traces, Contemporary Art Gallery, Berlin" },
+    { year: "2023", event: "Substance and Surface, Museum of Modern Art, Vienna" },
+    { year: "2023", event: "Sound and Space, Kunstverein München, Munich" },
+    { year: "2022", event: "Color Studies, Gallery XYZ, London" },
+    { year: "2021", event: "Industrial Fragments, Biennale of Contemporary Art, Venice" },
+    { year: "2021", event: "New Materialities, Tate Modern, London" },
+    { year: "2020", event: "Between Object and Sound, Berlinische Galerie, Berlin" }
+  ];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName={artistName} />
-
+      <Header artistName="Artist Name" />
+      
       <main className="flex-1">
-        <section className="section-py">
-          <div className="site-container">
-            <h1 id="page-title" tabIndex={-1} className="text-type-h1 font-semibold h1-spacing">
-              Statement
-            </h1>
-
-            <div className="grid gap-8 md:grid-cols-12">
-              {/* Portrait (optional) */}
-              <div className="md:col-span-4">
-                {portrait && (
-                  <img
-                    src={portrait.replace(/^\/+/, "")}
-                    alt="Artist portrait"
-                    className="w-full object-cover"
-                    loading="lazy"
-                  />
-                )}
-              </div>
-
-              {/* Text */}
-              <div className="md:col-span-8 text-type-body leading-relaxed space-y-[var(--paragraph-gap)]">
-                {paragraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-
-                <div className="mt-6">
-                  <a href={pressKit} className="underline underline-offset-4">
-                    Press kit (PDF)
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <div className="site-container section-py">
+          <Breadcrumbs 
+            items={[
+              { label: "Home", href: "/", testId: "link-bc-home" },
+              { label: "Statement", testId: "text-bc-current" }
+            ]} 
+          />
+        </div>
+        <StatementPage
+          portraitImageUrl={portraitImage}
+          statement={statementText}
+          exhibitions={exhibitions}
+          portraitPosition="left"
+          email="hi@example.art"
+        />
       </main>
 
       <Footer
-        artistName={artistName}
-        year={new Date().getFullYear()}
-        portfolioPdfUrl={(content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "")}
-        socialLinks={
-          (content?.contacts?.socials || []).reduce((acc: any, s: any) => {
-            const key = String(s.label || "").toLowerCase();
-            if (["instagram", "soundcloud", "bandcamp"].includes(key)) acc[key] = s.href;
-            return acc;
-          }, {}) as any
-        }
+        artistName="Artist Name"
+        year={2025}
+        portfolioPdfUrl="/files/portfolio.pdf"
+        socialLinks={{
+          instagram: "https://instagram.com/artist",
+          soundcloud: "https://soundcloud.com/artist",
+          bandcamp: "https://artist.bandcamp.com"
+        }}
       />
     </div>
   );
