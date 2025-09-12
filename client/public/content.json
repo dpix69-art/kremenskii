@@ -37,7 +37,7 @@
           "price": "€3,200",
           "availability": "available",
           "images": [
-            { "url": "images/farbkoerper/fkb-01.jpg", "role": "main" },
+            { "url": "images/farbkoerper/fkb-01.jpg?v=2025-09-12-1", "role": "main" },
             { "url": "images/farbkoerper/fkb-01-d-1.png", "role": "detail" },
             { "url": "images/farbkoerper/fkb-01-d-2.png", "role": "detail" }
           ],
