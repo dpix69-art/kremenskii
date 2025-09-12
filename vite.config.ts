@@ -30,8 +30,6 @@ export default defineConfig(async ({ mode }) => {
 
   return {
     plugins,
-
-    // ВАЖНО для GitHub Pages — относительные ассеты
     base: "./",
 
     resolve: {
