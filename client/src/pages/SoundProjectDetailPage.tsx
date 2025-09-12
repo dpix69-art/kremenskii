@@ -5,109 +5,148 @@ import SoundProjectDetail from "@/components/SoundProjectDetail";
 import GalleryGrid from "@/components/GalleryGrid";
 import Footer from "@/components/Footer";
 import { useContent } from "@/content/ContentProvider";
-import soundImage from "@assets/generated_images/Sound_art_installation_ace33df5.png";
+import { assetUrl } from "@/lib/assetUrl";
 
 type RouteParams = { slug: string };
+
+function makeCompactEmbed(platform: string | undefined, raw: string | undefined): string {
+  const url = (raw || "").trim();
+  if (!url) return "";
+
+  // SoundCloud: ключевое — visual=false и выключить всё лишнее
+  if (platform === "soundcloud" || /soundcloud\.com/i.test(url)) {
+    const u = new URL(url);
+    // если это уже w.soundcloud.com/player - перезапишем параметры
+    if (/w\.soundcloud\.com\/player/i.test(u.host + u.pathname)) {
+      const params = u.searchParams;
+      params.set("visual", "false");
+      params.set("auto_play", "false");
+      params.set("hide_related", "true");
+      params.set("show_comments", "false");
+      params.set("show_user", "false");
+      params.set("show_reposts", "false");
+      params.set("show_teaser", "false");
+      return u.toString();
+    }
+    // иначе не трогаем структуру, но добавляем стандартные параметры если это player
+    try {
+      const maybe = new URL(url);
+      const p = maybe.searchParams;
+      p.set("visual", "false");
+      p.set("auto_play", "false");
+      p.set("hide_related", "true");
+      p.set("show_comments", "false");
+      p.set("show_user", "false");
+      p.set("show_reposts", "false");
+      p.set("show_teaser", "false");
+      return maybe.toString();
+    } catch {
+      return url;
+    }
+  }
+
+  // Bandcamp: уменьшаем size и убираем artwork
+  if (platform === "bandcamp" || /bandcamp\.com/i.test(url)) {
+    // заменим параметры в query-строке, если это embed URL
+    try {
+      const u = new URL(url);
+      const p = u.searchParams;
+      // типичный embed bandcamp — параметры часто в path-части. Если их нет в query — оставим url как есть.
+      // но попробуем подменить size/artwork если присутствуют:
+      if (p.has("size")) p.set("size", "small");
+      if (p.has("artwork")) p.set("artwork", "none");
+      if (p.has("tracklist")) p.set("tracklist", "false");
+      return u.toString();
+    } catch {
+      // если это строка вида ...EmbeddedPlayer/...size=large... — просто заменим токены
+      return url
+        .replace(/size=large/gi, "size=small")
+        .replace(/artwork=(large|small)/gi, "artwork=none")
+        .replace(/tracklist=true/gi, "tracklist=false");
+    }
+  }
+
+  return url;
+}
 
 export default function SoundProjectDetailPage() {
   const { slug } = useParams<RouteParams>();
   const { content } = useContent();
 
-  // Найдём проект по slug в content.json
+  // Найти проект по slug
   const s = (content?.sounds || []).find((x: any) => x.slug === slug);
+  if (!s) {
+    // если нет такого — минимальный Not Found
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
+        <main className="flex-1 section-py">
+          <div className="site-container">
+            <Breadcrumbs
+              items={[
+                { label: "Home", href: "#/", testId: "link-bc-home" },
+                { label: "Sounds", href: "#/sounds", testId: "link-bc-sounds" },
+                { label: "Not Found", testId: "text-bc-current" },
+              ]}
+            />
+            <h1 className="text-type-h2 font-semibold mt-6">Project not found</h1>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
-  const fallbackBodyBlocks = [
-    { type: "h2" as const, text: "Concept" },
-    {
-      type: "p" as const,
-      text:
-        "This installation explores the acoustic properties of industrial spaces, using field recordings and live processing to create an immersive sound environment that responds to the physical architecture.",
-    },
-    {
-      type: "p" as const,
-      text:
-        "The work was developed during a residency at the former factory space, incorporating both the building's natural acoustics and its industrial heritage into the composition.",
-    },
-    { type: "h2" as const, text: "Process" },
-    {
-      type: "p" as const,
-      text:
-        "Over the course of three weeks, I recorded the ambient sounds of the space at different times of day, capturing both the building's silence and the urban environment filtering through its walls.",
-    },
-  ];
+  const projectTitle = s.title || "Untitled";
+  const projectYear = String(s.year ?? "");
+  const location = s.location || undefined;
 
-  // Title/Year
-  const projectTitle = s?.title || "Industrial Resonance";
-  const projectYear = String(s?.year ?? "2023");
+  // обложку прячем — не передаём вовсе
+  const coverImageUrl: string | undefined = undefined;
 
-  // Location: из s.location {city,country,institution}, если нет — попробуем meta.venue
-  const location =
-    s?.location ||
-    (s?.meta?.venue
-      ? { city: "", country: "", institution: s.meta.venue }
-      : { city: "Berlin", country: "Germany", institution: "Künstlerhaus Bethanien" });
-
-  // Cover
-  const coverImageUrl =
-    (typeof s?.cover === "string" ? s.cover.replace(/^\/+/, "") : undefined) || soundImage;
-
-  // Body blocks: поддерживаем s.bodyBlocks (массив заголовков/параграфов) ИЛИ s.about (массив строк)
+  // Текстовые блоки: bodyBlocks предпочтительнее; иначе about[], иначе пусто
   const bodyBlocks =
-    (Array.isArray(s?.bodyBlocks) && s!.bodyBlocks.length > 0
-      ? s!.bodyBlocks
-      : Array.isArray(s?.about) && s!.about.length > 0
-      ? (s!.about as string[]).map((text) => ({ type: "p" as const, text }))
-      : fallbackBodyBlocks);
+    (Array.isArray(s.bodyBlocks) && s.bodyBlocks.length > 0
+      ? s.bodyBlocks
+      : Array.isArray(s.about) && s.about.length > 0
+      ? (s.about as string[]).map((text) => ({ type: "p" as const, text }))
+      : []);
 
-  // Tracks: из JSON как есть (title, duration, externalLink)
-  const tracks = Array.isArray(s?.tracks) && s!.tracks.length > 0
-    ? s!.tracks
-    : [
-        { title: "Factory Floor", duration: "12:34", externalLink: "https://soundcloud.com/artist/factory-floor" },
-        { title: "Resonance Study #1", duration: "08:21" },
-        { title: "Ambient Reconstruction", duration: "15:07", externalLink: "https://soundcloud.com/artist/ambient-reconstruction" },
-      ];
+  // Треки — как есть из JSON
+  const tracks = Array.isArray(s.tracks) ? s.tracks : [];
 
-  // Meta + embed
+  // Метаданные — компактно
   const meta = {
-    label: s?.meta?.label || "Experimental Sounds",
+    label: s?.meta?.label || "",
     platforms: Array.isArray(s?.meta?.platforms)
-      ? s!.meta.platforms
-      : s?.meta?.platform
-      ? [s!.meta.platform]
-      : ["Bandcamp", "SoundCloud"],
+      ? s.meta.platforms
+      : s?.platform
+      ? [s.platform]
+      : [],
   };
 
-  const embeddedPlayerUrl =
-    (typeof s?.embed === "string" && s.embed) ||
-    (typeof s?.embedUrl === "string" && s.embedUrl) ||
-    "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/123456789&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true";
+  // Компактный плеер
+  const embeddedPlayerUrl = makeCompactEmbed(s?.platform, s?.embed);
 
   // Related: остальные проекты
-  const relatedSounds =
-    (content?.sounds || [])
-      .filter((x: any) => x.slug !== slug)
-      .map((x: any, idx: number) => {
-        const cover =
-          typeof x.cover === "string" ? x.cover.replace(/^\/+/, "") : soundImage;
-        const medium =
-          (x?.meta?.label || x?.meta?.platform || x?.meta?.venue || "").toString().trim();
-        return {
-          id: x.slug || `sound-related-${idx + 1}`,
-          title: x.title || "Untitled",
-          year: String(x.year ?? ""),
-          medium,
-          imageUrl: cover,
-          linkUrl: `#/sounds/${x.slug || ""}`,
-          type: "sound_project" as const,
-        };
-      })
-      .slice(0, 6) || [];
+  const relatedSounds = (content?.sounds || [])
+    .filter((x: any) => x.slug !== slug)
+    .map((x: any, idx: number) => {
+      const cover = typeof x.cover === "string" ? x.cover.replace(/^\/+/, "") : "";
+      const medium = (x?.meta?.label || x?.platform || "").toString().trim();
+      return {
+        id: x.slug || `sound-related-${idx + 1}`,
+        title: x.title || "Untitled",
+        year: String(x.year ?? ""),
+        medium,
+        imageUrl: cover ? assetUrl(cover) : "",
+        linkUrl: `#/sounds/${x.slug || ""}`,
+        type: "sound_project" as const,
+      };
+    })
+    .slice(0, 6);
 
-  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
-    /^\/+/,
-    ""
-  );
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "");
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -128,11 +167,13 @@ export default function SoundProjectDetailPage() {
           title={projectTitle}
           year={projectYear}
           location={location}
-          coverImageUrl={coverImageUrl}
+          /* coverImageUrl опускаем — скрываем обложку */
           bodyBlocks={bodyBlocks}
           tracks={tracks}
           meta={meta}
           embeddedPlayerUrl={embeddedPlayerUrl}
+          compactPlayer
+          hideCover
         />
 
         {relatedSounds.length > 0 && (
