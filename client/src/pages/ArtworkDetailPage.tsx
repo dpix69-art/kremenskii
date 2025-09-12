@@ -46,9 +46,8 @@ export default function ArtworkDetailPage() {
     (Array.isArray(work?.about) && work!.about.length > 0
       ? (work!.about as string[])
       : [
-          "This work continues the exploration of color as material substance, investigating how pigment can occupy and define space beyond the traditional boundaries of painting.",
-          "The composition emerges from a process of layering and excavation, where each application of paint both conceals and reveals the surface beneath.",
-          "Part of the ongoing Farbkoerper series, this piece questions the relationship between color perception and physical presence.",
+          "Plywood, gravel and road dust register direct actions — imprint, friction, displacement. This is not metaphor: it is a topography of actual interaction.",
+          "The crushed stone leaves permanent scars; plywood absorbs the impact without breaking.",
         ]);
 
   // --- 3) Изображения работы ---
