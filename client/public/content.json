@@ -33,7 +33,7 @@
           "year": 2024,
           "technique": "Medium: Acrylic pigment on MDF",
           "dimensions": "51 x 69 x 0.6 cm",
-          // "price": "€3,200",
+          "price": "€3,200",
           "availability": "available",
           "images": [
             { "url": "images/farb/fk-12-main.jpg", "role": "main" },
