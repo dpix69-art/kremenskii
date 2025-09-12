@@ -16,15 +16,15 @@
     {
       "slug": "farbkoerper",
       "title": "Farbkörper",
-      "year": "2022–",
+      "year": "2022",
       "intro": "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony.",
       "artworkImages": [
-        "images/farbkoerper/fkb-01.jpg?v=2025-09-12-1",
-        "images/farbkoerper/fkb-02.jpg?v=2025-09-12-1",
-        "images/farbkoerper/fkb-03.jpg?v=2025-09-12-1",
-        "images/farbkoerper/fkb-04.jpg?v=2025-09-12-1",
-        "images/farbkoerper/fkb-05.jpg?v=2025-09-12-1",
-        "images/farbkoerper/fkb-06.jpg?v=2025-09-12-1" 
+        "images/farbkoerper/fkb-01.jpg",
+        "images/farbkoerper/fkb-02.jpg",
+        "images/farbkoerper/fkb-03.jpg",
+        "images/farbkoerper/fkb-04.jpg",
+        "images/farbkoerper/fkb-05.jpg",
+        "images/farbkoerper/fkb-06.jpg" 
       ],
       "works": [
         {
@@ -37,8 +37,9 @@
           "price": "€3,200",
           "availability": "available",
           "images": [
-            { "url": "images/farbkoerper/fkb-01.jpg?v=2025-09-12-1", "role": "main" },
-            { "url": "images/farbkoerper/fkb-02.jpg?v=2025-09-12-1", "role": "detail" }
+            { "url": "images/farbkoerper/fkb-01.jpg", "role": "main" },
+            { "url": "images/farbkoerper/fkb-01-d-1.png", "role": "detail" },
+            { "url": "images/farbkoerper/fkb-01-d-2.png", "role": "detail" }
           ],
           "about": [
             "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony."
@@ -46,13 +47,14 @@
         },
         {
           "slug": "study-11",
+          "aliases": ["study-11"],
           "title": "fkb-02",
           "year": 2024,
           "technique": "Mixed media on canvas",
           "dimensions": "120 × 90 cm",
           "images": [
-            { "url": "images/farbkoerper/fkb-03.jpg?v=2025-09-12-1", "role": "main" },
-            { "url": "images/farbkoerper/fkb-04.jpg?v=2025-09-12-1", "role": "detail" }
+            { "url": "images/farbkoerper/fkb-03.jpg", "role": "main" },
+            { "url": "images/farbkoerper/fkb-04.jpg", "role": "detail" }
           ],
           "about": ["Short note about process/materials for Study #11."]
         },
