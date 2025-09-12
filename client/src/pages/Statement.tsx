@@ -57,7 +57,6 @@ export default function Statement() {
           statement={statementText}
           exhibitions={exhibitions}
           portraitPosition="left"
-          email={email}
         />
       </main>
 
