@@ -25,6 +25,7 @@ interface Props {
   bodyBlocks?: Block[];
   tracks?: Track[];
   meta?: Meta;
+  photos?: { url: string; alt?: string }[];
   embeddedPlayerUrl?: string;
   /** скрыть обложку */
   hideCover?: boolean;
@@ -46,6 +47,7 @@ export default function SoundProjectDetail({
   hideCover = false,
   compactPlayer = false,
   showTracks = false,
+  photos = [], 
 }: Props) {
   const hasCover = !!coverImageUrl && !hideCover;
 
@@ -137,6 +139,23 @@ export default function SoundProjectDetail({
                 </div>
               </div>
             )}
+            {/* Фото-галерея проекта (если заданы) */}
+            {photos.length > 0 && (
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {photos.map((p, i) => (
+                  <div key={i} className="aspect-[4/3] overflow-hidden rounded-md bg-muted">
+                    <img
+                      src={assetUrl(p.url)}
+                      alt={p.alt || `${title} — photo ${i + 1}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
 
             {/* Список треков — по умолчанию скрыт */}
             {showTracks && tracks.length > 0 && (

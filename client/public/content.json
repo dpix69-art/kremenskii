@@ -228,6 +228,20 @@
         { "title": "Live at Elsiens Galerie Stuttgart", "duration": "20:18" }
       ],
       "meta": { "label": "Independent", "platforms": ["SoundCloud"] }
+    },
+    {
+      "slug": "album-learning-to-breathe",
+      "title": "learning to breathe",
+      "year": 2025,
+      "platform": "bandcamp",
+      "cover": "images/covers/learning-to-breathe-cover.jpg",
+      "embed": "https://bandcamp.com/EmbeddedPlayer/album=987654321/size=large/bgcol=ffffff/linkcol=333333/tracklist=false/artwork=none/transparent=true/",
+
+       "meta": { "label": "Independent", "platforms": ["Bandcamp"] },
+       "photos": [
+    { "url": "images/sounds/learning-to-breathe-studio-1.jpg", "alt": "Studio view 1" },
+    { "url": "images/sounds/learning-to-breathe-studio-2.jpg", "alt": "Studio view 2" }
+  ]
     }
   ],
 
