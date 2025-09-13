@@ -25,7 +25,7 @@ export default function Footer({
           {/* Copyright and Legal */}
           <div className="flex flex-col items-center sm:flex-row sm:items-center gap-2 sm:gap-4 text-center sm:text-left">
             <a 
-              href="/impressum" 
+              href="#/impressum" 
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               data-testid="link-impressum"
             >
