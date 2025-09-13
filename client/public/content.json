@@ -213,6 +213,7 @@
       "year": 2024,
       "platform": "soundcloud",
       "pageUrl": "https://soundcloud.com/dmitrii-kremenskii/impact-of-the-fan",
+      "cover": "images/covers/impact-of-the-fan.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1852226274",
       "tracks": [
         { "title": "Impact of the Fan", "duration": "51:31" }
@@ -225,6 +226,7 @@
       "year": 2024,
       "platform": "soundcloud",
       "pageUrl": "https://soundcloud.com/dmitrii-kremenskii/live-at-elsiens-galerie-stuttgart",
+      "cover": "images/covers/live-at-elsiens-galerie-stuttgart.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1841509218",
       "tracks": [
         { "title": "Live at Elsiens Galerie Stuttgart", "duration": "20:18" }
