@@ -1,6 +1,7 @@
+// client/src/components/GalleryGrid.tsx
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
-import { platformCover } from "@/lib/platformCover";
+import { assetUrl } from "@/lib/assetUrl";
 
 type ItemType = "artwork" | "series" | "sound_project";
 
@@ -9,46 +10,49 @@ interface GridItem {
   title: string;
   year?: string;
   medium?: string;
-  imageUrl?: string;          // локальный путь ИЛИ пусто — тогда попробуем platform/embed
+  imageUrl?: string;      // локальный или абсолютный URL
   linkUrl: string;
   type: ItemType;
-  // для sound_project (автообложка)
-  platform?: string;          // "soundcloud" | "bandcamp"
-  embedUrl?: string;
+  platform?: string;      // optional (sound_project)
+  embedUrl?: string;      // optional (sound_project)
 }
 
-interface GalleryGridProps {
+interface Props {
   items: GridItem[];
-  columns?: 2 | 3 | 4 | 6;
   heading?: string;
-  linkUrl?: string;
+  linkUrl?: string;     // “See all” ссылка
+  columns?: 2 | 3 | 4 | 6;
   showArtworkBadge?: boolean;
-  /** Класс аспекта изображения (например, 'aspect-[2/3]' для вертикального) */
-  imageAspectClass?: string;  // NEW
+  imageAspect?: "square" | "portrait" | "landscape"; // <<< добавлено
 }
 
-const typeLabel: Record<ItemType, string> = {
-  artwork: "ARTWORK",
-  series: "SERIES",
-  sound_project: "SOUNDS",
+const aspectClass = (a: Props["imageAspect"]) => {
+  switch (a) {
+    case "portrait":
+      return "aspect-[3/4]"; // вертикально
+    case "landscape":
+      return "aspect-[4/3]"; // горизонтально
+    default:
+      return "aspect-square";
+  }
 };
 
 export default function GalleryGrid({
   items,
-  columns = 3,
   heading,
   linkUrl,
-  showArtworkBadge = false,
-  imageAspectClass = "aspect-[4/3]", // по умолчанию было горизонтально
-}: GalleryGridProps) {
+  columns = 2,
+  showArtworkBadge = true,
+  imageAspect = "square",
+}: Props) {
   const gridCols =
-    columns === 2
-      ? "grid-cols-1 sm:grid-cols-2"
-      : columns === 3
-      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+    columns === 6
+      ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
       : columns === 4
       ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-      : "grid-cols-2 md:grid-cols-3 xl:grid-cols-6";
+      : columns === 3
+      ? "grid-cols-2 md:grid-cols-3"
+      : "grid-cols-1 md:grid-cols-2";
 
   return (
     <section className="section-py">
@@ -58,59 +62,65 @@ export default function GalleryGrid({
             <h2 className="text-type-h2 font-semibold text-foreground">{heading}</h2>
             {linkUrl && (
               <Link href={linkUrl}>
-                <a className="text-type-body underline text-muted-foreground hover:text-foreground">
-                  View all
-                </a>
+                <span className="text-type-body underline text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                  See all
+                </span>
               </Link>
             )}
           </div>
         )}
 
-        <div className={cn("grid gap-x-6 gap-y-[22px]", gridCols)}>
-          {items.map((item) => {
-            // решить, какую картинку рендерить: локальная или из платформы (SoundCloud/Bandcamp)
-            const computedImage =
-              item.imageUrl && item.imageUrl.trim().length > 0
-                ? item.imageUrl
-                : platformCover(item.platform, item.embedUrl) || "";
+        <div className={cn("grid gap-x-6 gap-y-8", gridCols)}>
+          {items.map((it) => {
+            const badgeLabel =
+              it.type === "series"
+                ? "SERIES"
+                : it.type === "sound_project"
+                ? "SOUNDS"
+                : showArtworkBadge
+                ? "ARTWORK"
+                : "";
+
+            const imgSrc = it.imageUrl ? assetUrl(it.imageUrl) : "";
 
             return (
-              <Link key={item.id} href={item.linkUrl}>
-                <a className="group block">
-                  {/* Медиа */}
-                  <div className={cn("overflow-hidden rounded-md", imageAspectClass)}>
-                    {computedImage ? (
+              <Link key={it.id} href={it.linkUrl}>
+                <a className="block group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring rounded-md">
+                  {/* Картинка */}
+                  <div className={cn("w-full overflow-hidden rounded-md", aspectClass(imageAspect))}>
+                    {imgSrc ? (
                       <img
-                        src={computedImage}
-                        alt={item.title}
+                        src={imgSrc}
+                        alt={it.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                         loading="lazy"
                         decoding="async"
                       />
                     ) : (
-                      <div className="w-full h-full bg-muted" />
+                      <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground text-xs">
+                        No image
+                      </div>
                     )}
                   </div>
 
-                  {/* Метка типа (SERIES / SOUNDS / ARTWORK) */}
-                  <div className="mt-[14px]">
-                    <div className="text-[12px] font-[300] uppercase tracking-wide text-muted-foreground mb-[12px]">
-                      {item.type === "artwork" && showArtworkBadge ? "ARTWORK" : typeLabel[item.type]}
+                  {/* Подписи */}
+                  <div className="mt-[10px]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[12px] font-light uppercase tracking-wide text-muted-foreground mb-[12px]">
+                        {badgeLabel || <span>&nbsp;</span>}
+                      </span>
                     </div>
 
-                    {/* Тайтл */}
-                    <div className="text-type-body font-medium text-foreground leading-tight">
-                      {item.title}
-                    </div>
-
-                    {/* Мета */}
-                    {(item.year || item.medium) && (
-                      <div className="text-type-small text-muted-foreground mt-1">
-                        {item.year ? item.year : null}
-                        {item.year && item.medium ? " • " : ""}
-                        {item.medium ? item.medium : null}
+                    <div className="space-y-1">
+                      <div className="text-type-body text-foreground leading-snug">
+                        {it.title}
                       </div>
-                    )}
+                      {(it.year || it.medium) && (
+                        <div className="text-type-small text-muted-foreground leading-snug">
+                          {[it.year, it.medium].filter(Boolean).join(" • ")}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </a>
               </Link>
