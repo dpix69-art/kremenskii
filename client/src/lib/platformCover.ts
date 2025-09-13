@@ -1,8 +1,6 @@
 // client/src/lib/platformCover.ts
 import { useEffect, useMemo, useState } from "react";
-
-/** Проверка абсолютного URL */
-const isAbs = (u?: string) => !!u && /^(https?:)?\/\//i.test(u);
+import { assetUrl } from "@/lib/assetUrl";
 
 /** Извлечь целевой URL из w.soundcloud.com/player?url=ENCODED */
 function extractSoundCloudTarget(url: string): string {
@@ -16,6 +14,16 @@ function extractSoundCloudTarget(url: string): string {
   return url;
 }
 
+/** HEAD-проверка наличия файла (на нашем же домене работает, CORS ок) */
+async function checkUrlOk(u: string): Promise<boolean> {
+  try {
+    const res = await fetch(u, { method: "HEAD", cache: "no-store" });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 /** Получить thumbnail через oEmbed SoundCloud */
 async function fetchSoundCloudThumb(targetUrl: string): Promise<string | undefined> {
   const t = extractSoundCloudTarget(targetUrl);
@@ -26,18 +34,22 @@ async function fetchSoundCloudThumb(targetUrl: string): Promise<string | undefin
   return typeof data?.thumbnail_url === "string" ? data.thumbnail_url : undefined;
 }
 
-/** Асинхронно подобрать лучшую обложку (без заглушек) */
+/** Асинхронно подобрать лучшую обложку (проверяем cover, если он битый — падаем на oEmbed) */
 export async function resolvePlatformCover(opts: {
   platform?: "soundcloud" | "bandcamp";
   embedUrl?: string;
-  cover?: string; // приоритет, если задан
+  cover?: string; // приоритет, если он существует физически
 }): Promise<string | undefined> {
   const { platform, embedUrl, cover } = opts;
 
-  // Явный cover — главный
-  if (cover) return cover;
+  // 1) если задан cover — проверим, что файл реально доступен
+  if (cover) {
+    const abs = assetUrl(cover.replace(/^\/+/, ""));
+    if (await checkUrlOk(abs)) return cover;
+    // если файл битый — не используем cover, идём дальше
+  }
 
-  // SoundCloud — тянем через oEmbed
+  // 2) SoundCloud — пытаемся достать через oEmbed
   if ((platform && platform.toLowerCase() === "soundcloud") || /soundcloud\.com/i.test(embedUrl || "")) {
     if (!embedUrl) return;
     try {
@@ -48,12 +60,11 @@ export async function resolvePlatformCover(opts: {
     }
   }
 
-  // Bandcamp — без сервера авто-нормально не достать (CORS/нет стабильного oEmbed)
-  // Используй cover из content.json
+  // 3) Bandcamp — без сервера авто нельзя (оставляем пусто или cover из JSON)
   return;
 }
 
-/** React-хук для карточек/гридов */
+/** React-хук для карточек/грида */
 export function usePlatformCover(opts: {
   platform?: "soundcloud" | "bandcamp";
   embedUrl?: string;
@@ -61,30 +72,21 @@ export function usePlatformCover(opts: {
 }) {
   const [url, setUrl] = useState<string | undefined>(undefined);
 
-  // Мгновенно берём cover, если он есть
-  const initial = useMemo(() => {
-    const c = opts.cover;
-    return c ? c : undefined;
-  }, [opts.cover]);
+  // быстрый первичный src (только если cover есть — для мгновенного рендера)
+  const initial = useMemo(() => (opts.cover ? opts.cover : undefined), [opts.cover]);
 
   useEffect(() => {
     let cancelled = false;
-
     async function run() {
-      if (opts.cover) {
-        setUrl(opts.cover);
-        return;
-      }
       const r = await resolvePlatformCover(opts);
       if (!cancelled) setUrl(r);
     }
-
     run();
     return () => {
       cancelled = true;
     };
   }, [opts.platform, opts.embedUrl, opts.cover]);
 
-  // Если platformCover ещё не загрузился — покажем initial (если есть)
+  // если проверка ещё не завершилась — показываем initial (если он есть)
   return url || initial;
 }

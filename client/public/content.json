@@ -208,14 +208,14 @@
 
   "sounds": [
     {
-      "slug": "impact-of-the-fan",
-      "title": "Impact of the fan",
+      "slug": "impact-of-the-Fan",
+      "title": "Impact of the Fan",
       "year": 2024,
       "platform": "soundcloud",
-      "cover": "images/sounds/material-voices-cover.jpg",
+      //"cover": "images/sounds/material-voices-cover.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1852226274",
       "tracks": [
-        { "title": "Impact of the fan", "duration": "51:31" }
+        { "title": "Impact of the Fan", "duration": "51:31" }
       ],
       "meta": { "label": "Independent", "platforms": ["SoundCloud"] }
     },
@@ -224,7 +224,7 @@
       "title": "Live at Elsiens Galerie Stuttgart",
       "year": 2024,
       "platform": "soundcloud",
-      "cover": "images/sounds/spatial-frequencies-cover.jpg",
+      //"cover": "images/sounds/spatial-frequencies-cover.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1841509218",
       "tracks": [
         { "title": "Live at Elsiens Galerie Stuttgart", "duration": "20:18" }
