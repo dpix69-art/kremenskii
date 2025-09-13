@@ -14,8 +14,8 @@ export default function ContactsPage({
   email,
   city,
   country,
-  introText = "If you have an idea or proposal, please write an email.",
-  openToText = "Open for exhibitions, collaborations and commissions. Please email."
+  introText = "Idea? Please write me an email.",
+  openToText = "Open for exhibitions, collaborations and commissions."
 }: ContactsPageProps) {
   const [emailCopied, setEmailCopied] = useState(false);
 
@@ -45,8 +45,8 @@ export default function ContactsPage({
     }
     // Trigger download
     const link = document.createElement('a');
-    link.href = '/files/portfolio.pdf';
-    link.download = 'artist-portfolio.pdf';
+    link.href = '/files/kremenskii-portfolio.pdf';
+    link.download = 'kremenskii-portfolio.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -94,7 +94,7 @@ export default function ContactsPage({
                     className="text-base"
                     data-testid="button-download-portfolio"
                   >
-                    Download portfolio (PDF, 2.4 MB)
+                    Download portfolio (PDF, 16.3 MB)
                   </Button>
                 </div>
               </div>

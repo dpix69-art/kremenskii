@@ -13,19 +13,19 @@ type SocialLinks = {
 export default function Contacts() {
   const { content } = useContent();
 
-  const email = content?.contacts?.email ?? "hi@example.art";
-  const city = content?.contacts?.city ?? "Berlin";
+  const email = content?.contacts?.email ?? "hi@kremenskii.art";
+  const city = content?.contacts?.city ?? "Stuttgart";
   const country = content?.contacts?.country ?? "Germany";
 
   const introText =
     content?.contacts?.introText ??
-    "If you have an idea or proposal, please write an email.";
+    "Idea? Please write an email.";
 
   const openToText =
     content?.contacts?.openToText ??
     "Open for exhibitions, collaborations and commissions. Please email.";
 
-  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/kremenskii-portfolio.pdf").replace(
     /^\/+/,
     ""
   );
