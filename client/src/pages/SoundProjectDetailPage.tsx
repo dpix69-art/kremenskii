@@ -1,3 +1,4 @@
+// client/src/pages/SoundProjectDetailPage.tsx
 import { useParams } from "wouter";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -5,13 +6,15 @@ import SoundProjectDetail from "@/components/SoundProjectDetail";
 import GalleryGrid from "@/components/GalleryGrid";
 import Footer from "@/components/Footer";
 import { useContent } from "@/content/ContentProvider";
-import { assetUrl } from "@/lib/assetUrl";
 
 type RouteParams = { slug: string };
 
+// компактные параметры для плееров
 function makeCompactEmbed(platform: string | undefined, raw: string | undefined): string {
   const url = (raw || "").trim();
   if (!url) return "";
+
+  // SoundCloud — visual=false и выключаем лишнее
   if (platform === "soundcloud" || /soundcloud\.com/i.test(url)) {
     try {
       const u = new URL(url);
@@ -28,6 +31,8 @@ function makeCompactEmbed(platform: string | undefined, raw: string | undefined)
       return url;
     }
   }
+
+  // Bandcamp — ужимаем размер и убираем обложку/треклист
   if (platform === "bandcamp" || /bandcamp\.com/i.test(url)) {
     try {
       const u = new URL(url);
@@ -43,6 +48,7 @@ function makeCompactEmbed(platform: string | undefined, raw: string | undefined)
         .replace(/tracklist=true/gi, "tracklist=false");
     }
   }
+
   return url;
 }
 
@@ -50,6 +56,7 @@ export default function SoundProjectDetailPage() {
   const { slug } = useParams<RouteParams>();
   const { content } = useContent();
 
+  // найдём проект по slug
   const s = (content?.sounds || []).find((x: any) => x.slug === slug);
   if (!s) {
     return (
@@ -61,7 +68,7 @@ export default function SoundProjectDetailPage() {
               items={[
                 { label: "Home", href: "#/", testId: "link-bc-home" },
                 { label: "Sounds", href: "#/sounds", testId: "link-bc-sounds" },
-                { label: "Not Found", testId: "text-bc-current" }
+                { label: "Not Found", testId: "text-bc-current" },
               ]}
             />
             <h1 className="text-type-h2 font-semibold mt-6">Project not found</h1>
@@ -76,14 +83,26 @@ export default function SoundProjectDetailPage() {
   const projectYear = String(s.year ?? "");
   const location = s.location || undefined;
 
+  // --- текстовые блоки: массив/строка/резерв ---
   const bodyBlocks =
-    (Array.isArray(s.bodyBlocks) && s.bodyBlocks.length > 0
+    Array.isArray(s.bodyBlocks) && s.bodyBlocks.length > 0
       ? s.bodyBlocks
+      : typeof s.bodyBlocks === "string" && s.bodyBlocks.trim().length > 0
+      ? [{ type: "p" as const, text: s.bodyBlocks }]
       : Array.isArray(s.about) && s.about.length > 0
       ? (s.about as string[]).map((text) => ({ type: "p" as const, text }))
-      : []);
+      : [];
 
+  // --- фото проекта: массив объектов {url, alt?} ---
+  const photos =
+    Array.isArray(s.photos)
+      ? s.photos.filter((p: any) => typeof p?.url === "string" && p.url.trim().length > 0)
+      : [];
+
+  // треки — есть в JSON, но список мы скрываем в компоненте (showTracks=false по умолчанию)
   const tracks = Array.isArray(s.tracks) ? s.tracks : [];
+
+  // метаданные
   const meta = {
     label: s?.meta?.label || "",
     platforms: Array.isArray(s?.meta?.platforms)
@@ -93,9 +112,10 @@ export default function SoundProjectDetailPage() {
       : [],
   };
 
+  // компактный плеер
   const embeddedPlayerUrl = makeCompactEmbed(s?.platform, s?.embed);
 
-  // Related: остальные проекты — теперь с platform/embed (для авто-обложек)
+  // related — остальные проекты (до 12 шт.)
   const relatedSounds = (content?.sounds || [])
     .filter((x: any) => x.slug !== slug)
     .map((x: any, idx: number) => {
@@ -106,11 +126,11 @@ export default function SoundProjectDetailPage() {
         title: x.title || "Untitled",
         year: String(x.year ?? ""),
         medium,
-        imageUrl,                       // пусть GalleryGrid решает (локальная или платформа)
+        imageUrl,
         linkUrl: `#/sounds/${x.slug || ""}`,
         type: "sound_project" as const,
-        platform: (x.platform || "").toLowerCase(), // "soundcloud" | "bandcamp"
-        embedUrl: x.embed
+        platform: (x.platform || "").toLowerCase(),
+        embedUrl: x.embed,
       };
     })
     .slice(0, 12);
@@ -120,13 +140,14 @@ export default function SoundProjectDetailPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
+
       <main className="flex-1">
         <div className="site-container section-py">
           <Breadcrumbs
             items={[
               { label: "Home", href: "#/", testId: "link-bc-home" },
               { label: "Sounds", href: "#/sounds", testId: "link-bc-sounds" },
-              { label: projectTitle, testId: "text-bc-current" }
+              { label: projectTitle, testId: "text-bc-current" },
             ]}
           />
         </div>
@@ -135,15 +156,19 @@ export default function SoundProjectDetailPage() {
           title={projectTitle}
           year={projectYear}
           location={location}
+          // cover скрыта:
+          hideCover
+          // текст
           bodyBlocks={bodyBlocks}
+          // список треков не показываем: showTracks=false по умолчанию
           tracks={tracks}
           meta={meta}
+          // компактный плеер
           embeddedPlayerUrl={embeddedPlayerUrl}
           compactPlayer
-          hideCover
-          showTracks={false}
+          // ВАЖНО: передаём фотографии!
+          photos={photos}
         />
-
 
         {relatedSounds.length > 0 && (
           <section>
@@ -151,11 +176,12 @@ export default function SoundProjectDetailPage() {
               items={relatedSounds}
               heading="Related Sound Projects"
               linkUrl="#/sounds"
-              columns={4}   // <= было 2, теперь 4 (можно поставить 6)
+              columns={4}
             />
           </section>
         )}
       </main>
+
       <Footer year={new Date().getFullYear()} portfolioPdfUrl={portfolioPdfUrl} />
     </div>
   );
