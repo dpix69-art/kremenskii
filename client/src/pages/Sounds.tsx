@@ -43,7 +43,7 @@ export default function Sounds() {
 
         <GalleryGrid
           items={soundProjects}
-          columns={4} // хочешь крупнее/мельче: 2/3/4/6
+          columns={2} // хочешь крупнее/мельче: 2/3/4/6
         />
       </main>
       <Footer />
