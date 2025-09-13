@@ -27,8 +27,7 @@ export default function Home() {
   const artistName = content?.site?.artistName ?? "Artist Name";
   const role = content?.site?.role ?? "artist";
   const statement =
-    content?.site?.statement ??
-    "Two short sentences about the practice.";
+    content?.site?.statement ?? "Two short sentences about the practice.";
 
   const homeItems: GridItem[] = useMemo(() => {
     const COUNT = 6;
@@ -81,7 +80,7 @@ export default function Home() {
       embedUrl: s.embed,
     }));
 
-    // базовый микс: минимум 1 серия и 1 sound (если есть), остальное — работы
+    // Микс: минимум 1 серия и 1 звук (если есть), остальное — работы
     const picked: GridItem[] = [];
     picked.push(...takeRandom(allSeries, 1));
     picked.push(...takeRandom(allSounds, 1));
@@ -89,7 +88,7 @@ export default function Home() {
     const remaining = Math.max(0, COUNT - picked.length);
     picked.push(...takeRandom(allArtworks, remaining));
 
-    // если работ не хватило — добиваем из серий/саундов
+    // Если работ не хватило — добираем сериями/саундом
     if (picked.length < COUNT) {
       const still = COUNT - picked.length;
       const extras = [...allSeries, ...allSounds].filter(
@@ -98,7 +97,6 @@ export default function Home() {
       picked.push(...takeRandom(extras, still));
     }
 
-    // финальное перемешивание для более естественного порядка
     return shuffle(picked).slice(0, COUNT);
   }, [content]);
 
@@ -131,9 +129,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Рандомные карточки */}
+        {/* Рандомные карточки в 2 колонки (крупные) */}
         <div style={{ marginTop: "var(--heading-gap-lg)" }}>
-          <GalleryGrid items={homeItems} columns={3} showArtworkBadge />
+          <GalleryGrid items={homeItems} columns={2} showArtworkBadge />
         </div>
       </main>
 

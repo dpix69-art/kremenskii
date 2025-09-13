@@ -235,14 +235,14 @@
       "year": 2025,
       "platform": "bandcamp",
       "cover": "images/covers/learning-to-breathe-cover.jpg",
-      "embed": "https://bandcamp.com/EmbeddedPlayer/album=1109147001/size=large/bgcol=ffffff/linkcol=333333/tracklist=false/artwork=none/transparent=true/",
+      "embed": "https://bandcamp.com/EmbeddedPlayer/v=2/album=1109147001/size=large/tracklist=false/artwork=small/transparent=true/",
 
        "meta": { "label": "Independent", "platforms": ["Bandcamp"] },
        "photos": [
-    { "url": "images/sounds/learning-to-breathe-studio-1.jpg", "alt": "Studio view 1" },
-    { "url": "images/sounds/learning-to-breathe-studio-2.jpg", "alt": "Studio view 2" }
+    {  "url": "images/sounds/learning-to-breathe-studio-1.jpg", "alt": "Studio view 1" },
+    {  "url": "images/sounds/learning-to-breathe-studio-2.jpg", "alt": "Studio view 2" }
   ],
-   "bodyBlocks": "bodyBlocks" 
+      "bodyBlocks": "bodyBlocks" 
     }
   ],
 
