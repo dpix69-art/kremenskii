@@ -343,7 +343,7 @@ export default function SeriesPage() {
         </section>
 
         {/* Works Grid */}
-        <GalleryGrid items={currentSeries.works} columns={3} />
+        <GalleryGrid items={currentSeries.works} columns={2} />
       </main>
 
       <Footer year={new Date().getFullYear()} portfolioPdfUrl={portfolioPdfUrl} />
