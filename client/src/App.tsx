@@ -33,37 +33,33 @@ function RouteManager() {
   const [location] = useLocation();
 
   useEffect(() => {
-    // Check if current route is a content route
-    const isContentRoute = CONTENT_ROUTES.some(pattern => pattern.test(location));
-    
-    if (isContentRoute) {
-      // Check if URL has a hash
-      const hasHash = window.location.hash.length > 0;
-      
-      if (!hasHash) {
-        // Immediately scroll to top
-        window.scrollTo(0, 0);
-        
-        // Focus main heading after a brief delay to ensure DOM is ready
-        setTimeout(() => {
-          // Try different heading IDs in order of priority
-          const headingSelectors = ['#page-title', '#series-title', '#artwork-title', '#project-title'];
-          
-          for (const selector of headingSelectors) {
-            const heading = document.querySelector(selector);
-            if (heading) {
-              (heading as HTMLElement).focus();
-              break;
-            }
-          }
-        }, 50);
-      }
-      // If has hash, let browser handle naturally
+    if (typeof window === "undefined") return;
+
+    // выключаем нативное восстановление скролла при back/forward
+    if ("scrollRestoration" in window.history) {
+      try {
+        window.history.scrollRestoration = "manual";
+      } catch {}
     }
+
+    // Всегда скроллим наверх при смене маршрута (в т.ч. при hash-роутинге)
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+    // Даем кадр(ы) на рендер и фокусим заголовок для доступности
+    const ids = ["page-title", "series-title", "artwork-title", "project-title"];
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        for (const id of ids) {
+          const el = document.getElementById(id) as HTMLElement | null;
+          if (el) { el.focus?.(); break; }
+        }
+      });
+    });
   }, [location]);
 
   return null;
 }
+
 
 function Router() {
   return (
