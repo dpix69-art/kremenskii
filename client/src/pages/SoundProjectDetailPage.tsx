@@ -141,7 +141,9 @@ export default function SoundProjectDetailPage() {
           embeddedPlayerUrl={embeddedPlayerUrl}
           compactPlayer
           hideCover
+          showTracks={false}
         />
+
 
         {relatedSounds.length > 0 && (
           <section>

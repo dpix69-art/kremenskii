@@ -30,6 +30,8 @@ interface Props {
   hideCover?: boolean;
   /** компактная высота плеера */
   compactPlayer?: boolean;
+  /** показывать ли список треков (по умолчанию скрыт) */
+  showTracks?: boolean;
 }
 
 export default function SoundProjectDetail({
@@ -43,6 +45,7 @@ export default function SoundProjectDetail({
   embeddedPlayerUrl,
   hideCover = false,
   compactPlayer = false,
+  showTracks = false,
 }: Props) {
   const hasCover = !!coverImageUrl && !hideCover;
 
@@ -119,11 +122,8 @@ export default function SoundProjectDetail({
             {embeddedPlayerUrl && (
               <div className="mt-6">
                 <div
-                  className={compactPlayer ? "w-full overflow-hidden rounded-md" : "w-full overflow-hidden rounded-md"}
-                  style={{
-                    // Жёстко задаём высоту для компактного режима
-                    height: compactPlayer ? 132 : 360
-                  }}
+                  className="w-full overflow-hidden rounded-md"
+                  style={{ height: compactPlayer ? 132 : 360 }}
                 >
                   <iframe
                     title={`${title} player`}
@@ -138,25 +138,13 @@ export default function SoundProjectDetail({
               </div>
             )}
 
-            {/* Треки */}
-            {tracks.length > 0 && (
+            {/* Список треков — по умолчанию скрыт */}
+            {showTracks && tracks.length > 0 && (
               <div className="mt-6 space-y-2">
                 {tracks.map((t, i) => (
                   <div key={i} className="flex items-baseline gap-3">
                     <span className="text-type-body text-foreground">{t.title}</span>
-                    {t.duration && (
-                      <span className="text-type-small text-muted-foreground">{t.duration}</span>
-                    )}
-                    {t.externalLink && (
-                      <a
-                        href={t.externalLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-type-small underline text-muted-foreground hover:text-foreground"
-                      >
-                        open
-                      </a>
-                    )}
+                    {/* время и ссылки специально не рендерим — плеер уже всё даёт */}
                   </div>
                 ))}
               </div>
