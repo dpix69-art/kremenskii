@@ -27,16 +27,17 @@ interface GalleryGridProps {
 }
 
 function gridClass(cols: number | undefined) {
+  // +10px по вертикали: заменили единый gap-6 на gap-x-6 gap-y-[34px]
   switch (cols) {
     case 2:
-      return "grid grid-cols-1 sm:grid-cols-2 gap-6";
+      return "grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-[34px]";
     case 4:
-      return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6";
+      return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-[34px]";
     case 6:
-      return "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6";
+      return "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-[34px]";
     case 3:
     default:
-      return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
+      return "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-[34px]";
   }
 }
 
@@ -70,26 +71,33 @@ function Card({ item, showArtworkBadge }: { item: GridItem; showArtworkBadge?: b
       : "";
 
   return (
-    <a href={item.linkUrl} className="group block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground/30 rounded-md">
-      <div className="aspect-[4/3] overflow-hidden rounded-md bg-muted">
-        {src ? (
-          <img
-            src={src}
-            alt={item.title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-            loading="lazy"
-            decoding="async"
-          />
-        ) : (
-          <div className="w-full h-full" />
-        )}
+    <a
+      href={item.linkUrl}
+      className="group block focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-foreground/30 rounded-md"
+    >
+      {/* Внутренний отступ вокруг изображения +10px */}
+      <div className="rounded-md bg-muted p-[10px]">
+        <div className="aspect-[4/3] overflow-hidden rounded-[8px]">
+          {src ? (
+            <img
+              src={src}
+              alt={item.title}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <div className="w-full h-full" />
+          )}
+        </div>
       </div>
 
       <div className="flex items-end justify-between mt-2">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
             {badge && (
-              <span className="text-type-xsmall font-semibold uppercase tracking-wide text-muted-foreground">
+              // Серый, 12px
+              <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
                 {badge}
               </span>
             )}
@@ -118,7 +126,9 @@ export default function GalleryGrid({
           <div className="flex items-baseline justify-between mb-6">
             {heading ? (
               <h2 className="text-type-h2 font-semibold text-foreground">{heading}</h2>
-            ) : <div />}
+            ) : (
+              <div />
+            )}
             {linkUrl && (
               <a
                 href={linkUrl}
