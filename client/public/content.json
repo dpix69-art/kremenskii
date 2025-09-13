@@ -241,7 +241,8 @@
        "photos": [
     { "url": "images/sounds/learning-to-breathe-studio-1.jpg", "alt": "Studio view 1" },
     { "url": "images/sounds/learning-to-breathe-studio-2.jpg", "alt": "Studio view 2" }
-  ]
+  ],
+   "bodyBlocks": "bodyBlocks" 
     }
   ],
 

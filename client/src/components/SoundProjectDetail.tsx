@@ -47,7 +47,7 @@ export default function SoundProjectDetail({
   hideCover = false,
   compactPlayer = false,
   showTracks = false,
-  photos = [], 
+  photos = [],
 }: Props) {
   const hasCover = !!coverImageUrl && !hideCover;
 
@@ -57,7 +57,13 @@ export default function SoundProjectDetail({
         {/* Заголовок и мета */}
         <header className="block-gap">
           <div>
-            <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">{title}</h1>
+            <h1
+              id="project-title"
+              tabIndex={-1}
+              className="text-type-h1 font-semibold text-foreground h1-spacing"
+            >
+              {title}
+            </h1>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-type-body text-muted-foreground">
               {year && <span>{year}</span>}
               {location && (location.city || location.country || location.institution) && (
@@ -92,7 +98,7 @@ export default function SoundProjectDetail({
           )}
 
           {/* Text + Player */}
-          <div className={`col-span-12 ${hasCover ? "lg:col-span-7" : "lg:col-span-8"}`}>
+          <div className={`col-span-12 ${hasCover ? "lg:col-span-7" : "lg:col-span-12"}`}>
             {/* Текстовые блоки */}
             {bodyBlocks.length > 0 && (
               <div className="prose prose-lg max-w-none space-y-4">
@@ -139,11 +145,12 @@ export default function SoundProjectDetail({
                 </div>
               </div>
             )}
+
             {/* Фото-галерея проекта (если заданы) */}
             {photos.length > 0 && (
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {photos.map((p, i) => (
-                  <div key={i} className="aspect-[4/3] overflow-hidden rounded-md bg-muted">
+                  <div key={i} className="aspect-[4/3] overflow-hidden rounded-md">
                     <img
                       src={assetUrl(p.url)}
                       alt={p.alt || `${title} — photo ${i + 1}`}
@@ -155,7 +162,6 @@ export default function SoundProjectDetail({
                 ))}
               </div>
             )}
-
 
             {/* Список треков — по умолчанию скрыт */}
             {showTracks && tracks.length > 0 && (
