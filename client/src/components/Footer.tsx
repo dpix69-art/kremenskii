@@ -15,7 +15,7 @@ interface FooterProps {
 export default function Footer({
   artistName = "Dmitrii Kremenskii",
   year = new Date().getFullYear(),
-  portfolioPdfUrl = "/files/portfolio.pdf",
+  portfolioPdfUrl = "/files/kremenskii-portfolio.pdf",
   socialLinks = {}
 }: FooterProps) {
   return (
