@@ -2,84 +2,48 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main   # если у тебя основная ветка называется иначе — поменяй
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 18
           cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          npm ci || npm i
+        run: npm ci
 
-      # Проверяем, что контент лежит там, где ожидает Vite (root=client)
-      - name: Ensure content.json exists (pre)
-        run: |
-          test -f client/public/content.json && echo "OK: client/public/content.json present" || (echo "ERROR: client/public/content.json missing" && exit 1)
-
-      - name: Build
+      - name: Build project
         run: npm run build
-        env:
-          VITE_BUILD_ID: ${{ github.sha }}
-          
-      # На всякий случай — отключаем Jekyll
-      - name: Ensure .nojekyll in output
-        run: |
-          mkdir -p dist/public
-          touch dist/public/.nojekyll
-
-      # Форс-копируем статику из client/public в финальный артефакт
-      - name: Force copy static public assets (content.json, images, files)
-        run: |
-          mkdir -p dist/public
-          cp -f client/public/content.json dist/public/content.json || true
-          if [ -d client/public/images ]; then
-            rm -rf dist/public/images
-            cp -R client/public/images dist/public/
-          fi
-          if [ -d client/public/files ]; then
-            rm -rf dist/public/files
-            cp -R client/public/files dist/public/
-          fi
-
-      # Проверяем, что content.json реально в артефакте
-      - name: List build output & check content.json
-        run: |
-          echo "Contents of dist/public (top):"
-          ls -la dist/public | sed -n '1,200p'
-          test -f dist/public/content.json && echo "OK: content.json in build" || (echo "ERROR: content.json not found in dist/public" && exit 1)
+        working-directory: client
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: dist/public
+          path: client/dist
 
   deploy:
     needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v2
