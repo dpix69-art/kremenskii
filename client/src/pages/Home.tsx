@@ -67,7 +67,7 @@ export default function Home() {
     return items;
   }, [content]);
 
-  const HOMEPAGE_COUNT = 6;
+  const HOMEPAGE_COUNT = 2;
   const homepageCards = useMemo(() => pickRandom(pool, HOMEPAGE_COUNT), [pool]);
 
   return (
