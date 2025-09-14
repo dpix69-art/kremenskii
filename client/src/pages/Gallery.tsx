@@ -156,7 +156,11 @@ export default function Gallery() {
         <SeriesIndex series={seriesData} />
       </main>
 
-      <Footer year={new Date().getFullYear()} portfolioPdfUrl={portfolioPdfUrl} />
+      <Footer
+        year={new Date().getFullYear()}
+        portfolioPdfUrl={portfolioPdfUrl}
+        socialLinks={socialLinks}
+      />
     </div>
   );
 }
