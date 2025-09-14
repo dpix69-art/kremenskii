@@ -23,13 +23,13 @@ interface Props {
   linkUrl?: string;     // “See all” ссылка
   columns?: 2 | 3 | 4 | 6;
   showArtworkBadge?: boolean;
-  imageAspect?: "square" | "portrait" | "landscape"; // <<< добавлено
+  imageAspect?: "square" | "portrait" | "landscape";
 }
 
 const aspectClass = (a: Props["imageAspect"]) => {
   switch (a) {
     case "portrait":
-      return "aspect-[3/4]"; // вертикально
+      return "aspect-[4/5]"; // вертикально (как в макете)
     case "landscape":
       return "aspect-[4/3]"; // горизонтально
     default:
