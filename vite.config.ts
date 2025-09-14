@@ -2,14 +2,12 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
-// Если деплой на project pages (user.github.io/REPO/), можно задать base:
-// const base = `/${process.env.GITHUB_REPOSITORY?.split("/")[1]}/`;
+// Для custom domain (kremenskii.art) base ДОЛЖЕН быть "/"
+const base = "/";
 
 export default defineConfig({
-  // фронт лежит в client/
-  root: "client",
-  // base, если нужно подкаталого (GH Pages project):
-  // base,
+  root: "client",          // фронт лежит в client/
+  base,                    // пути к ассетам с корня домена
   plugins: [
     react(),
     ViteImageOptimizer({
@@ -26,5 +24,4 @@ export default defineConfig({
     outDir: "dist",        // => client/dist
     emptyOutDir: true,
   },
-  // publicDir по умолчанию "client/public" — менять не нужно
 });
