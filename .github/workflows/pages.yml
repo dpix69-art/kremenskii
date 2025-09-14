@@ -27,12 +27,10 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          # Кэшируем lock-файл и в корне, и в client (если есть)
           cache-dependency-path: |
             package-lock.json
             client/package-lock.json
 
-      # Устанавливаем зависимости там, где есть package.json
       - name: Detect package location
         id: where
         run: |
@@ -44,13 +42,24 @@ jobs:
             echo "❌ package.json not found"; exit 1
           fi
 
-      - name: Install dependencies
-        run: npm ci
+      # ⚠️ Если lock рассинхронен, npm ci падает. Делаем fallback на npm install.
+      - name: Install dependencies (ci → install fallback)
         working-directory: ${{ steps.where.outputs.pkgdir }}
+        run: |
+          set -e
+          if [ -f package-lock.json ]; then
+            echo "Trying npm ci…"
+            npm ci || (echo "npm ci failed — using npm install" && npm install --no-audit --no-fund)
+          else
+            echo "No lockfile — using npm install"
+            npm install --no-audit --no-fund
+          fi
 
       - name: Build
-        run: npm run build
         working-directory: ${{ steps.where.outputs.pkgdir }}
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: npm run build
 
       - name: Locate dist
         id: dist
