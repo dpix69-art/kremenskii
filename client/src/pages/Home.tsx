@@ -94,7 +94,7 @@ export default function Home() {
         <section style={{ marginTop: "var(--heading-gap-lg)" }}>
           <GalleryGrid
             items={homepageCards}
-            columns={2}
+            columns={8}
             showArtworkBadge={true}
             imageAspectClass="aspect-[2/3]"   // ВЕРТИКАЛЬНО только на главной
           />
