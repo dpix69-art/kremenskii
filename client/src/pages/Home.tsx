@@ -67,7 +67,7 @@ export default function Home() {
     return items;
   }, [content]);
 
-  const HOMEPAGE_COUNT = 2;
+  const HOMEPAGE_COUNT = 8;
   const homepageCards = useMemo(() => pickRandom(pool, HOMEPAGE_COUNT), [pool]);
 
   return (
@@ -94,7 +94,7 @@ export default function Home() {
         <section style={{ marginTop: "var(--heading-gap-lg)" }}>
           <GalleryGrid
             items={homepageCards}
-            columns={8}
+            columns={2}
             showArtworkBadge={true}
             imageAspectClass="aspect-[2/3]"   // ВЕРТИКАЛЬНО только на главной
           />
