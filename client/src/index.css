@@ -247,6 +247,20 @@
   }
 }
 
+
+@layer base {
+  /* Скрыть авто-фокус с заголовков, которым RouteManager ставит tabindex="-1" */
+  :where(h1,h2,h3,h4,h5,h6)[tabindex="-1"]:focus,
+  :where(h1,h2,h3,h4,h5,h6)[tabindex="-1"]:focus-visible,
+  #page-title:focus, #page-title:focus-visible,
+  #series-title:focus, #series-title:focus-visible,
+  #artwork-title:focus, #artwork-title:focus-visible,
+  #project-title:focus, #project-title:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
 /**
  * Using the elevate system.
  * Automatic contrast adjustment.
