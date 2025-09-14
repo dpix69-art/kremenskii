@@ -1,38 +1,29 @@
-// vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
-import { fileURLToPath } from "node:url";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],          // никаких dev-плагинов в проде
-  base: "./",                  // GitHub Pages-safe: относительные ассеты
-
-  // твои алиасы:
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "client", "src"),
-      "@shared": path.resolve(__dirname, "shared"),
-      "@assets": path.resolve(__dirname, "attached_assets"),
-    },
-  },
-
-  // корень фронтенда
-  root: path.resolve(__dirname, "client"),
-
-  // public лежит в корне репо (не в client/)
-  publicDir: path.resolve(__dirname, "public"),
-
-  // билд в dist/public (как у тебя)
+  plugins: [
+    react(),
+    ViteImageOptimizer({
+      includePublic: true, // оптимизировать картинки и из public/
+      // качество
+      jpg: { quality: 80 },
+      jpeg: { quality: 80 },
+      png: { quality: 80 },
+      webp: { quality: 80 },
+      avif: { quality: 50 },
+      // ресайзы (три варианта под мобилу/ноут/ретину)
+      resize: [
+        { width: 800 },
+        { width: 1600 },
+        { width: 2400 },
+      ],
+    }),
+  ],
   build: {
-    outDir: path.resolve(__dirname, "dist/public"),
+    outDir: "dist",
     emptyOutDir: true,
-    sourcemap: false,
-  },
-
-  server: {
-    fs: { strict: true, deny: ["**/.*"] },
   },
 });
