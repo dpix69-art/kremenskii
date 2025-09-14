@@ -3,7 +3,7 @@ const defaultContent = {
     artistName: "Dmitrii Kremenskii",
     role: "artist",
     statement:
-      "My practice investigates the intersection of material and meaning, exploring how physical substances carry cultural and emotional weight beyond their immediate visual properties.",
+      "I record experience; I do not release it. Whether loss, fear, or elevation, an event remains in me as structure. I return to it and translate it into action: pressure, abrasion, layering, frequency. Material becomes the site where that action is registered.",
   },
   nav: [
     { label: "Gallery", href: "#/gallery" },
@@ -15,13 +15,13 @@ const defaultContent = {
     email: "hi@kremenskii.art",
     city: "Stuttgart",
     country: "Germany",
-    introText: "If you have an idea or proposal, please write an email.",
-    openToText: "Open for exhibitions, collaborations and commissions. Please email.",
-    portfolioPdf: "files/portfolio.pdf",
+    introText: "Idea? Please write me an email.",
+    openToText: "Open for exhibitions, collaborations and commissions.",
+    portfolioPdf: "files/kremenskii-portfolio.pdf",
     socials: [
-      { label: "Instagram", href: "https://instagram.com/artist" },
-      { label: "Soundcloud", href: "https://soundcloud.com/artist" },
-      { label: "Bandcamp", href: "https://artist.bandcamp.com" },
+      { label: "Instagram", href: "https://www.instagram.com/dmitrii.kremenskii.art" },
+      { label: "Soundcloud", href: "https://soundcloud.com/dmitrii-kremenskii" },
+      { label: "Bandcamp", href: "https://kremenskii.bandcamp.com/" },
     ],
   },
   statement: {
@@ -32,8 +32,9 @@ const defaultContent = {
     ],
     pressKitPdf: "files/press-kit.pdf",
     exhibitions: [
-      { year: "2023", event: "Material Traces, Elsiens Art Gallery, Stuttgart" },
-      { year: "2024", event: "Im contrast, Elsiens Art Gallery, Stuttgart" },
+      { "year": "2024", "event": "Sand & Sieb im Kontrast, Elsiens Art Gallery, Stuttgart" },
+      { "year": "2024", "event": "Rolle Vorwärts, live performance music event series in Stuttgart" },
+      { "year": "2022", "event": "OFFEN FÜR NEUES, Elsiens Art Gallery, Stuttgart" }
     ],
   },
   series: [],
