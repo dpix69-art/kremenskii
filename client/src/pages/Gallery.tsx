@@ -1,115 +1,55 @@
 import Header from "@/components/Header";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import SeriesIndex from "@/components/SeriesIndex";
 import Footer from "@/components/Footer";
 import { useContent } from "@/content/ContentProvider";
-import { assetUrl } from "@/lib/assetUrl";
-
-type SeriesCard = {
-  title: string;
-  slug: string;
-  year: string;
-  intro: string;
-  artworkImages: string[];
-  workCount: number;
-};
-
-/** Нейтральный плейсхолдер (4:5) — без внешних файлов */
-const BLANK_SVG =
-  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000"><rect width="100%" height="100%" fill="%23f2f2f2"/></svg>';
-
-function isLegacyAsset(raw: string) {
-  const s = raw.toLowerCase();
-  return (
-    s.includes("generated_images") ||
-    s.startsWith("@assets") ||
-    s.includes("/assets/generated_images")
-  );
-}
-
-function cleanImage(raw?: any): string {
-  const src = typeof raw === "string" ? raw : raw?.url || raw?.src || "";
-  if (!src) return "";
-  if (isLegacyAsset(src)) return "";
-  return assetUrl(String(src).replace(/^\/+/, ""));
-}
+import { buildImageSet } from "@/lib/imageSet";
+import { Link } from "wouter";
 
 export default function Gallery() {
   const { content } = useContent();
-
-  // 1) Собираем серии из JSON безопасно
-  const seriesFromJson: SeriesCard[] = Array.isArray(content?.series)
-    ? content!.series.map((s: any) => {
-        // Берём до 3 превью для карточки серии
-        let imgs: any[] = [];
-        if (Array.isArray(s.artworkImages) && s.artworkImages.length) {
-          imgs = s.artworkImages;
-        } else if (Array.isArray(s.works)) {
-          imgs = s.works
-            .map((w: any) => (Array.isArray(w.images) ? w.images[0] : w.images))
-            .filter(Boolean)
-            .slice(0, 3);
-        }
-
-        // Нормализуем пути и фильтруем «наследие»
-        const normalized = imgs
-          .map((it) => cleanImage(it))
-          .filter(Boolean);
-
-        // Если карточке нужно ровно 3 превью (для сетки) — мягко дополним плейсхолдерами
-        while (normalized.length < 3) normalized.push(BLANK_SVG);
-
-        const workCount =
-          typeof s.workCount === "number"
-            ? s.workCount
-            : Array.isArray(s.works)
-            ? s.works.length
-            : 0;
-
-        return {
-          title: s.title || s.slug || "Untitled series",
-          slug: s.slug || "",
-          year: String(s.year ?? ""),
-          intro: typeof s.intro === "string" ? s.intro : "",
-          artworkImages: normalized.slice(0, 3),
-          workCount,
-        };
-      })
-    : [];
-
-  // 2) Никаких fallbackSeries и «синих абстрактов» — только JSON или пусто
-  const seriesData: SeriesCard[] = seriesFromJson;
-
-  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/kremenskii-portfolio.pdf").replace(
-    /^\/+/,
-    ""
-  );
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "");
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
+      <main className="flex-1 site-container section-py">
+        <h1 id="page-title" className="text-type-h1 font-semibold mb-8">
+          Gallery
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {(content?.series || []).map((s: any) => {
+            const cover = s.artworkImages?.[0] || s.works?.[0]?.images?.[0];
+            if (!cover) return null;
+            const set = buildImageSet(cover.url || cover);
 
-      <main className="section-py flex-1">
-        <div className="site-container heading-gap-lg">
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "#/", testId: "link-bc-home" },
-              { label: "Gallery", testId: "text-bc-current" },
-            ]}
-          />
-          <h1
-            id="page-title"
-            tabIndex={-1}
-            className="text-type-h1 font-semibold text-foreground h1-spacing"
-          >
-            Gallery
-          </h1>
+            return (
+              <Link key={s.slug} href={`#/gallery/${s.slug}`}>
+                <a className="block group">
+                  <div className="aspect-[4/5] overflow-hidden rounded-md bg-muted">
+                    <picture>
+                      <source type="image/avif" srcSet={set.avif} sizes={set.sizes} />
+                      <source type="image/webp" srcSet={set.webp} sizes={set.sizes} />
+                      <img
+                        src={set.fallback}
+                        srcSet={set.webp}
+                        sizes={set.sizes}
+                        alt={s.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </picture>
+                  </div>
+                  <div className="mt-3">
+                    <span className="block text-xs font-light text-muted-foreground">SERIES</span>
+                    <h3 className="text-type-body font-medium text-foreground group-hover:underline">{s.title}</h3>
+                  </div>
+                </a>
+              </Link>
+            );
+          })}
         </div>
-
-        <SeriesIndex series={seriesData} />
       </main>
-
-      <Footer year={new Date().getFullYear()} portfolioPdfUrl={portfolioPdfUrl} />
+      <Footer />
     </div>
   );
 }
