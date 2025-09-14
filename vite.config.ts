@@ -1,13 +1,19 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import path from "node:path";
 
-// Для custom domain (kremenskii.art) base ДОЛЖЕН быть "/"
+// Для custom domain (kremenskii.art) base = "/"
 const base = "/";
 
 export default defineConfig({
   root: "client",          // фронт лежит в client/
-  base,                    // пути к ассетам с корня домена
+  base,
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "client/src"), // ⟵ ВАЖНО: alias @ → client/src
+    },
+  },
   plugins: [
     react(),
     ViteImageOptimizer({
