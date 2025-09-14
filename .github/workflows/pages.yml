@@ -3,47 +3,58 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main   # если у тебя основная ветка называется иначе — поменяй
+      - main      # поменяй, если у тебя другая основная ветка
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # чтобы vite знал базовый путь при GH Pages, если репозиторий не user/ org site
+      # VITE_BASE: "/${{ github.event.repository.name }}/"
+      # Если у тебя root-домен без подкаталога, оставь закомментированным
+      NODE_OPTIONS: "--max_old_space_size=4096"
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'npm'
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: client/package-lock.json
 
       - name: Install dependencies
+        working-directory: client
         run: npm ci
 
-      - name: Build project
-        run: npm run build
+      - name: Build
         working-directory: client
+        run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: client/dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
