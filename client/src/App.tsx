@@ -29,36 +29,59 @@ const CONTENT_ROUTES = [
   /^\/impressum$/
 ];
 
+// src/App.tsx — заменить всю функцию RouteManager на это
 function RouteManager() {
   const [location] = useLocation();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // выключаем нативное восстановление скролла при back/forward
+    // Отключаем восстановление скролла браузером
     if ("scrollRestoration" in window.history) {
       try {
         window.history.scrollRestoration = "manual";
       } catch {}
     }
 
-    // Всегда скроллим наверх при смене маршрута (в т.ч. при hash-роутинге)
+    // Всегда скроллим вверх при смене маршрута
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
-    // Даем кадр(ы) на рендер и фокусим заголовок для доступности
-    const ids = ["page-title", "series-title", "artwork-title", "project-title"];
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        for (const id of ids) {
-          const el = document.getElementById(id) as HTMLElement | null;
-          if (el) { el.focus?.(); break; }
-        }
-      });
-    });
+    // ВАЖНО: фокус на #page-title/… больше НЕ ставим,
+    // чтобы не появлялась рамка фокуса на заголовке.
   }, [location]);
 
   return null;
 }
+// function RouteManager() {
+//   const [location] = useLocation();
+
+//   useEffect(() => {
+//     if (typeof window === "undefined") return;
+
+//     // выключаем нативное восстановление скролла при back/forward
+//     if ("scrollRestoration" in window.history) {
+//       try {
+//         window.history.scrollRestoration = "manual";
+//       } catch {}
+//     }
+
+//     // Всегда скроллим наверх при смене маршрута (в т.ч. при hash-роутинге)
+//     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+//     // Даем кадр(ы) на рендер и фокусим заголовок для доступности
+//     const ids = ["page-title", "series-title", "artwork-title", "project-title"];
+//     requestAnimationFrame(() => {
+//       requestAnimationFrame(() => {
+//         for (const id of ids) {
+//           const el = document.getElementById(id) as HTMLElement | null;
+//           if (el) { el.focus?.(); break; }
+//         }
+//       });
+//     });
+//   }, [location]);
+
+//   return null;
+// }
 
 
 function Router() {
