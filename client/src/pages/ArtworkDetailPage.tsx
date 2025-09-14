@@ -9,11 +9,11 @@ import { useContent } from "@/content/ContentProvider";
 import { assetUrl } from "@/lib/assetUrl";
 
 // плейсхолдеры на случай полного отсутствия картинок в JSON
-import blueAbstractImage from "@assets/generated_images/Blue_abstract_color_field_53f088fd.png";
-import industrialSculptureImage from "@assets/generated_images/Industrial_sculpture_assemblage_2b04ef29.png";
-import gesturalPaintingImage from "@assets/generated_images/Gestural_earth_tone_painting_554103d6.png";
-import minimalistInstallationImage from "@assets/generated_images/White_minimalist_installation_e967bdd0.png";
-import digitalPrintImage from "@assets/generated_images/Digital_glitch_print_392d678b.png";
+// import blueAbstractImage from "@assets/generated_images/Blue_abstract_color_field_53f088fd.png";
+// import industrialSculptureImage from "@assets/generated_images/Industrial_sculpture_assemblage_2b04ef29.png";
+// import gesturalPaintingImage from "@assets/generated_images/Gestural_earth_tone_painting_554103d6.png";
+// import minimalistInstallationImage from "@assets/generated_images/White_minimalist_installation_e967bdd0.png";
+// import digitalPrintImage from "@assets/generated_images/Digital_glitch_print_392d678b.png";
 
 type RouteParams = { series: string; slug: string };
 
@@ -28,7 +28,7 @@ export default function ArtworkDetailPage() {
   // Мап серий для заголовка (под твои реальные слуги)
   const seriesMap: Record<string, string> = {
     farbkoerper: "Farbkörper",
-    "pgsrd-trc": "Plywood-Gravel-Sand-Road-Dust (TRC)",
+    "pgsrd-trc": "Plywood Gravel Sand Road Dust (TRC)",
   };
 
   const seriesTitle = ser?.title || seriesMap[series!] || series || "Unknown Series";
