@@ -32,7 +32,7 @@ export default function StatementPage({
 
   // Фолбэки из content.json
   const usedPortrait =
-    portraitImageUrl || content?.statement?.portrait || "images/kremenskii.png";
+    portraitImageUrl || content?.statement?.portrait || "images/kremenskii.jpg";
 
   const usedStatement: string[] =
     statement ||
