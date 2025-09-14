@@ -1,95 +1,133 @@
+// client/src/components/GalleryGrid.tsx
 import { Link } from "wouter";
-import { buildImageSet } from "@/lib/imageSet";
+import { cn } from "@/lib/utils";
+import { assetUrl } from "@/lib/assetUrl";
 
-export interface GalleryItem {
+type ItemType = "artwork" | "series" | "sound_project";
+
+interface GridItem {
   id: string;
   title: string;
   year?: string;
   medium?: string;
-  imageUrl: string;
+  imageUrl?: string;      // локальный или абсолютный URL
   linkUrl: string;
-  type: "artwork" | "series" | "sound";
+  type: ItemType;
+  platform?: string;      // optional (sound_project)
+  embedUrl?: string;      // optional (sound_project)
 }
 
-interface GalleryGridProps {
-  items: GalleryItem[];
+interface Props {
+  items: GridItem[];
   heading?: string;
-  linkUrl?: string;
-  columns?: number;
+  linkUrl?: string;     // “See all” ссылка
+  columns?: 2 | 3 | 4 | 6;
+  showArtworkBadge?: boolean;
+  imageAspect?: "square" | "portrait" | "landscape"; // <<< добавлено
 }
+
+const aspectClass = (a: Props["imageAspect"]) => {
+  switch (a) {
+    case "portrait":
+      return "aspect-[3/4]"; // вертикально
+    case "landscape":
+      return "aspect-[4/3]"; // горизонтально
+    default:
+      return "aspect-square";
+  }
+};
 
 export default function GalleryGrid({
   items,
   heading,
   linkUrl,
-  columns = 3,
-}: GalleryGridProps) {
+  columns = 2,
+  showArtworkBadge = true,
+  imageAspect = "square",
+}: Props) {
+  const gridCols =
+    columns === 6
+      ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
+      : columns === 4
+      ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      : columns === 3
+      ? "grid-cols-2 md:grid-cols-3"
+      : "grid-cols-1 md:grid-cols-2";
+
   return (
-    <div className="site-container section-py">
-      {heading && (
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-type-h2 font-semibold text-foreground">{heading}</h2>
-          {linkUrl && (
-            <Link href={linkUrl}>
-              <a className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                View All
-              </a>
-            </Link>
-          )}
+    <section className="section-py">
+      <div className="site-container">
+        {heading && (
+          <div className="flex items-end justify-between mb-6">
+            <h2 className="text-type-h2 font-semibold text-foreground">{heading}</h2>
+            {linkUrl && (
+              <Link href={linkUrl}>
+                <span className="text-type-body underline text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+                  See all
+                </span>
+              </Link>
+            )}
+          </div>
+        )}
+
+        <div className={cn("grid gap-x-6 gap-y-8", gridCols)}>
+          {items.map((it) => {
+            const badgeLabel =
+              it.type === "series"
+                ? "SERIES"
+                : it.type === "sound_project"
+                ? "SOUNDS"
+                : showArtworkBadge
+                ? "ARTWORK"
+                : "";
+
+            const imgSrc = it.imageUrl ? assetUrl(it.imageUrl) : "";
+
+            return (
+              <Link key={it.id} href={it.linkUrl}>
+                <a className="block group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring rounded-md">
+                  {/* Картинка */}
+                  <div className={cn("w-full overflow-hidden rounded-md", aspectClass(imageAspect))}>
+                    {imgSrc ? (
+                      <img
+                        src={imgSrc}
+                        alt={it.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground text-xs">
+                        No image
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Подписи */}
+                  <div className="mt-[10px]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[12px] font-light uppercase tracking-wide text-muted-foreground mb-[12px]">
+                        {badgeLabel || <span>&nbsp;</span>}
+                      </span>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="text-type-body text-foreground leading-snug">
+                        {it.title}
+                      </div>
+                      {(it.year || it.medium) && (
+                        <div className="text-type-small text-muted-foreground leading-snug">
+                          {[it.year, it.medium].filter(Boolean).join(" • ")}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              </Link>
+            );
+          })}
         </div>
-      )}
-
-      <div
-        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${columns} gap-8`}
-      >
-        {items.map((item) => {
-          const set = buildImageSet(item.imageUrl);
-
-          return (
-            <Link key={item.id} href={item.linkUrl}>
-              <a className="block group">
-                <div className="aspect-[4/5] overflow-hidden rounded-md bg-muted">
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcSet={set.avif}
-                      sizes={set.sizes}
-                    />
-                    <source
-                      type="image/webp"
-                      srcSet={set.webp}
-                      sizes={set.sizes}
-                    />
-                    <img
-                      src={set.fallback}
-                      srcSet={set.webp}
-                      sizes={set.sizes}
-                      alt={item.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </picture>
-                </div>
-                <div className="mt-3">
-                  <span className="block text-xs font-light text-muted-foreground">
-                    {item.type.toUpperCase()}
-                  </span>
-                  <h3 className="text-type-body font-medium text-foreground group-hover:underline">
-                    {item.title}
-                  </h3>
-                  {item.year && (
-                    <p className="text-sm text-muted-foreground">{item.year}</p>
-                  )}
-                  {item.medium && (
-                    <p className="text-sm text-muted-foreground">{item.medium}</p>
-                  )}
-                </div>
-              </a>
-            </Link>
-          );
-        })}
       </div>
-    </div>
+    </section>
   );
 }

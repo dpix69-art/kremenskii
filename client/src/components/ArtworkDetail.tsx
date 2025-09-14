@@ -1,11 +1,10 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation, useParams } from "wouter";
-import { buildImageSet } from "@/lib/imageSet";
 
 interface ArtworkImage {
   url: string;
-  role: "main" | "angle" | "detail" | "poster" | "installation-view";
+  role: 'main' | 'angle' | 'detail';
   alt: string;
 }
 
@@ -16,7 +15,7 @@ interface ArtworkDetailProps {
   medium: string;
   dimensions: string;
   price?: string;
-  availability?: "available" | "sold";
+  availability?: 'available' | 'sold';
   description: string[];
   images: ArtworkImage[];
   prevWork?: { title: string; slug: string };
@@ -30,22 +29,27 @@ export default function ArtworkDetail({
   medium,
   dimensions,
   price,
-  availability = "available",
+  availability = 'available',
   description,
   images,
   prevWork,
-  nextWork,
+  nextWork
 }: ArtworkDetailProps) {
   const [, setLocation] = useLocation();
   const { series } = useParams();
-  const mainImage = images.find((img) => img.role === "main") || images[0];
-  const extraImages = images.filter((img) => img.role !== "main");
+  const mainImage = images.find(img => img.role === 'main') || images[0];
+  const extraImages = images.filter(img => img.role !== 'main');
 
   const handlePrevClick = () => {
-    if (prevWork && series) setLocation(`/gallery/${series}/${prevWork.slug}`);
+    if (prevWork && series) {
+      setLocation(`/gallery/${series}/${prevWork.slug}`);
+    }
   };
+
   const handleNextClick = () => {
-    if (nextWork && series) setLocation(`/gallery/${series}/${nextWork.slug}`);
+    if (nextWork && series) {
+      setLocation(`/gallery/${series}/${nextWork.slug}`);
+    }
   };
 
   return (
@@ -56,39 +60,18 @@ export default function ArtworkDetail({
           {/* Left Column: Main Image */}
           <div className="col-span-12 lg:col-span-7">
             <div className="w-full flex justify-center">
-              {mainImage && (
-                <picture>
-                  <source
-                    type="image/avif"
-                    srcSet={buildImageSet(mainImage.url).avif}
-                    sizes={buildImageSet(mainImage.url).sizes}
-                  />
-                  <source
-                    type="image/webp"
-                    srcSet={buildImageSet(mainImage.url).webp}
-                    sizes={buildImageSet(mainImage.url).sizes}
-                  />
-                  <img
-                    src={buildImageSet(mainImage.url).fallback}
-                    srcSet={buildImageSet(mainImage.url).webp}
-                    sizes={buildImageSet(mainImage.url).sizes}
-                    alt={mainImage.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full max-h-[90vh] object-contain bg-muted"
-                    style={{ cursor: "default", pointerEvents: "none" }}
-                    data-testid="main-artwork-image"
-                  />
-                </picture>
-              )}
+              <img
+                src={mainImage.url}
+                alt={mainImage.alt}
+                className="w-full max-h-[90vh] object-contain"
+                style={{ cursor: 'default', pointerEvents: 'none' }}
+                data-testid="main-artwork-image"
+              />
             </div>
           </div>
 
           {/* Right Column: Meta Panel */}
-          <div
-            className="col-span-12 lg:col-span-5"
-            style={{ marginTop: "var(--block-gap-sm)" }}
-          >
+          <div className="col-span-12 lg:col-span-5" style={{ marginTop: 'var(--block-gap-sm)' }}>
             <div className="block-gap">
               {/* Title */}
               <h1
@@ -99,160 +82,120 @@ export default function ArtworkDetail({
                 {title}
               </h1>
 
-              {/* Metadata */}
+              {/* Metadata as labeled rows */}
               <dl className="space-y-4">
+                {/* Series */}
                 {seriesTitle && (
                   <div>
-                    <dt className="text-type-small font-semibold text-foreground leading-snug">
-                      Series:
-                    </dt>
-                    <dd className="text-type-body text-foreground leading-relaxed">
-                      {seriesTitle}
-                    </dd>
+                    <dt className="text-type-small font-semibold text-foreground leading-snug">Series:</dt>
+                    <dd className="text-type-body text-foreground leading-relaxed">{seriesTitle}</dd>
                   </div>
                 )}
 
+                {/* Year */}
                 <div>
-                  <dt className="text-type-small font-semibold text-foreground leading-snug">
-                    Year:
-                  </dt>
+                  <dt className="text-type-small font-semibold text-foreground leading-snug">Year:</dt>
+                  <dd className="text-type-body text-foreground leading-relaxed">{year}</dd>
+                </div>
+
+                {/* Availability */}
+                <div>
+                  <dt className="text-type-small font-semibold text-foreground leading-snug">Availability:</dt>
                   <dd className="text-type-body text-foreground leading-relaxed">
-                    {year}
+                    {availability === 'sold' ? 'Sold' : 'Available'}
                   </dd>
                 </div>
 
+                {/* Price */}
                 <div>
-                  <dt className="text-type-small font-semibold text-foreground leading-snug">
-                    Availability:
-                  </dt>
+                  <dt className="text-type-small font-semibold text-foreground leading-snug">Price:</dt>
                   <dd className="text-type-body text-foreground leading-relaxed">
-                    {availability === "sold" ? "Sold" : "Available"}
+                    {price || 'On request'}
                   </dd>
                 </div>
 
+                {/* Technique */}
                 <div>
-                  <dt className="text-type-small font-semibold text-foreground leading-snug">
-                    Price:
-                  </dt>
-                  <dd className="text-type-body text-foreground leading-relaxed">
-                    {price || "On request"}
-                  </dd>
+                  <dt className="text-type-small font-semibold text-foreground leading-snug">Technique:</dt>
+                  <dd className="text-type-body text-foreground leading-relaxed">{medium}</dd>
                 </div>
 
+                {/* Dimensions */}
                 <div>
-                  <dt className="text-type-small font-semibold text-foreground leading-snug">
-                    Technique:
-                  </dt>
-                  <dd className="text-type-body text-foreground leading-relaxed">
-                    {medium}
-                  </dd>
-                </div>
-
-                <div>
-                  <dt className="text-type-small font-semibold text-foreground leading-snug">
-                    Dimensions:
-                  </dt>
-                  <dd className="text-type-body text-foreground leading-relaxed">
-                    {dimensions}
-                  </dd>
+                  <dt className="text-type-small font-semibold text-foreground leading-snug">Dimensions:</dt>
+                  <dd className="text-type-body text-foreground leading-relaxed">{dimensions}</dd>
                 </div>
               </dl>
 
-              {/* About */}
-              {description.length > 0 && (
-                <div
-                  className="block-gap"
-                  style={{ paddingTop: "var(--h3-mt)" }}
-                >
-                  <h3 className="text-type-h3 font-medium text-foreground h3-spacing">
-                    About This Work
-                  </h3>
-                  <div className="space-y-4">
-                    {description.map((paragraph, index) => (
-                      <p
-                        key={index}
-                        className="text-type-body text-foreground leading-relaxed"
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
+              {/* About This Work */}
+              <div className="block-gap" style={{ paddingTop: 'var(--h3-mt)' }}>
+                <h3 className="text-type-h3 font-medium text-foreground h3-spacing">About This Work</h3>
+                <div className="space-y-4">
+                  {description.map((paragraph, index) => (
+                    <p key={index} className="text-type-body text-foreground leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Extra Images */}
-      {extraImages.length > 0 && (
-        <div className="site-container py-12">
+      {/* Additional content below main content */}
+      <div className="site-container py-12">
+        {/* Extra Images */}
+        {extraImages.length > 0 && (
           <div className="space-y-6 mb-12">
-            <h3 className="text-xl font-medium text-foreground">
-              Additional Views
-            </h3>
+            <h3 className="text-xl font-medium text-foreground">Additional Views</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {extraImages.map((image, index) => {
-                const set = buildImageSet(image.url);
-                return (
-                  <div
-                    key={index}
-                    className="aspect-square overflow-hidden rounded-md bg-muted"
-                    data-testid={`extra-image-${index}`}
-                  >
-                    <picture>
-                      <source type="image/avif" srcSet={set.avif} sizes={set.sizes} />
-                      <source type="image/webp" srcSet={set.webp} sizes={set.sizes} />
-                      <img
-                        src={set.fallback}
-                        srcSet={set.webp}
-                        sizes={set.sizes}
-                        alt={image.alt}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-contain"
-                      />
-                    </picture>
-                  </div>
-                );
-              })}
+              {extraImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="aspect-square overflow-hidden rounded-md bg-muted"
+                  data-testid={`extra-image-${index}`}
+                >
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Prev/Next Navigation */}
-      {(prevWork || nextWork) && (
-        <div className="site-container py-8 flex justify-between items-center">
-          {prevWork ? (
-            <Button
-              variant="ghost"
-              className="flex items-center gap-2"
-              data-testid="button-prev-work"
-              onClick={handlePrevClick}
-            >
-              <ChevronLeft size={16} />
-              <span>Previous</span>
-            </Button>
-          ) : (
-            <div />
-          )}
+        {/* Navigation */}
+        {(prevWork || nextWork) && (
+          <div className="flex justify-between items-center pt-8">
+            {prevWork ? (
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
+                data-testid="button-prev-work"
+                onClick={handlePrevClick}
+              >
+                <ChevronLeft size={16} />
+                <span>Previous</span>
+              </Button>
+            ) : <div />}
 
-          {nextWork ? (
-            <Button
-              variant="ghost"
-              className="flex items-center gap-2"
-              data-testid="button-next-work"
-              onClick={handleNextClick}
-            >
-              <span>Next</span>
-              <ChevronRight size={16} />
-            </Button>
-          ) : (
-            <div />
-          )}
-        </div>
-      )}
+            {nextWork ? (
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
+                data-testid="button-next-work"
+                onClick={handleNextClick}
+              >
+                <span>Next</span>
+                <ChevronRight size={16} />
+              </Button>
+            ) : <div />}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
