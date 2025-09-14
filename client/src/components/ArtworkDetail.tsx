@@ -59,11 +59,11 @@ export default function ArtworkDetail({
         <div className="grid-12">
           {/* Left Column: Main Image */}
           <div className="col-span-12 lg:col-span-7">
-            <div className="w-full h-[65vh] lg:h-[clamp(540px,88vh,1000px)] overflow-hidden">
+            <div className="w-full flex justify-center">
               <img
                 src={mainImage.url}
                 alt={mainImage.alt}
-                className="w-full h-full object-cover object-center"
+                className="w-full max-h-[90vh] object-contain"
                 style={{ cursor: 'default', pointerEvents: 'none' }}
                 data-testid="main-artwork-image"
               />
@@ -71,11 +71,11 @@ export default function ArtworkDetail({
           </div>
 
           {/* Right Column: Meta Panel */}
-          <div className="col-span-12 lg:col-span-5" style={{marginTop: 'var(--block-gap-sm)'}}>
+          <div className="col-span-12 lg:col-span-5" style={{ marginTop: 'var(--block-gap-sm)' }}>
             <div className="block-gap">
               {/* Title */}
-              <h1 
-                id="artwork-title" 
+              <h1
+                id="artwork-title"
                 tabIndex={-1}
                 className="text-type-h1 font-semibold text-foreground leading-tight"
               >
@@ -128,7 +128,7 @@ export default function ArtworkDetail({
               </dl>
 
               {/* About This Work */}
-              <div className="block-gap" style={{paddingTop: 'var(--h3-mt)'}}>
+              <div className="block-gap" style={{ paddingTop: 'var(--h3-mt)' }}>
                 <h3 className="text-type-h3 font-medium text-foreground h3-spacing">About This Work</h3>
                 <div className="space-y-4">
                   {description.map((paragraph, index) => (
@@ -145,14 +145,13 @@ export default function ArtworkDetail({
 
       {/* Additional content below main content */}
       <div className="site-container py-12">
-
         {/* Extra Images */}
         {extraImages.length > 0 && (
           <div className="space-y-6 mb-12">
             <h3 className="text-xl font-medium text-foreground">Additional Views</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {extraImages.map((image, index) => (
-                <div 
+                <div
                   key={index}
                   className="aspect-square overflow-hidden rounded-md bg-muted"
                   data-testid={`extra-image-${index}`}
@@ -172,9 +171,9 @@ export default function ArtworkDetail({
         {(prevWork || nextWork) && (
           <div className="flex justify-between items-center pt-8">
             {prevWork ? (
-              <Button 
-                variant="ghost" 
-                className="flex items-center gap-2" 
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
                 data-testid="button-prev-work"
                 onClick={handlePrevClick}
               >
@@ -182,11 +181,11 @@ export default function ArtworkDetail({
                 <span>Previous</span>
               </Button>
             ) : <div />}
-            
+
             {nextWork ? (
-              <Button 
-                variant="ghost" 
-                className="flex items-center gap-2" 
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
                 data-testid="button-next-work"
                 onClick={handleNextClick}
               >
