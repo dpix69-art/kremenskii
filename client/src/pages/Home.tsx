@@ -100,11 +100,7 @@ export default function Home() {
           />
         </section>
       </main>
-      <Footer
-        year={new Date().getFullYear()}
-        portfolioPdfUrl={portfolioPdfUrl}
-        socialLinks={socialLinks}
-      />
+      <Footer />
     </div>
   );
 }

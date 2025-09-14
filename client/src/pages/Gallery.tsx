@@ -157,10 +157,10 @@ export default function Gallery() {
       </main>
 
       <Footer
-        year={new Date().getFullYear()}
-        portfolioPdfUrl={portfolioPdfUrl}
-        socialLinks={socialLinks}
-      />
+              year={new Date().getFullYear()}
+              portfolioPdfUrl={portfolioPdfUrl}
+              socialLinks={socialLinks}
+            />
     </div>
   );
 }
