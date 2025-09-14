@@ -119,7 +119,8 @@ export default function SeriesPage() {
         <GalleryGrid
           items={works}
           columns={3}
-          imageAspect="portrait"   // <<< ВАЖНО: вертикальные карточки
+          imageAspect="portrait" 
+          imageAspectClass="aspect-[2/3]"   // <<< ВАЖНО: вертикальные карточки
         />
       </main>
 
