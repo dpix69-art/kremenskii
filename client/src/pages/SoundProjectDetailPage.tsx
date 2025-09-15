@@ -9,14 +9,6 @@ import { useContent } from "@/content/ContentProvider";
 
 type RouteParams = { slug: string };
 
-// после деструктуризации пропсов
-const safeTracks: { title: string; duration?: string }[] = Array.isArray(tracks)
-  ? tracks.map((t: any) => (typeof t === "string" ? { title: t } : t)).filter(t => t?.title)
-  : [];
-
-const safePhotos: { url: string; alt?: string }[] = Array.isArray(photos)
-  ? photos.map((p: any) => (typeof p === "string" ? { url: p } : p)).filter(p => p?.url)
-  : [];
 
 
 // компактные параметры для плееров
