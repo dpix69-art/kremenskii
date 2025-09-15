@@ -1,0 +1,310 @@
+{
+  "site": {
+    "artistName": "Dmitrii Kremenskii",
+    "role": "artist",
+    "statement": "I record experience; I do not release it. Whether loss, fear, or elevation, an event remains in me as structure. I return to it and translate it into action: pressure, abrasion, layering, frequency. Material becomes the site where that action is registered."
+  },
+
+  "nav": [
+    { "label": "Gallery",   "href": "#/gallery" },
+    { "label": "Sounds",    "href": "#/sounds" },
+    { "label": "Statement", "href": "#/statement" },
+    { "label": "Contacts",  "href": "#/contacts" }
+  ],
+
+  "series": [
+    {
+      "slug": "farbkoerper",
+      "title": "Farbkörper",
+      "year": "2022",
+      "intro": "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure, not decorative harmony.",
+      "artworkImages": [
+        "images/farbkoerper/fkb-01.jpg",
+        "images/farbkoerper/fkb-02.jpg",
+        "images/farbkoerper/fkb-03.jpg"
+      ],
+      "works": [
+        {
+          "slug": "fkb-01",
+          "title": "Fkb-01",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-01.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-01-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-01-d-2.png","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-02",
+          "title": "Fkb-02",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-02.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-02-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-02-d-2.png","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-03",
+          "title": "Fkb-03",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-03.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-03-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-03-d-2.png","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-04",
+          "title": "Fkb-04",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-04.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-04-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-04-d-2.png","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-05",
+          "title": "Fkb-05",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-05.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-05-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-05-d-2.png","role": "detail" }
+          ]
+        },
+        {
+          "slug": "fkb-06",
+          "title": "Fkb-06",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "41 x 60 x 0.6 cm",
+          "images": [
+            { "url": "images/farbkoerper/fkb-06.jpg",    "role": "main" },
+            { "url": "images/farbkoerper/fkb-06-d-1.png","role": "detail" },
+            { "url": "images/farbkoerper/fkb-06-d-2.png","role": "detail" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "pgsrd-trc",
+      "title": "Plywood Gravel Sand Road Dust (TRC)",
+      "year": "2022",
+      "intro": ["Plywood, gravel and road dust register direct actions — imprint, friction, displacement. This is not metaphor: it is a topography of actual interaction.",
+                "The crushed stone leaves permanent scars.\nPlywood absorbs the impact without breaking."
+              ],
+      "artworkImages": [
+        "images/pgsrd-trc/pgsrd-trc-01.jpg",
+        "images/pgsrd-trc/pgsrd-trc-02.jpg",
+        "images/pgsrd-trc/pgsrd-trc-03.jpg"
+      ],
+      "works": [
+        { "slug": "pgsrd-trc-01", "title": "PGSRD-trc-01", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-01.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-01-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-01-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-02", "title": "PGSRD-trc-02", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-02.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-02-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-02-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-03", "title": "PGSRD-trc-03", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-03.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-03-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-03-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-04", "title": "PGSRD-trc-04", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-04.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-04-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-04-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-05", "title": "PGSRD-trc-05", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-05.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-05-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-05-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-06", "title": "PGSRD-trc-06", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-06.jpg?url-00",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-06-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-06-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-07", "title": "PGSRD-trc-07", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-07.jpg?url-00",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-07-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-07-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-08", "title": "PGSRD-trc-08", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-08.jpg?url-00",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-08-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-08-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-09", "title": "PGSRD-trc-09", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-09.jpg?url-00",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-09-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-09-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-10", "title": "PGSRD-trc-10", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-10.jpg?url-00",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-10-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-10-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-11", "title": "PGSRD-trc-11", "year": 2022, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-11.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-11-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-11-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-12", "title": "PGSRD-trc-12", "year": 2021, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-12.jpg?url-00",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-12-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-12-d-2.png","role": "detail" }
+          ]
+        },
+        { "slug": "pgsrd-trc-13", "title": "PGSRD-trc-13", "year": 2021, "technique": "Gravel, sand, road dust on plywood", "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            { "url": "images/pgsrd-trc/pgsrd-trc-13.jpg",    "role": "main" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-13-d-1.png","role": "detail" },
+            { "url": "images/pgsrd-trc/pgsrd-trc-13-d-2.png","role": "detail" }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "sounds": [
+    {
+      "slug": "impact-of-the-Fan",
+      "title": "Impact of the Fan",
+      "year": 2024,
+      "platform": "soundcloud",
+      "pageUrl": "https://soundcloud.com/dmitrii-kremenskii/impact-of-the-fan",
+      "cover": "images/covers/impact-of-the-fan.jpg",
+      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1852226274",
+      "tracks": [
+        { "title": "Impact of the Fan", "duration": "51:31" }
+      ],
+      "meta": { "label": "Independent", "platforms": ["SoundCloud"] }
+    },
+    {
+      "slug": "live-at-elsiens-galerie-stuttgart",
+      "title": "Live at Elsiens Galerie Stuttgart",
+      "year": 2024,
+      "platform": "soundcloud",
+      "pageUrl": "https://soundcloud.com/dmitrii-kremenskii/live-at-elsiens-galerie-stuttgart",
+      "cover": "images/covers/live-at-elsiens-galerie-stuttgart.jpg",
+      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1841509218",
+      "tracks": [
+        { "title": "Live at Elsiens Galerie Stuttgart", "duration": "20:18" }
+      ],
+      "meta": { "label": "Independent", "platforms": ["SoundCloud"] }
+    },
+    {
+  "slug": "album-learning-to-breathe",
+  "title": "learning to breathe",
+  "year": 2025,
+  "platform": "bandcamp",
+  "cover": "images/covers/learning-to-breathe-cover.jpg",
+  "embed": "https://bandcamp.com/EmbeddedPlayer/v=2/album=1109147001/size=large/tracklist=false/artwork=small/transparent=true/",
+  "meta": { "label": "Independent", "platforms": ["Bandcamp"] },
+  "photos": [
+    { "url": "images/sounds/learning-to-breathe-studio-1.jpg", "alt": "Studio view 1" },
+    { "url": "images/sounds/learning-to-breathe-studio-2.jpg", "alt": "Studio view 2" }
+  ],
+  "bodyBlocks": [
+    {
+      "type": "p",
+      "text": "This album charts a meditative journey through states of being, using sound as both compass and vessel. With layers of drones, pulses, and textured noise, it explores the interplay between stillness and motion, chaos and harmony, the internal and the external."
+    },
+    {
+      "type": "p",
+      "text": "It begins with Learning to Breathe, a grounding meditation where heartbeat rhythms and noise textures invite the listener to rediscover the breath as a unifying force. Stream of Consciousness then drifts into the restless ebb and flow of thought, gradually aligning scattered currents into a flowing whole."
+    },
+    {
+      "type": "p",
+      "text": "From there, Particle Flow propels the journey into a realm of kinetic energy—micro- and macro-pulses colliding, carrying the listener into a state of perpetual movement. Taken together, these pieces form a continuum of sound—inviting deep listening, in the subtle rhythms that underlie both mind and matter."
+    },
+    {
+      "type": "p",
+      "text": "releases September 25, 2025"
+    }
+  ]
+}
+  ],
+
+  "statement": {
+    "portrait": "images/kremenskii.png",
+    "paragraphs": [
+      "Vulnerability and the absence of resistance expose the underlying dynamics of social relations. When dependency arises, people often reveal their true nature; without resistance, their actions rest entirely on the conscience of society.",
+      "My practice translates these dynamics into material form. By compressing and deforming substances such as gravel, incapable of resistance,",
+      "I produce traces that register force and dependency. These imprints act as evidence of power relations and as memory of the mechanisms shaping human interaction."
+    ],
+    "exhibitions": [
+      { "year": "2024", "event": "Sand & Sieb im Kontrast, Elsiens Art Gallery, Stuttgart" },
+      { "year": "2024", "event": "Rolle Vorwärts, live performance music event series in Stuttgart" },
+      { "year": "2022", "event": "OFFEN FÜR NEUES, Elsiens Art Gallery, Stuttgart" }
+    ],
+    "pressKitPdf": "files/press-kit.pdf"
+  },
+
+  "contacts": {
+    "email": "hi@kremenskii.art",
+    "city": "Stuttgart",
+    "country": "Germany",
+    "introText": "Idea? Please write me an email.",
+    "openToText": "Open for exhibitions, collaborations and commissions.",
+    "portfolioPdf": "files/kremenskii-portfolio.pdf",
+    "socials": [
+      { "label": "Instagram",  "href": "https://www.instagram.com/dmitrii.kremenskii.art" },
+      { "label": "Soundcloud", "href": "https://soundcloud.com/dmitrii-kremenskii" },
+      { "label": "Bandcamp",   "href": "https://kremenskii.bandcamp.com/" }
+    ]
+  },
+
+  "impressum": {
+    "paragraphs": [
+      "This website is operated by Dmitrii Kremenskii.",
+      "No reproduction without written permission.",
+      "Contact: hi@kremenskii.art"
+    ]
+  },
+
+  "footer": {
+    "legal": "No reproduction without written permission.",
+    "copyright": "2025 © Dmitrii Kremenskii. All rights reserved."
+  }
+}
