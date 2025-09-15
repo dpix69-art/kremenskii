@@ -42,13 +42,25 @@ export default function ArtworkDetailPage() {
   const availability = work?.availability || "";
 
   // Описание: сначала work.about (массив строк), иначе — ТЕКСТ ИЗ ОПИСАНИЯ СЕРИИ (ser.intro)
-  const seriesIntro = typeof ser?.intro === "string" ? ser!.intro : "";
-  const description: string[] =
-    Array.isArray(work?.about) && work!.about.length > 0
-      ? (work!.about as string[])
-      : seriesIntro
-      ? [seriesIntro]
-      : [];
+  // const seriesIntro = typeof ser?.intro === "string" ? ser!.intro : "";
+  // const description: string[] =
+  //   Array.isArray(work?.about) && work!.about.length > 0
+  //     ? (work!.about as string[])
+  //     : seriesIntro
+  //     ? [seriesIntro]
+  //     : [];
+
+  // ↓ вместо текущего seriesIntro/description
+const seriesIntroParts: string[] = Array.isArray(ser?.intro)
+  ? ser!.intro
+  : ser?.intro
+  ? [String(ser!.intro)]
+  : [];
+
+const description: string[] =
+  Array.isArray(work?.about) && work!.about.length > 0
+    ? (work!.about as string[])
+    : seriesIntroParts;
 
   // --- 3) Изображения работы ---
   const imgs = Array.isArray(work?.images) ? (work!.images as any[]) : [];
