@@ -41,7 +41,7 @@ export default function SeriesPage() {
   if (!ser) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
-        <Header artistName={content?.site?.artistName || "Artist Name"} />
+        <Header artistName={content?.site?.artistName || "Dmitrii Kremenskii"} />
         <main className="flex-1 section-py">
           <div className="site-container">
             <Breadcrumbs
@@ -81,7 +81,7 @@ export default function SeriesPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header artistName={content?.site?.artistName || "Artist Name"} />
+      <Header artistName={content?.site?.artistName || "Dmitrii Kremenskii"} />
 
       <main className="flex-1">
         {/* Заголовок серии */}
@@ -125,9 +125,9 @@ export default function SeriesPage() {
       </main>
 
       <Footer
-        artistName={content?.site?.artistName || "Artist Name"}
+        artistName={content?.site?.artistName || "Dmitrii Kremenskii"}
         year={new Date().getFullYear()}
-        portfolioPdfUrl={content?.contacts?.portfolioPdf || "/files/portfolio.pdf"}
+        portfolioPdfUrl={content?.contacts?.portfolioPdf || "/files/kremenskii-portfolio.pdf"}
         socialLinks={{
           instagram: content?.contacts?.socials?.find((s: any) => /instagram/i.test(s.label))?.href,
           soundcloud: content?.contacts?.socials?.find((s: any) => /soundcloud/i.test(s.label))?.href,
