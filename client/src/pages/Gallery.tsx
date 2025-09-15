@@ -1,3 +1,4 @@
+// src/pages/Gallery.tsx
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SeriesIndex from "@/components/SeriesIndex";
@@ -9,7 +10,7 @@ type SeriesCard = {
   title: string;
   slug: string;
   year: string;
-  intro: string;
+  intro: string;          // ← SeriesIndex ожидает строку
   artworkImages: string[];
   workCount: number;
 };
@@ -56,7 +57,7 @@ export default function Gallery() {
           .map((it) => cleanImage(it))
           .filter(Boolean);
 
-        // Если карточке нужно ровно 3 превью (для сетки) — мягко дополним плейсхолдерами
+        // Если карточке нужно ровно 3 превью — мягко дополним плейсхолдерами
         while (normalized.length < 3) normalized.push(BLANK_SVG);
 
         const workCount =
@@ -66,50 +67,16 @@ export default function Gallery() {
             ? s.works.length
             : 0;
 
+        // ✅ Фикс: поддерживаем string | string[] у series.intro
+        const introText =
+          Array.isArray(s.intro)
+            ? s.intro
+                .filter((p: any) => typeof p === "string" && p.trim().length > 0)
+                .join("\n\n")
+            : typeof s.intro === "string"
+            ? s.intro
+            : "";
+
         return {
           title: s.title || s.slug || "Untitled series",
           slug: s.slug || "",
-          year: String(s.year ?? ""),
-          intro: typeof s.intro === "string" ? s.intro : "",
-          artworkImages: normalized.slice(0, 3),
-          workCount,
-        };
-      })
-    : [];
-
-  // 2) Никаких fallbackSeries и «синих абстрактов» — только JSON или пусто
-  const seriesData: SeriesCard[] = seriesFromJson;
-
-  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/kremenskii-portfolio.pdf").replace(
-    /^\/+/,
-    ""
-  );
-
-  return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
-
-      <main className="section-py flex-1">
-        <div className="site-container heading-gap-lg">
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "#/", testId: "link-bc-home" },
-              { label: "Gallery", testId: "text-bc-current" },
-            ]}
-          />
-          <h1
-            id="page-title"
-            tabIndex={-1}
-            className="text-type-h1 font-semibold text-foreground h1-spacing"
-          >
-            Gallery
-          </h1>
-        </div>
-
-        <SeriesIndex series={seriesData} />
-      </main>
-
-      <Footer year={new Date().getFullYear()} portfolioPdfUrl={portfolioPdfUrl} />
-    </div>
-  );
-}
