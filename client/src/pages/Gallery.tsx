@@ -80,3 +80,47 @@ export default function Gallery() {
         return {
           title: s.title || s.slug || "Untitled series",
           slug: s.slug || "",
+          year: String(s.year ?? ""),
+          intro: introText,                 // ← теперь всегда есть строка
+          artworkImages: normalized.slice(0, 3),
+          workCount,
+        };
+      })
+    : [];
+
+  // 2) Никаких fallbackSeries — только JSON или пусто
+  const seriesData: SeriesCard[] = seriesFromJson;
+
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/kremenskii-portfolio.pdf").replace(
+    /^\/+/,
+    ""
+  );
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header />
+
+      <main className="section-py flex-1">
+        <div className="site-container heading-gap-lg">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "#/", testId: "link-bc-home" },
+              { label: "Gallery", testId: "text-bc-current" },
+            ]}
+          />
+          <h1
+            id="page-title"
+            tabIndex={-1}
+            className="text-type-h1 font-semibold text-foreground h1-spacing"
+          >
+            Gallery
+          </h1>
+        </div>
+
+        <SeriesIndex series={seriesData} />
+      </main>
+
+      <Footer year={new Date().getFullYear()} portfolioPdfUrl={portfolioPdfUrl} />
+    </div>
+  );
+}
