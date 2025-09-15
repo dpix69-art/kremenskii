@@ -554,11 +554,11 @@
     "exhibitions": [
       {
         "year": "2024",
-        "event": "Sand & Sieb im Kontrast, Elsiens Art Gallery, Stuttgart"
+        "event": "Rolle Vorwärts, live performance music event series in Stuttgart"
       },
       {
         "year": "2024",
-        "event": "Rolle Vorwärts, live performance music event series in Stuttgart"
+        "event": "Sand & Sieb im Kontrast, Elsiens Art Gallery, Stuttgart"
       },
       {
         "year": "2022",
@@ -571,7 +571,7 @@
     "email": "hi@kremenskii.art",
     "city": "Stuttgart",
     "country": "Germany",
-    "introText": "Idea? Please write me an email.",
+    "introText": "Have an idea? Get in touch.",
     "openToText": "Open for exhibitions, collaborations and commissions.",
     "portfolioPdf": "files/kremenskii-portfolio.pdf",
     "socials": [
