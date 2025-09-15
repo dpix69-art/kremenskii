@@ -98,7 +98,7 @@ export default function Statement() {
 
               {exhibitionsNormalized.length > 0 && (
                 <div className="mt-6">
-                  <h3 className="text-type-h3 font-medium mb-4">Exhibitions</h3>
+                  <h3 className="text-type-h3 font-medium mb-4">Selected Programs: Exhibitions & Performances</h3>
                   <ul className="list-disc pl-5 space-y-2">
                     {exhibitionsNormalized.map((line, i) => (
                       <li key={i}>{line}</li>
