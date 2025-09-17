@@ -52,18 +52,30 @@ export default function ArtworkDetailPage() {
   const legacyAvailability = work?.availability;
   const legacyPrice = work?.price;
 
-  const availability =
+  const availabilityRaw =
     (sale?.availability as string) ||
     (typeof legacyAvailability === "string" ? legacyAvailability : "") ||
     "";
 
-  const priceLabelFromSale = sale ? formatPriceLabel(sale) : "";
-  const price =
-    priceLabelFromSale ||
-    (typeof legacyPrice === "string" ? legacyPrice : "") ||
-    "";
+  const normalizedAvailability = availabilityRaw as
+    | "available"
+    | "reserved"
+    | "sold"
+    | "not_for_sale"
+    | "";
 
-  // Описание: сначала work.about (массив строк), иначе — текст серии (intro: string | string[])
+  const priceLabelFromSale = sale ? formatPriceLabel(sale) : "";
+  const legacyPriceLabel = typeof legacyPrice === "string" ? legacyPrice : "";
+
+  // правило: если не available — цену не показываем
+  const shouldHidePrice =
+    normalizedAvailability === "sold" ||
+    normalizedAvailability === "reserved" ||
+    normalizedAvailability === "not_for_sale";
+
+  const price = shouldHidePrice ? "" : (priceLabelFromSale || legacyPriceLabel);
+
+  // Описание: work.about[] или intro серии (поддержка string | string[])
   const seriesIntroParts: string[] = Array.isArray(ser?.intro)
     ? ser!.intro
     : ser?.intro
@@ -81,7 +93,7 @@ export default function ArtworkDetailPage() {
     imgs.length > 0
       ? imgs
           .map((it: any, idx: number) => {
-            const raw = typeof it === "string" ? it : (it?.url || it?.src || "");
+            const raw = typeof it === "string" ? it : it?.url || it?.src || "";
             if (!raw) return null;
             const normalized = String(raw).replace(/^\/+/, "");
             const role = (it && typeof it === "object" && it.role) || (idx === 0 ? "main" : "detail");
@@ -92,11 +104,7 @@ export default function ArtworkDetailPage() {
             };
           })
           .filter(Boolean) as { url: string; role: any; alt: string }[]
-      : [
-          // Фолбэки на случай полного отсутствия картинок:
-          // { url: blueAbstractImage, role: "main" as const, alt: `${workTitle} - main view` },
-          // { url: gesturalPaintingImage, role: "detail" as const, alt: `${workTitle} - detail` },
-        ];
+      : [];
 
   // --- 4) Prev/Next в серии ---
   let prevWork: { title: string; slug: string } | undefined;
@@ -111,7 +119,7 @@ export default function ArtworkDetailPage() {
     }
   }
 
-  // --- 5) Related: из этой же серии ---
+  // --- 5) Related (тот же код, что и был) ---
   const relatedInSeries =
     (ser?.works || [])
       .filter((w: any) => w.slug !== slug)
@@ -132,7 +140,6 @@ export default function ArtworkDetailPage() {
       })
       .slice(0, 8);
 
-  // --- 6) Related: из других серий ---
   const relatedGlobal =
     (content?.series || [])
       .filter((s: any) => s.slug !== series)
@@ -142,12 +149,10 @@ export default function ArtworkDetailPage() {
         const raw = typeof first === "string" ? first : first?.src || first?.url || "";
         const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
         const imageUrl = normalized ? assetUrl(normalized) : "";
-
         const parentSeries = (content?.series || []).find((s: any) =>
           Array.isArray(s.works) ? s.works.some((it: any) => it.slug === w.slug) : false
         );
         const parentSlug = parentSeries?.slug || "gallery";
-
         return {
           id: w.slug || `global-${i + 1}`,
           title: w.title || "Untitled",
@@ -191,8 +196,8 @@ export default function ArtworkDetailPage() {
           year={year}
           medium={medium}
           dimensions={dimensions}
-          price={price}                 // ← теперь label, включая форматирование / on request
-          availability={availability}   // ← из sale или legacy
+          price={price}                    // ← пустая строка, если недоступно
+          availability={normalizedAvailability}
           description={description}
           images={artworkImages}
           prevWork={prevWork}
