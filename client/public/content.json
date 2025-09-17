@@ -80,11 +80,7 @@
             }
           ],
           "sale": {
-            "availability": "sold",
-            "price": {
-              "mode": "on_request"
-            },
-            "notes": ""
+            "availability": "sold"
           }
         },
         {
