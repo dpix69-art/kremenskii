@@ -78,7 +78,14 @@
               "url": "images/farbkoerper/fkb-02-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "sold",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "fkb-03",
@@ -504,16 +511,15 @@
       "title": "learning to breathe",
       "year": 2025,
       "platform": "bandcamp",
-      "pageUrl": "",
       "cover": "images/covers/learning-to-breathe-cover.jpg",
       "embed": "https://bandcamp.com/EmbeddedPlayer/v=2/album=1109147001/size=large/tracklist=false/artwork=small/transparent=true/",
+      "tracks": [],
       "meta": {
         "label": "Fish is watching",
         "platforms": [
           "Bandcamp"
         ]
       },
-      "tracks": [],
       "photos": [
         {
           "url": "images/sounds/learning-to-breathe-studio-1.jpg",
