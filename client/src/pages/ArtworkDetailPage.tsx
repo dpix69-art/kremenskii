@@ -211,7 +211,7 @@ export default function ArtworkDetailPage() {
           year={year}
           medium={medium}
           dimensions={dimensions}
-          price={price}                 {/* <-- undefined скрывает блок у большинства реализаций */}
+          price={price}                 
           availability={availability}
           description={description}
           images={artworkImages}
