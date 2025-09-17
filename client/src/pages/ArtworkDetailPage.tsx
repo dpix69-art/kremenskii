@@ -8,14 +8,23 @@ import Footer from "@/components/Footer";
 import { useContent } from "@/content/ContentProvider";
 import { assetUrl } from "@/lib/assetUrl";
 
-// плейсхолдеры на случай полного отсутствия картинок в JSON
-// import blueAbstractImage from "@assets/generated_images/Blue_abstract_color_field_53f088fd.png";
-// import industrialSculptureImage from "@assets/generated_images/Industrial_sculpture_assemblage_2b04ef29.png";
-// import gesturalPaintingImage from "@assets/generated_images/Gestural_earth_tone_painting_554103d6.png";
-// import minimalistInstallationImage from "@assets/generated_images/White_minimalist_installation_e967bdd0.png";
-// import digitalPrintImage from "@assets/generated_images/Digital_glitch_print_392d678b.png";
-
 type RouteParams = { series: string; slug: string };
+
+// helper: форматировать цену
+function formatPriceLabel(sale: any): string | "" {
+  const mode = sale?.price?.mode;
+  if (mode === "on_request") return "Price on request";
+  if (mode === "fixed" && typeof sale?.price?.amount === "number") {
+    const amount = sale.price.amount;
+    const currency = sale.price.currency || "EUR";
+    try {
+      return new Intl.NumberFormat("de-DE", { style: "currency", currency }).format(amount);
+    } catch {
+      return `${amount} ${currency}`;
+    }
+  }
+  return "";
+}
 
 export default function ArtworkDetailPage() {
   const { series, slug } = useParams<RouteParams>();
@@ -25,7 +34,6 @@ export default function ArtworkDetailPage() {
   const ser = (content?.series || []).find((s: any) => s.slug === series);
   const work = ser?.works?.find((w: any) => w.slug === slug);
 
-  // Мап серий для заголовка (под твои реальные слуги)
   const seriesMap: Record<string, string> = {
     farbkoerper: "Farbkörper",
     "pgsrd-trc": "Plywood Gravel Sand Road Dust (TRC)",
@@ -38,29 +46,34 @@ export default function ArtworkDetailPage() {
   const year = String(work?.year ?? "");
   const medium = work?.technique || work?.medium || "";
   const dimensions = work?.dimensions || "";
-  const price = work?.price || "";
-  const availability = work?.availability || "";
 
-  // Описание: сначала work.about (массив строк), иначе — ТЕКСТ ИЗ ОПИСАНИЯ СЕРИИ (ser.intro)
-  // const seriesIntro = typeof ser?.intro === "string" ? ser!.intro : "";
-  // const description: string[] =
-  //   Array.isArray(work?.about) && work!.about.length > 0
-  //     ? (work!.about as string[])
-  //     : seriesIntro
-  //     ? [seriesIntro]
-  //     : [];
+  // NEW: читаем sale с бэкомпатом
+  const sale = (work as any)?.sale;
+  const legacyAvailability = work?.availability;
+  const legacyPrice = work?.price;
 
-  // ↓ вместо текущего seriesIntro/description
-const seriesIntroParts: string[] = Array.isArray(ser?.intro)
-  ? ser!.intro
-  : ser?.intro
-  ? [String(ser!.intro)]
-  : [];
+  const availability =
+    (sale?.availability as string) ||
+    (typeof legacyAvailability === "string" ? legacyAvailability : "") ||
+    "";
 
-const description: string[] =
-  Array.isArray(work?.about) && work!.about.length > 0
-    ? (work!.about as string[])
-    : seriesIntroParts;
+  const priceLabelFromSale = sale ? formatPriceLabel(sale) : "";
+  const price =
+    priceLabelFromSale ||
+    (typeof legacyPrice === "string" ? legacyPrice : "") ||
+    "";
+
+  // Описание: сначала work.about (массив строк), иначе — текст серии (intro: string | string[])
+  const seriesIntroParts: string[] = Array.isArray(ser?.intro)
+    ? ser!.intro
+    : ser?.intro
+    ? [String(ser!.intro)]
+    : [];
+
+  const description: string[] =
+    Array.isArray(work?.about) && work!.about.length > 0
+      ? (work!.about as string[])
+      : seriesIntroParts;
 
   // --- 3) Изображения работы ---
   const imgs = Array.isArray(work?.images) ? (work!.images as any[]) : [];
@@ -68,12 +81,10 @@ const description: string[] =
     imgs.length > 0
       ? imgs
           .map((it: any, idx: number) => {
-            const raw =
-              typeof it === "string" ? it : (it?.url || it?.src || "");
+            const raw = typeof it === "string" ? it : (it?.url || it?.src || "");
             if (!raw) return null;
             const normalized = String(raw).replace(/^\/+/, "");
-            const role =
-              (it && typeof it === "object" && it.role) || (idx === 0 ? "main" : "detail");
+            const role = (it && typeof it === "object" && it.role) || (idx === 0 ? "main" : "detail");
             return {
               url: assetUrl(normalized),
               role: role as "main" | "detail" | "angle" | "poster" | "installation-view",
@@ -82,11 +93,12 @@ const description: string[] =
           })
           .filter(Boolean) as { url: string; role: any; alt: string }[]
       : [
-          { url: blueAbstractImage, role: "main" as const, alt: `${workTitle} - main view` },
-          { url: gesturalPaintingImage, role: "detail" as const, alt: `${workTitle} - detail` },
+          // Фолбэки на случай полного отсутствия картинок:
+          // { url: blueAbstractImage, role: "main" as const, alt: `${workTitle} - main view` },
+          // { url: gesturalPaintingImage, role: "detail" as const, alt: `${workTitle} - detail` },
         ];
 
-  // --- 4) Prev/Next в серии (по порядку в массиве works) ---
+  // --- 4) Prev/Next в серии ---
   let prevWork: { title: string; slug: string } | undefined;
   let nextWork: { title: string; slug: string } | undefined;
   if (ser?.works && Array.isArray(ser.works)) {
@@ -105,10 +117,9 @@ const description: string[] =
       .filter((w: any) => w.slug !== slug)
       .map((w: any, i: number) => {
         const first = Array.isArray(w.images) && w.images[0] ? w.images[0] : undefined;
-        const raw =
-          typeof first === "string" ? first : first?.src || first?.url || "";
+        const raw = typeof first === "string" ? first : first?.src || first?.url || "";
         const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
-        const imageUrl = normalized ? assetUrl(normalized) : minimalistInstallationImage;
+        const imageUrl = normalized ? assetUrl(normalized) : "";
         return {
           id: w.slug || `related-${i + 1}`,
           title: w.title || "Untitled",
@@ -121,19 +132,17 @@ const description: string[] =
       })
       .slice(0, 8);
 
-  // --- 6) Related: из других серий (берём первые работы) ---
+  // --- 6) Related: из других серий ---
   const relatedGlobal =
     (content?.series || [])
       .filter((s: any) => s.slug !== series)
       .flatMap((s: any) => (Array.isArray(s.works) ? s.works.slice(0, 1) : []))
       .map((w: any, i: number) => {
         const first = Array.isArray(w.images) && w.images[0] ? w.images[0] : undefined;
-        const raw =
-          typeof first === "string" ? first : first?.src || first?.url || "";
+        const raw = typeof first === "string" ? first : first?.src || first?.url || "";
         const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
-        const imageUrl = normalized ? assetUrl(normalized) : digitalPrintImage;
+        const imageUrl = normalized ? assetUrl(normalized) : "";
 
-        // нужно знать серию для линка
         const parentSeries = (content?.series || []).find((s: any) =>
           Array.isArray(s.works) ? s.works.some((it: any) => it.slug === w.slug) : false
         );
@@ -153,7 +162,7 @@ const description: string[] =
 
   const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "");
 
-  // --- 7) Analytics event ---
+  // --- 7) Analytics ---
   useEffect(() => {
     if (series && slug && typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "view_artwork", { series, work: slug });
@@ -182,15 +191,14 @@ const description: string[] =
           year={year}
           medium={medium}
           dimensions={dimensions}
-          price={price}
-          availability={availability}
+          price={price}                 // ← теперь label, включая форматирование / on request
+          availability={availability}   // ← из sale или legacy
           description={description}
           images={artworkImages}
           prevWork={prevWork}
           nextWork={nextWork}
         />
 
-        {/* Related Works in Series */}
         {relatedInSeries.length > 0 && (
           <section>
             <GalleryGrid
@@ -202,7 +210,6 @@ const description: string[] =
           </section>
         )}
 
-        {/* Related Works from Other Series */}
         {relatedGlobal.length > 0 && (
           <section style={{ marginTop: "var(--section-py-lg)" }}>
             <GalleryGrid
