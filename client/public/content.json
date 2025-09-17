@@ -109,7 +109,10 @@
               "url": "images/farbkoerper/fkb-03-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "sold"
+          }
         },
         {
           "slug": "fkb-04",
@@ -174,7 +177,7 @@
             }
           ],
           "sale": {
-            "availability": "reserved"
+            "availability": "sold"
           }
         }
       ]
