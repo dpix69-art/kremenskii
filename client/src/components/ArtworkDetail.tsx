@@ -4,9 +4,11 @@ import { useLocation, useParams } from "wouter";
 
 interface ArtworkImage {
   url: string;
-  role: 'main' | 'angle' | 'detail';
+  role: "main" | "angle" | "detail";
   alt: string;
 }
+
+type Availability = "available" | "reserved" | "sold" | "not_for_sale" | "";
 
 interface ArtworkDetailProps {
   title: string;
@@ -14,8 +16,8 @@ interface ArtworkDetailProps {
   year: string;
   medium: string;
   dimensions: string;
-  price?: string;
-  availability?: 'available' | 'sold';
+  price?: string; // e.g. "€1,800" or "Price on request"
+  availability?: Availability; // now supports reserved / not_for_sale
   description: string[];
   images: ArtworkImage[];
   prevWork?: { title: string; slug: string };
@@ -29,28 +31,41 @@ export default function ArtworkDetail({
   medium,
   dimensions,
   price,
-  availability = 'available',
+  availability = "available",
   description,
   images,
   prevWork,
-  nextWork
+  nextWork,
 }: ArtworkDetailProps) {
   const [, setLocation] = useLocation();
   const { series } = useParams();
-  const mainImage = images.find(img => img.role === 'main') || images[0];
-  const extraImages = images.filter(img => img.role !== 'main');
+
+  // Безопасные выборки изображений (страница-родитель уже подставляет плейсхолдер, но перестрахуемся)
+  const mainImage = images?.find((img) => img.role === "main") || images?.[0];
+  const extraImages = (images || []).filter((img) => img.role !== "main");
 
   const handlePrevClick = () => {
-    if (prevWork && series) {
-      setLocation(`/gallery/${series}/${prevWork.slug}`);
-    }
+    if (prevWork && series) setLocation(`/gallery/${series}/${prevWork.slug}`);
   };
 
   const handleNextClick = () => {
-    if (nextWork && series) {
-      setLocation(`/gallery/${series}/${nextWork.slug}`);
-    }
+    if (nextWork && series) setLocation(`/gallery/${series}/${nextWork.slug}`);
   };
+
+  // Человеческий лейбл доступности
+  const availabilityLabels: Record<Exclude<Availability, "">, string> = {
+    available: "Available",
+    reserved: "Reserved",
+    sold: "Sold",
+    not_for_sale: "Not for sale",
+  };
+  const availabilityLabel =
+    availability && availability !== ""
+      ? availabilityLabels[availability as Exclude<Availability, "">] || "Available"
+      : "Available";
+
+  // Показываем цену ТОЛЬКО если работа доступна
+  const showPrice = availability === "available";
 
   return (
     <div className="w-full">
@@ -60,18 +75,25 @@ export default function ArtworkDetail({
           {/* Left Column: Main Image */}
           <div className="col-span-12 lg:col-span-7">
             <div className="w-full flex justify-center">
-              <img
-                src={mainImage.url}
-                alt={mainImage.alt}
-                className="w-full max-h-[90vh] object-contain"
-                style={{ cursor: 'default', pointerEvents: 'none' }}
-                data-testid="main-artwork-image"
-              />
+              {mainImage ? (
+                <img
+                  src={mainImage.url}
+                  alt={mainImage.alt}
+                  className="w-full max-h-[90vh] object-contain"
+                  style={{ cursor: "default", pointerEvents: "none" }}
+                  data-testid="main-artwork-image"
+                />
+              ) : (
+                <div
+                  className="w-full max-h-[90vh] aspect-[4/5] bg-muted rounded"
+                  aria-hidden
+                />
+              )}
             </div>
           </div>
 
           {/* Right Column: Meta Panel */}
-          <div className="col-span-12 lg:col-span-5" style={{ marginTop: 'var(--block-gap-sm)' }}>
+          <div className="col-span-12 lg:col-span-5" style={{ marginTop: "var(--block-gap-sm)" }}>
             <div className="block-gap">
               {/* Title */}
               <h1
@@ -101,18 +123,18 @@ export default function ArtworkDetail({
                 {/* Availability */}
                 <div>
                   <dt className="text-type-small font-semibold text-foreground leading-snug">Availability:</dt>
-                  <dd className="text-type-body text-foreground leading-relaxed">
-                    {availability === 'sold' ? 'Sold' : 'Available'}
-                  </dd>
+                  <dd className="text-type-body text-foreground leading-relaxed">{availabilityLabel}</dd>
                 </div>
 
-                {/* Price */}
-                <div>
-                  <dt className="text-type-small font-semibold text-foreground leading-snug">Price:</dt>
-                  <dd className="text-type-body text-foreground leading-relaxed">
-                    {price || 'On request'}
-                  </dd>
-                </div>
+                {/* Price — показываем только если available */}
+                {showPrice && (
+                  <div>
+                    <dt className="text-type-small font-semibold text-foreground leading-snug">Price:</dt>
+                    <dd className="text-type-body text-foreground leading-relaxed">
+                      {price || "On request"}
+                    </dd>
+                  </div>
+                )}
 
                 {/* Technique */}
                 <div>
@@ -128,7 +150,7 @@ export default function ArtworkDetail({
               </dl>
 
               {/* About This Work */}
-              <div className="block-gap" style={{ paddingTop: 'var(--h3-mt)' }}>
+              <div className="block-gap" style={{ paddingTop: "var(--h3-mt)" }}>
                 <h3 className="text-type-h3 font-medium text-foreground h3-spacing">About This Work</h3>
                 <div className="space-y-4">
                   {description.map((paragraph, index) => (
@@ -156,11 +178,7 @@ export default function ArtworkDetail({
                   className="aspect-square overflow-hidden rounded-md bg-muted"
                   data-testid={`extra-image-${index}`}
                 >
-                  <img
-                    src={image.url}
-                    alt={image.alt}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={image.url} alt={image.alt} className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
@@ -180,7 +198,9 @@ export default function ArtworkDetail({
                 <ChevronLeft size={16} />
                 <span>Previous</span>
               </Button>
-            ) : <div />}
+            ) : (
+              <div />
+            )}
 
             {nextWork ? (
               <Button
@@ -192,7 +212,9 @@ export default function ArtworkDetail({
                 <span>Next</span>
                 <ChevronRight size={16} />
               </Button>
-            ) : <div />}
+            ) : (
+              <div />
+            )}
           </div>
         )}
       </div>

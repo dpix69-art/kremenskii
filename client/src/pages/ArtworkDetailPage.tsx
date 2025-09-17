@@ -211,7 +211,7 @@ export default function ArtworkDetailPage() {
           year={year}
           medium={medium}
           dimensions={dimensions}
-          price={price}                 
+          price={price}
           availability={availability}
           description={description}
           images={artworkImages}
