@@ -57,7 +57,14 @@
               "url": "images/farbkoerper/fkb-01-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "fkb-02",
