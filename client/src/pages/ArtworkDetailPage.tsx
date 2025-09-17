@@ -10,7 +10,11 @@ import { assetUrl } from "@/lib/assetUrl";
 
 type RouteParams = { series: string; slug: string };
 
-// helper: форматировать цену
+// SVG-заглушка (4:5) на случай отсутствия изображений у работы
+const BLANK_SVG =
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000"><rect width="100%" height="100%" fill="%23f2f2f2"/></svg>';
+
+// helper: форматировать цену из sale
 function formatPriceLabel(sale: any): string | "" {
   const mode = sale?.price?.mode;
   if (mode === "on_request") return "Price on request";
@@ -30,7 +34,7 @@ export default function ArtworkDetailPage() {
   const { series, slug } = useParams<RouteParams>();
   const { content } = useContent();
 
-  // --- 1) Найдём серию и работу в content.json ---
+  // 1) Найти серию и работу
   const ser = (content?.series || []).find((s: any) => s.slug === series);
   const work = ser?.works?.find((w: any) => w.slug === slug);
 
@@ -41,13 +45,13 @@ export default function ArtworkDetailPage() {
 
   const seriesTitle = ser?.title || seriesMap[series!] || series || "Unknown Series";
 
-  // --- 2) Основные поля работы ---
+  // 2) Основные поля
   const workTitle = work?.title || "Untitled";
   const year = String(work?.year ?? "");
   const medium = work?.technique || work?.medium || "";
   const dimensions = work?.dimensions || "";
 
-  // NEW: читаем sale с бэкомпатом
+  // Читаем sale (с поддержкой legacy)
   const sale = (work as any)?.sale;
   const legacyAvailability = work?.availability;
   const legacyPrice = work?.price;
@@ -57,25 +61,26 @@ export default function ArtworkDetailPage() {
     (typeof legacyAvailability === "string" ? legacyAvailability : "") ||
     "";
 
-  const normalizedAvailability = availabilityRaw as
+  const availability = (availabilityRaw || "") as
     | "available"
     | "reserved"
     | "sold"
     | "not_for_sale"
     | "";
 
-  const priceLabelFromSale = sale ? formatPriceLabel(sale) : "";
-  const legacyPriceLabel = typeof legacyPrice === "string" ? legacyPrice : "";
+  const priceFromSale = sale ? formatPriceLabel(sale) : "";
+  const priceLegacy = typeof legacyPrice === "string" ? legacyPrice : "";
 
-  // правило: если не available — цену не показываем
-  const shouldHidePrice =
-    normalizedAvailability === "sold" ||
-    normalizedAvailability === "reserved" ||
-    normalizedAvailability === "not_for_sale";
+  // Показываем цену только если доступно
+  const hidePrice =
+    availability === "sold" ||
+    availability === "reserved" ||
+    availability === "not_for_sale";
 
-  const price = shouldHidePrice ? "" : (priceLabelFromSale || legacyPriceLabel);
+  const price: string | undefined =
+    hidePrice ? undefined : (priceFromSale || priceLegacy || undefined);
 
-  // Описание: work.about[] или intro серии (поддержка string | string[])
+  // 3) Описание: work.about[] или intro серии (string | string[])
   const seriesIntroParts: string[] = Array.isArray(ser?.intro)
     ? ser!.intro
     : ser?.intro
@@ -87,26 +92,31 @@ export default function ArtworkDetailPage() {
       ? (work!.about as string[])
       : seriesIntroParts;
 
-  // --- 3) Изображения работы ---
+  // 4) Изображения: нормализуем и гарантируем минимум 1 плейсхолдер
   const imgs = Array.isArray(work?.images) ? (work!.images as any[]) : [];
-  const artworkImages =
-    imgs.length > 0
-      ? imgs
-          .map((it: any, idx: number) => {
-            const raw = typeof it === "string" ? it : it?.url || it?.src || "";
-            if (!raw) return null;
-            const normalized = String(raw).replace(/^\/+/, "");
-            const role = (it && typeof it === "object" && it.role) || (idx === 0 ? "main" : "detail");
-            return {
-              url: assetUrl(normalized),
-              role: role as "main" | "detail" | "angle" | "poster" | "installation-view",
-              alt: `${workTitle} - ${role}`,
-            };
-          })
-          .filter(Boolean) as { url: string; role: any; alt: string }[]
-      : [];
+  let artworkImages =
+    imgs
+      .map((it: any, idx: number) => {
+        const raw = typeof it === "string" ? it : it?.url || it?.src || "";
+        if (!raw) return null;
+        const normalized = String(raw).replace(/^\/+/, "");
+        const role =
+          (it && typeof it === "object" && it.role) || (idx === 0 ? "main" : "detail");
+        return {
+          url: assetUrl(normalized),
+          role: (role || "detail") as "main" | "detail" | "angle" | "poster" | "installation-view",
+          alt: `${workTitle} - ${role || "detail"}`,
+        };
+      })
+      .filter(Boolean) as { url: string; role: any; alt: string }[];
 
-  // --- 4) Prev/Next в серии ---
+  if (artworkImages.length === 0) {
+    artworkImages = [
+      { url: BLANK_SVG, role: "main" as const, alt: `${workTitle} - placeholder` },
+    ];
+  }
+
+  // 5) Prev/Next в серии
   let prevWork: { title: string; slug: string } | undefined;
   let nextWork: { title: string; slug: string } | undefined;
   if (ser?.works && Array.isArray(ser.works)) {
@@ -119,7 +129,7 @@ export default function ArtworkDetailPage() {
     }
   }
 
-  // --- 5) Related (тот же код, что и был) ---
+  // 6) Related
   const relatedInSeries =
     (ser?.works || [])
       .filter((w: any) => w.slug !== slug)
@@ -127,7 +137,7 @@ export default function ArtworkDetailPage() {
         const first = Array.isArray(w.images) && w.images[0] ? w.images[0] : undefined;
         const raw = typeof first === "string" ? first : first?.src || first?.url || "";
         const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
-        const imageUrl = normalized ? assetUrl(normalized) : "";
+        const imageUrl = normalized ? assetUrl(normalized) : BLANK_SVG;
         return {
           id: w.slug || `related-${i + 1}`,
           title: w.title || "Untitled",
@@ -148,11 +158,13 @@ export default function ArtworkDetailPage() {
         const first = Array.isArray(w.images) && w.images[0] ? w.images[0] : undefined;
         const raw = typeof first === "string" ? first : first?.src || first?.url || "";
         const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
-        const imageUrl = normalized ? assetUrl(normalized) : "";
+        const imageUrl = normalized ? assetUrl(normalized) : BLANK_SVG;
+
         const parentSeries = (content?.series || []).find((s: any) =>
           Array.isArray(s.works) ? s.works.some((it: any) => it.slug === w.slug) : false
         );
         const parentSlug = parentSeries?.slug || "gallery";
+
         return {
           id: w.slug || `global-${i + 1}`,
           title: w.title || "Untitled",
@@ -165,9 +177,12 @@ export default function ArtworkDetailPage() {
       })
       .slice(0, 8);
 
-  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(/^\/+/, "");
+  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
+    /^\/+/,
+    ""
+  );
 
-  // --- 7) Analytics ---
+  // 7) Analytics
   useEffect(() => {
     if (series && slug && typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "view_artwork", { series, work: slug });
@@ -196,8 +211,8 @@ export default function ArtworkDetailPage() {
           year={year}
           medium={medium}
           dimensions={dimensions}
-          price={price}                    // ← пустая строка, если недоступно
-          availability={normalizedAvailability}
+          price={price}                 {/* <-- undefined скрывает блок у большинства реализаций */}
+          availability={availability}
           description={description}
           images={artworkImages}
           prevWork={prevWork}
