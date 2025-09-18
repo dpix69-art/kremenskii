@@ -233,7 +233,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-01-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-02",
@@ -254,7 +261,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-02-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-03",
@@ -275,7 +289,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-03-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-04",
@@ -296,7 +317,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-04-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-05",
@@ -317,7 +345,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-05-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-06",
@@ -338,7 +373,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-06-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-07",
@@ -359,7 +401,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-07-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-08",
@@ -380,7 +429,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-08-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-09",
@@ -401,7 +457,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-09-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-10",
@@ -422,7 +485,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-10-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-11",
@@ -443,7 +513,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-11-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-12",
@@ -464,7 +541,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-12-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "pgsrd-trc-13",
@@ -485,7 +569,14 @@
               "url": "images/pgsrd-trc/pgsrd-trc-13-d-2.png",
               "role": "detail"
             }
-          ]
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
         }
       ]
     }
