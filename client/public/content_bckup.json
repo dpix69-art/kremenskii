@@ -676,36 +676,6 @@
           "text": "releases September 25, 2025"
         }
       ]
-    },
-    {
-      "slug": "vita",
-      "title": "Resonanzraum Vita",
-      "year": 2025,
-      "platform": "bandcamp",
-      "pageUrl": "https://fish-is-watching.bandcamp.com/track/resonanzraum-vita-live-performance-16112025",
-      "cover": "",
-      "embed": "<iframe style=\"border: 0; width: 100%; height: 120px;\" src=\"https://bandcamp.com/EmbeddedPlayer/track=833255040/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/\" seamless><a href=\"https://fish-is-watching.bandcamp.com/track/resonanzraum-vita-live-performance-16112025\">Resonanzraum Vita. Live Performance (16.11.2025) by fish is watching</a></iframe>",
-      "meta": {
-        "label": "Fish is watching",
-        "platforms": []
-      },
-      "tracks": [],
-      "photos": [
-        {
-          "url": "images/sounds/vita-1.png",
-          "alt": "fish is watching Resonanzraum Vita"
-        },
-        {
-          "url": "images/sounds/vita-2.png",
-          "alt": "fish is watching Resonanzraum Vita"
-        }
-      ],
-      "bodyBlocks": [
-        {
-          "type": "p",
-          "text": "Live performance and recording at the house of Vita.\n\nThe house has its own tone and quiet history. Light, walls, and furniture hold the memory of earlier rehearsals. We work with this memory as a resonant body. We listen to how air, wood, and instruments react to each other and let the space decide when the piece begins and ends."
-        }
-      ]
     }
   ],
   "statement": {
