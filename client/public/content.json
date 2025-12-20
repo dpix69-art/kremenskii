@@ -688,8 +688,7 @@
       "meta": {
         "label": "Fish is watching",
         "platforms": [
-          "Bandcamp",
-          "YouTube"
+          ""
         ]
       },
       "tracks": [],
@@ -718,6 +717,10 @@
       "My practice translates these dynamics into material form. By compressing and deforming substances I produce traces that register force and dependency. These imprints act as evidence of power relations and as memory of the mechanisms shaping human interaction."
     ],
     "exhibitions": [
+      {
+        "year": "2025",
+        "event": "Resonanzraum Vita. Live performance and recording at the house of Vita."
+      },
       {
         "year": "2024",
         "event": "Rolle Vorwärts, live performance music event series in Stuttgart"
