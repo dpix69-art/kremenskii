@@ -687,7 +687,10 @@
       "embed": "https://bandcamp.com/EmbeddedPlayer/track=833255040/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
       "meta": {
         "label": "Fish is watching",
-        "platforms": []
+        "platforms": [
+          "Bandcamp",
+          "YouTube"
+        ]
       },
       "tracks": [],
       "photos": [
