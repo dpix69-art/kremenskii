@@ -685,13 +685,11 @@
       "pageUrl": "https://fish-is-watching.bandcamp.com/track/resonanzraum-vita-live-performance-16112025",
       "cover": "images/covers/vita.png",
       "embed": "https://bandcamp.com/EmbeddedPlayer/track=833255040/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+      "tracks": [],
       "meta": {
         "label": "Fish is watching",
-        "platforms": [
-          ""
-        ]
+        "platforms": []
       },
-      "tracks": [],
       "photos": [
         {
           "url": "images/sounds/resonanzraum-photo-1.png",
@@ -713,8 +711,8 @@
   "statement": {
     "portrait": "images/kremenskii.png",
     "paragraphs": [
-      "Vulnerability and the absence of resistance expose the underlying dynamics of social relations. When dependency arises, people often reveal their true nature; without resistance, their actions rest entirely on\nthe conscience of society. ",
-      "My practice translates these dynamics into material form. By compressing and deforming substances I produce traces that register force and dependency. These imprints act as evidence of power relations and as memory of the mechanisms shaping human interaction."
+      "My practice approaches material as a site of registration rather than representation.\nI work with surfaces under pressure through compression, abrasion and deformation.",
+      "These actions register force, dependency and resistance as material fact. What remains is not an image, but a record of interaction, where structure forms through pressure rather than intention. "
     ],
     "exhibitions": [
       {
