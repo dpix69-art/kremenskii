@@ -37,7 +37,7 @@ export default function Sounds() {
             tabIndex={-1}
             className="text-type-h1 font-semibold text-foreground h1-spacing"
           >
-            Sounds
+            {/* Sounds */}
           </h1>
         </div>
 

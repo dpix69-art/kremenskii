@@ -68,7 +68,7 @@ export default function Statement() {
 
           {/* Page title */}
           <h1 id="page-title" className="text-type-h1 font-semibold mb-8">
-            Statement
+            {/* Statement */}
           </h1>
 
           {/* Content grid */}

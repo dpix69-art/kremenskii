@@ -113,7 +113,7 @@ export default function Gallery() {
             tabIndex={-1}
             className="text-type-h1 font-semibold text-foreground h1-spacing"
           >
-            Gallery
+            {/* Gallery */}
           </h1>
         </div>
 

@@ -54,7 +54,7 @@ export default function Contacts() {
             ]}
           />
           <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">
-            Contacts
+            {/* Contacts */}
           </h1>
         </div>
 
