@@ -152,7 +152,7 @@ export default function Home() {
                 tabIndex={-1}
                 className="text-type-h1 leading-tight font-semibold text-foreground h1-spacing"
               >
-                {content?.site? ?? ""}
+                {/* {content?.site?.artistName ?? ""} */}
               </h1>
               <p
                 className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide"
