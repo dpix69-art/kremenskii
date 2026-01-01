@@ -152,13 +152,13 @@ export default function Home() {
                 tabIndex={-1}
                 className="text-type-h1 leading-tight font-semibold text-foreground h1-spacing"
               >
-                {content?.site?.artistName ?? "Dmitrii Kremenskii"}
+                {content?.site?.artistName ?? ""}
               </h1>
               <p
                 className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide"
                 style={{ marginBottom: "var(--paragraph-gap)" }}
               >
-                {content?.site?.role ?? "artist"}
+                {content?.site?.role ?? "Visual & Sound Artist"}
               </p>
               <p className="text-type-body leading-relaxed text-foreground max-w-[48ch]">
                 {content?.site?.statement ?? "I record experience; I do not release it."}
