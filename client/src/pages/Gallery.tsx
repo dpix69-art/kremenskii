@@ -105,7 +105,7 @@ export default function Gallery() {
           <Breadcrumbs
             items={[
               { label: "Home", href: "#/", testId: "link-bc-home" },
-              { label: "Gallery", testId: "text-bc-current" },
+              { label: "", testId: "text-bc-current" },
             ]}
           />
           <h1
