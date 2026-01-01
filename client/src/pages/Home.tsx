@@ -161,7 +161,7 @@ export default function Home() {
                 {content?.site?.role ?? "Visual & Sound Artist"}
               </p>
               <p className="text-type-body leading-relaxed text-foreground max-w-[48ch]">
-                {content?.site?.statement ?? "I record experience; I do not release it."}
+                {content?.site?.statement ?? "Experience becomes structure. I compress, distort, layer. Material stores the action. Sound stores the space."}
               </p>
             </div>
           </div>
