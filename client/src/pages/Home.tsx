@@ -131,7 +131,7 @@ export default function Home() {
   }, [content]);
 
   // Собираем итоговую витрину: сначала закреплённые, затем рандом без дублей
-  const HOMEPAGE_COUNT = 8;
+  const HOMEPAGE_COUNT = 2;
   const homepageCards = useMemo(() => {
     const excludeIds = new Set(featuredCards.map((it) => it.id));
     const restPool = pool.filter((it) => !excludeIds.has(it.id));
