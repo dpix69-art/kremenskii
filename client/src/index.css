@@ -76,8 +76,9 @@
   --chart-4: 240 12% 40%;
   --chart-5: 180 10% 35%;
 
-  --font-sans: "Inter", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-  
+  /* --font-sans: "Inter", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif; */
+  --font-sans: "SUSE Mono", sans-serif;
+
   /* Typography Scale - Exact pixel values as per spec */
   --type-h1: 40px;         /* H1: 40px/1.2/600 */
   --type-h2: 30px;         /* H2: 30px/1.25/600 */
@@ -85,7 +86,7 @@
   --type-body: 17px;       /* Body: 17px/1.65/400 */
   --type-small: 13px;      /* Small: 13px/1.4/400 */
   --font-serif: Georgia, serif;
-  --font-mono: Menlo, monospace;
+  --font-mono: SUSE Mono, monospace;
   --radius: .5rem; /* 8px */
   
   /* VERTICAL RHYTHM TOKENS (multiples of 4px) */
