@@ -73,10 +73,10 @@ export default function Statement() {
 
           {/* Content grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Portrait */}
+            {/* Portrait aspect-[4/5] */}
             <div>
               {portrait ? (
-                <div className="aspect-[4/5] overflow-hidden rounded-md bg-muted">
+                <div className="overflow-hidden rounded-md bg-muted">
                   <img
                     src={portrait}
                     alt={`Portrait of ${artistName}`}
