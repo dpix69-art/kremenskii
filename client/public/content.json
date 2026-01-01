@@ -2,15 +2,15 @@
   "site": {
     "artistName": "Dmitrii Kremenskii",
     "role": "artist",
-    "statement": "I record experience; I do not release it. Whether loss, fear, or elevation, an event remains in me as structure. I return to it and translate it into action: pressure, abrasion, layering, frequency. Material becomes the site where that action is registered.",
+    "statement": "Experience becomes structure. I compress, distort, layer. Material stores the action. Sound stores the space.",
     "homeFeatured": [
       {
         "series": "farbkoerper",
-        "work": "fkb-01"
+        "work": "fkb-03"
       },
       {
         "series": "pgsrd-trc",
-        "work": "pgsrd-trc-07"
+        "work": "pgsrd-trc-04"
       }
     ]
   },
@@ -41,7 +41,7 @@
       "slug": "farbkoerper",
       "title": "Farbkörper",
       "year": "2022",
-      "intro": "Pigment behaves here as matter. I layer, compress and partly plane it off. The surface stores gradients of pressure rather than compositional harmony.",
+      "intro": "Pigment. Layered, compressed, planed.\nPressure stored as gradient.",
       "artworkImages": [
         "images/farbkoerper/fkb-01.jpg",
         "images/farbkoerper/fkb-02.jpg",
@@ -215,8 +215,7 @@
       "title": "Plywood Gravel Sand Road Dust (TRC)",
       "year": "2022",
       "intro": [
-        "Plywood, gravel and road dust register direct actions: imprint, friction, displacement. The surface forms a topography of actual interaction.",
-        "The crushed stone leaves permanent scars.\nPlywood absorbs the impact without breaking."
+        "Plywood, gravel, road dust.\nImprint, friction, displacement.\nSurface as topography of action."
       ],
       "artworkImages": [
         "images/pgsrd-trc/pgsrd-trc-01.jpg",
@@ -711,17 +710,19 @@
   "statement": {
     "portrait": "images/kremenskii.png",
     "paragraphs": [
-      "My practice approaches material as a site of registration rather than representation.\nI work with surfaces under pressure through compression, abrasion and deformation.",
-      "These actions register force, dependency and resistance as material fact. What remains is not an image, but a record of interaction, where structure forms through pressure rather than intention. "
+      "My practice registers what is already present: pressure in material, frequency in space.",
+      "I work through repetition, distortion, and layering. Pigment, plywood, gravel, sound — each becomes a site where action is stored. Not as representation, but as fact.",
+      "Compression leaves a gradient. Abrasion leaves a scar. Electromagnetic fields modulate sound. Movement shapes frequency.",
+      "The work does not serve. It documents."
     ],
     "exhibitions": [
       {
         "year": "2025",
-        "event": "Resonanzraum Vita. Live performance and recording at the house of Vita."
+        "event": "Resonanzraum Vita. Site-specific recording and performance."
       },
       {
         "year": "2024",
-        "event": "Rolle Vorwärts, live performance music event series in Stuttgart"
+        "event": "Rolle Vorwärts, Stuttgart. Live sound."
       },
       {
         "year": "2024",
