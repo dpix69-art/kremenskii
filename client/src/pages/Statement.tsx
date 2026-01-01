@@ -90,15 +90,41 @@ export default function Statement() {
 
             {/* Text + Exhibitions */}
             <div className="md:col-span-2 space-y-4">
-              {paragraphs.map((p, i) => (
+              {/* {paragraphs.map((p, i) => (
                 <p key={i} className="text-type-body text-foreground leading-relaxed">
                   {p}
                 </p>
-              ))}
+              ))} */}
+
+              {paragraphs.map((p, i) => {
+                const t = (p ?? "").trim();
+
+                const isVita = t.toLowerCase() === "vita";
+                const isSelected =
+                  t.toLowerCase() === "selected" ||
+                  t.toLowerCase().startsWith("selected programs");
+
+                if (isVita || isSelected) {
+                  return (
+                    <h3
+                      key={i}
+                      className="text-type-h3 font-medium mt-8 mb-4"
+                    >
+                      {isSelected ? "Selected Programs" : "Vita"}
+                    </h3>
+                  );
+                }
+
+                return (
+                  <p key={i} className="text-type-body text-foreground leading-relaxed">
+                    {p}
+                  </p>
+                );
+              })}
 
               {exhibitionsNormalized.length > 0 && (
                 <div className="mt-6">
-                  <h3 className="text-type-h3 font-medium mb-4">Selected Programs: Exhibitions & Performances</h3>
+                  <h3 className="text-type-h3 font-medium mb-4">Selected: Exhibitions & Lives</h3>
                   <ul className="list-disc pl-5 space-y-2">
                     {exhibitionsNormalized.map((line, i) => (
                       <li key={i}>{line}</li>
