@@ -22,7 +22,7 @@ export default function Impressum() {
           />
 
           <h1 id="page-title" tabIndex={-1} className="text-type-h1 font-semibold text-foreground h1-spacing">
-            Impressum
+            
           </h1>
 
           <div className="prose max-w-none">
