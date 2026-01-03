@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GalleryGrid from "@/components/GalleryGrid";
@@ -26,7 +27,7 @@ function pickRandom<T>(arr: T[], n: number): T[] {
   return copy.slice(0, n);
 }
 
-// Построить карточку Artwork по (seriesSlug, workSlug)
+// Build an artwork card from (seriesSlug, workSlug)
 function makeArtworkCard(content: any, seriesSlug: string, workSlug: string): GridItem | null {
   const s = (content?.series || []).find((ss: any) => ss.slug === seriesSlug);
   if (!s || !Array.isArray(s.works)) return null;
@@ -57,7 +58,7 @@ function makeArtworkCard(content: any, seriesSlug: string, workSlug: string): Gr
 export default function Home() {
   const { content } = useContent();
 
-  // Базовый пул карточек (как было)
+  // Base card pool (as before)
   const pool = useMemo(() => {
     const items: GridItem[] = [];
 
@@ -109,7 +110,7 @@ export default function Home() {
     return items;
   }, [content]);
 
-  // Закреплённые карточки (первые 1–2)
+  // Fixed featured artwork cards (first 1–2)
   const featuredCards = useMemo(() => {
     const raw = (content?.site?.homeFeatured || []) as { series: string; work: string }[];
     if (!Array.isArray(raw) || raw.length === 0) return [];
@@ -117,7 +118,7 @@ export default function Home() {
       .map((f) => makeArtworkCard(content, f.series, f.work))
       .filter(Boolean) as GridItem[];
 
-    // убрать дубли и ограничить до 2
+    // Deduplicate and limit to 2
     const seen = new Set<string>();
     const uniq: GridItem[] = [];
     for (const it of resolved) {
@@ -130,7 +131,7 @@ export default function Home() {
     return uniq;
   }, [content]);
 
-  // Собираем итоговую витрину: сначала закреплённые, затем рандом без дублей
+  // Final homepage selection: featured first, then random without duplicates
   const HOMEPAGE_COUNT = 2;
   const homepageCards = useMemo(() => {
     const excludeIds = new Set(featuredCards.map((it) => it.id));
@@ -139,6 +140,8 @@ export default function Home() {
     const randomTail = pickRandom(restPool, need);
     return [...featuredCards, ...randomTail];
   }, [pool, featuredCards]);
+
+  const featuredSound = content?.sounds?.[0];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -152,7 +155,7 @@ export default function Home() {
                 tabIndex={-1}
                 className="text-type-h1 leading-tight font-semibold text-foreground h1-spacing"
               >
-                {/* {content?.site?.artistName ?? ""} */}
+                {/* artist name intentionally omitted */}
               </h1>
               <p
                 className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide"
@@ -161,13 +164,14 @@ export default function Home() {
                 {content?.site?.role ?? "Visual & Sound Artist"}
               </p>
               <p className="text-type-body leading-relaxed text-foreground max-w-[48ch]">
-                {content?.site?.statement ?? "Experience becomes structure. I compress, distort, layer. Material stores the action. Sound stores the space."}
+                {content?.site?.statement ??
+                  "Experience becomes structure. I compress, distort, layer. Material stores the action. Sound stores the space."}
               </p>
             </div>
           </div>
         </section>
 
-        {/* Две вертикальные карточки */}
+        {/* Two vertical featured cards */}
         <section style={{ marginTop: "var(--heading-gap-lg)" }}>
           <GalleryGrid
             items={homepageCards}
@@ -176,47 +180,49 @@ export default function Home() {
             imageAspect="portrait"
           />
         </section>
-        {/* Sounds */}
-        <section style={{ marginTop: "var(--heading-gap-lg)" }}>
-          <div className="site-container">
-            <div className="max-w-4xl">
-              {/* Divider / section label */}
-              <p className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
-                Sounds
-              </p>
 
-              <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-6">
-                {(content?.sounds || []).map((s: any) => {
-                  const platform = String(s?.platform || "").toLowerCase();
-                  const iframeHeight =
-                    platform.includes("soundcloud") ? 166 : 120; // stable layout, no autoplay
+        {/* Featured sound */}
+        {featuredSound && (
+          <section style={{ marginTop: "var(--heading-gap-lg)" }}>
+            <div className="site-container">
+              <div className="max-w-4xl">
+                <p className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
+                  Sounds
+                </p>
 
-                  return (
-                    <div key={s.slug} className="space-y-2">
-                      <div className="flex items-start justify-between gap-6">
-                        <div className="text-type-body leading-relaxed text-foreground">
-                          {s.title || "Untitled"}
-                        </div>
-                        <div className="text-type-small leading-snug text-muted-foreground whitespace-nowrap">
-                          {s.year ? String(s.year) : ""}
-                        </div>
-                      </div>
+                <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-2">
+                  <div className="flex items-start justify-between gap-6">
+                    <Link
+                      to={`/projects/${featuredSound.slug}`}
+                      className="text-type-body leading-relaxed text-foreground hover:underline"
+                    >
+                      {featuredSound.title || "Untitled"}
+                    </Link>
 
-                      <iframe
-                        title={`${s.title || "Sound"} player`}
-                        src={s.embed}
-                        loading="lazy"
-                        className="w-full border-0"
-                        style={{ height: `${iframeHeight}px` }}
-                        allow="encrypted-media; fullscreen"
-                      />
+                    <div className="text-type-small leading-snug text-muted-foreground whitespace-nowrap">
+                      {featuredSound.year ? String(featuredSound.year) : ""}
                     </div>
-                  );
-                })}
+                  </div>
+
+                  <iframe
+                    title={`${featuredSound.title || "Sound"} player`}
+                    src={featuredSound.embed}
+                    loading="lazy"
+                    className="w-full border-0"
+                    style={{
+                      height: String(featuredSound.platform || "")
+                        .toLowerCase()
+                        .includes("soundcloud")
+                        ? "166px"
+                        : "120px",
+                    }}
+                    allow="encrypted-media; fullscreen"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </main>
       <Footer />
     </div>
