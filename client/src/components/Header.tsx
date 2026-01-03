@@ -51,7 +51,7 @@ export default function Header({ artistName: artistNameProp }: HeaderProps) {
   return (
     <header className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-32">
           {/* Logo / Artist Name */}
           <Link href="/" data-testid="link-home" className="cursor-pointer" aria-label="Home">
             <div
