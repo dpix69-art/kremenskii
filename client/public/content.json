@@ -71,7 +71,9 @@
           "sale": {
             "availability": "available",
             "price": {
-              "mode": "on_request"
+              "mode": "fixed",
+              "amount": 800,
+              "currency": "EUR"
             },
             "notes": ""
           }
@@ -123,7 +125,9 @@
           "sale": {
             "availability": "available",
             "price": {
-              "mode": "on_request"
+              "mode": "fixed",
+              "amount": 800,
+              "currency": "EUR"
             },
             "notes": ""
           }
@@ -151,7 +155,9 @@
           "sale": {
             "availability": "available",
             "price": {
-              "mode": "on_request"
+              "mode": "fixed",
+              "amount": 800,
+              "currency": "EUR"
             },
             "notes": ""
           }
@@ -179,7 +185,9 @@
           "sale": {
             "availability": "available",
             "price": {
-              "mode": "on_request"
+              "mode": "fixed",
+              "amount": 800,
+              "currency": "EUR"
             },
             "notes": ""
           }
