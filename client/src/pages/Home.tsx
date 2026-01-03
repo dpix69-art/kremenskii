@@ -176,6 +176,47 @@ export default function Home() {
             imageAspect="portrait"
           />
         </section>
+        {/* Sounds */}
+        <section style={{ marginTop: "var(--heading-gap-lg)" }}>
+          <div className="site-container">
+            <div className="max-w-4xl">
+              {/* Divider / section label */}
+              <p className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
+                Sounds
+              </p>
+
+              <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-6">
+                {(content?.sounds || []).map((s: any) => {
+                  const platform = String(s?.platform || "").toLowerCase();
+                  const iframeHeight =
+                    platform.includes("soundcloud") ? 166 : 120; // stable layout, no autoplay
+
+                  return (
+                    <div key={s.slug} className="space-y-2">
+                      <div className="flex items-start justify-between gap-6">
+                        <div className="text-type-body leading-relaxed text-foreground">
+                          {s.title || "Untitled"}
+                        </div>
+                        <div className="text-type-small leading-snug text-muted-foreground whitespace-nowrap">
+                          {s.year ? String(s.year) : ""}
+                        </div>
+                      </div>
+
+                      <iframe
+                        title={`${s.title || "Sound"} player`}
+                        src={s.embed}
+                        loading="lazy"
+                        className="w-full border-0"
+                        style={{ height: `${iframeHeight}px` }}
+                        allow="encrypted-media; fullscreen"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
