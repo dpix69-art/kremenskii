@@ -192,7 +192,7 @@ export default function Home() {
                 <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-2">
                   <div className="flex items-start gap-6">
                 <a
-                  href={`#/projects/${featuredSound.slug}`}
+                  href={`#/${featuredSound.slug}`}
                   className="text-type-body leading-relaxed text-foreground hover:underline"
                 >
                   {featuredSound.title || "Untitled"}
