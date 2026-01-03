@@ -184,15 +184,15 @@ export default function Home() {
         {featuredSound && (
           <section style={{ marginTop: "var(--heading-gap-lg)", paddingBottom: "200px", }}>
             <div className="site-container">
-              <div className="max-w-4xl">
+              <div className="">
                 <p className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
                   Sounds
                 </p>
 
                 <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-2">
-                  <div className="flex items-start gap-6">
+                  <div className="flex justify-between items-start gap-6">
                 <a
-                  href={`#/${featuredSound.slug}`}
+                  href={`#/sounds/${featuredSound.slug}`}
                   className="text-type-body leading-relaxed text-foreground hover:underline"
                 >
                   {featuredSound.title || "Untitled"}
