@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GalleryGrid from "@/components/GalleryGrid";
@@ -192,12 +191,12 @@ export default function Home() {
 
                 <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-2">
                   <div className="flex items-start justify-between gap-6">
-                    <Link
-                      to={`/projects/${featuredSound.slug}`}
-                      className="text-type-body leading-relaxed text-foreground hover:underline"
-                    >
-                      {featuredSound.title || "Untitled"}
-                    </Link>
+                <a
+                  href={`#/projects/${featuredSound.slug}`}
+                  className="text-type-body leading-relaxed text-foreground hover:underline"
+                >
+                  {featuredSound.title || "Untitled"}
+                </a>
 
                     <div className="text-type-small leading-snug text-muted-foreground whitespace-nowrap">
                       {featuredSound.year ? String(featuredSound.year) : ""}
