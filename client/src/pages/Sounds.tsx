@@ -33,7 +33,7 @@ export default function Sounds() {
               Sounds
             </p>
 
-            <p className="text-type-body leading-relaxed text-muted-foreground max-w-[52ch]">
+            <p className="text-type-body leading-relaxed text-muted-foreground max-w-2xl pb-[72px]">
               Sound and surface as parallel practices. Field recordings, electromagnetic modulation, sample manipulation. Repetition, distortion, constraint. Both document action, not intention.
               <br />
               One take — one line. No overdubs, no corrections.
