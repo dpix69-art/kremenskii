@@ -63,8 +63,7 @@ export default function Sounds() {
                       <p className="text-type-small leading-relaxed text-muted-foreground max-w-[72ch]">
                         {s.summary}
                       </p>
-                    )}
-
+                    )}  
                     <iframe
                       title={`${s.title || "Sound"} player`}
                       src={s.embed}
