@@ -605,9 +605,9 @@
       "year": 2026,
       "platform": "bandcamp",
       "pageUrl": "https://kremenskii.bandcamp.com/album/150011",
-      "summary": "Four tracks. Field recordings, modulation, polyrhythmic abstraction. Stuttgart and surrounding areas.",
       "cover": "images/covers/150011.jpg",
       "embed": "https://bandcamp.com/EmbeddedPlayer/album=1250921947/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+      "summary": "Four tracks. Field recordings, modulation, polyrhythmic abstraction. Stuttgart and surrounding areas.",
       "meta": {
         "label": "Independent",
         "platforms": []
@@ -617,7 +617,7 @@
       "bodyBlocks": [
         {
           "type": "p",
-          "text": "150011\n\nBuilt from field recordings made in Stuttgart and surrounding areas. Recorded with contact microphones, XY stereo (Zoom H5), and wide stereo high-sensitivity mics.\n\nThe four tracks work through repetition, distortion, and layering. Polyrhythmic structures resist fixed grids. A filtered tone repeats as pulse. Percussion holds the frame. The rhythmic layer distorts within frequency constraints.\n\nNo edits, no second takes. One take — one line.\n"
+          "text": "150011\n\nBuilt from field recordings made in Stuttgart and surrounding areas. Recorded with contact microphones, XY stereo (Zoom H5), and wide stereo high-sensitivity mics.\n\nThe four tracks work through repetition, distortion, and layering. Polyrhythmic structures resist fixed grids. A filtered tone repeats as pulse. Percussion holds the frame. The rhythmic layer distorts within frequency constraints.\n"
         }
       ]
     },
@@ -627,9 +627,9 @@
       "year": 2025,
       "platform": "bandcamp",
       "pageUrl": "https://fish-is-watching.bandcamp.com/track/resonanzraum-vita-live-performance-16112025",
-      "summary": "Site-specific recording and performance. House of Vita.",
       "cover": "images/covers/vita.png",
       "embed": "https://bandcamp.com/EmbeddedPlayer/track=833255040/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+      "summary": "Site-specific recording and performance. House of Vita.",
       "tracks": [],
       "meta": {
         "label": "Fish is watching",
@@ -657,9 +657,9 @@
       "title": "learning to breathe",
       "year": 2025,
       "platform": "bandcamp",
-      "summary": "Drones, pulses, and textured noise. Performed together in one take. No overdubs, no edits.",
       "cover": "images/covers/learning-to-breathe-cover.jpg",
       "embed": "https://bandcamp.com/EmbeddedPlayer/v=2/album=1109147001/size=large/tracklist=false/artwork=small/transparent=true/",
+      "summary": "Drones, pulses, and textured noise. Performed together in one take. No overdubs, no edits.",
       "tracks": [],
       "meta": {
         "label": "Fish is watching",
@@ -702,28 +702,21 @@
       "year": 2024,
       "platform": "soundcloud",
       "pageUrl": "https://soundcloud.com/dmitrii-kremenskii/impact-of-the-fan",
-      "summary": "Live studio session. Electromagnetic fields are modulated by airflow from a fan, shaping the sound in real time.",
       "cover": "images/covers/impact-of-the-fan.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1852226274",
-      "meta": {
-        "label": "Independent",
-        "platforms": [
-          "SoundCloud"
-        ]
-      },
+      "summary": "Live studio session. Fun controllers sound modulation through electromagnetic fields.",
       "tracks": [
         {
           "title": "Impact of the Fan",
           "duration": "51:31"
         }
       ],
-      "photos": [],
-      "bodyBlocks": [
-        {
-          "type": "p",
-          "text": "Live studio session. Electromagnetic fields are modulated by airflow from a fan, shaping the sound in real time."
-        }
-      ]
+      "meta": {
+        "label": "Independent",
+        "platforms": [
+          "SoundCloud"
+        ]
+      }
     },
     {
       "slug": "live-at-elsiens-galerie-stuttgart",
@@ -731,9 +724,9 @@
       "year": 2024,
       "platform": "soundcloud",
       "pageUrl": "https://soundcloud.com/dmitrii-kremenskii/live-at-elsiens-galerie-stuttgart",
-      "summary": "Live at Elsiens Galerie Stuttgart",
       "cover": "images/covers/live-at-elsiens-galerie-stuttgart.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1841509218",
+      "summary": "Live at Elsiens Galerie Stuttgart",
       "tracks": [
         {
           "title": "Live at Elsiens Galerie Stuttgart",
