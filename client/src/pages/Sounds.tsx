@@ -29,11 +29,11 @@ export default function Sounds() {
 
         <section style={{ marginTop: "var(--heading-gap-lg)", paddingBottom: "200px" }}>
           <div className="site-container">
-            <p className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
-              {/* Sounds */}
-            </p>
+            <h1 className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
+              Sounds
+            </h1>
 
-            <p className="text-type-body leading-relaxed text-muted-foreground max-w-2xl pb-[72px]">
+            <p className="text-type-body leading-relaxed max-w-2xl pb-[72px]">
               Sound and surface as parallel practices. Field recordings, electromagnetic modulation, sample manipulation. Repetition, distortion, constraint. Both document action, not intention.
               <br />
               One take — one line. No overdubs, no corrections.
