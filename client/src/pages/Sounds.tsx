@@ -30,7 +30,7 @@ export default function Sounds() {
         <section style={{ marginTop: "var(--heading-gap-lg)", paddingBottom: "200px" }}>
           <div className="site-container">
             <p className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
-              Sounds
+              {/* Sounds */}
             </p>
 
             <p className="text-type-body leading-relaxed text-muted-foreground max-w-2xl pb-[72px]">
