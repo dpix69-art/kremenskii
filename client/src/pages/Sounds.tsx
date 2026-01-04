@@ -36,6 +36,7 @@ export default function Sounds() {
             <p className="text-type-body leading-relaxed max-w-2xl pb-[72px]">
               Sound and surface as parallel practices. Field recordings, electromagnetic modulation, sample manipulation. Repetition, distortion, constraint. Both document action, not intention.
               <br />
+              <br />
               Not constructed, performed. Composition forms during recording. No edits, no second takes.
               <br />
               One take — one line. 
