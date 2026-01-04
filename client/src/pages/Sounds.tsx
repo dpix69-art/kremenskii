@@ -37,9 +37,7 @@ export default function Sounds() {
               Sound and surface as parallel practices. Field recordings, electromagnetic modulation, sample manipulation. Repetition, distortion, constraint. Both document action, not intention.
               <br />
               <br />
-              Not constructed, performed. Composition forms during recording. No edits, no second takes.
-              <br />
-              One take — one line. 
+              Not constructed, performed. Composition forms during recording. No edits, no second takes. One take — one line. 
             </p>
 
             <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-0">
