@@ -30,13 +30,8 @@ export default function Sounds() {
         <section style={{ marginTop: "var(--heading-gap-lg)", paddingBottom: "200px" }}>
           <div className="site-container">
             <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">
-             <a  
-               href="#/sounds"
-              //  className="hover:underline"
-             >
-               Sounds
-                </a>
-</h1>
+              Sounds
+            </h1>
 
             <p className="text-type-body leading-relaxed max-w-2xl pb-[72px]">
               Sound and surface as parallel practices. Field recordings, electromagnetic modulation, sample manipulation. Repetition, distortion, constraint. Both document action, not intention.

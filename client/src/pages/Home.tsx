@@ -186,7 +186,12 @@ export default function Home() {
             <div className="site-container">
               <div className="">
                 <p className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
-                  Sounds
+                  <a  
+               href="#/sounds"
+              //  className="hover:underline"
+             >
+               Sounds
+                </a>
                 </p>
 
                 <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-2">
