@@ -29,7 +29,7 @@ export default function Sounds() {
 
         <section style={{ marginTop: "var(--heading-gap-lg)", paddingBottom: "200px" }}>
           <div className="site-container">
-            <h1 className="text-type-small leading-snug font-semibold text-muted-foreground uppercase tracking-wide">
+            <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">
               Sounds
             </h1>
 
