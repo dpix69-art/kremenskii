@@ -58,7 +58,7 @@ export default function Sounds() {
           platform.includes("soundcloud") ? 166 : 120;
 
         return (
-          <div key={s.slug} className="space-y-2">
+          <div key={s.slug} className="space-y-2 pb-[72px]">
             <div className="flex items-start justify-between gap-6">
               <a
                 href={`#/sounds/${s.slug}`}
