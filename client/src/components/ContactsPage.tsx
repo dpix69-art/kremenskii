@@ -94,7 +94,7 @@ export default function ContactsPage({
                     className="text-base"
                     data-testid="button-download-portfolio"
                   >
-                    Download portfolio (PDF, 16.3 MB)
+                    Download portfolio (PDF, 10.9 MB)
                   </Button>
                 </div>
               </div>
