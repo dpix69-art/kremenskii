@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "prerender": "node scripts/prerender.js",
     "sitemap": "node scripts/sitemap.js",
-    "build:prod": "vite build && node scripts/prerender.js && node scripts/sitemap.js"
+    "build:prod": "vite build && node scripts/prerender.js && node scripts/sitemap.js",
+    "optimize-images": "node scripts/optimize-images.js"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -28,6 +29,7 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.17",
     "typescript": "5.6.3",
-    "vite": "^5.4.19"
+    "vite": "^5.4.19",
+    "sharp": "^0.33.3"
   }
 }

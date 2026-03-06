@@ -2,6 +2,7 @@ import { useParams, Link } from "wouter";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GalleryGrid from "@/components/GalleryGrid";
+import ImageZoom from "@/components/ImageZoom";
 import Footer from "@/components/Footer";
 import { useContent } from "@/content/ContentProvider";
 import { assetUrl } from "@/lib/assetUrl";
@@ -16,6 +17,27 @@ function formatPrice(sale: any): string {
     catch { return `${amount} ${currency}`; }
   }
   return "";
+}
+
+/**
+ * Given an image URL like "images/farbkoerper/fkb-01.jpg"
+ * returns the thumb version: "images/farbkoerper/fkb-01-thumb.jpg"
+ * Falls back to original if thumb doesn't follow convention.
+ */
+function thumbUrl(src: string): string {
+  if (!src) return "";
+  const dot = src.lastIndexOf(".");
+  if (dot === -1) return assetUrl(src);
+  const base = src.slice(0, dot);
+  const ext = src.slice(dot);
+  // Don't double-thumb
+  if (base.endsWith("-thumb")) return assetUrl(src);
+  return assetUrl(`${base}-thumb${ext}`);
+}
+
+function rawUrl(imgObj: any): string {
+  if (!imgObj) return "";
+  return typeof imgObj === "string" ? imgObj : imgObj.url || imgObj.src || "";
 }
 
 export default function ArtworkDetailPage() {
@@ -52,15 +74,17 @@ export default function ArtworkDetailPage() {
 
   // Images
   const imgs = Array.isArray(work.images) ? work.images : [];
-  const mainImg = imgs[0] ? assetUrl(typeof imgs[0] === "string" ? imgs[0] : imgs[0].url || "") : "";
-  const details = imgs.slice(1).map((im: any) => assetUrl(typeof im === "string" ? im : im.url || "")).filter(Boolean);
+  const mainRaw = rawUrl(imgs[0]);
+  const mainFull = mainRaw ? assetUrl(mainRaw) : "";
+  const mainThumb = mainRaw ? thumbUrl(mainRaw) : "";
+  const details = imgs.slice(1).map((im: any) => rawUrl(im)).filter(Boolean);
 
   // Related
   const related = (ser?.works || [])
     .filter((w: any) => w.slug !== slug)
     .map((w: any, i: number) => {
       const first = Array.isArray(w.images) && w.images[0];
-      const url = first ? (typeof first === "string" ? first : first.url || "") : "";
+      const url = rawUrl(first);
       return {
         id: w.slug || `r${i}`,
         title: w.title || "Untitled",
@@ -92,10 +116,15 @@ export default function ArtworkDetailPage() {
 
           {/* Layout: image + meta */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
-            {/* Main image */}
+            {/* Main image with zoom */}
             <div className="lg:col-span-7">
-              {mainImg ? (
-                <img src={mainImg} alt={title} className="w-full max-h-[85vh] object-contain" />
+              {mainFull ? (
+                <ImageZoom
+                  thumbSrc={mainThumb}
+                  fullSrc={mainFull}
+                  alt={title}
+                  zoomScale={2.5}
+                />
               ) : (
                 <div className="w-full aspect-[4/5] bg-muted rounded-sm" />
               )}
@@ -187,7 +216,7 @@ export default function ArtworkDetailPage() {
               <h2 className="text-type-h3 font-semibold" style={{ marginBottom: "var(--h2-mb)" }}>Details</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {details.map((src: string, i: number) => (
-                  <img key={i} src={src} alt="Detail" className="w-full aspect-square object-cover rounded-sm transition-transform duration-500 hover:scale-[1.02]" loading="lazy" />
+                  <img key={i} src={thumbUrl(src)} alt="Detail" className="w-full aspect-square object-cover rounded-sm transition-transform duration-500 hover:scale-[1.02]" loading="lazy" />
                 ))}
               </div>
             </div>
