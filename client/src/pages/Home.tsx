@@ -159,36 +159,38 @@ export default function Home() {
                 <Link href="/sounds"><span className="cursor-pointer">Sounds</span></Link>
               </p>
 
-              <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-2">
-                <div className="flex justify-between items-start gap-6">
-                  <Link href={`/sounds/${featuredSound.slug}`}>
-                    <span className="text-type-body leading-relaxed text-foreground hover:underline cursor-pointer">
-                      {featuredSound.title || "Untitled"}
-                    </span>
-                  </Link>
-                  <div className="text-type-small leading-snug text-muted-foreground whitespace-nowrap">
-                    {featuredSound.year ? String(featuredSound.year) : ""}
-                    {featuredSound.meta?.label ? ` · ${featuredSound.meta.label}` : ""}
+              <div style={{ marginTop: "var(--paragraph-gap)" }}>
+                {/* Title row with small cover thumbnail */}
+                <div className="flex items-start gap-4">
+                  {soundCover && (
+                    <Link href={`/sounds/${featuredSound.slug}`}>
+                      <div className="w-16 h-16 flex-shrink-0 rounded-sm overflow-hidden cursor-pointer">
+                        <img
+                          src={soundCover}
+                          alt={featuredSound.title || ""}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.05]"
+                          loading="lazy"
+                        />
+                      </div>
+                    </Link>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-start gap-6">
+                      <Link href={`/sounds/${featuredSound.slug}`}>
+                        <span className="text-type-body leading-relaxed text-foreground hover:underline cursor-pointer">
+                          {featuredSound.title || "Untitled"}
+                        </span>
+                      </Link>
+                      <div className="text-type-small leading-snug text-muted-foreground whitespace-nowrap">
+                        {featuredSound.year ? String(featuredSound.year) : ""}
+                        {featuredSound.meta?.label ? ` · ${featuredSound.meta.label}` : ""}
+                      </div>
+                    </div>
+                    {featuredSound.summary && (
+                      <p className="text-type-small text-muted-foreground mt-1">{featuredSound.summary}</p>
+                    )}
                   </div>
                 </div>
-
-                {featuredSound.summary && (
-                  <p className="text-type-small text-muted-foreground">{featuredSound.summary}</p>
-                )}
-
-                {/* Cover image */}
-                {soundCover && (
-                  <Link href={`/sounds/${featuredSound.slug}`}>
-                    <div className="mt-4 cursor-pointer overflow-hidden rounded-sm">
-                      <img
-                        src={soundCover}
-                        alt={featuredSound.title || ""}
-                        className="w-full max-w-md aspect-square object-cover transition-transform duration-500 hover:scale-[1.02]"
-                        loading="lazy"
-                      />
-                    </div>
-                  </Link>
-                )}
 
                 {/* Embedded player */}
                 {soundEmbed && (
