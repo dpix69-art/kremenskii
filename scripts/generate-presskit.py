@@ -1,303 +1,294 @@
 #!/usr/bin/env python3
 """
-generate-presskit.py
+generate-presskit.py v2
 
-Generates a clean, minimal Press Kit PDF from content.json.
-Reads artist info, statement, exhibitions, selected works.
-Output: client/public/files/press-kit.pdf
+Clean, minimal Press Kit PDF from content.json.
+Images compressed in-memory (800px max, JPEG q75) — output ~500KB vs 29MB.
 
 Usage: python3 scripts/generate-presskit.py
+Requires: pip install reportlab Pillow
 """
 
-import json
-import os
+import json, io
 from pathlib import Path
-
+from PIL import Image as PILImage
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.lib.colors import HexColor
 from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
 
-# ── Paths ────────────────────────────────────────────────
 CONTENT_PATH = Path("client/public/content.json")
 IMAGES_DIR = Path("client/public")
 OUTPUT_PATH = Path("client/public/files/press-kit.pdf")
 
-# ── Colors ───────────────────────────────────────────────
+IMG_MAX_PX = 800
+IMG_QUALITY = 75
+
 BLACK = HexColor("#0a0a0a")
-GRAY = HexColor("#666666")
-LIGHT_GRAY = HexColor("#e0e0e0")
-WHITE = HexColor("#ffffff")
+DARK = HexColor("#333333")
+GRAY = HexColor("#777777")
+LIGHT = HexColor("#cccccc")
 
-# ── Layout ───────────────────────────────────────────────
 PAGE_W, PAGE_H = A4
-MARGIN_L = 28 * mm
-MARGIN_R = 28 * mm
-MARGIN_T = 28 * mm
-MARGIN_B = 24 * mm
-CONTENT_W = PAGE_W - MARGIN_L - MARGIN_R
+ML, MR, MT, MB = 30*mm, 30*mm, 32*mm, 28*mm
+CW = PAGE_W - ML - MR
 
-def load_content():
-    with open(CONTENT_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
 
-def draw_line(c, y, width=None):
-    """Draw a thin horizontal rule."""
-    w = width or CONTENT_W
-    c.setStrokeColor(LIGHT_GRAY)
-    c.setLineWidth(0.5)
-    c.line(MARGIN_L, y, MARGIN_L + w, y)
+def compress_image(img_path):
+    full = IMAGES_DIR / img_path.replace("?url-00", "").lstrip("/")
+    if not full.exists():
+        return None
+    try:
+        img = PILImage.open(full).convert("RGB")
+        w, h = img.size
+        if max(w, h) > IMG_MAX_PX:
+            r = IMG_MAX_PX / max(w, h)
+            img = img.resize((int(w*r), int(h*r)), PILImage.LANCZOS)
+        buf = io.BytesIO()
+        img.save(buf, format="JPEG", quality=IMG_QUALITY, optimize=True)
+        buf.seek(0)
+        return ImageReader(buf)
+    except Exception as e:
+        print(f"  Warning: {full} — {e}")
+        return None
 
-def draw_text_block(c, text, x, y, font="Helvetica", size=9, color=BLACK, max_width=None, leading=14):
-    """Draw multiline text, return new y position."""
-    c.setFont(font, size)
-    c.setFillColor(color)
-    mw = max_width or CONTENT_W
 
+def rule(c, y):
+    c.setStrokeColor(LIGHT)
+    c.setLineWidth(0.4)
+    c.line(ML, y, ML + CW, y)
+
+
+def wrap_lines(text, font, size, max_w):
     lines = []
-    for paragraph in text.split("\n"):
-        paragraph = paragraph.strip()
-        if not paragraph:
+    for para in text.split("\n"):
+        para = para.strip()
+        if not para:
             lines.append("")
             continue
-        words = paragraph.split()
-        current_line = ""
-        for word in words:
-            test = f"{current_line} {word}".strip()
-            if pdfmetrics.stringWidth(test, font, size) <= mw:
-                current_line = test
+        words = para.split()
+        cur = ""
+        for w in words:
+            test = f"{cur} {w}".strip()
+            if pdfmetrics.stringWidth(test, font, size) <= max_w:
+                cur = test
             else:
-                if current_line:
-                    lines.append(current_line)
-                current_line = word
-        if current_line:
-            lines.append(current_line)
+                if cur: lines.append(cur)
+                cur = w
+        if cur: lines.append(cur)
+    return lines
 
+
+def draw_text(c, text, x, y, font="Helvetica", size=9, color=BLACK, max_w=None, leading=13.5):
+    mw = max_w or CW
+    lines = wrap_lines(text, font, size, mw)
+    c.setFont(font, size)
+    c.setFillColor(color)
     for line in lines:
-        if y < MARGIN_B + 20:
+        if y < MB + 16:
             c.showPage()
-            y = PAGE_H - MARGIN_T
+            y = PAGE_H - MT
             c.setFont(font, size)
             c.setFillColor(color)
         if line == "":
-            y -= leading * 0.6
+            y -= leading * 0.5
         else:
             c.drawString(x, y, line)
             y -= leading
     return y
 
-def add_image_safe(c, img_path, x, y, max_w, max_h):
-    """Try to add an image, return (actual_w, actual_h) or None."""
-    full_path = IMAGES_DIR / img_path.replace("?url-00", "").lstrip("/")
-    if not full_path.exists():
-        return None
-    try:
-        img = ImageReader(str(full_path))
-        iw, ih = img.getSize()
-        ratio = min(max_w / iw, max_h / ih)
-        w = iw * ratio
-        h = ih * ratio
-        c.drawImage(img, x, y - h, width=w, height=h, preserveAspectRatio=True)
-        return (w, h)
-    except Exception:
-        return None
 
-
-def build_pdf(content):
+def build_pdf(data):
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     c = canvas.Canvas(str(OUTPUT_PATH), pagesize=A4)
     c.setTitle("Press Kit — Dmitrii Kremenskii")
     c.setAuthor("Dmitrii Kremenskii")
-    c.setSubject("Artist Press Kit")
 
-    site = content.get("site", {})
-    statement = content.get("statement", {})
-    contacts = content.get("contacts", {})
-    series_list = content.get("series", [])
-    exhibitions = statement.get("exhibitions", [])
-    paragraphs = statement.get("paragraphs", [])
+    site = data.get("site", {})
+    stmt = data.get("statement", {})
+    cont = data.get("contacts", {})
 
-    artist_name = site.get("artistName", "Dmitrii Kremenskii")
+    name = site.get("artistName", "Dmitrii Kremenskii")
     role = site.get("role", "Visual & Sound Artist")
+    city = cont.get("city", "Stuttgart")
+    country = cont.get("country", "Germany")
+    email = cont.get("email", "hi@kremenskii.art")
+    paragraphs = stmt.get("paragraphs", [])
+    exhibitions = stmt.get("exhibitions", [])
+    series_list = data.get("series", [])
 
-    # ── PAGE 1: Header + Statement ───────────────────────
-    y = PAGE_H - MARGIN_T
+    # ══════════════════════════════════════════════════════
+    # PAGE 1: Header
+    # ══════════════════════════════════════════════════════
+    y = PAGE_H - MT
 
-    # Artist name — large
-    c.setFont("Helvetica-Bold", 24)
+    # Name
+    c.setFont("Helvetica-Bold", 22)
     c.setFillColor(BLACK)
-    c.drawString(MARGIN_L, y, artist_name)
-    y -= 14
-
-    # Role
-    c.setFont("Helvetica", 10)
-    c.setFillColor(GRAY)
-    c.drawString(MARGIN_L, y, role)
-    y -= 8
-
-    # Location + email
-    city = contacts.get("city", "Stuttgart")
-    country = contacts.get("country", "Germany")
-    email = contacts.get("email", "hi@kremenskii.art")
-    c.drawString(MARGIN_L, y, f"{city}, {country}  ·  {email}")
-    y -= 6
-
-    # Website
-    c.drawString(MARGIN_L, y, "kremenskii.art")
-    y -= 20
-
-    draw_line(c, y)
+    c.drawString(ML, y, name)
     y -= 24
 
-    # Statement heading
-    c.setFont("Helvetica-Bold", 11)
-    c.setFillColor(BLACK)
-    c.drawString(MARGIN_L, y, "Statement")
-    y -= 18
-
-    # Statement text — filter out empty/whitespace-only paragraphs
-    statement_text = "\n\n".join(p for p in paragraphs if p.strip())
-    y = draw_text_block(c, statement_text, MARGIN_L, y, size=9, leading=14, color=BLACK)
+    # Role — on its own line
+    c.setFont("Helvetica", 9.5)
+    c.setFillColor(GRAY)
+    c.drawString(ML, y, role)
     y -= 20
+
+    # Contact block — each on its own line, clean
+    c.setFont("Helvetica", 8.5)
+    c.setFillColor(DARK)
+    c.drawString(ML, y, f"{city}, {country}")
+    y -= 13
+    c.drawString(ML, y, email)
+    y -= 13
+    c.setFillColor(GRAY)
+    c.drawString(ML, y, "kremenskii.art")
+    y -= 22
+
+    rule(c, y)
+    y -= 28
+
+    # ── Statement ────────────────────────────────────────
+    c.setFont("Helvetica-Bold", 10)
+    c.setFillColor(BLACK)
+    c.drawString(ML, y, "Statement")
+    y -= 20
+
+    clean = [p for p in paragraphs if p.strip()]
+    y = draw_text(c, "\n\n".join(clean), ML, y, size=8.5, leading=13, color=DARK)
+    y -= 16
 
     # ── Exhibitions ──────────────────────────────────────
     if exhibitions:
-        draw_line(c, y)
+        rule(c, y)
         y -= 24
-
-        c.setFont("Helvetica-Bold", 11)
+        c.setFont("Helvetica-Bold", 10)
         c.setFillColor(BLACK)
-        c.drawString(MARGIN_L, y, "Selected Exhibitions & Performances")
-        y -= 20
+        c.drawString(ML, y, "Selected Exhibitions & Performances")
+        y -= 22
 
         for ex in exhibitions:
-            if y < MARGIN_B + 30:
+            if y < MB + 16:
                 c.showPage()
-                y = PAGE_H - MARGIN_T
-
-            year = str(ex.get("year", ""))
-            event = ex.get("event", "")
-
-            c.setFont("Helvetica", 9)
+                y = PAGE_H - MT
+            yr = str(ex.get("year", ""))
+            ev = ex.get("event", "")
+            c.setFont("Helvetica", 8.5)
             c.setFillColor(GRAY)
-            c.drawString(MARGIN_L, y, year)
-            c.setFillColor(BLACK)
-            c.drawString(MARGIN_L + 40, y, event)
-            y -= 16
+            c.drawString(ML, y, yr)
+            c.setFillColor(DARK)
+            c.drawString(ML + 36, y, ev)
+            y -= 15
 
-    # ── PAGE 2+: Selected Works ──────────────────────────
+    # ══════════════════════════════════════════════════════
+    # PAGE 2+: Selected Works
+    # ══════════════════════════════════════════════════════
     c.showPage()
-    y = PAGE_H - MARGIN_T
+    y = PAGE_H - MT
 
-    c.setFont("Helvetica-Bold", 11)
+    c.setFont("Helvetica-Bold", 10)
     c.setFillColor(BLACK)
-    c.drawString(MARGIN_L, y, "Selected Works")
-    y -= 24
+    c.drawString(ML, y, "Selected Works")
+    y -= 28
+
+    IW = 52 * mm   # image width
+    IH = 66 * mm   # image max height
+    TX = ML + IW + 10 * mm
+    TW = CW - IW - 10 * mm
 
     for s in series_list:
-        works = s.get("works", [])
-        # Pick up to 3 works per series for press kit
-        selected = works[:3]
-
-        for w in selected:
-            if y < MARGIN_B + 100:
+        for w in s.get("works", [])[:3]:
+            if y < MB + 80 * mm:
                 c.showPage()
-                y = PAGE_H - MARGIN_T
+                y = PAGE_H - MT
 
-            # Try to show image
+            top = y
+            img_h = 0
+
+            # Compressed image
             imgs = w.get("images", [])
-            main_img = None
             if imgs:
                 raw = imgs[0] if isinstance(imgs[0], str) else imgs[0].get("url", "")
                 if raw:
-                    result = add_image_safe(c, raw, MARGIN_L, y, 65 * mm, 50 * mm)
-                    if result:
-                        img_w, img_h = result
-                        # Text next to image
-                        text_x = MARGIN_L + img_w + 8 * mm
-                        text_w = CONTENT_W - img_w - 8 * mm
-                        main_img = True
+                    reader = compress_image(raw)
+                    if reader:
+                        rw, rh = reader.getSize()
+                        ratio = min(IW / rw, IH / rh)
+                        dw, dh = rw * ratio, rh * ratio
+                        c.drawImage(reader, ML, y - dh, width=dw, height=dh)
+                        img_h = dh
 
-            if not main_img:
-                text_x = MARGIN_L
-                text_w = CONTENT_W
-                img_h = 0
-
-            text_y = y - 4
-
-            # Work title
-            c.setFont("Helvetica-Bold", 10)
+            # Meta text
+            ty = top - 2
+            c.setFont("Helvetica-Bold", 9.5)
             c.setFillColor(BLACK)
-            c.drawString(text_x, text_y, w.get("title", "Untitled"))
-            text_y -= 16
+            c.drawString(TX, ty, w.get("title", "Untitled"))
+            ty -= 17
 
-            # Series
-            c.setFont("Helvetica", 8)
-            c.setFillColor(GRAY)
-            c.drawString(text_x, text_y, f"Series: {s.get('title', '')}")
-            text_y -= 13
-
-            # Year
-            c.drawString(text_x, text_y, f"Year: {w.get('year', '')}")
-            text_y -= 13
-
-            # Technique
-            tech = w.get("technique", w.get("medium", ""))
-            if tech:
-                c.drawString(text_x, text_y, f"Technique: {tech}")
-                text_y -= 13
-
-            # Dimensions
-            dims = w.get("dimensions", "")
-            if dims:
-                c.drawString(text_x, text_y, f"Dimensions: {dims}")
-                text_y -= 13
-
-            # Availability
+            fields = [
+                ("Series", s.get("title", "")),
+                ("Year", str(w.get("year", ""))),
+                ("Technique", w.get("technique", w.get("medium", ""))),
+                ("Dimensions", w.get("dimensions", "")),
+            ]
             avail = w.get("sale", {}).get("availability", "")
             if avail:
-                label = {"available": "Available", "sold": "Sold"}.get(avail, avail.title())
-                c.drawString(text_x, text_y, f"Status: {label}")
-                text_y -= 13
+                fields.append(("Status", {"available": "Available", "sold": "Sold"}.get(avail, avail.title())))
 
-            y = min(text_y, y - img_h) - 20
+            c.setFont("Helvetica", 7.5)
+            for label, val in fields:
+                if not val: continue
+                c.setFillColor(GRAY)
+                c.drawString(TX, ty, label)
+                c.setFillColor(DARK)
+                c.drawString(TX + 50, ty, val)
+                ty -= 12
 
-    # ── Contact footer on last page ──────────────────────
-    if y < MARGIN_B + 60:
+            y = top - max(img_h, top - ty) - 16
+
+    # ══════════════════════════════════════════════════════
+    # Footer
+    # ══════════════════════════════════════════════════════
+    if y < MB + 60:
         c.showPage()
-        y = PAGE_H - MARGIN_T
+        y = PAGE_H - MT
 
-    y -= 10
-    draw_line(c, y)
+    y -= 6
+    rule(c, y)
     y -= 20
 
-    c.setFont("Helvetica", 9)
+    c.setFont("Helvetica", 8)
+    c.setFillColor(DARK)
+    c.drawString(ML, y, f"{email}  ·  kremenskii.art")
+    y -= 13
     c.setFillColor(GRAY)
-    c.drawString(MARGIN_L, y, f"Contact: {email}  ·  kremenskii.art")
-    y -= 14
-    c.drawString(MARGIN_L, y, f"{city}, {country}")
-    y -= 14
+    c.drawString(ML, y, f"{city}, {country}")
+    y -= 16
 
-    socials = contacts.get("socials", [])
-    social_text = "  ·  ".join(s.get("href", "") for s in socials if s.get("href"))
-    if social_text:
-        c.setFont("Helvetica", 7)
-        c.drawString(MARGIN_L, y, social_text)
-        y -= 14
+    for s in cont.get("socials", []):
+        lbl = s.get("label", "")
+        href = s.get("href", "")
+        if lbl and href:
+            c.setFont("Helvetica", 7)
+            c.setFillColor(GRAY)
+            c.drawString(ML, y, f"{lbl}: {href}")
+            y -= 11
 
+    y -= 6
     c.setFont("Helvetica", 7)
-    c.drawString(MARGIN_L, y, "High-resolution images available on request.")
-    y -= 14
-    c.drawString(MARGIN_L, y, f"© {artist_name}. All rights reserved. No reproduction without written permission.")
+    c.setFillColor(GRAY)
+    c.drawString(ML, y, "High-resolution images available on request.")
+    y -= 11
+    c.drawString(ML, y, f"\u00a9 {name}. All rights reserved.")
 
     c.save()
-    print(f"\n✅ Press Kit saved: {OUTPUT_PATH}")
-    print(f"   Size: {OUTPUT_PATH.stat().st_size / 1024:.0f} KB\n")
+
+    kb = OUTPUT_PATH.stat().st_size / 1024
+    sz = f"{kb:.0f} KB" if kb < 1024 else f"{kb/1024:.1f} MB"
+    print(f"\n\u2705 Press Kit: {OUTPUT_PATH}  ({sz})\n")
 
 
 if __name__ == "__main__":
-    content = load_content()
-    build_pdf(content)
+    build_pdf(json.loads(CONTENT_PATH.read_text(encoding="utf-8")))
