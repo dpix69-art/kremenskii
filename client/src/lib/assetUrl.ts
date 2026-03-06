@@ -1,7 +1,9 @@
-export function assetUrl(p?: string) {
-  if (!p) return "";
-  const base = (import.meta.env.BASE_URL || "/").replace(/\/+$/, "");
-  const v = import.meta.env.VITE_BUILD_ID || "";
-  const url = `${base}/${String(p).replace(/^\/+/, "")}`;
-  return v ? `${url}${url.includes("?") ? "&" : "?"}v=${v}` : url;
+/**
+ * Normalize asset URL — ensures leading slash for absolute paths
+ */
+export function assetUrl(src: string): string {
+  if (!src) return "";
+  const s = src.replace(/^\/+/, "").replace(/\?url.*$/, "");
+  if (s.startsWith("http") || s.startsWith("data:")) return s;
+  return "/" + s;
 }

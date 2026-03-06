@@ -1,248 +1,191 @@
 import { useParams } from "wouter";
-import { useEffect } from "react";
+import { Link } from "wouter";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ArtworkDetail from "@/components/ArtworkDetail";
 import GalleryGrid from "@/components/GalleryGrid";
 import Footer from "@/components/Footer";
 import { useContent } from "@/content/ContentProvider";
 import { assetUrl } from "@/lib/assetUrl";
 
-type RouteParams = { series: string; slug: string };
-
-// SVG-заглушка (4:5) на случай отсутствия изображений у работы
-const BLANK_SVG =
-  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000"><rect width="100%" height="100%" fill="%23f2f2f2"/></svg>';
-
-// helper: форматировать цену из sale
-function formatPriceLabel(sale: any): string | "" {
+function formatPrice(sale: any): string {
   const mode = sale?.price?.mode;
   if (mode === "on_request") return "Price on request";
   if (mode === "fixed" && typeof sale?.price?.amount === "number") {
     const amount = sale.price.amount;
     const currency = sale.price.currency || "EUR";
-    try {
-      return new Intl.NumberFormat("de-DE", { style: "currency", currency }).format(amount);
-    } catch {
-      return `${amount} ${currency}`;
-    }
+    try { return new Intl.NumberFormat("de-DE", { style: "currency", currency }).format(amount); }
+    catch { return `${amount} ${currency}`; }
   }
   return "";
 }
 
 export default function ArtworkDetailPage() {
-  const { series, slug } = useParams<RouteParams>();
+  const { series, slug } = useParams<{ series: string; slug: string }>();
   const { content } = useContent();
 
-  // 1) Найти серию и работу
   const ser = (content?.series || []).find((s: any) => s.slug === series);
   const work = ser?.works?.find((w: any) => w.slug === slug);
+  const seriesTitle = ser?.title || series || "Series";
 
-  const seriesMap: Record<string, string> = {
-    farbkoerper: "Farbkörper",
-    "pgsrd-trc": "Plywood Gravel Sand Road Dust (TRC)",
-  };
-
-  const seriesTitle = ser?.title || seriesMap[series!] || series || "Unknown Series";
-
-  // 2) Основные поля
-  const workTitle = work?.title || "Untitled";
-  const year = String(work?.year ?? "");
-  const medium = work?.technique || work?.medium || "";
-  const dimensions = work?.dimensions || "";
-
-  // Читаем sale (с поддержкой legacy)
-  const sale = (work as any)?.sale;
-  const legacyAvailability = work?.availability;
-  const legacyPrice = work?.price;
-
-  const availabilityRaw =
-    (sale?.availability as string) ||
-    (typeof legacyAvailability === "string" ? legacyAvailability : "") ||
-    "";
-
-  const availability = (availabilityRaw || "") as
-    | "available"
-    | "reserved"
-    | "sold"
-    | "not_for_sale"
-    | "";
-
-  const priceFromSale = sale ? formatPriceLabel(sale) : "";
-  const priceLegacy = typeof legacyPrice === "string" ? legacyPrice : "";
-
-  // Показываем цену только если доступно
-  const hidePrice =
-    availability === "sold" ||
-    availability === "reserved" ||
-    availability === "not_for_sale";
-
-  const price: string | undefined =
-    hidePrice ? undefined : (priceFromSale || priceLegacy || undefined);
-
-  // 3) Описание: work.about[] или intro серии (string | string[])
-  const seriesIntroParts: string[] = Array.isArray(ser?.intro)
-    ? ser!.intro
-    : ser?.intro
-    ? [String(ser!.intro)]
-    : [];
-
-  const description: string[] =
-    Array.isArray(work?.about) && work!.about.length > 0
-      ? (work!.about as string[])
-      : seriesIntroParts;
-
-  // 4) Изображения: нормализуем и гарантируем минимум 1 плейсхолдер
-  const imgs = Array.isArray(work?.images) ? (work!.images as any[]) : [];
-  let artworkImages =
-    imgs
-      .map((it: any, idx: number) => {
-        const raw = typeof it === "string" ? it : it?.url || it?.src || "";
-        if (!raw) return null;
-        const normalized = String(raw).replace(/^\/+/, "");
-        const role =
-          (it && typeof it === "object" && it.role) || (idx === 0 ? "main" : "detail");
-        return {
-          url: assetUrl(normalized),
-          role: (role || "detail") as "main" | "detail" | "angle" | "poster" | "installation-view",
-          alt: `${workTitle} - ${role || "detail"}`,
-        };
-      })
-      .filter(Boolean) as { url: string; role: any; alt: string }[];
-
-  if (artworkImages.length === 0) {
-    artworkImages = [
-      { url: BLANK_SVG, role: "main" as const, alt: `${workTitle} - placeholder` },
-    ];
+  if (!work) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
+        <main className="flex-1 section-py">
+          <div className="site-container">
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Gallery", href: "/gallery" }, { label: "Not found" }]} />
+            <h1 className="text-type-h2 font-semibold mt-6">Artwork not found</h1>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
-  // 5) Prev/Next в серии
-  let prevWork: { title: string; slug: string } | undefined;
-  let nextWork: { title: string; slug: string } | undefined;
-  if (ser?.works && Array.isArray(ser.works)) {
-    const idx = ser.works.findIndex((w: any) => w.slug === slug);
-    if (idx >= 0) {
-      const p = ser.works[idx - 1];
-      const n = ser.works[idx + 1];
-      prevWork = p ? { title: p.title || "Previous", slug: p.slug } : undefined;
-      nextWork = n ? { title: n.title || "Next", slug: n.slug } : undefined;
-    }
-  }
+  const title = work.title || "Untitled";
+  const year = String(work.year ?? "");
+  const technique = work.technique || work.medium || "";
+  const dimensions = work.dimensions || "";
+  const sale = work.sale;
+  const availability = sale?.availability || "";
+  const price = availability === "available" ? formatPrice(sale) : "";
 
-  // 6) Related
-  const relatedInSeries =
-    (ser?.works || [])
-      .filter((w: any) => w.slug !== slug)
-      .map((w: any, i: number) => {
-        const first = Array.isArray(w.images) && w.images[0] ? w.images[0] : undefined;
-        const raw = typeof first === "string" ? first : first?.src || first?.url || "";
-        const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
-        const imageUrl = normalized ? assetUrl(normalized) : BLANK_SVG;
-        return {
-          id: w.slug || `related-${i + 1}`,
-          title: w.title || "Untitled",
-          year: String(w.year ?? ""),
-          medium: w.technique || w.medium || "",
-          imageUrl,
-          linkUrl: `#/gallery/${series}/${w.slug || ""}`,
-          type: "artwork" as const,
-        };
-      })
-      .slice(0, 8);
+  // Images
+  const imgs = Array.isArray(work.images) ? work.images : [];
+  const mainImg = imgs[0] ? assetUrl(typeof imgs[0] === "string" ? imgs[0] : imgs[0].url || "") : "";
+  const details = imgs.slice(1).map((im: any) => assetUrl(typeof im === "string" ? im : im.url || "")).filter(Boolean);
 
-  const relatedGlobal =
-    (content?.series || [])
-      .filter((s: any) => s.slug !== series)
-      .flatMap((s: any) => (Array.isArray(s.works) ? s.works.slice(0, 1) : []))
-      .map((w: any, i: number) => {
-        const first = Array.isArray(w.images) && w.images[0] ? w.images[0] : undefined;
-        const raw = typeof first === "string" ? first : first?.src || first?.url || "";
-        const normalized = raw ? String(raw).replace(/^\/+/, "") : "";
-        const imageUrl = normalized ? assetUrl(normalized) : BLANK_SVG;
+  // Related works in series
+  const related = (ser?.works || [])
+    .filter((w: any) => w.slug !== slug)
+    .map((w: any, i: number) => {
+      const first = Array.isArray(w.images) && w.images[0];
+      const url = first ? (typeof first === "string" ? first : first.url || "") : "";
+      return {
+        id: w.slug || `r${i}`,
+        title: w.title || "Untitled",
+        year: String(w.year ?? ""),
+        medium: w.technique || w.medium || "",
+        imageUrl: url,
+        linkUrl: `/gallery/${series}/${w.slug}`,
+        type: "artwork" as const,
+      };
+    })
+    .slice(0, 8);
 
-        const parentSeries = (content?.series || []).find((s: any) =>
-          Array.isArray(s.works) ? s.works.some((it: any) => it.slug === w.slug) : false
-        );
-        const parentSlug = parentSeries?.slug || "gallery";
-
-        return {
-          id: w.slug || `global-${i + 1}`,
-          title: w.title || "Untitled",
-          year: String(w.year ?? ""),
-          medium: w.technique || w.medium || "",
-          imageUrl,
-          linkUrl: `#/gallery/${parentSlug}/${w.slug || ""}`,
-          type: "artwork" as const,
-        };
-      })
-      .slice(0, 8);
-
-  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/portfolio.pdf").replace(
-    /^\/+/,
-    ""
-  );
-
-  // 7) Analytics
-  useEffect(() => {
-    if (series && slug && typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "view_artwork", { series, work: slug });
-    }
-  }, [series, slug]);
+  // Prev/Next
+  const workIdx = (ser?.works || []).findIndex((w: any) => w.slug === slug);
+  const prevWork = workIdx > 0 ? ser.works[workIdx - 1] : null;
+  const nextWork = workIdx >= 0 && workIdx < (ser?.works?.length || 0) - 1 ? ser.works[workIdx + 1] : null;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
-
       <main className="flex-1">
         <div className="site-container section-py">
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "#/", testId: "link-bc-home" },
-              { label: "Gallery", href: "#/gallery", testId: "link-bc-gallery" },
-              { label: seriesTitle, href: `#/gallery/${series}`, testId: "link-bc-series" },
-              { label: workTitle, testId: "text-bc-current" },
-            ]}
-          />
+          <Breadcrumbs items={[
+            { label: "Home", href: "/" },
+            { label: "Gallery", href: "/gallery" },
+            { label: seriesTitle, href: `/gallery/${series}` },
+            { label: title },
+          ]} />
+
+          {/* Layout: image + meta */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+            {/* Main image */}
+            <div className="lg:col-span-7">
+              {mainImg ? (
+                <img src={mainImg} alt={title} className="w-full max-h-[85vh] object-contain" />
+              ) : (
+                <div className="w-full aspect-[4/5] bg-muted rounded-sm" />
+              )}
+            </div>
+
+            {/* Meta panel */}
+            <div className="lg:col-span-5 pt-2">
+              <h1 className="text-type-h1 font-semibold text-foreground mb-6">{title}</h1>
+
+              {/* Availability badge */}
+              {availability === "available" && (
+                <span className="inline-block px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide border rounded-sm text-green-700 border-green-700 mb-6">
+                  Available
+                </span>
+              )}
+              {availability === "sold" && (
+                <span className="inline-block px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide border rounded-sm text-muted-foreground border-muted-foreground/30 mb-6">
+                  Sold
+                </span>
+              )}
+
+              <dl className="space-y-5">
+                {seriesTitle && (
+                  <div>
+                    <dt className="text-type-small font-semibold text-foreground">Series</dt>
+                    <dd className="text-type-body text-foreground">{seriesTitle}</dd>
+                  </div>
+                )}
+                <div>
+                  <dt className="text-type-small font-semibold text-foreground">Year</dt>
+                  <dd className="text-type-body text-foreground">{year}</dd>
+                </div>
+                {technique && (
+                  <div>
+                    <dt className="text-type-small font-semibold text-foreground">Technique</dt>
+                    <dd className="text-type-body text-foreground">{technique}</dd>
+                  </div>
+                )}
+                {dimensions && (
+                  <div>
+                    <dt className="text-type-small font-semibold text-foreground">Dimensions</dt>
+                    <dd className="text-type-body text-foreground">{dimensions}</dd>
+                  </div>
+                )}
+                {price && (
+                  <div>
+                    <dt className="text-type-small font-semibold text-foreground">Price</dt>
+                    <dd className="text-type-body text-foreground">{price}</dd>
+                  </div>
+                )}
+              </dl>
+
+              {/* Prev / Next */}
+              <div className="flex gap-4 mt-8 pt-6 border-t border-border">
+                {prevWork && (
+                  <Link href={`/gallery/${series}/${prevWork.slug}`}>
+                    <span className="text-type-small text-muted-foreground hover:text-foreground transition-colors cursor-pointer">← {prevWork.title}</span>
+                  </Link>
+                )}
+                <div className="flex-1" />
+                {nextWork && (
+                  <Link href={`/gallery/${series}/${nextWork.slug}`}>
+                    <span className="text-type-small text-muted-foreground hover:text-foreground transition-colors cursor-pointer">{nextWork.title} →</span>
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
-        <ArtworkDetail
-          title={workTitle}
-          seriesTitle={seriesTitle}
-          year={year}
-          medium={medium}
-          dimensions={dimensions}
-          price={price}
-          availability={availability}
-          description={description}
-          images={artworkImages}
-          prevWork={prevWork}
-          nextWork={nextWork}
-        />
-
-        {relatedInSeries.length > 0 && (
-          <section>
-            <GalleryGrid
-              items={relatedInSeries}
-              heading={`More from ${seriesTitle}`}
-              linkUrl={`#/gallery/${series}`}
-              columns={4}
-            />
+        {/* Detail images */}
+        {details.length > 0 && (
+          <section className="section-py">
+            <div className="site-container">
+              <h2 className="text-type-h3 font-semibold mb-6">Details</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {details.map((src: string, i: number) => (
+                  <img key={i} src={src} alt="Detail" className="w-full aspect-square object-cover rounded-sm transition-transform duration-500 hover:scale-[1.02]" loading="lazy" />
+                ))}
+              </div>
+            </div>
           </section>
         )}
 
-        {relatedGlobal.length > 0 && (
-          <section style={{ marginTop: "var(--section-py-lg)" }}>
-            <GalleryGrid
-              items={relatedGlobal}
-              heading="From other series & projects"
-              linkUrl="#/gallery"
-              columns={4}
-            />
-          </section>
+        {/* Related */}
+        {related.length > 0 && (
+          <GalleryGrid items={related} heading={`More from ${seriesTitle}`} linkUrl={`/gallery/${series}`} columns={4} />
         )}
       </main>
-
-      <Footer year={new Date().getFullYear()} portfolioPdfUrl={portfolioPdfUrl} />
+      <Footer />
     </div>
   );
 }

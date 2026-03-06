@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import { ChevronRight } from "lucide-react";
 
 interface BreadcrumbItem {
   label: string;
@@ -7,39 +6,45 @@ interface BreadcrumbItem {
   testId?: string;
 }
 
-interface BreadcrumbsProps {
+interface Props {
   items: BreadcrumbItem[];
 }
 
-export default function Breadcrumbs({ items }: BreadcrumbsProps) {
+function normalizeHref(href?: string): string {
+  if (!href) return "/";
+  if (href.startsWith("#/")) return href.slice(1);
+  if (href === "#/") return "/";
+  return href;
+}
+
+export default function Breadcrumbs({ items }: Props) {
   return (
-    <nav aria-label="Breadcrumb" className="mt-6 mb-4 lg:mt-8">
-      <ol className="flex items-center flex-wrap gap-1 text-sm text-muted-foreground pt-[0px] pb-[0px]">
-        {items.map((item, index) => (
-          <li key={index} className="flex items-center">
-            {index > 0 && (
-              <ChevronRight className="mx-2 h-3 w-3" />
-            )}
-            {item.href ? (
-              <Link href={item.href}>
-                <span 
-                  className="hover:text-foreground transition-colors cursor-pointer"
-                  data-testid={item.testId || `link-bc-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+    <nav
+      className="flex flex-wrap gap-1 text-type-small text-muted-foreground mb-6"
+      aria-label="Breadcrumb"
+    >
+      {items.map((item, i) => {
+        const isLast = i === items.length - 1;
+        return (
+          <span key={i} className="flex items-center gap-1">
+            {i > 0 && <span className="mx-1 text-muted-foreground/50">/</span>}
+            {isLast || !item.href ? (
+              <span className="text-foreground" data-testid={item.testId}>
+                {item.label}
+              </span>
+            ) : (
+              <Link href={normalizeHref(item.href)}>
+                <span
+                  className="underline underline-offset-2 hover:text-foreground transition-colors cursor-pointer"
+                  data-testid={item.testId}
                 >
                   {item.label}
                 </span>
               </Link>
-            ) : (
-              <span 
-                className="text-foreground"
-                data-testid={item.testId || `text-bc-current`}
-              >
-                {item.label}
-              </span>
             )}
-          </li>
-        ))}
-      </ol>
+          </span>
+        );
+      })}
     </nav>
   );
 }

@@ -12,18 +12,11 @@ export default function Statement() {
     return (
       <div className="min-h-screen bg-background flex flex-col">
         <Header />
-        <main className="flex-1">
-          <div className="site-container section-py">
-            <Breadcrumbs
-              items={[
-                { label: "Home", href: "#/", testId: "link-bc-home" },
-                { label: "Statement", testId: "text-bc-current" },
-              ]}
-            />
-            <h1 id="page-title" className="text-type-h1 font-semibold mb-8">
-              Statement
-            </h1>
-            <p className="text-muted-foreground">No statement</p>
+        <main className="flex-1 section-py">
+          <div className="site-container">
+            <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Statement" }]} />
+            <h1 className="text-type-h1 font-semibold mb-8">Statement</h1>
+            <p className="text-muted-foreground">No statement available.</p>
           </div>
         </main>
         <Footer />
@@ -31,23 +24,14 @@ export default function Statement() {
     );
   }
 
-  const artistName = content?.site?.artistName ?? "Artist";
   const portrait = st.portrait ? assetUrl(st.portrait) : "";
   const paragraphs: string[] = Array.isArray(st.paragraphs) ? st.paragraphs : [];
+  const pressKit = st.pressKitPdf || "";
 
-  // Унифицированный список выставок: поддерживаем строки, {year,event}, {year,title,venue,city,country}
-  const exhibitions = Array.isArray(st.exhibitions) ? st.exhibitions : [];
-  const exhibitionsNormalized: string[] = exhibitions
+  const exhibitions = (Array.isArray(st.exhibitions) ? st.exhibitions : [])
     .map((ex: any) => {
       if (typeof ex === "string") return ex;
-      if (ex && typeof ex === "object") {
-        if (ex.event) return `${ex.year ?? ""} — ${ex.event}`.trim();
-        const parts = [ex.year, ex.title, ex.venue, ex.city, ex.country].filter(Boolean);
-        if (parts.length > 0) {
-          const [year, ...rest] = parts;
-          return `${year ?? ""}${rest.length ? " — " + rest.join(", ") : ""}`;
-        }
-      }
+      if (ex?.event) return `${ex.year ?? ""} — ${ex.event}`.trim();
       return "";
     })
     .filter(Boolean);
@@ -55,79 +39,41 @@ export default function Statement() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
-
       <main className="flex-1">
         <div className="site-container section-py">
-          {/* Breadcrumbs */}
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "#/", testId: "link-bc-home" },
-              { label: "Statement", testId: "text-bc-current" },
-            ]}
-          />
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Statement" }]} />
 
-          {/* Page title */}
-          <h1 id="page-title" className="text-type-h1 font-semibold mb-8">
-            {/* Statement */}
-          </h1>
-
-          {/* Content grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Portrait aspect-[4/5] */}
-            <div>
-              {portrait ? (
-                <div className="overflow-hidden rounded-md bg-muted">
-                  <img
-                    src={portrait}
-                    alt={`Portrait of ${artistName}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ) : null}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-16">
+            {/* Portrait */}
+            <div className="md:col-span-4">
+              {portrait && (
+                <img src={portrait} alt={content?.site?.artistName || ""} className="w-full max-w-[360px] aspect-[4/5] object-cover rounded-sm" />
+              )}
             </div>
 
-            {/* Text + Exhibitions */}
-            <div className="md:col-span-2 space-y-4">
-              {/* {paragraphs.map((p, i) => (
-                <p key={i} className="text-type-body text-foreground leading-relaxed">
-                  {p}
+            {/* Text */}
+            <div className="md:col-span-8">
+              {paragraphs.map((p, i) => (
+                <p key={i} className="text-type-body text-foreground leading-relaxed mb-4">{p}</p>
+              ))}
+
+              {pressKit && (
+                <p className="mt-8">
+                  <a href={assetUrl(pressKit)} target="_blank" rel="noopener" className="text-type-small text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors">
+                    Download Press Kit (PDF)
+                  </a>
                 </p>
-              ))} */}
+              )}
 
-              {paragraphs.map((p, i) => {
-                const t = (p ?? "").trim();
-
-                const isVita = t.toLowerCase() === "vita";
-                const isSelected =
-                  t.toLowerCase() === "selected" ||
-                  t.toLowerCase().startsWith("selected programs");
-
-                if (isVita || isSelected) {
-                  return (
-                    <h3
-                      key={i}
-                      className="text-type-h3 font-medium mt-8 mb-4"
-                    >
-                      {isSelected ? "Selected Programs" : "Vita"}
-                    </h3>
-                  );
-                }
-
-                return (
-                  <p key={i} className="text-type-body text-foreground leading-relaxed">
-                    {p}
-                  </p>
-                );
-              })}
-
-              {exhibitionsNormalized.length > 0 && (
-                <div className="mt-6">
-                  <h3 className="text-type-h3 font-medium mb-4">Selected: Exhibitions & Lives</h3>
-                  <ul className="list-disc pl-5 space-y-2">
-                    {exhibitionsNormalized.map((line, i) => (
-                      <li key={i}>{line}</li>
+              {/* Exhibitions */}
+              {exhibitions.length > 0 && (
+                <div className="mt-12">
+                  <h2 className="text-type-h3 font-semibold mb-4">Exhibitions</h2>
+                  <ul className="space-y-0">
+                    {exhibitions.map((ex, i) => (
+                      <li key={i} className="py-3 border-b border-border last:border-b-0 text-type-body text-foreground">
+                        {ex}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -136,7 +82,6 @@ export default function Statement() {
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );

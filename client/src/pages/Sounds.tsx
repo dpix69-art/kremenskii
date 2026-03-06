@@ -1,4 +1,4 @@
-// client/src/pages/Sounds.tsx
+import { Link } from "wouter";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
@@ -10,75 +10,57 @@ export default function Sounds() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
-      <main className="section-py flex-1">
-        <div className="site-container heading-gap-lg">
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "#/", testId: "link-bc-home" },
-              { label: "Sounds", testId: "text-bc-current" },
-            ]}
-          />
-          <h1
-            id="page-title"
-            tabIndex={-1}
-            className="text-type-h1 font-semibold text-foreground h1-spacing"
-          >
-            {/* intentionally empty */}
-          </h1>
-        </div>
+      <main className="flex-1 section-py">
+        <div className="site-container">
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Sounds" }]} />
 
-        <section style={{ marginTop: "var(--heading-gap-lg)", paddingBottom: "200px" }}>
-          <div className="site-container">
-            <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">
-              Sounds
-            </h1>
+          <h1 className="text-type-h1 font-semibold text-foreground mb-4">Sounds</h1>
 
-            <p className="text-type-body leading-relaxed max-w-2xl pb-[72px]">
-              Sound and surface as parallel practices. Field recordings, electromagnetic modulation, sample manipulation. Repetition, distortion, constraint. Both document action, not intention.
-              <br />
-              <br />
-              Not constructed, performed. Composition forms during recording. No edits, no second takes. One take — one line. 
-            </p>
+          <p className="text-type-body leading-relaxed max-w-2xl mb-16 text-foreground">
+            Sound and surface as parallel practices. Field recordings, electromagnetic modulation, sample manipulation.
+            Repetition, distortion, constraint. Both document action, not intention.
+            <br /><br />
+            Not constructed, performed. Composition forms during recording. No edits, no second takes. One take — one line.
+          </p>
 
-            <div style={{ marginTop: "var(--paragraph-gap)" }} className="space-y-0">
-              {(content?.sounds || []).map((s: any) => {
-                const platform = String(s?.platform || "").toLowerCase();
-                const iframeHeight = platform.includes("soundcloud") ? 166 : 120;
+          <div className="space-y-16">
+            {(content?.sounds || []).map((s: any) => {
+              const platform = String(s?.platform || "").toLowerCase();
+              const iframeHeight = platform.includes("soundcloud") ? 166 : 120;
 
-                return (
-                  <div key={s.slug} className="space-y-2 pb-[72px]">
-                    <div className="flex items-start justify-between gap-6">
-                      <a
-                        href={`#/sounds/${s.slug}`}
-                        className="text-type-body leading-relaxed text-foreground hover:underline"
-                      >
+              return (
+                <div key={s.slug}>
+                  <div className="flex items-start justify-between gap-6 mb-2">
+                    <Link href={`/sounds/${s.slug}`}>
+                      <span className="text-type-body text-foreground hover:underline cursor-pointer">
                         {s.title || "Untitled"}
-                      </a>
-
-                      <div className="text-type-small leading-snug text-muted-foreground whitespace-nowrap">
-                        {s.year ? String(s.year) : ""}
-                      </div>
-                    </div>
-
-                    {s.summary && (
-                      <p className="text-type-small leading-relaxed text-muted-foreground max-w-[72ch]">
-                        {s.summary}
-                      </p>
-                    )}  
-                    <iframe
-                      title={`${s.title || "Sound"} player`}
-                      src={s.embed}
-                      loading="lazy"
-                      className="w-full border-0"
-                      style={{ height: `${iframeHeight}px` }}
-                      allow="encrypted-media; fullscreen"
-                    />
+                      </span>
+                    </Link>
+                    <span className="text-type-small text-muted-foreground whitespace-nowrap">
+                      {s.year ? String(s.year) : ""}
+                      {s.meta?.label ? ` · ${s.meta.label}` : ""}
+                    </span>
                   </div>
-                );
-              })}
-            </div>
+
+                  {s.summary && (
+                    <p className="text-type-small text-muted-foreground mb-4">{s.summary}</p>
+                  )}
+
+                  {s.embed && (
+                    <iframe
+                      src={s.embed}
+                      className="w-full border-0 rounded-sm"
+                      style={{ height: iframeHeight }}
+                      allow="autoplay"
+                      loading="lazy"
+                      title={s.title}
+                    />
+                  )}
+                </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
       </main>
       <Footer />
     </div>

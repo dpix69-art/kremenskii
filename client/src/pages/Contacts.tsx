@@ -1,14 +1,7 @@
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ContactsPage from "@/components/ContactsPage";
 import Footer from "@/components/Footer";
 import { useContent } from "@/content/ContentProvider";
-
-type SocialLinks = {
-  instagram?: string;
-  soundcloud?: string;
-  bandcamp?: string;
-};
 
 export default function Contacts() {
   const { content } = useContent();
@@ -16,62 +9,53 @@ export default function Contacts() {
   const email = content?.contacts?.email ?? "hi@kremenskii.art";
   const city = content?.contacts?.city ?? "Stuttgart";
   const country = content?.contacts?.country ?? "Germany";
-
-  const introText =
-    content?.contacts?.introText ??
-    "Idea? Please write an email.";
-
-  const openToText =
-    content?.contacts?.openToText ??
-    "Open for exhibitions, collaborations and commissions. Please email.";
-
-  const portfolioPdfUrl = (content?.contacts?.portfolioPdf ?? "files/kremenskii-portfolio.pdf").replace(
-    /^\/+/,
-    ""
-  );
-
-  const socialLinks: SocialLinks = (content?.contacts?.socials || []).reduce(
-    (acc: SocialLinks, s: any) => {
-      const key = String(s.label || "").toLowerCase();
-      if (["instagram", "soundcloud", "bandcamp"].includes(key)) {
-        (acc as any)[key] = s.href;
-      }
-      return acc;
-    },
-    {}
-  );
+  const introText = content?.contacts?.introText ?? "Idea? Please write an email.";
+  const openToText = content?.contacts?.openToText ?? "";
+  const socials = content?.contacts?.socials || [];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
+      <main className="flex-1 section-py">
+        <div className="site-container">
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contacts" }]} />
 
-      <main className="section-py flex-1">
-        <div className="site-container heading-gap-lg">
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "#/", testId: "link-bc-home" },
-              { label: "Contacts", testId: "text-bc-current" }
-            ]}
-          />
-          <h1 className="text-type-h1 font-semibold text-foreground h1-spacing">
-            {/* Contacts */}
-          </h1>
+          <div className="max-w-lg">
+            <h1 className="text-type-h1 font-semibold text-foreground mb-8">Contacts</h1>
+
+            {introText && <p className="text-type-body text-foreground mb-3">{introText}</p>}
+            {openToText && <p className="text-type-body text-muted-foreground mb-6">{openToText}</p>}
+
+            <p className="mb-2">
+              <a href={`mailto:${email}`} className="text-type-body text-foreground underline underline-offset-3 hover:opacity-70 transition-opacity">
+                {email}
+              </a>
+            </p>
+
+            <p className="text-type-small text-muted-foreground mb-8">
+              {[city, country].filter(Boolean).join(", ")}
+            </p>
+
+            {/* Socials */}
+            {socials.length > 0 && (
+              <div className="flex gap-6 flex-wrap">
+                {socials.map((s: any) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-type-small text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-
-        <ContactsPage
-          email={email}
-          city={city}
-          country={country}
-          introText={introText}
-          openToText={openToText}
-        />
       </main>
-
-      <Footer
-        year={new Date().getFullYear()}
-        portfolioPdfUrl={portfolioPdfUrl}
-        socialLinks={socialLinks}
-      />
+      <Footer />
     </div>
   );
 }

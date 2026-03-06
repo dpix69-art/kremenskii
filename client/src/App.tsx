@@ -1,122 +1,70 @@
 import { Switch, Route, useLocation } from "wouter";
-import { useEffect, Suspense } from "react";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { useEffect, Suspense, lazy } from "react";
 import CookiesBanner from "@/components/CookiesBanner";
-import ErrorBoundary from "@/components/ui/error-boundary";
-import LoadingFallback from "@/components/ui/loading-fallback";
-import {
-  HomePage,
-  GalleryPage,
-  SeriesPage as LazySeriesPage,
-  ArtworkDetailPage,
-  SoundsPage,
-  SoundProjectDetailPage,
-  StatementPage,
-  ContactsPage,
-  ImpressumPage,
-  NotFoundPage
-} from "@/components/ui/lazy-routes";
 
-// Content routes that need scroll-to-top and focus management
-const CONTENT_ROUTES = [
-  /^\/gallery(\/[^\/]+)?(\/[^\/]+)?$/, // /gallery, /gallery/:series, /gallery/:series/:slug
-  /^\/sounds(\/[^\/]+)?$/, // /sounds, /sounds/:slug
-  /^\/statement$/,
-  /^\/contacts$/,
-  /^\/impressum$/
-];
+// Lazy-loaded pages
+const HomePage = lazy(() => import("@/pages/Home"));
+const GalleryPage = lazy(() => import("@/pages/Gallery"));
+const SeriesPage = lazy(() => import("@/pages/SeriesPage"));
+const ArtworkDetailPage = lazy(() => import("@/pages/ArtworkDetailPage"));
+const SoundsPage = lazy(() => import("@/pages/Sounds"));
+const SoundProjectDetailPage = lazy(() => import("@/pages/SoundProjectDetailPage"));
+const StatementPage = lazy(() => import("@/pages/Statement"));
+const ContactsPage = lazy(() => import("@/pages/Contacts"));
+const ImpressumPage = lazy(() => import("@/pages/Impressum"));
+const NotFoundPage = lazy(() => import("@/pages/not-found"));
 
-// src/App.tsx — заменить всю функцию RouteManager на это
+// Scroll to top on route change
 function RouteManager() {
   const [location] = useLocation();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-
-    // Отключаем восстановление скролла браузером
     if ("scrollRestoration" in window.history) {
-      try {
-        window.history.scrollRestoration = "manual";
-      } catch {}
+      try { window.history.scrollRestoration = "manual"; } catch {}
     }
-
-    // Всегда скроллим вверх при смене маршрута
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-
-    // ВАЖНО: фокус на #page-title/… больше НЕ ставим,
-    // чтобы не появлялась рамка фокуса на заголовке.
   }, [location]);
 
   return null;
 }
-// function RouteManager() {
-//   const [location] = useLocation();
 
-//   useEffect(() => {
-//     if (typeof window === "undefined") return;
-
-//     // выключаем нативное восстановление скролла при back/forward
-//     if ("scrollRestoration" in window.history) {
-//       try {
-//         window.history.scrollRestoration = "manual";
-//       } catch {}
-//     }
-
-//     // Всегда скроллим наверх при смене маршрута (в т.ч. при hash-роутинге)
-//     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-
-//     // Даем кадр(ы) на рендер и фокусим заголовок для доступности
-//     const ids = ["page-title", "series-title", "artwork-title", "project-title"];
-//     requestAnimationFrame(() => {
-//       requestAnimationFrame(() => {
-//         for (const id of ids) {
-//           const el = document.getElementById(id) as HTMLElement | null;
-//           if (el) { el.focus?.(); break; }
-//         }
-//       });
-//     });
-//   }, [location]);
-
-//   return null;
-// }
-
+// Minimal loading state — just a thin line
+function LoadingFallback() {
+  return (
+    <div style={{
+      position: "fixed", top: 0, left: 0, right: 0, height: "2px",
+      background: "currentColor", opacity: 0.15, zIndex: 9999,
+      animation: "loading 1.2s ease infinite",
+    }} />
+  );
+}
 
 function Router() {
   return (
-    <ErrorBoundary>
-      <Suspense fallback={<LoadingFallback />}>
-        <RouteManager />
-        <Switch>
-          <Route path="/" component={HomePage} />
-          <Route path="/gallery" component={GalleryPage} />
-          <Route path="/gallery/:series" component={LazySeriesPage} />
-          <Route path="/gallery/:series/:slug" component={ArtworkDetailPage} />
-          <Route path="/sounds" component={SoundsPage} />
-          <Route path="/sounds/:slug" component={SoundProjectDetailPage} />
-          <Route path="/statement" component={StatementPage} />
-          <Route path="/contacts" component={ContactsPage} />
-          <Route path="/impressum" component={ImpressumPage} />
-          {/* Fallback to 404 */}
-          <Route component={NotFoundPage} />
-        </Switch>
-      </Suspense>
-    </ErrorBoundary>
+    <Suspense fallback={<LoadingFallback />}>
+      <RouteManager />
+      <Switch>
+        <Route path="/" component={HomePage} />
+        <Route path="/gallery" component={GalleryPage} />
+        <Route path="/gallery/:series" component={SeriesPage} />
+        <Route path="/gallery/:series/:slug" component={ArtworkDetailPage} />
+        <Route path="/sounds" component={SoundsPage} />
+        <Route path="/sounds/:slug" component={SoundProjectDetailPage} />
+        <Route path="/statement" component={StatementPage} />
+        <Route path="/contacts" component={ContactsPage} />
+        <Route path="/impressum" component={ImpressumPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Suspense>
   );
 }
 
-function App() {
+export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-        <CookiesBanner />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <>
+      <Router />
+      <CookiesBanner />
+    </>
   );
 }
-
-export default App;

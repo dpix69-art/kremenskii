@@ -1,47 +1,31 @@
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useContent } from "@/content/ContentProvider";
 
-interface HeaderProps {
-  artistName?: string;
-}
-
-type NavItem = { title: string; path: string }; // path вида "/gallery"
+type NavItem = { title: string; path: string };
 
 function normalizePath(p?: string): string {
   if (!p) return "/";
-  // принимаем "#/gallery" или "/gallery" → приводим к "/gallery"
+  // Support both "#/gallery" (legacy) and "/gallery"
   if (p.startsWith("#/")) return p.slice(1);
+  if (p === "#/") return "/";
   return p;
 }
 
-export default function Header({ artistName: artistNameProp }: HeaderProps) {
+export default function Header() {
   const { content } = useContent();
   const [location] = useLocation();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  // const artistName = artistNameProp ?? content?.site?.artistName ?? "Dmitrii Kremenskii";
-  const artistName = content?.site?.artistName ?? artistNameProp ?? "Dmitrii Kremenskii";
-  // Навигация: content.json (nav/navigation) → дефолт
-  const navBase = ((content?.nav || content?.navigation || []) as any[]);
-  const navFromJson: NavItem[] = navBase
+  const artistName = content?.site?.artistName ?? "Dmitrii Kremenskii";
+
+  const navItems: NavItem[] = (content?.nav || [])
     .map((n: any) => ({
       title: String(n.title ?? n.label ?? "").trim(),
       path: normalizePath(String(n.path ?? n.href ?? "/")),
     }))
-    .filter((n: NavItem) => n.title && n.path);
-
-  const navItems: NavItem[] =
-    navFromJson.length > 0
-      ? navFromJson
-      : [
-          { title: "Gallery", path: "/gallery" },
-          { title: "Sounds", path: "/sounds" },
-          { title: "Statement", path: "/statement" },
-          { title: "Contacts", path: "/contacts" },
-        ];
+    .filter((n: NavItem) => n.title && n.path && n.path !== "/");
 
   const isActive = (path: string) => {
     if (path === "/") return location === "/";
@@ -49,26 +33,24 @@ export default function Header({ artistName: artistNameProp }: HeaderProps) {
   };
 
   return (
-    <header className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-32">
-          {/* Logo / Artist Name */}
-          <Link href="/" data-testid="link-home" className="cursor-pointer" aria-label="Home">
-            <div
-              className="text-type-h3 font-semibold text-foreground"
-              data-testid="text-header-artist-name"
-            >
+    <header className="w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 border-b border-transparent">
+      <div className="site-container">
+        <div className="flex items-center justify-between h-20 md:h-24">
+          <Link href="/" aria-label="Home">
+            <span className="text-type-h3 font-semibold text-foreground tracking-tight cursor-pointer">
               {artistName}
-            </div>
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop */}
+          <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
             {navItems.map((item) => (
-              <Link key={item.path} href={item.path} data-testid={`link-${item.title.toLowerCase()}`}>
+              <Link key={item.path} href={item.path}>
                 <span
-                  className={`text-type-small transition-colors hover:text-foreground/80 ${
-                    isActive(item.path) ? "text-foreground font-medium" : "text-muted-foreground"
+                  className={`text-type-small tracking-wide transition-colors duration-200 cursor-pointer ${
+                    isActive(item.path)
+                      ? "text-foreground font-medium"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                   aria-current={isActive(item.path) ? "page" : undefined}
                 >
@@ -78,43 +60,34 @@ export default function Header({ artistName: artistNameProp }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen((v) => !v)}
-            data-testid="button-mobile-menu"
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-nav"
+          {/* Mobile toggle */}
+          <button
+            className="md:hidden flex items-center justify-center w-10 h-10 text-foreground"
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <nav id="mobile-nav" className="md:hidden py-4">
-            <div className="flex flex-col space-y-3">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  data-testid={`mobile-link-${item.title.toLowerCase()}`}
+        {/* Mobile nav */}
+        {open && (
+          <nav className="md:hidden pb-6 border-t border-border" aria-label="Mobile navigation">
+            {navItems.map((item) => (
+              <Link key={item.path} href={item.path} onClick={() => setOpen(false)}>
+                <span
+                  className={`block py-3 text-type-small tracking-wide transition-colors duration-200 cursor-pointer ${
+                    isActive(item.path)
+                      ? "text-foreground font-medium"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  aria-current={isActive(item.path) ? "page" : undefined}
                 >
-                  <span
-                    className={`block py-2 text-type-small transition-colors hover:text-foreground/80 ${
-                      isActive(item.path) ? "text-foreground font-medium" : "text-muted-foreground"
-                    }`}
-                    aria-current={isActive(item.path) ? "page" : undefined}
-                  >
-                    {item.title}
-                  </span>
-                </Link>
-              ))}
-            </div>
+                  {item.title}
+                </span>
+              </Link>
+            ))}
           </nav>
         )}
       </div>

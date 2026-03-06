@@ -1,7 +1,5 @@
-// client/src/components/GalleryGrid.tsx
 import { Link } from "wouter";
-import { cn } from "@/lib/utils";
-import { assetUrl } from "@/lib/assetUrl";
+import { clsx } from "clsx";
 
 type ItemType = "artwork" | "series" | "sound_project";
 
@@ -10,32 +8,46 @@ interface GridItem {
   title: string;
   year?: string;
   medium?: string;
-  imageUrl?: string;      // локальный или абсолютный URL
+  imageUrl?: string;
   linkUrl: string;
   type: ItemType;
-  platform?: string;      // optional (sound_project)
-  embedUrl?: string;      // optional (sound_project)
+  platform?: string;
+  embedUrl?: string;
 }
 
 interface Props {
   items: GridItem[];
   heading?: string;
-  linkUrl?: string;     // “See all” ссылка
+  linkUrl?: string;
   columns?: 2 | 3 | 4 | 6;
   showArtworkBadge?: boolean;
   imageAspect?: "square" | "portrait" | "landscape";
+  imageAspectClass?: string;
 }
 
-const aspectClass = (a: Props["imageAspect"]) => {
-  switch (a) {
-    case "portrait":
-      return "aspect-[4/5]"; // вертикально (как в макете)
-    case "landscape":
-      return "aspect-[4/3]"; // горизонтально
-    default:
-      return "aspect-square";
-  }
+const defaultAspect = {
+  portrait: "aspect-[4/5]",
+  landscape: "aspect-[4/3]",
+  square: "aspect-square",
 };
+
+// Normalize link: strip "#" prefix for browser routing
+function normalizeLink(href: string): string {
+  if (href.startsWith("#/")) return href.slice(1);
+  if (href.startsWith("#")) return "/" + href.slice(1);
+  return href;
+}
+
+// Normalize image URL
+function normalizeImage(src?: string): string {
+  if (!src) return "";
+  let s = src.replace(/^\/+/, "").replace(/\?url.*$/, "");
+  // Skip legacy/placeholder assets
+  if (s.includes("generated_images") || s.startsWith("@assets")) return "";
+  // Ensure absolute path
+  if (!s.startsWith("http") && !s.startsWith("/")) s = "/" + s;
+  return s;
+}
 
 export default function GalleryGrid({
   items,
@@ -44,6 +56,7 @@ export default function GalleryGrid({
   columns = 2,
   showArtworkBadge = true,
   imageAspect = "square",
+  imageAspectClass,
 }: Props) {
   const gridCols =
     columns === 6
@@ -51,8 +64,10 @@ export default function GalleryGrid({
       : columns === 4
       ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       : columns === 3
-      ? "grid-cols-2 md:grid-cols-3"
+      ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       : "grid-cols-1 md:grid-cols-2";
+
+  const aspectCls = imageAspectClass || defaultAspect[imageAspect] || "aspect-square";
 
   return (
     <section className="section-py">
@@ -61,7 +76,7 @@ export default function GalleryGrid({
           <div className="flex items-end justify-between mb-6">
             <h2 className="text-type-h2 font-semibold text-foreground">{heading}</h2>
             {linkUrl && (
-              <Link href={linkUrl}>
+              <Link href={normalizeLink(linkUrl)}>
                 <span className="text-type-body underline text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
                   See all
                 </span>
@@ -70,59 +85,56 @@ export default function GalleryGrid({
           </div>
         )}
 
-        <div className={cn("grid gap-x-6 gap-y-8", gridCols)}>
+        <div className={clsx("grid gap-x-6 gap-y-8", gridCols)}>
           {items.map((it) => {
-            const badgeLabel =
+            const badge =
               it.type === "series"
-                ? "SERIES"
+                ? "Series"
                 : it.type === "sound_project"
-                ? "SOUNDS"
+                ? "Sounds"
                 : showArtworkBadge
-                ? "ARTWORK"
+                ? "Artwork"
                 : "";
 
-            const imgSrc = it.imageUrl ? assetUrl(it.imageUrl) : "";
+            const imgSrc = normalizeImage(it.imageUrl);
 
             return (
-              <Link key={it.id} href={it.linkUrl}>
-                <a className="block group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring rounded-md">
-                  {/* Картинка */}
-                  <div className={cn("w-full overflow-hidden rounded-md", aspectClass(imageAspect))}>
+              <Link key={it.id} href={normalizeLink(it.linkUrl)}>
+                <article className="group cursor-pointer">
+                  {/* Image with hover zoom */}
+                  <div className={clsx("w-full overflow-hidden rounded-sm bg-muted", aspectCls)}>
                     {imgSrc ? (
                       <img
                         src={imgSrc}
                         alt={it.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                         loading="lazy"
                         decoding="async"
                       />
                     ) : (
-                      <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground text-xs">
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">
                         No image
                       </div>
                     )}
                   </div>
 
-                  {/* Подписи */}
-                  <div className="mt-[10px]">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[12px] font-light uppercase tracking-wide text-muted-foreground mb-[12px]">
-                        {badgeLabel || <span>&nbsp;</span>}
+                  {/* Caption */}
+                  <div className="mt-3">
+                    {badge && (
+                      <span className="text-[11px] font-normal uppercase tracking-widest text-muted-foreground block mb-1.5">
+                        {badge}
                       </span>
+                    )}
+                    <div className="text-type-body text-foreground leading-snug">
+                      {it.title}
                     </div>
-
-                    <div className="space-y-1">
-                      <div className="text-type-body text-foreground leading-snug">
-                        {it.title}
+                    {(it.year || it.medium) && (
+                      <div className="text-type-small text-muted-foreground leading-snug mt-1">
+                        {[it.year, it.medium].filter(Boolean).join(" · ")}
                       </div>
-                      {(it.year || it.medium) && (
-                        <div className="text-type-small text-muted-foreground leading-snug">
-                          {[it.year, it.medium].filter(Boolean).join(" • ")}
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
-                </a>
+                </article>
               </Link>
             );
           })}
