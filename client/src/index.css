@@ -2,37 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== LIGHT MODE — exact original values ===== */
+/* ===== DESIGN TOKENS ===== */
 :root {
+  /* Colors — unchanged */
   --background: 0 0% 100%;
   --foreground: 0 0% 4%;
   --border: 0 0% 93%;
   --muted: 210 5% 90%;
   --muted-foreground: 0 0% 40%;
 
-  /* Typography Scale — exact pixel values as per original spec */
-  --type-h1: 40px;         /* H1: 40px / 1.2 / 600 */
-  --type-h2: 30px;         /* H2: 30px / 1.25 / 600 */
-  --type-h3: 22px;         /* H3: 22px / 1.35 / 600 */
-  --type-body: 17px;       /* Body: 17px / 1.65 / 400 */
-  --type-small: 13px;      /* Small: 13px / 1.4 / 400 */
+  /* Typography Scale — bolder, more contrast */
+  --type-h1: 48px;         /* was 40 → 48. Bold presence. */
+  --type-h2: 36px;         /* was 30 → 36. Series titles, sections. */
+  --type-h3: 24px;         /* was 22 → 24. Subheadings. */
+  --type-body: 16px;       /* was 17 → 16. Tighter, modern. */
+  --type-small: 12px;      /* was 13 → 12. Meta — smaller = more contrast with H1. */
 
   /* Font — SUSE Mono, exactly as original */
   --font-sans: "SUSE Mono", sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: "SUSE Mono", monospace;
 
-  /* VERTICAL RHYTHM TOKENS (multiples of 4px) — exact original */
+  /* VERTICAL RHYTHM TOKENS */
   --section-py-sm: 64px;
-  --section-py-lg: 72px;
+  --section-py-lg: 80px;       /* was 72 → 80. More breathing room. */
   --block-gap-sm: 24px;
   --block-gap-lg: 32px;
-  --heading-gap-lg: 40px;
+  --heading-gap-lg: 48px;      /* was 40 → 48. H1 gets more air. */
   --heading-gap-md: 32px;
   --heading-gap-sm: 24px;
-  --h1-mb: 16px;
-  --h2-mt: 40px;
-  --h2-mb: 12px;
+  --h1-mb: 20px;               /* was 16 → 20. */
+  --h2-mt: 48px;               /* was 40 → 48. */
+  --h2-mb: 16px;               /* was 12 → 16. */
   --h3-mt: 32px;
   --h3-mb: 8px;
   --paragraph-gap: 16px;
@@ -56,14 +57,13 @@
   }
 }
 
-/* ===== UNIFIED CONTAINER SYSTEM — exact original ===== */
+/* ===== CONTAINER ===== */
 .site-container {
   max-width: 1200px;
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
 }
-
 @media (min-width: 1024px) {
   .site-container {
     padding-left: 32px;
@@ -76,7 +76,6 @@
   padding-top: var(--section-py-sm);
   padding-bottom: var(--section-py-sm);
 }
-
 @media (min-width: 1024px) {
   .section-py {
     padding-top: var(--section-py-lg);
@@ -84,7 +83,7 @@
   }
 }
 
-/* ===== SPACING UTILITIES — exact original ===== */
+/* ===== SPACING UTILITIES ===== */
 .h1-spacing { margin-bottom: var(--h1-mb); }
 .h2-spacing { margin-top: var(--h2-mt); margin-bottom: var(--h2-mb); }
 .block-gap > * + * { margin-top: var(--block-gap-sm); }
@@ -110,4 +109,16 @@ img {
   outline: 2px solid hsl(var(--foreground) / 0.4);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* ===== INQUIRY LINK — subtle, organic ===== */
+.inquiry-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s ease;
+}
+.inquiry-link:hover {
+  color: hsl(var(--foreground));
 }

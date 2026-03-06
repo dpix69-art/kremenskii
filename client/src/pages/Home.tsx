@@ -104,6 +104,9 @@ export default function Home() {
   const soundPlatform = (featuredSound?.platform || "").toLowerCase();
   const embedHeight = soundPlatform.includes("soundcloud") ? 166 : 120;
 
+  const openToText = content?.contacts?.openToText || "";
+  const email = content?.contacts?.email || "";
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
@@ -121,6 +124,24 @@ export default function Home() {
               <p className="text-type-body leading-relaxed text-foreground max-w-[48ch]">
                 {content?.site?.statement ?? "Experience becomes structure."}
               </p>
+
+              {/* Soft open-to line */}
+              {openToText && (
+                <p className="text-type-small text-muted-foreground mt-6">
+                  {openToText}
+                  {email && (
+                    <>
+                      {" — "}
+                      <a
+                        href={`mailto:${email}`}
+                        className="text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors"
+                      >
+                        {email}
+                      </a>
+                    </>
+                  )}
+                </p>
+              )}
             </div>
           </div>
         </section>
@@ -130,7 +151,7 @@ export default function Home() {
           <GalleryGrid items={homepageCards} columns={2} showArtworkBadge imageAspect="portrait" />
         </section>
 
-        {/* Featured sound — with cover image + embed player */}
+        {/* Featured sound */}
         {featuredSound && (
           <section style={{ marginTop: "var(--heading-gap-lg)", paddingBottom: "200px" }}>
             <div className="site-container">

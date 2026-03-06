@@ -1,5 +1,4 @@
-import { useParams } from "wouter";
-import { Link } from "wouter";
+import { useParams, Link } from "wouter";
 import Header from "@/components/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GalleryGrid from "@/components/GalleryGrid";
@@ -26,6 +25,7 @@ export default function ArtworkDetailPage() {
   const ser = (content?.series || []).find((s: any) => s.slug === series);
   const work = ser?.works?.find((w: any) => w.slug === slug);
   const seriesTitle = ser?.title || series || "Series";
+  const email = content?.contacts?.email || "hi@kremenskii.art";
 
   if (!work) {
     return (
@@ -55,7 +55,7 @@ export default function ArtworkDetailPage() {
   const mainImg = imgs[0] ? assetUrl(typeof imgs[0] === "string" ? imgs[0] : imgs[0].url || "") : "";
   const details = imgs.slice(1).map((im: any) => assetUrl(typeof im === "string" ? im : im.url || "")).filter(Boolean);
 
-  // Related works in series
+  // Related
   const related = (ser?.works || [])
     .filter((w: any) => w.slug !== slug)
     .map((w: any, i: number) => {
@@ -103,7 +103,9 @@ export default function ArtworkDetailPage() {
 
             {/* Meta panel */}
             <div className="lg:col-span-5 pt-2">
-              <h1 className="text-type-h1 font-semibold text-foreground mb-6">{title}</h1>
+              <h1 className="text-type-h1 font-semibold text-foreground leading-tight" style={{ marginBottom: "var(--h1-mb)" }}>
+                {title}
+              </h1>
 
               {/* Availability badge */}
               {availability === "available" && (
@@ -148,6 +150,18 @@ export default function ArtworkDetailPage() {
                 )}
               </dl>
 
+              {/* Soft inquiry — only for available works */}
+              {availability === "available" && (
+                <p className="mt-8 pt-6 border-t border-border">
+                  <a
+                    href={`mailto:${email}?subject=${encodeURIComponent(`Inquiry: ${title}`)}`}
+                    className="inquiry-link text-type-small"
+                  >
+                    For inquiries — {email}
+                  </a>
+                </p>
+              )}
+
               {/* Prev / Next */}
               <div className="flex gap-4 mt-8 pt-6 border-t border-border">
                 {prevWork && (
@@ -170,7 +184,7 @@ export default function ArtworkDetailPage() {
         {details.length > 0 && (
           <section className="section-py">
             <div className="site-container">
-              <h2 className="text-type-h3 font-semibold mb-6">Details</h2>
+              <h2 className="text-type-h3 font-semibold" style={{ marginBottom: "var(--h2-mb)" }}>Details</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {details.map((src: string, i: number) => (
                   <img key={i} src={src} alt="Detail" className="w-full aspect-square object-cover rounded-sm transition-transform duration-500 hover:scale-[1.02]" loading="lazy" />

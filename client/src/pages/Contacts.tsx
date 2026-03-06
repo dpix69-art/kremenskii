@@ -21,31 +21,46 @@ export default function Contacts() {
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contacts" }]} />
 
           <div className="max-w-lg">
-            <h1 className="text-type-h1 font-semibold text-foreground mb-8">Contacts</h1>
+            <h1 className="text-type-h1 font-semibold text-foreground leading-tight" style={{ marginBottom: "var(--heading-gap-sm)" }}>
+              Contacts
+            </h1>
 
-            {introText && <p className="text-type-body text-foreground mb-3">{introText}</p>}
-            {openToText && <p className="text-type-body text-muted-foreground mb-6">{openToText}</p>}
+            {introText && (
+              <p className="text-type-body text-foreground" style={{ marginBottom: "var(--paragraph-gap)" }}>
+                {introText}
+              </p>
+            )}
 
-            <p className="mb-2">
-              <a href={`mailto:${email}`} className="text-type-body text-foreground underline underline-offset-3 hover:opacity-70 transition-opacity">
+            {/* Email — clear, prominent but not shouting */}
+            <p style={{ marginBottom: "var(--paragraph-gap)" }}>
+              <a
+                href={`mailto:${email}`}
+                className="text-type-h3 font-semibold text-foreground underline underline-offset-4 decoration-muted-foreground/40 hover:decoration-foreground transition-all"
+              >
                 {email}
               </a>
             </p>
 
-            <p className="text-type-small text-muted-foreground mb-8">
+            {openToText && (
+              <p className="text-type-body text-muted-foreground" style={{ marginBottom: "var(--block-gap-sm)" }}>
+                {openToText}
+              </p>
+            )}
+
+            <p className="text-type-small text-muted-foreground" style={{ marginBottom: "var(--heading-gap-sm)" }}>
               {[city, country].filter(Boolean).join(", ")}
             </p>
 
             {/* Socials */}
             {socials.length > 0 && (
-              <div className="flex gap-6 flex-wrap">
+              <div className="flex gap-6 flex-wrap pt-6 border-t border-border">
                 {socials.map((s: any) => (
                   <a
                     key={s.label}
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-type-small text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors"
+                    className="text-type-small text-muted-foreground underline underline-offset-2 decoration-transparent hover:decoration-muted-foreground hover:text-foreground transition-all"
                   >
                     {s.label}
                   </a>
