@@ -600,6 +600,28 @@
   ],
   "sounds": [
     {
+      "slug": "20490",
+      "title": "204906",
+      "year": 2026,
+      "platform": "bandcamp",
+      "pageUrl": "https://kremenskii.bandcamp.com/album/204906",
+      "summary": "One take — one line. No overdubs, no corrections.",
+      "cover": "images/covers/150011.jpg",
+      "embed": "https://bandcamp.com/EmbeddedPlayer/album=1237836842/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/",
+      "meta": {
+        "label": "Independent",
+        "platforms": []
+      },
+      "tracks": [],
+      "photos": [],
+      "bodyBlocks": [
+        {
+          "type": "p",
+          "text": "204906\n\nNo edits, no second takes. One take — one line.\n"
+        }
+      ]
+    },
+    {
       "slug": "150011",
       "title": "150011",
       "year": 2026,
@@ -618,28 +640,6 @@
         {
           "type": "p",
           "text": "150011\n\nBuilt from field recordings made in Stuttgart and surrounding areas. Recorded with contact microphones, XY stereo (Zoom H5), and wide stereo high-sensitivity mics.\n\nThe four tracks work through repetition, distortion, and layering. Polyrhythmic structures resist fixed grids. A filtered tone repeats as pulse. Percussion holds the frame. The rhythmic layer distorts within frequency constraints.\n\nNo edits, no second takes. One take — one line.\n"
-        }
-      ]
-    },
-    {
-      "slug": "20490",
-      "title": "204906",
-      "year": 2026,
-      "platform": "bandcamp",
-      "pageUrl": "https://kremenskii.bandcamp.com/album/204906",
-      "summary": "One take — one line. No overdubs, no corrections.",
-      "cover": "images/covers/150011.jpg",
-      "embed": "<iframe style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=1237836842/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/\" seamless><a href=\"https://kremenskii.bandcamp.com/album/204906\">204906 by dmitrii kremenskii</a></iframe>",
-      "meta": {
-        "label": "Independent",
-        "platforms": []
-      },
-      "tracks": [],
-      "photos": [],
-      "bodyBlocks": [
-        {
-          "type": "p",
-          "text": "204906\n\nNo edits, no second takes. One take — one line.\n"
         }
       ]
     },
