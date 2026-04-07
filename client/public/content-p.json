@@ -608,11 +608,11 @@
       "summary": "Four tracks. Field recordings, modulation, polyrhythmic abstraction. Stuttgart and surrounding areas.",
       "cover": "images/covers/150011.jpg",
       "embed": "https://bandcamp.com/EmbeddedPlayer/album=1250921947/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
-      "tracks": [],
       "meta": {
         "label": "Independent",
         "platforms": []
       },
+      "tracks": [],
       "photos": [],
       "bodyBlocks": [
         {
@@ -622,30 +622,9 @@
       ]
     },
     {
-      "slug": "20490",
-      "title": "204906",
-      "year": 2026,
-      "platform": "bandcamp",
-      "pageUrl": "https://kremenskii.bandcamp.com/album/204906",
-      "summary": "One take — one line. No overdubs, no corrections.",
-      "cover": "images/covers/150011.jpg",
-      "embed": "<iframe style=\"border: 0; width: 100%; height: 42px;\" src=\"https://bandcamp.com/EmbeddedPlayer/album=1237836842/size=small/bgcol=ffffff/linkcol=0687f5/transparent=true/\" seamless><a href=\"https://kremenskii.bandcamp.com/album/204906\">204906 by dmitrii kremenskii</a></iframe>",
-      "meta": {
-        "label": "Independent",
-        "platforms": []
-      },
-      "tracks": [],
-      "photos": [],
-      "bodyBlocks": [
-        {
-          "type": "p",
-          "text": "204906\n\nNo edits, no second takes. One take — one line.\n"
-        }
-      ]
-    },
-    {
       "slug": "vita",
       "title": "Resonanzraum Vita",
+      "video": "https://www.youtube.com/embed/7uSOLMnjvkU?si=X-14wIDH4NL-zUG8",
       "year": 2025,
       "platform": "bandcamp",
       "pageUrl": "https://fish-is-watching.bandcamp.com/track/resonanzraum-vita-live-performance-16112025",
@@ -727,18 +706,18 @@
       "summary": "Live studio session. Electromagnetic fields are modulated by airflow from a fan, shaping the sound in real time.",
       "cover": "images/covers/impact-of-the-fan.jpg",
       "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1852226274",
-      "tracks": [
-        {
-          "title": "Impact of the Fan",
-          "duration": "51:31"
-        }
-      ],
       "meta": {
         "label": "Independent",
         "platforms": [
           "SoundCloud"
         ]
       },
+      "tracks": [
+        {
+          "title": "Impact of the Fan",
+          "duration": "51:31"
+        }
+      ],
       "photos": [],
       "bodyBlocks": [
         {
