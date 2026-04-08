@@ -606,7 +606,7 @@
       "platform": "bandcamp",
       "pageUrl": "https://kremenskii.bandcamp.com/album/204906",
       "summary": "One take — one line. No overdubs, no corrections.",
-      "cover": "images/covers/150011.jpg",
+      "cover": "images/covers/20490.jpg",
       "embed": "https://bandcamp.com/EmbeddedPlayer/album=1237836842/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
       "meta": {
         "label": "Independent",
@@ -617,7 +617,7 @@
       "bodyBlocks": [
         {
           "type": "p",
-          "text": "204906\n\nNo edits, no second takes. One take — one line.\n"
+          "text": "204906\n\n"
         }
       ]
     },

@@ -1,0 +1,213 @@
+backend:
+  name: github
+  repo: dpix69-art/kremenskii.art
+  branch: main
+
+# Single content.json as the data source
+# Sveltia reads/writes directly to this file
+media_folder: client/public/images
+public_folder: /images
+
+# Use single_file collections to edit sections of content.json
+collections:
+
+  # ═══════════════════════════════════════
+  # SITE SETTINGS
+  # ═══════════════════════════════════════
+  - name: site
+    label: "Site Settings"
+    files:
+      - name: settings
+        label: "General Settings"
+        file: client/public/content.json
+        description: "Site-wide settings, navigation, footer, impressum"
+        fields:
+          # ── Site ──
+          - name: site
+            label: Site
+            widget: object
+            fields:
+              - { name: artistName, label: "Artist Name", widget: string }
+              - { name: role, label: "Role / Subtitle", widget: string }
+              - { name: statement, label: "Homepage Statement", widget: text }
+              - name: homeFeatured
+                label: "Featured Works on Homepage"
+                widget: list
+                max: 2
+                fields:
+                  - { name: series, label: "Series Slug", widget: string }
+                  - { name: work, label: "Work Slug", widget: string }
+
+          # ── Navigation ──
+          - name: nav
+            label: Navigation
+            widget: list
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: href, label: "URL Path", widget: string, hint: "e.g. /gallery or /sounds" }
+
+          # ── Statement / Bio ──
+          - name: statement
+            label: Statement & Bio
+            widget: object
+            fields:
+              - { name: portrait, label: "Portrait Image", widget: image, required: false }
+              - name: paragraphs
+                label: "Statement Paragraphs"
+                widget: list
+                field: { name: text, label: Paragraph, widget: text }
+              - name: exhibitions
+                label: "Exhibitions & Performances"
+                widget: list
+                fields:
+                  - { name: year, label: Year, widget: string }
+                  - { name: event, label: Event, widget: string }
+              - { name: pressKitPdf, label: "Press Kit PDF Path", widget: string, required: false }
+
+          # ── Contacts ──
+          - name: contacts
+            label: Contacts
+            widget: object
+            fields:
+              - { name: email, label: Email, widget: string }
+              - { name: city, label: City, widget: string }
+              - { name: country, label: Country, widget: string }
+              - { name: introText, label: "Intro Text", widget: string, required: false }
+              - { name: openToText, label: "Open To Text", widget: string, required: false }
+              - { name: portfolioPdf, label: "Portfolio PDF Path", widget: string, required: false }
+              - name: socials
+                label: Social Links
+                widget: list
+                fields:
+                  - { name: label, label: "Platform Name", widget: string }
+                  - { name: href, label: URL, widget: string }
+
+          # ── Footer ──
+          - name: footer
+            label: Footer
+            widget: object
+            required: false
+            fields:
+              - { name: legal, label: "Legal Text", widget: string, required: false }
+              - { name: copyright, label: "Copyright Text", widget: string, required: false }
+
+          # ── Impressum ──
+          - name: impressum
+            label: Impressum
+            widget: object
+            required: false
+            fields:
+              - name: paragraphs
+                label: "Impressum Paragraphs"
+                widget: list
+                required: false
+                field: { name: text, label: Paragraph, widget: text }
+
+          # ── Series ──
+          - name: series
+            label: "Artwork Series"
+            widget: list
+            fields:
+              - { name: slug, label: Slug, widget: string, hint: "URL-safe identifier, e.g. farbkoerper" }
+              - { name: title, label: Title, widget: string }
+              - { name: year, label: Year, widget: string }
+              - { name: intro, label: "Introduction Text", widget: text }
+              - name: artworkImages
+                label: "Preview Images (for gallery index)"
+                widget: list
+                max: 3
+                field: { name: url, label: "Image Path", widget: image }
+              - name: works
+                label: Works
+                widget: list
+                fields:
+                  - { name: slug, label: Slug, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: year, label: Year, widget: number, value_type: int }
+                  - { name: technique, label: Technique, widget: string, required: false }
+                  - { name: dimensions, label: Dimensions, widget: string, required: false }
+                  - name: images
+                    label: Images
+                    widget: list
+                    fields:
+                      - { name: url, label: "Image Path", widget: image }
+                      - name: role
+                        label: Role
+                        widget: select
+                        options: ["main", "detail", "angle", "installation-view"]
+                        default: "detail"
+                  - name: sale
+                    label: "Sale Info"
+                    widget: object
+                    required: false
+                    fields:
+                      - name: availability
+                        label: Availability
+                        widget: select
+                        options: ["available", "sold", "reserved", "not_for_sale"]
+                        default: "available"
+                      - name: price
+                        label: Price
+                        widget: object
+                        required: false
+                        fields:
+                          - name: mode
+                            label: "Price Mode"
+                            widget: select
+                            options: ["fixed", "on_request"]
+                            default: "on_request"
+                          - { name: amount, label: "Amount (EUR)", widget: number, required: false }
+                          - { name: currency, label: Currency, widget: string, default: "EUR", required: false }
+                      - { name: notes, label: Notes, widget: string, required: false }
+
+          # ── Sound Projects ──
+          - name: sounds
+            label: "Sound Projects"
+            widget: list
+            fields:
+              - { name: slug, label: Slug, widget: string }
+              - { name: title, label: Title, widget: string }
+              - { name: year, label: Year, widget: number, value_type: int }
+              - { name: platform, label: "Platform", widget: select, options: ["bandcamp", "soundcloud", "youtube"], required: false }
+              - { name: pageUrl, label: "Page URL", widget: string, required: false }
+              - { name: summary, label: Summary, widget: text, required: false }
+              - { name: cover, label: "Cover Image", widget: image, required: false }
+              - { name: embed, label: "Embed URL (iframe src)", widget: string, required: false }
+              - { name: video, label: "Video Embed URL (YouTube)", widget: string, required: false }
+              - { name: location, label: Location, widget: string, required: false }
+              - name: meta
+                label: Metadata
+                widget: object
+                required: false
+                fields:
+                  - { name: label, label: "Label (e.g. Independent, Fish is watching)", widget: string, required: false }
+                  - name: platforms
+                    label: "Platform Links"
+                    widget: list
+                    required: false
+                    field: { name: name, label: "Platform Name", widget: string }
+              - name: tracks
+                label: Tracks
+                widget: list
+                required: false
+                fields:
+                  - { name: title, label: "Track Title", widget: string }
+                  - { name: duration, label: Duration, widget: string, required: false }
+              - name: photos
+                label: Photos
+                widget: list
+                required: false
+                fields:
+                  - { name: url, label: Image, widget: image }
+                  - { name: alt, label: "Alt Text", widget: string, required: false }
+              - name: bodyBlocks
+                label: "Body Text Blocks"
+                widget: list
+                required: false
+                fields:
+                  - name: type
+                    label: Type
+                    widget: select
+                    options: ["p", "h2", "h3"]
+                    default: "p"
+                  - { name: text, label: Text, widget: text }
