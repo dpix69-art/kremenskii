@@ -55,7 +55,7 @@ collections:
               - name: paragraphs
                 label: "Statement Paragraphs"
                 widget: list
-                field: { name: text, label: Paragraph, widget: text }
+                field: { name: text, label: Paragraph, widget: text, required: false }
               - name: exhibitions
                 label: "Exhibitions & Performances"
                 widget: list
