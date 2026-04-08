@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: dpix69-art/kremenskii.art
+  repo: dpix69-art/kremenskii
   branch: main
 
 # Single content.json as the data source
