@@ -140,7 +140,7 @@
             "availability": "available",
             "price": {
               "mode": "fixed",
-              "amount": 800,
+              "amount": 1200,
               "currency": "EUR"
             },
             "notes": ""
@@ -195,7 +195,7 @@
             "availability": "available",
             "price": {
               "mode": "fixed",
-              "amount": 800,
+              "amount": 1200,
               "currency": "EUR"
             },
             "notes": ""
@@ -225,7 +225,7 @@
             "availability": "available",
             "price": {
               "mode": "fixed",
-              "amount": 800,
+              "amount": 1200,
               "currency": "EUR"
             },
             "notes": ""
@@ -255,7 +255,7 @@
             "availability": "available",
             "price": {
               "mode": "fixed",
-              "amount": 800,
+              "amount": 1200,
               "currency": "EUR"
             },
             "notes": ""
