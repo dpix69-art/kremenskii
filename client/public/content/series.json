@@ -1,0 +1,564 @@
+{
+  "series": [
+    {
+      "slug": "farbkoerper",
+      "title": "Farbkörper",
+      "year": "2022",
+      "intro": "Pigment. Layered, compressed, planed.\nPressure stored as gradient.",
+      "artworkImages": [
+        "images/farbkoerper/fkb-01.jpg",
+        "images/farbkoerper/fkb-02.jpg",
+        "images/farbkoerper/fkb-03.jpg"
+      ],
+      "works": [
+        {
+          "slug": "fkb-01",
+          "title": "Fkb-01",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "images/farbkoerper/fkb-01.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/farbkoerper/fkb-01-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/farbkoerper/fkb-01-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1200,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "fkb-02",
+          "title": "Fkb-02",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "images/farbkoerper/fkb-02.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/farbkoerper/fkb-02-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/farbkoerper/fkb-02-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "sold"
+          }
+        },
+        {
+          "slug": "fkb-03",
+          "title": "Fkb-03",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "images/farbkoerper/fkb-03.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/farbkoerper/fkb-03-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/farbkoerper/fkb-03-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1200,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "fkb-04",
+          "title": "Fkb-04",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "images/farbkoerper/fkb-04.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/farbkoerper/fkb-04-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/farbkoerper/fkb-04-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1200,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "fkb-05",
+          "title": "Fkb-05",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "images/farbkoerper/fkb-05.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/farbkoerper/fkb-05-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/farbkoerper/fkb-05-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1200,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "fkb-06",
+          "title": "Fkb-06",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "41 x 60 x 0.6 cm",
+          "images": [
+            {
+              "url": "images/farbkoerper/fkb-06.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/farbkoerper/fkb-06-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/farbkoerper/fkb-06-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "not_for_sale"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "pgsrd-trc",
+      "title": "Plywood Gravel Sand Road Dust (TRC)",
+      "year": "2022",
+      "intro": [
+        "Plywood, gravel, road dust.\nImprint, friction, displacement.\nSurface as topography of action."
+      ],
+      "artworkImages": [
+        "images/pgsrd-trc/pgsrd-trc-01.jpg",
+        "images/pgsrd-trc/pgsrd-trc-02.jpg",
+        "images/pgsrd-trc/pgsrd-trc-03.jpg"
+      ],
+      "works": [
+        {
+          "slug": "pgsrd-trc-01",
+          "title": "PGSRD-trc-01",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-01.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-01-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-01-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-02",
+          "title": "PGSRD-trc-02",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-02.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-02-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-02-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-03",
+          "title": "PGSRD-trc-03",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-03.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-03-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-03-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-04",
+          "title": "PGSRD-trc-04",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-04.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-04-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-04-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-05",
+          "title": "PGSRD-trc-05",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-05.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-05-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-05-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-06",
+          "title": "PGSRD-trc-06",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-06.jpg?url-00",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-06-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-06-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-07",
+          "title": "PGSRD-trc-07",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-07.jpg?url-00",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-07-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-07-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-08",
+          "title": "PGSRD-trc-08",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-08.jpg?url-00",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-08-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-08-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-09",
+          "title": "PGSRD-trc-09",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-09.jpg?url-00",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-09-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-09-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-10",
+          "title": "PGSRD-trc-10",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-10.jpg?url-00",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-10-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-10-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-11",
+          "title": "PGSRD-trc-11",
+          "year": 2022,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-11.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-11-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-11-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-12",
+          "title": "PGSRD-trc-12",
+          "year": 2021,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-12.jpg?url-00",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-12-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-12-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        },
+        {
+          "slug": "pgsrd-trc-13",
+          "title": "PGSRD-trc-13",
+          "year": 2021,
+          "technique": "Gravel, sand, road dust on plywood",
+          "dimensions": "21 × 29.7 × 0.4 cm",
+          "images": [
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-13.jpg",
+              "role": "main"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-13-d-1.png",
+              "role": "detail"
+            },
+            {
+              "url": "images/pgsrd-trc/pgsrd-trc-13-d-2.png",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request"
+            },
+            "notes": ""
+          }
+        }
+      ]
+    }
+  ]
+}

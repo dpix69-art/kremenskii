@@ -1,0 +1,174 @@
+{
+  "sounds": [
+    {
+      "slug": "20490",
+      "title": "204906",
+      "year": 2026,
+      "platform": "bandcamp",
+      "pageUrl": "https://kremenskii.bandcamp.com/album/204906",
+      "summary": "One take — one line. No overdubs, no corrections.",
+      "cover": "images/covers/20490.jpg",
+      "embed": "https://bandcamp.com/EmbeddedPlayer/album=1237836842/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+      "meta": {
+        "label": "Independent",
+        "platforms": []
+      },
+      "tracks": [],
+      "photos": [],
+      "bodyBlocks": [
+        {
+          "type": "p",
+          "text": "204906\n\n"
+        }
+      ]
+    },
+    {
+      "slug": "150011",
+      "title": "150011",
+      "year": 2026,
+      "platform": "bandcamp",
+      "pageUrl": "https://kremenskii.bandcamp.com/album/150011",
+      "summary": "Four tracks. Field recordings, modulation, polyrhythmic abstraction. Stuttgart and surrounding areas.",
+      "cover": "images/covers/150011.jpg",
+      "embed": "https://bandcamp.com/EmbeddedPlayer/album=1250921947/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+      "tracks": [],
+      "meta": {
+        "label": "Independent",
+        "platforms": []
+      },
+      "photos": [],
+      "bodyBlocks": [
+        {
+          "type": "p",
+          "text": "150011\n\nBuilt from field recordings made in Stuttgart and surrounding areas. Recorded with contact microphones, XY stereo (Zoom H5), and wide stereo high-sensitivity mics.\n\nThe four tracks work through repetition, distortion, and layering. Polyrhythmic structures resist fixed grids. A filtered tone repeats as pulse. Percussion holds the frame. The rhythmic layer distorts within frequency constraints.\n\nNo edits, no second takes. One take — one line.\n"
+        }
+      ]
+    },
+    {
+      "slug": "vita",
+      "title": "Resonanzraum Vita",
+      "year": 2025,
+      "platform": "bandcamp",
+      "pageUrl": "https://fish-is-watching.bandcamp.com/track/resonanzraum-vita-live-performance-16112025",
+      "summary": "Site-specific recording and performance. House of Vita.",
+      "cover": "images/covers/vita.png",
+      "embed": "https://bandcamp.com/EmbeddedPlayer/track=833255040/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+      "tracks": [],
+      "meta": {
+        "label": "Fish is watching",
+        "platforms": []
+      },
+      "photos": [
+        {
+          "url": "images/sounds/resonanzraum-photo-1.png",
+          "alt": "Live performance and recording at the house of Vita."
+        },
+        {
+          "url": "images/sounds/resonanzraum-photo-2.png",
+          "alt": "Live performance and recording at the house of Vita."
+        }
+      ],
+      "bodyBlocks": [
+        {
+          "type": "p",
+          "text": "Live performance and recording at the house of Vita.\n\nThe house has its own tone and quiet history. Light, walls, and furniture hold the memory of earlier rehearsals. We work with this memory as a resonant body. We listen to how air, wood, and instruments react to each other and let the space decide when the piece begins and ends."
+        }
+      ]
+    },
+    {
+      "slug": "album-learning-to-breathe",
+      "title": "learning to breathe",
+      "year": 2025,
+      "platform": "bandcamp",
+      "summary": "Drones, pulses, and textured noise. Performed together in one take. No overdubs, no edits.",
+      "cover": "images/covers/learning-to-breathe-cover.jpg",
+      "embed": "https://bandcamp.com/EmbeddedPlayer/v=2/album=1109147001/size=large/tracklist=false/artwork=small/transparent=true/",
+      "tracks": [],
+      "meta": {
+        "label": "Fish is watching",
+        "platforms": [
+          "Bandcamp"
+        ]
+      },
+      "photos": [
+        {
+          "url": "images/sounds/learning-to-breathe-studio-1.jpg",
+          "alt": "Studio view 1"
+        },
+        {
+          "url": "images/sounds/learning-to-breathe-studio-2.jpg",
+          "alt": "Studio view 2"
+        }
+      ],
+      "bodyBlocks": [
+        {
+          "type": "p",
+          "text": "This album charts a meditative journey through states of being, using sound as both compass and vessel. With layers of drones, pulses, and textured noise, it explores the interplay between stillness and motion, chaos and harmony, the internal and the external."
+        },
+        {
+          "type": "p",
+          "text": "It begins with Learning to Breathe, a grounding meditation where heartbeat rhythms and noise textures invite the listener to rediscover the breath as a unifying force. Stream of Consciousness then drifts into the restless ebb and flow of thought, gradually aligning scattered currents into a flowing whole."
+        },
+        {
+          "type": "p",
+          "text": "From there, Particle Flow propels the journey into a realm of kinetic energy—micro- and macro-pulses colliding, carrying the listener into a state of perpetual movement. Taken together, these pieces form a continuum of sound—inviting deep listening, in the subtle rhythms that underlie both mind and matter."
+        },
+        {
+          "type": "p",
+          "text": "releases September 25, 2025"
+        }
+      ]
+    },
+    {
+      "slug": "impact-of-the-Fan",
+      "title": "Impact of the Fan",
+      "year": 2024,
+      "platform": "soundcloud",
+      "pageUrl": "https://soundcloud.com/dmitrii-kremenskii/impact-of-the-fan",
+      "summary": "Live studio session. Electromagnetic fields are modulated by airflow from a fan, shaping the sound in real time.",
+      "cover": "images/covers/impact-of-the-fan.jpg",
+      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1852226274",
+      "tracks": [
+        {
+          "title": "Impact of the Fan",
+          "duration": "51:31"
+        }
+      ],
+      "meta": {
+        "label": "Independent",
+        "platforms": [
+          "SoundCloud"
+        ]
+      },
+      "photos": [],
+      "bodyBlocks": [
+        {
+          "type": "p",
+          "text": "Live studio session. Electromagnetic fields are modulated by airflow from a fan, shaping the sound in real time."
+        }
+      ]
+    },
+    {
+      "slug": "live-at-elsiens-galerie-stuttgart",
+      "title": "Live at Elsiens Galerie Stuttgart",
+      "year": 2024,
+      "platform": "soundcloud",
+      "pageUrl": "https://soundcloud.com/dmitrii-kremenskii/live-at-elsiens-galerie-stuttgart",
+      "summary": "Live at Elsiens Galerie Stuttgart",
+      "cover": "images/covers/live-at-elsiens-galerie-stuttgart.jpg",
+      "embed": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1841509218",
+      "tracks": [
+        {
+          "title": "Live at Elsiens Galerie Stuttgart",
+          "duration": "20:18"
+        }
+      ],
+      "meta": {
+        "label": "Independent",
+        "platforms": [
+          "SoundCloud"
+        ]
+      }
+    }
+  ]
+}

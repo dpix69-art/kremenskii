@@ -19,7 +19,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 
-CONTENT_PATH = Path("client/public/content.json")
+CONTENT_DIR = Path("client/public/content")
 IMAGES_DIR = Path("client/public")
 OUTPUT_PATH = Path("client/public/files/press-kit.pdf")
 
@@ -291,4 +291,19 @@ def build_pdf(data):
 
 
 if __name__ == "__main__":
-    build_pdf(json.loads(CONTENT_PATH.read_text(encoding="utf-8")))
+    import json as _json
+    def _read(name):
+        return _json.loads((CONTENT_DIR / name).read_text(encoding="utf-8"))
+    site_data = _read("site.json")
+    sd = _read("series.json")
+    data = {
+        "site": site_data["site"],
+        "nav": site_data.get("nav", []),
+        "footer": site_data.get("footer", {}),
+        "series": sd.get("series", sd) if isinstance(sd, dict) else sd,
+        "sounds": _read("sounds.json").get("sounds", []),
+        "statement": _read("statement.json"),
+        "contacts": _read("contacts.json"),
+        "impressum": _read("impressum.json"),
+    }
+    build_pdf(data)

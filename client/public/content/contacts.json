@@ -1,0 +1,22 @@
+{
+  "email": "hi@kremenskii.art",
+  "city": "Stuttgart",
+  "country": "Germany",
+  "introText": "Have an idea? Get in touch.",
+  "openToText": "Open for exhibitions, collaborations and commissions.",
+  "portfolioPdf": "files/kremenskii-portfolio.pdf",
+  "socials": [
+    {
+      "label": "Instagram",
+      "href": "https://www.instagram.com/dmitrii.kremenskii.art"
+    },
+    {
+      "label": "Soundcloud",
+      "href": "https://soundcloud.com/dmitrii-kremenskii"
+    },
+    {
+      "label": "Bandcamp",
+      "href": "https://kremenskii.bandcamp.com/"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "site": {
+    "artistName": "Dmitrii Kremenskii",
+    "role": "Visual & Sound Artist",
+    "statement": "Experience becomes structure. I compress, distort, layer. Material stores the action. Sound stores the space.",
+    "homeFeatured": [
+      {
+        "series": "farbkoerper",
+        "work": "fkb-03"
+      },
+      {
+        "series": "pgsrd-trc",
+        "work": "pgsrd-trc-04"
+      }
+    ]
+  },
+  "nav": [
+    {
+      "label": "Home",
+      "href": "#/"
+    },
+    {
+      "label": "Gallery",
+      "href": "#/gallery"
+    },
+    {
+      "label": "Sounds",
+      "href": "#/sounds"
+    },
+    {
+      "label": "Statement",
+      "href": "#/statement"
+    },
+    {
+      "label": "Contacts",
+      "href": "#/contacts"
+    }
+  ],
+  "footer": {
+    "legal": "No reproduction without written permission.",
+    "copyright": "2026 © Dmitrii Kremenskii. All rights reserved."
+  }
+}

@@ -1,25 +1,19 @@
 #!/usr/bin/env node
-/**
- * sitemap.js — Generates sitemap.xml and robots.txt from content.json
- */
-
 import fs from "node:fs";
 import path from "node:path";
 
 const DIST = path.resolve("dist");
-const CONTENT_PATH = path.resolve("client/public/content.json");
+const CONTENT_DIR = path.resolve("client/public/content");
 const DOMAIN = "https://kremenskii.art";
 
-let content;
-try {
-  content = JSON.parse(fs.readFileSync(CONTENT_PATH, "utf-8"));
-} catch {
-  console.error("❌ Cannot read content.json");
-  process.exit(1);
+function readJson(name) {
+  return JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, name), "utf-8"));
 }
 
-const series = content.series || [];
-const sounds = content.sounds || [];
+const sd = readJson("series.json");
+const snd = readJson("sounds.json");
+const series = sd.series || sd;
+const sounds = snd.sounds || snd;
 
 const urls = [
   { loc: "/", priority: "1.0", changefreq: "weekly" },
@@ -35,13 +29,11 @@ for (const s of series) {
     urls.push({ loc: `/gallery/${s.slug}/${w.slug}`, priority: "0.7", changefreq: "monthly" });
   }
 }
-
 for (const s of sounds) {
   urls.push({ loc: `/sounds/${s.slug}`, priority: "0.7", changefreq: "monthly" });
 }
 
 const today = new Date().toISOString().split("T")[0];
-
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>
@@ -50,16 +42,8 @@ ${urls.map(u => `  <url>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`).join("\n")}
-</urlset>
-`;
-
-const robots = `User-agent: *
-Allow: /
-
-Sitemap: ${DOMAIN}/sitemap.xml
-`;
+</urlset>`;
 
 fs.writeFileSync(path.join(DIST, "sitemap.xml"), sitemap, "utf-8");
-fs.writeFileSync(path.join(DIST, "robots.txt"), robots, "utf-8");
-
-console.log(`\n🗺️  Generated sitemap.xml (${urls.length} URLs) + robots.txt\n`);
+fs.writeFileSync(path.join(DIST, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${DOMAIN}/sitemap.xml\n`, "utf-8");
+console.log(`\n🗺️  sitemap.xml (${urls.length} URLs) + robots.txt\n`);
