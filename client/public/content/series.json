@@ -185,9 +185,7 @@
       "slug": "pgsrd-trc",
       "title": "Plywood Gravel Sand Road Dust (TRC)",
       "year": "2022",
-      "intro": [
-        "Plywood, gravel, road dust.\nImprint, friction, displacement.\nSurface as topography of action."
-      ],
+      "intro": "Plywood, gravel, road dust.\nImprint, friction, displacement.\nSurface as topography of action.",
       "artworkImages": [
         "images/pgsrd-trc/pgsrd-trc-01.jpg",
         "images/pgsrd-trc/pgsrd-trc-02.jpg",
@@ -217,7 +215,9 @@
           "sale": {
             "availability": "available",
             "price": {
-              "mode": "on_request"
+              "mode": "on_request",
+              "amount": null,
+              "currency": ""
             },
             "notes": ""
           }
@@ -554,6 +554,47 @@
             "availability": "available",
             "price": {
               "mode": "on_request"
+            },
+            "notes": ""
+          }
+        }
+      ]
+    },
+    {
+      "slug": "S1",
+      "title": "S1",
+      "year": "2022 -",
+      "intro": "The surface is primed. A roller, loaded with pigment, \nmoves across it under repeated pressure. \nThe action stops when the material can no longer \naccept the pigment.",
+      "artworkImages": [
+        "/images/S1-22-003-master.jpg"
+      ],
+      "works": [
+        {
+          "slug": "S1-22-003",
+          "title": "S1-22-003",
+          "year": 22,
+          "technique": "",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "/images/S1-22-003-master.jpg",
+              "role": "main"
+            },
+            {
+              "url": "/images/S1-22-003-master-fr-1-1.jpg",
+              "role": "detail"
+            },
+            {
+              "url": "/images/S1-22-003-master-fr-2.jpg",
+              "role": "detail"
+            }
+          ],
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1200,
+              "currency": "EUR"
             },
             "notes": ""
           }
