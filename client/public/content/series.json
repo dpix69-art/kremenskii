@@ -567,7 +567,8 @@
       "intro": "The surface is primed. A roller, loaded with pigment,  moves across it under repeated pressure. \nThe action stops when the material can no longer accept the pigment.",
       "artworkImages": [
         "/images/S1/S1-22-003-master-li-thumb.jpg",
-        "/images/S1/S1-24-001-dpt-master-thumb.jpg"
+        "/images/S1/S1-24-001-dpt-master-thumb.jpg",
+        "/images/S1/S1-26-002-master-li-thumb.jpg"
       ],
       "works": [
         {
@@ -617,6 +618,28 @@
             },
             {
               "url": "/images/S1/S1-24-001-dpt-master--fr-2-thumb.jpg",
+              "role": "detail"
+            }
+          ],
+          "sale": null
+        },
+        {
+          "slug": "S1-26-002",
+          "title": "S1-26-002",
+          "year": 26,
+          "technique": "",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "/images/S1/S1-26-002-master-li-thumb.jpg",
+              "role": "main"
+            },
+            {
+              "url": "/images/S1/S1-26-002-master--fr-1-thumb.jpg",
+              "role": "detail"
+            },
+            {
+              "url": "/images/S1/S1-26-002-master--fr-2-thumb.jpg",
               "role": "detail"
             }
           ],
