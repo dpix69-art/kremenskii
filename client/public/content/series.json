@@ -691,7 +691,7 @@
       "year": "2022 -",
       "intro": "Before the field of S1 dries, the same roller still loaded, now with a contrasting pigment moves across it again. The window is short: the field stays open for minutes. The mark enters the field.",
       "artworkImages": [
-        "/images/S2/S2-26-005-ex-master-thumb.jpg",
+        "/images/S2/S2-26-0013-master-thumb.JPG",
         "/images/S2/S2-26-007-master-thumb.jpg",
         "/images/S2/S2-26-011-master-thumb.jpg"
       ],
@@ -779,6 +779,28 @@
             },
             {
               "url": "/images/S2/S3-26-012-master--fr-2-thumb.jpg",
+              "role": "detail"
+            }
+          ],
+          "sale": null
+        },
+        {
+          "slug": "S2-26-0013",
+          "title": "S2-26-0013",
+          "year": 2026,
+          "technique": "Acrylic pigment on canvas",
+          "dimensions": "41 x 58 cm (approx., deckle edges)",
+          "images": [
+            {
+              "url": "/images/S2/S2-26-0013-master-thumb.JPG",
+              "role": "main"
+            },
+            {
+              "url": "/images/S2/S2-26-0013-master-fr-2-thumb.jpg",
+              "role": "detail"
+            },
+            {
+              "url": "/images/S2/S2-26-0013-master-fr-1-thumb.jpg",
               "role": "detail"
             }
           ],
