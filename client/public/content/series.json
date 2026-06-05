@@ -760,6 +760,28 @@
             }
           ],
           "sale": null
+        },
+        {
+          "slug": "S2-26-002",
+          "title": "S2-26-002",
+          "year": 2026,
+          "technique": "Acrylic pigment on canvas",
+          "dimensions": "79 × 58 cm (approx., deckle edges)",
+          "images": [
+            {
+              "url": "/images/S2/S2-26-012-master-thumb.jpg",
+              "role": "main"
+            },
+            {
+              "url": "/images/S2/S3-26-012-master--fr-1-thumb.jpg",
+              "role": "detail"
+            },
+            {
+              "url": "/images/S2/S3-26-012-master--fr-2-thumb.jpg",
+              "role": "detail"
+            }
+          ],
+          "sale": null
         }
       ]
     }
