@@ -684,6 +684,39 @@
           }
         }
       ]
+    },
+    {
+      "slug": "S2",
+      "title": "S2",
+      "year": "2022 -",
+      "intro": "Before the field of S1 dries, the same roller still loaded, now with a contrasting pigment moves across it again. The window is short: the field stays open for minutes. The mark enters the field.",
+      "artworkImages": [
+        "/images/S2/S2-26-005-ex-master-thumb.jpg"
+      ],
+      "works": [
+        {
+          "slug": "S2-26-005-ex",
+          "title": "S2-26-005-ex",
+          "year": 2026,
+          "technique": "Acrylic pigment on canvas",
+          "dimensions": "",
+          "images": [
+            {
+              "url": "/images/S2/S2-26-005-ex-master-thumb.jpg",
+              "role": "main"
+            },
+            {
+              "url": "/images/S2/IMG_3407-crop-thumb.jpg",
+              "role": "detail"
+            },
+            {
+              "url": "/images/S2/IMG_3602-crop-thumb.jpg",
+              "role": "detail"
+            }
+          ],
+          "sale": null
+        }
+      ]
     }
   ]
 }
