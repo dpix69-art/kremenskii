@@ -807,6 +807,62 @@
           "sale": null
         }
       ]
+    },
+    {
+      "slug": "S3",
+      "title": "S3",
+      "year": "2022 -",
+      "intro": "Remaining surface elements outlined by hand\nafter the work has dried. The line marks what is there,\nnot what should have been.",
+      "artworkImages": [
+        "/images/S3/S3-22-01-master-thumb.jpg",
+        "/images/S3/S3-26-001-master-thumb.jpg"
+      ],
+      "works": [
+        {
+          "slug": "S3-26-001",
+          "title": "S3-26-001",
+          "year": 2026,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "/images/S3/S3-26-001-master-thumb.jpg",
+              "role": "main"
+            },
+            {
+              "url": "/images/S3/S3-26-001-master--fr-1-thumb.jpg",
+              "role": "detail"
+            },
+            {
+              "url": "/images/S3/S3-26-001-master--fr-2-thumb.jpg",
+              "role": "detail"
+            }
+          ],
+          "sale": null
+        },
+        {
+          "slug": "S3-22-001",
+          "title": "S3-22-01",
+          "year": 2022,
+          "technique": "Acrylic pigment on MDF",
+          "dimensions": "51 × 69 × 0.6 cm",
+          "images": [
+            {
+              "url": "/images/S3/S3-22-01-master-thumb.jpg",
+              "role": "main"
+            },
+            {
+              "url": "/images/S3/S3-22-01-master--fr-1-thumb.jpg",
+              "role": "detail"
+            },
+            {
+              "url": "/images/S3/S3-22-01-master--fr-2-thumb.jpg",
+              "role": "detail"
+            }
+          ],
+          "sale": null
+        }
+      ]
     }
   ]
 }
