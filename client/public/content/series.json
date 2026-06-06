@@ -596,7 +596,7 @@
             "availability": "available",
             "price": {
               "mode": "fixed",
-              "amount": 1200,
+              "amount": 1000,
               "currency": "EUR"
             },
             "notes": ""
@@ -622,7 +622,15 @@
               "role": "detail"
             }
           ],
-          "sale": null
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request",
+              "amount": 850,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "S1-26-002",
@@ -677,8 +685,8 @@
           "sale": {
             "availability": "available",
             "price": {
-              "mode": "on_request",
-              "amount": null,
+              "mode": "fixed",
+              "amount": 950,
               "currency": "EUR"
             },
             "notes": ""
@@ -717,7 +725,15 @@
               "role": "detail"
             }
           ],
-          "sale": null
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1400,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "S2-26-007",
@@ -739,7 +755,15 @@
               "role": "detail"
             }
           ],
-          "sale": null
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1300,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "S2-26-011",
@@ -761,7 +785,15 @@
               "role": "detail"
             }
           ],
-          "sale": null
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request",
+              "amount": 950,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "S2-26-002",
@@ -783,7 +815,15 @@
               "role": "detail"
             }
           ],
-          "sale": null
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1400,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "S2-26-0013",
@@ -805,7 +845,15 @@
               "role": "detail"
             }
           ],
-          "sale": null
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 700,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
         }
       ]
     },
@@ -839,7 +887,15 @@
               "role": "detail"
             }
           ],
-          "sale": null
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "on_request",
+              "amount": 1150,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
         },
         {
           "slug": "S3-22-001",
@@ -861,7 +917,15 @@
               "role": "detail"
             }
           ],
-          "sale": null
+          "sale": {
+            "availability": "available",
+            "price": {
+              "mode": "fixed",
+              "amount": 1000,
+              "currency": "EUR"
+            },
+            "notes": ""
+          }
         }
       ]
     }
