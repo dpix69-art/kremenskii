@@ -62,7 +62,8 @@
             }
           ],
           "sale": {
-            "availability": "sold"
+            "availability": "sold",
+            "notes": ""
           }
         },
         {
@@ -786,7 +787,7 @@
         },
         {
           "slug": "S2-26-0013",
-          "title": "S2-26-0013",
+          "title": "S2-26-013",
           "year": 2026,
           "technique": "Acrylic pigment on canvas",
           "dimensions": "41 x 58 cm (approx., deckle edges)",
@@ -842,7 +843,7 @@
         },
         {
           "slug": "S3-22-001",
-          "title": "S3-22-01",
+          "title": "S3-22-001",
           "year": 2022,
           "technique": "Acrylic pigment on MDF",
           "dimensions": "51 × 69 × 0.6 cm",
