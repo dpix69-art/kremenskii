@@ -172,12 +172,13 @@
               "role": "detail"
             },
             {
-              "url": "/images/farbkoerper/fkb-06-d-2.png",
+              "url": "/images/farbkoerper/fkb-06-d-2-a-thumb.jpg",
               "role": "detail"
             }
           ],
           "sale": {
-            "availability": "not_for_sale"
+            "availability": "not_for_sale",
+            "notes": ""
           }
         }
       ]
@@ -584,11 +585,11 @@
               "role": "main"
             },
             {
-              "url": "/images/S1/S1-22-003-master-fr-1-thumb.jpg",
+              "url": "/images/S1/S1-22-003-master-fr-1-a-thumb.jpg",
               "role": "detail"
             },
             {
-              "url": "/images/S1/S1-22-003-master-fr-2-thumb.jpg",
+              "url": "/images/S1/S1-22-003-master-fr-2-a-thumb.jpg",
               "role": "detail"
             }
           ],
@@ -717,11 +718,11 @@
               "role": "main"
             },
             {
-              "url": "/images/S2/IMG_3407-crop-thumb.jpg",
+              "url": "/images/S2/S2-26-005-ex-master-fr-1-thumb.jpg",
               "role": "detail"
             },
             {
-              "url": "/images/S2/IMG_3602-crop-thumb.jpg",
+              "url": "/images/S2/S2-26-005-ex-master-fr-2-thumb.jpg",
               "role": "detail"
             }
           ],
@@ -747,7 +748,7 @@
               "role": "main"
             },
             {
-              "url": "/images/S2/S2-26-007-master--fr-1-thumb.jpg",
+              "url": "/images/S2/S2-26-007-master--fr-1-a-thumb.jpg",
               "role": "detail"
             },
             {
