@@ -16,7 +16,7 @@ import path from "node:path";
 
 const IMAGES_DIR = path.resolve("client/public/images");
 const THUMB_MAX_WIDTH = 1600;
-const THUMB_QUALITY = 80;
+const THUMB_QUALITY = 90;
 const EXTENSIONS = [".jpg", ".jpeg", ".png"];
 
 // Skip files that are already thumbnails or details
